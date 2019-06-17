@@ -21,14 +21,13 @@ public class PlatformManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(disPlatformPrefab, new Vector2(-3.5f, -2.5f), disPlatformPrefab.transform.rotation);
-        Instantiate(disPlatformPrefab, new Vector2(0f, -2.5f), disPlatformPrefab.transform.rotation);
-        Instantiate(disPlatformPrefab, new Vector2(3.5f, -2.5f), disPlatformPrefab.transform.rotation);
+        
     }
 
     IEnumerator SpawnPlatform (Vector2 sp) {
         yield return new WaitForSeconds(2f);
         Instantiate(disPlatformPrefab, sp, disPlatformPrefab.transform.rotation);
+        // todo тут непонятно почему платформа остается is_kinematic и улетает за карту
 
     }
 }

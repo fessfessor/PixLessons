@@ -8,8 +8,9 @@ public class AidKit : MonoBehaviour
     private int healthSize;
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.GetComponent<Health>() != null) {
-            col.gameObject.GetComponent<Health>().health += healthSize;
+        Health health = col.gameObject.GetComponent<Health>();
+        if (health != null) {
+            health.health += healthSize;
             Destroy(gameObject);
         }
     }
