@@ -13,6 +13,8 @@ public class CollisionDamage : MonoBehaviour
         if (col.gameObject.CompareTag(colTag)) {
             Health health=  col.gameObject.GetComponent<Health>();
             health.takeHit(damage);
+
+
         }
         
     }

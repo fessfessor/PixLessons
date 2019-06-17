@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Platform
   - Coin
+  - AidKit
   layers:
   - Default
   - TransparentFX

@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
    
     }
 
+    /*
     private void OnCollisionEnter2D(Collision2D col) {
         // Смена цвета платформы при прыжке на нее
         if (col.gameObject.CompareTag("Platform")) {
@@ -73,11 +74,14 @@ public class Player : MonoBehaviour
         Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 
     }
+    */
 
     //Метод прыжка
     void Jump() {
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 
-    
+   
+
+
 }

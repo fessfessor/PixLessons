@@ -27,5 +27,9 @@ public class EnemyPatrol : MonoBehaviour
                 isRightDirection = true;
             }
         }
+        //Проверка
+        //Проверка
+        //Проверка
+
     }
 }

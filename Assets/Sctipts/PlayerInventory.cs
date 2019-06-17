@@ -11,6 +11,6 @@ public class PlayerInventory : MonoBehaviour
             cointsCount++;
             Debug.Log("coints = " + cointsCount);
             Destroy(col.gameObject);
-        }
+        } 
     }
 }
