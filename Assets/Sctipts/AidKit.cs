@@ -13,6 +13,17 @@ public class AidKit : MonoBehaviour
             health.health += healthSize;
             Destroy(gameObject);
         }
+        Debug.Log(col.gameObject.transform.childCount);
+        //Показать хелс бар
+        // Берем все чайлды, находим хелс бар и показываем его
+        for (int i = 0; i < col.gameObject.transform.childCount; i++) {
+            if (col.gameObject.transform.GetChild(i).transform.name == "HealthBar") {
+                Debug.Log(col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled);
+                col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;
+                Debug.Log(col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled);
+            }
+            Debug.Log(col.gameObject.transform.GetChild(i).transform.name);
+        }
     }
 
 
