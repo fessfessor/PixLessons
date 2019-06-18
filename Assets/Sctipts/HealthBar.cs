@@ -7,6 +7,7 @@ public class HealthBar : MonoBehaviour
 
     Vector3 localScale;
     SpriteRenderer sr;
+    Coroutine hideProcess;
 
     void Start()
     {
@@ -20,8 +21,8 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sr.enabled)
-            StartCoroutine(hideHealthBar());
+        if (sr.enabled && hideProcess == null)
+            hideProcess =  StartCoroutine(hideHealthBar());
 
         localScale.x = gameObject.GetComponentInParent<Health>().health * 0.01f;
         transform.localScale = localScale;
@@ -31,7 +32,8 @@ public class HealthBar : MonoBehaviour
     IEnumerator hideHealthBar() {
         yield return new WaitForSeconds(2f);
         sr.enabled = false;
+        hideProcess = null;
 
     }
-    //todo Работает , но если быстро меняется здоровье , то не работает, надо переписать на событие изменения кол-ва здоровья
+    
 }

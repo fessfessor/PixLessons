@@ -11,7 +11,10 @@ public class Player : MonoBehaviour
     public float minHeight = -50.0f;
     public SpriteRenderer[] renderers;
     public GroundDetection groundD;
-    public Vector3 direction;
+    private Vector3 direction;
+    public SpriteRenderer spriteR;
+
+    public Animator animator;
     
 
     public float timeRemaining = 3.0f;
@@ -22,7 +25,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         
-        rb = GetComponent<Rigidbody2D>();
 
         plat = GameObject.Find("Platforms");
         renderers = plat.GetComponentsInChildren<SpriteRenderer>();      
@@ -60,8 +62,13 @@ public class Player : MonoBehaviour
             transform.position = new Vector2(0, 0);
         }
 
+        animator.SetFloat("speed", Mathf.Abs(direction.x));
 
-   
+        if (direction.x > 0)
+            spriteR.flipX = false;
+        if (direction.x < 0)
+            spriteR.flipX = true;
+
     }
 
     /*
