@@ -27,9 +27,6 @@ public class FallPlatform : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         rb.isKinematic = false;
         Destroy(gameObject, 2f);
-        
-
-
     }
 
    

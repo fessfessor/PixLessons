@@ -10,11 +10,14 @@ public class HealthBar : MonoBehaviour
     void Start()
     {
         localScale = transform.localScale;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        
         localScale.x = gameObject.GetComponentInParent<Health>().health * 0.01f;
         transform.localScale = localScale;
     }

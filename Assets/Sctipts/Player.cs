@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public float minHeight = -50.0f;
     public SpriteRenderer[] renderers;
     public GroundDetection groundD;
+    public Vector3 direction;
     
 
     public float timeRemaining = 3.0f;
@@ -29,18 +30,21 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        direction = Vector3.zero;
         if (groundD.isGrounded) {
             doubleJumpAllowed = true;
         }
         
         if (Input.GetKey(KeyCode.A)) {
-            transform.Translate(Vector2.left * Time.deltaTime * speed);
+            direction = Vector3.left;
         } else if (Input.GetKey(KeyCode.D)) {
-            transform.Translate(Vector2.right * Time.deltaTime * speed);
+            direction = Vector3.right;
         }
+        direction *= speed;
+        direction.y = rb.velocity.y;
+        rb.velocity = direction;
 
         // Обработка прыжка и двогйного прыжка
         if ( Input.GetKeyDown(KeyCode.Space) && groundD.isGrounded) {
