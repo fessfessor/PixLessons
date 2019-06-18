@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
         if(!isJumping && !groundD.isGrounded)
             animator.SetTrigger("fallWithoutJump");
         isJumping = !groundD.isGrounded;
+
         
         direction = Vector3.zero;
 
