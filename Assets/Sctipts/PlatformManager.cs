@@ -27,7 +27,5 @@ public class PlatformManager : MonoBehaviour
     IEnumerator SpawnPlatform (Vector2 sp) {
         yield return new WaitForSeconds(2f);
         Instantiate(disPlatformPrefab, sp, disPlatformPrefab.transform.rotation);
-        // todo тут непонятно почему платформа остается is_kinematic и улетает за карту
-
     }
 }

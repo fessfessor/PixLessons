@@ -5,15 +5,16 @@ using UnityEngine;
 public class FallPlatform : MonoBehaviour
 {
     Rigidbody2D rb;
-    GameObject currentPlatform;
+   
     
     void Start(){
         rb = GetComponent<Rigidbody2D>();
-        currentPlatform = gameObject;
+        
     }
 
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag("Player")) {
+            
             PlatformManager.Instance.StartCoroutine("SpawnPlatform", new Vector2(transform.position.x, transform.position.y));    
             StartCoroutine(DropPlatform());
             
