@@ -15,7 +15,9 @@ public class Player : MonoBehaviour
     public SpriteRenderer spriteR;
 
     public Animator animator;
-    
+
+    private Vector3 jumpDirection;
+    private bool isJumping;
 
     public float timeRemaining = 3.0f;
 
@@ -34,11 +36,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        direction = Vector3.zero;
-        if (groundD.isGrounded) {
-            doubleJumpAllowed = true;
-        }
+        // todo разобраться с падениями
+        animator.SetBool("isGrounded", groundD.isGrounded);
+        if(!isJumping && !groundD.isGrounded)
+            animator.SetTrigger("fallWithoutJump");
+        isJumping = groundD.isGrounded;
         
+        direction = Vector3.zero;
+
         if (Input.GetKey(KeyCode.A)) {
             direction = Vector3.left;
         } else if (Input.GetKey(KeyCode.D)) {
@@ -48,12 +53,10 @@ public class Player : MonoBehaviour
         direction.y = rb.velocity.y;
         rb.velocity = direction;
 
-        // Обработка прыжка и двогйного прыжка
+        // Обработка прыжка
         if ( Input.GetKeyDown(KeyCode.Space) && groundD.isGrounded) {
-            Jump();          
-        }else if(doubleJumpAllowed && Input.GetKeyDown(KeyCode.Space)) {
             Jump();
-            doubleJumpAllowed = false;
+            animator.SetTrigger("startJump");
         }
 
         // телепортация обратно на платформу
@@ -63,33 +66,24 @@ public class Player : MonoBehaviour
         }
 
         animator.SetFloat("speed", Mathf.Abs(direction.x));
+        animator.SetFloat("isFalling", rb.velocity.y);
 
         if (direction.x > 0)
             spriteR.flipX = false;
         if (direction.x < 0)
             spriteR.flipX = true;
 
+        
     }
 
-    /*
-    private void OnCollisionEnter2D(Collision2D col) {
-        // Смена цвета платформы при прыжке на нее
-        if (col.gameObject.CompareTag("Platform")) {
-            col.gameObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        }
-
-    }
-
-    void insanePlatforms(SpriteRenderer[] renderers) {
-        //Рандомайзер цвета  
-        Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-
-    }
-    */
+   
 
     //Метод прыжка
     void Jump() {
+        isJumping = true;
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+
+        //Debug.Log(rb.velocity.y);
     }
 
    
