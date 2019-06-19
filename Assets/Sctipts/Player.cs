@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
     public float speed = 1.0f;
     public float force = 1.0f;
     public Rigidbody2D rb;   
-    bool doubleJumpAllowed = false;
     public float minHeight = -50.0f;
     public SpriteRenderer[] renderers;
     public GroundDetection groundD;
@@ -18,6 +17,10 @@ public class Player : MonoBehaviour
 
     private Vector3 jumpDirection;
     private bool isJumping;
+    private bool canMove;
+
+    public float swordAttackTime;
+    
 
     public float timeRemaining = 3.0f;
 
@@ -26,8 +29,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
 
+        canMove = true;
         plat = GameObject.Find("Platforms");
         renderers = plat.GetComponentsInChildren<SpriteRenderer>();      
 
@@ -36,23 +39,24 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        // todo разобраться с падениями
+        
+        //Анимации
         animator.SetBool("isGrounded", groundD.isGrounded);
         if(!isJumping && !groundD.isGrounded)
             animator.SetTrigger("fallWithoutJump");
+
         isJumping = !groundD.isGrounded;
 
-        
-        direction = Vector3.zero;
+        animator.SetFloat("speed", Mathf.Abs(direction.x));
+        animator.SetFloat("isFalling", rb.velocity.y);
 
-        if (Input.GetKey(KeyCode.A)) {
-            direction = Vector3.left;
-        } else if (Input.GetKey(KeyCode.D)) {
-            direction = Vector3.right;
+
+        //Движение
+        if (canMove) {
+            Move();
         }
-        direction *= speed;
-        direction.y = rb.velocity.y;
-        rb.velocity = direction;
+        
+
 
         // Обработка прыжка
         if ( Input.GetKeyDown(KeyCode.Space) && groundD.isGrounded) {
@@ -60,31 +64,62 @@ public class Player : MonoBehaviour
             animator.SetTrigger("startJump");
         }
 
-        // телепортация обратно на платформу
-        if(transform.position.y < minHeight) {
-            rb.velocity = new Vector2(0,0);
-            transform.position = new Vector2(0, 0);
+        //Атака
+        if (Input.GetKeyDown(KeyCode.Mouse0)){
+            StartCoroutine(SwordAttack());
+            canMove = false;
         }
 
-        animator.SetFloat("speed", Mathf.Abs(direction.x));
-        animator.SetFloat("isFalling", rb.velocity.y);
-
+        // телепортация обратно на платформу
+        if (transform.position.y < minHeight)
+            resetHeroPoition();
+        
         if (direction.x > 0)
             spriteR.flipX = false;
         if (direction.x < 0)
             spriteR.flipX = true;
 
-        
+       
     }
-
    
+   // Корутина чтобы останавливать персонажа,когда он бьет мечом 
+   IEnumerator SwordAttack() {
+        Attack();
+        yield return new WaitForSeconds(swordAttackTime);
+        canMove = true;
+    }
+    
 
-    //Метод прыжка
+    
     void Jump() {
         isJumping = true;
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+    }
 
-        //Debug.Log(rb.velocity.y);
+    void Attack() {
+        canMove = false;       
+        animator.SetTrigger("isSwordAttack");
+    }
+
+    void Move() {
+        
+
+        direction = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.A)) {
+            direction = Vector3.left;
+        }
+        else if (Input.GetKey(KeyCode.D)) {
+            direction = Vector3.right;
+        }
+        direction *= speed;
+        direction.y = rb.velocity.y;
+        rb.velocity = direction;
+    }
+
+    void resetHeroPoition() {
+        rb.velocity = new Vector2(0, 0);
+        transform.position = new Vector2(0, 0);
     }
 
    

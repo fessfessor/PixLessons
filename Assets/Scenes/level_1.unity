@@ -1371,12 +1371,12 @@ PrefabInstance:
     - target: {fileID: 5786352074284376727, guid: 2fd3e57548de60548bf859a49564a0c8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.04
+      value: -1.59
       objectReference: {fileID: 0}
     - target: {fileID: 5786352074284376727, guid: 2fd3e57548de60548bf859a49564a0c8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.61
+      value: -2.43
       objectReference: {fileID: 0}
     - target: {fileID: 5786352074284376727, guid: 2fd3e57548de60548bf859a49564a0c8,
         type: 3}
@@ -1819,6 +1819,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855417, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: swordAttackTime
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 3597829330073629890, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
