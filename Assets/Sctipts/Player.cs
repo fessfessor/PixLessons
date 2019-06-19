@@ -15,9 +15,14 @@ public class Player : MonoBehaviour
 
     public Animator animator;
 
+    public GameObject SwordRight;
+    public GameObject SwordLeft;
+    public bool isRightDirection;
+
     private Vector3 jumpDirection;
     private bool isJumping;
     private bool canMove;
+    private bool canAttack;
 
     public float swordAttackTime;
     
@@ -29,7 +34,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        canAttack = true;
         canMove = true;
         plat = GameObject.Find("Platforms");
         renderers = plat.GetComponentsInChildren<SpriteRenderer>();      
@@ -65,28 +70,36 @@ public class Player : MonoBehaviour
         }
 
         //Атака
-        if (Input.GetKeyDown(KeyCode.Mouse0)){
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack){
             StartCoroutine(SwordAttack());
             canMove = false;
+            canAttack = false;
         }
 
         // телепортация обратно на платформу
         if (transform.position.y < minHeight)
             resetHeroPoition();
-        
-        if (direction.x > 0)
-            spriteR.flipX = false;
-        if (direction.x < 0)
+
+        if (direction.x > 0) {
+            isRightDirection = true;
+            spriteR.flipX = false;           
+        }
+        if (direction.x < 0) {
+            isRightDirection = false;
             spriteR.flipX = true;
+        }
+            
 
        
     }
    
    // Корутина чтобы останавливать персонажа,когда он бьет мечом 
+   // и чтобы нельзя было закликивать атаку
    IEnumerator SwordAttack() {
         Attack();
         yield return new WaitForSeconds(swordAttackTime);
         canMove = true;
+        canAttack = true;
     }
     
 
@@ -97,8 +110,27 @@ public class Player : MonoBehaviour
     }
 
     void Attack() {
-        canMove = false;       
+       canAttack = false;
+       canMove = false;       
         animator.SetTrigger("isSwordAttack");
+        // В зависимости от направления лица персонажа включаем дополнительные коллайдеры-триггеры для меча
+
+
+    }
+    
+    //
+    void SwordAttackColliderStart() {
+        if (isRightDirection)
+            SwordRight.SetActive(true);
+        else
+            SwordLeft.SetActive(true);
+    }
+
+    void SwordAttackColliderDone() {
+        if (isRightDirection)
+            SwordRight.SetActive(false);
+        else
+            SwordLeft.SetActive(false);
     }
 
     void Move() {

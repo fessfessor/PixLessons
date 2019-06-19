@@ -8,6 +8,8 @@ public class EnemyPatrol : MonoBehaviour
     public GameObject rigthBorder;
     public Rigidbody2D rb;
 
+    public SpriteRenderer sr;
+
     public bool isRightDirection;
 
     [Range(1.0f,10.0f)]
@@ -16,6 +18,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update() {
         if (isRightDirection) {
+            sr.flipX = true;
             rb.velocity = Vector2.right * speed;
             if(transform.position.x > rigthBorder.transform.position.x) {
                 isRightDirection = false;
@@ -23,13 +26,12 @@ public class EnemyPatrol : MonoBehaviour
         }
         else {
             rb.velocity = Vector2.left * speed;
+            sr.flipX = false;
             if (transform.position.x < leftBorder.transform.position.x) {
                 isRightDirection = true;
             }
         }
-        //Проверка
-        //Проверка
-        //Проверка
+        
 
     }
 }
