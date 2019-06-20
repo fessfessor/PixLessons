@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     public float force = 1.0f;
     public Rigidbody2D rb;   
     public float minHeight = -50.0f;
-    public SpriteRenderer[] renderers;
     public GroundDetection groundD;
     private Vector3 direction;
     public SpriteRenderer spriteR;
@@ -23,22 +22,22 @@ public class Player : MonoBehaviour
     private bool isJumping;
     private bool canMove;
     private bool canAttack;
+    public bool isAttacking;
 
     public float swordAttackTime;
     
 
     public float timeRemaining = 3.0f;
 
-    GameObject plat;
+    
     
     // Start is called before the first frame update
     void Start()
     {
+        isAttacking = false;
         canAttack = true;
         canMove = true;
-        plat = GameObject.Find("Platforms");
-        renderers = plat.GetComponentsInChildren<SpriteRenderer>();      
-
+              
     }
 
     // Update is called once per frame
@@ -72,8 +71,8 @@ public class Player : MonoBehaviour
         //Атака
         if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack){
             StartCoroutine(SwordAttack());
-            canMove = false;
-            canAttack = false;
+           // canMove = false;
+           // canAttack = false;
         }
 
         // телепортация обратно на платформу
@@ -88,16 +87,24 @@ public class Player : MonoBehaviour
             isRightDirection = false;
             spriteR.flipX = true;
         }
-            
 
-       
+        
+
+        //Потрясающий костыль, решающий проблему ,что когда коллайдер оружия появляется во враге и их кколлайдеры не движутся
+        //относительно друг друга коллизии не происходит. Эта строка при каждой атаке совсем чуть двигает персонажа и вызвает коллизию
+        if (isAttacking)
+            transform.position = Vector3.Lerp(transform.position, new Vector2(transform.position.x + 0.0001f, transform.position.y), 1f);
+
+
     }
    
    // Корутина чтобы останавливать персонажа,когда он бьет мечом 
    // и чтобы нельзя было закликивать атаку
    IEnumerator SwordAttack() {
         Attack();
+        isAttacking = true;
         yield return new WaitForSeconds(swordAttackTime);
+        isAttacking = false;
         canMove = true;
         canAttack = true;
     }
@@ -112,16 +119,15 @@ public class Player : MonoBehaviour
     void Attack() {
        canAttack = false;
        canMove = false;       
-        animator.SetTrigger("isSwordAttack");
-        // В зависимости от направления лица персонажа включаем дополнительные коллайдеры-триггеры для меча
+        animator.SetTrigger("isSwordAttack");       
 
 
     }
     
-    //
+    //методы для ивента. Появление\исчезание коллайдера меча
     void SwordAttackColliderStart() {
         if (isRightDirection)
-            SwordRight.SetActive(true);
+            SwordRight.SetActive(true);        
         else
             SwordLeft.SetActive(true);
     }
@@ -134,8 +140,6 @@ public class Player : MonoBehaviour
     }
 
     void Move() {
-        
-
         direction = Vector3.zero;
 
         if (Input.GetKey(KeyCode.A)) {

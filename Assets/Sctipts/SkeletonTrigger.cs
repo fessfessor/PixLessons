@@ -8,7 +8,5 @@ public class SkeletonTrigger : MonoBehaviour
         Debug.Log("TRIGGER ");
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        Debug.Log("TRIGGER EXIT");
-    }
+   
 }

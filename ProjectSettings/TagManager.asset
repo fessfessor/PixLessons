@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - AidKit
   - HeroSword
+  - Empty
   layers:
   - Default
   - TransparentFX
