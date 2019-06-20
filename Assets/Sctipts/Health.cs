@@ -11,7 +11,7 @@ public class Health : MonoBehaviour
     public void takeHit(int damage) {
         health -= damage;
         if (health <= 0)
-            Destroy(gameObject);      
+            Destroy(gameObject, 0.5f);      
     }
 
    

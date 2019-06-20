@@ -103,6 +103,10 @@ public class Player : MonoBehaviour
    IEnumerator SwordAttack() {
         Attack();
         isAttacking = true;
+        //Если на земле тормозимся
+        if(groundD.isGrounded)
+        rb.velocity = new Vector2(0, 0);
+
         yield return new WaitForSeconds(swordAttackTime);
         isAttacking = false;
         canMove = true;

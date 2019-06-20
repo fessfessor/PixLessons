@@ -19,6 +19,7 @@ public class BackgroundScroll : MonoBehaviour
         for(int i=0; i<transform.childCount; i++) {
             layers[i] = transform.GetChild(i);
         }
+        //Debug.Log(layers.Length + " layers");
 
         leftIndex = 0;
         rightIndex = layers.Length - 1;
@@ -35,7 +36,8 @@ public class BackgroundScroll : MonoBehaviour
 
     void ScrollLeft() {
         int lastRight = rightIndex;
-        layers[rightIndex].position = Vector3.right * (layers[leftIndex].position.x - backgroundSize);
+        // 9 по z потому что родительский объект в -9 по z
+        layers[rightIndex].position = new Vector3(layers[leftIndex].position.x - backgroundSize,0,9);     
         leftIndex = rightIndex;
         rightIndex--;
         if (rightIndex < 0)
@@ -44,7 +46,8 @@ public class BackgroundScroll : MonoBehaviour
 
     void ScrollRight() {
         int lastLeft = leftIndex;
-        layers[leftIndex].position = Vector3.right * (layers[leftIndex].position.x + backgroundSize);
+        //layers[leftIndex].position = Vector3.right * (layers[rightIndex].position.x + backgroundSize);
+        layers[leftIndex].position = new Vector3(layers[rightIndex].position.x + backgroundSize, 0, 9);
         rightIndex = leftIndex;
         leftIndex++;
         if (leftIndex == layers.Length)
