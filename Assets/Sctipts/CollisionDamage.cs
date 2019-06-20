@@ -10,6 +10,7 @@ public class CollisionDamage : MonoBehaviour
     public string colTag;
     public string colTriggerTag;
 
+    //Сюда надо передать тег КОГО дамажим при касании
     private void OnCollisionEnter2D(Collision2D col) {
         if (col.gameObject.CompareTag(colTag)) {
             Health health = col.gameObject.GetComponent<Health>();
@@ -24,9 +25,9 @@ public class CollisionDamage : MonoBehaviour
 
         }
     }
-    
-    
-    
+
+
+    //Сюда надо передать тег ЧЕМ получаем дамаг при касании триггера
     private void OnTriggerEnter2D(Collider2D col) {       
             if (col.gameObject.CompareTag(colTriggerTag)) {
                 Health health = gameObject.GetComponent<Health>();               
