@@ -88,13 +88,11 @@ public class Player : MonoBehaviour
             spriteR.flipX = true;
         }
 
-        
 
         //Потрясающий костыль, решающий проблему ,что когда коллайдер оружия появляется во враге и их кколлайдеры не движутся
         //относительно друг друга коллизии не происходит. Эта строка при каждой атаке совсем чуть двигает персонажа и вызвает коллизию
-        if (isAttacking)
-            transform.position = Vector3.Lerp(transform.position, new Vector2(transform.position.x + 0.0001f, transform.position.y), 1f);
-
+        //if (isAttacking)
+        //    transform.position = Vector3.Lerp(transform.position, new Vector2(transform.position.x + 0.0001f, transform.position.y), 1f);
 
     }
    
@@ -108,6 +106,7 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(0, 0);
 
         yield return new WaitForSeconds(swordAttackTime);
+
         isAttacking = false;
         canMove = true;
         canAttack = true;
@@ -130,6 +129,7 @@ public class Player : MonoBehaviour
     
     //методы для ивента. Появление\исчезание коллайдера меча
     void SwordAttackColliderStart() {
+        rb.WakeUp();
         if (isRightDirection)
             SwordRight.SetActive(true);        
         else
