@@ -6,6 +6,8 @@ public class EnemyPatrol : MonoBehaviour
 {
     public GameObject leftBorder;
     public GameObject rigthBorder;
+    public GameObject head;
+
     public Rigidbody2D rb;
     public Health healthComponent;
    
@@ -27,12 +29,18 @@ public class EnemyPatrol : MonoBehaviour
     public bool isWaiting;
     public bool isAttacking;
 
+    Vector2 startHead;
+
+    bool closeAttack = false;
 
     private int currentHealth;
     private void Start() {
         healthComponent = transform.GetComponent<Health>();
         isWaiting = true;
         isAttacking = false;
+
+        startHead = head.transform.localPosition;
+
     }
 
     private void Update() {
@@ -40,33 +48,30 @@ public class EnemyPatrol : MonoBehaviour
         currentHealth = healthComponent.health;
         animator.SetInteger("health", currentHealth);
 
-        //Debug.Log(currentHealth);
-
+ 
         
-        // Некое подобие ИИ, враг патрулирует территории, но иногда останавливается отдохнуть, 
-        // и затем снова на идет патрулировать
+        // Некое подобие ИИ, враг патрулирует территории, иногда останавливается отдохнуть, 
+        // и затем снова на идет патрулировать. Ускоряется если видит игрока
         if (isEnableAI) {
+            // проверяем область патрулирования
             RaycastHit2D hits = CheckArea();
+            isAttacking = hits.transform.name == "Player";
+            //Debug.Log(hits.transform.name);
 
             if (!isAttacking) {// Если не атакуем ,то просто гуляем
                 if (!isWaiting) //Если мы не ждем, то стартуем корутину с  временем ожидания                
                     Move();
                 else
                     StartCoroutine(runAndWait());
-            }  
-            
-            // в территорию патрулирования зашел враг               
-            if (hits.transform.name == "Player") {
-                isAttacking = true;
-                MoveToEnemy(hits.transform.position);// бежим к нему и кусаем пока кто-нибдуь не умрет или не попросит пощады
+
+
+                animator.SetFloat("velocity", Mathf.Abs(rb.velocity.x));
+                animator.speed = 1f;
             }
-            
-            
+            else {
+                MoveToEnemy(hits.transform.position);
+            } 
 
-            animator.SetFloat("velocity", Mathf.Abs( rb.velocity.x));
-            // проверяем область патрулирования
-
-           
 
         }else {
             Move();
@@ -79,7 +84,8 @@ public class EnemyPatrol : MonoBehaviour
         yield return new WaitForSeconds(2f);
         isWaiting = false;
         yield return new WaitForSeconds(5f);
-        isWaiting = true;
+        if(!isAttacking)
+            isWaiting = true;
     }
 
 
@@ -104,11 +110,38 @@ public class EnemyPatrol : MonoBehaviour
 
     //Проверяем территории между 2 границ
     RaycastHit2D CheckArea() {
-        return Physics2D.Linecast(leftBorder.transform.position, rigthBorder.transform.position);
+        Debug.DrawLine(transform.position, head.transform.position, Color.red);
+
+        //В зависимости от положения спрайта меняем точку к которой рисуем луч
+        if (!sr.flipX)
+            head.transform.localPosition = startHead;
+        else
+            head.transform.localPosition = new Vector2(-startHead.x, startHead.y);
+
+        return Physics2D.Linecast( head.transform.position, transform.position);
+
     }
 
+   
+
     void MoveToEnemy(Vector2 enemyPosition) {
+        //Бежим к врагу с удвоенной скоростью
+        
+        if (!closeAttack) {
+            transform.position = Vector2.MoveTowards(transform.position, enemyPosition, Time.deltaTime * speed * 3.5f);
+            animator.SetFloat("velocity", 1f);
+            animator.speed = 2f;
+        }
+        else {
+            animator.speed = 1f;
+            animator.SetBool("attack", true);
+        }
 
-
+        //Проверка, если подбежали близко , то останавливаемся и кусаем
+        if(Mathf.Abs(transform.position.x - enemyPosition.x) < 1.3f)           
+            closeAttack = true;
+        else 
+            closeAttack = false;
+        
     }
 }
