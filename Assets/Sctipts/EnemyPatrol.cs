@@ -22,24 +22,24 @@ public class EnemyPatrol : MonoBehaviour
 
     // Параметры для врагов с измененным поведением
     public bool isEnableAI;
-    public string animationIdle;
-    public string animationWalk;
-    public string animationBite;
+    
 
     public bool isWaiting;
     public bool isAttacking;
 
-    Vector2 startHead;
+    
 
-    bool closeAttack = false;
+    bool closeAttack;
 
     private int currentHealth;
     private void Start() {
         healthComponent = transform.GetComponent<Health>();
         isWaiting = true;
         isAttacking = false;
+        closeAttack = false;
 
-        startHead = head.transform.localPosition;
+
+
 
     }
 
@@ -54,23 +54,45 @@ public class EnemyPatrol : MonoBehaviour
         // и затем снова на идет патрулировать. Ускоряется если видит игрока
         if (isEnableAI) {
             // проверяем область патрулирования
-            RaycastHit2D hits = CheckArea();
-            isAttacking = hits.transform.name == "Player";
-            //Debug.Log(hits.transform.name);
+            RaycastHit2D[] hits = CheckArea();
+
+            // Если в большой луч попал игрок бежим к нему
+            if(hits[0] && !hits[1]) {
+                isAttacking = hits[0].transform.name == "Player";
+                closeAttack = false;
+
+                MoveToEnemy(hits[0].transform.position);
+                
+                //Debug.Log(hits[0].transform.name);
+            }
+            else if(hits[1]) {
+                Debug.Log("CLOSE");
+                isAttacking = hits[1].transform.name == "Player";
+                closeAttack = hits[1].transform.name == "Player";
+                MoveToEnemy(hits[0].transform.position);
+            }
+            else {
+                closeAttack = false;
+                isAttacking = false;
+            }
+                
+
+           
+                
+            
+            
 
             if (!isAttacking) {// Если не атакуем ,то просто гуляем
+
                 if (!isWaiting) //Если мы не ждем, то стартуем корутину с  временем ожидания                
                     Move();
                 else
                     StartCoroutine(runAndWait());
 
-
                 animator.SetFloat("velocity", Mathf.Abs(rb.velocity.x));
                 animator.speed = 1f;
             }
-            else {
-                MoveToEnemy(hits.transform.position);
-            } 
+            
 
 
         }else {
@@ -80,6 +102,7 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     
+    //Создает видимость прогулки с моментами отдыха
     IEnumerator runAndWait() {
         yield return new WaitForSeconds(2f);
         isWaiting = false;
@@ -109,18 +132,31 @@ public class EnemyPatrol : MonoBehaviour
     }
 
     //Проверяем территории между 2 границ
-    RaycastHit2D CheckArea() {
-        Debug.DrawLine(transform.position, head.transform.position, Color.red);
+    RaycastHit2D[] CheckArea() {
+        Ray2D rayLeft = new Ray2D(transform.position, transform.position * Vector2.left);
+        Ray2D rayRight = new Ray2D(transform.position, transform.position * Vector2.right);
+        
+        Debug.DrawRay(transform.position, rayLeft.direction * 10, Color.white);
+        Debug.DrawRay(transform.position, rayRight.direction * 10, Color.white);
+        Debug.DrawRay(transform.position, rayLeft.direction * 1.3f, Color.red);
+        Debug.DrawRay(transform.position, rayRight.direction * 1.3f, Color.red);
 
-        //В зависимости от положения спрайта меняем точку к которой рисуем луч
-        if (!sr.flipX)
-            head.transform.localPosition = startHead;
-        else
-            head.transform.localPosition = new Vector2(-startHead.x, startHead.y);
+        RaycastHit2D[] rays = new RaycastHit2D[2];
 
-        return Physics2D.Linecast( head.transform.position, transform.position);
-
+        //В зависимости от положения спрайта меняем направление лучей
+        if (!sr.flipX) {
+            rays[0] = Physics2D.Raycast(transform.position, rayLeft.direction, 10f);
+            rays[1] = Physics2D.Raycast(transform.position, rayLeft.direction, 1.3f);
+        }
+        else {
+            rays[0] = Physics2D.Raycast(transform.position, rayRight.direction, 10f);
+            rays[1] = Physics2D.Raycast(transform.position, rayRight.direction, 1.3f);
+        }
+        
+        return rays;
     }
+
+    
 
    
 
@@ -129,6 +165,7 @@ public class EnemyPatrol : MonoBehaviour
         
         if (!closeAttack) {
             transform.position = Vector2.MoveTowards(transform.position, enemyPosition, Time.deltaTime * speed * 3.5f);
+            animator.SetBool("attack", false);
             animator.SetFloat("velocity", 1f);
             animator.speed = 2f;
         }
@@ -137,11 +174,5 @@ public class EnemyPatrol : MonoBehaviour
             animator.SetBool("attack", true);
         }
 
-        //Проверка, если подбежали близко , то останавливаемся и кусаем
-        if(Mathf.Abs(transform.position.x - enemyPosition.x) < 1.3f)           
-            closeAttack = true;
-        else 
-            closeAttack = false;
-        
     }
 }
