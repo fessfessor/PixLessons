@@ -53,6 +53,9 @@ public class EnemyPatrol : MonoBehaviour
         // Некое подобие ИИ, враг патрулирует территории, иногда останавливается отдохнуть, 
         // и затем снова на идет патрулировать. Ускоряется если видит игрока
         if (isEnableAI) {
+            if(closeAttack)
+                animator.SetBool("attack", false);
+
             // проверяем область патрулирования
             RaycastHit2D[] hits = CheckArea();
 
@@ -76,11 +79,6 @@ public class EnemyPatrol : MonoBehaviour
                 isAttacking = false;
             }
                 
-
-           
-                
-            
-            
 
             if (!isAttacking) {// Если не атакуем ,то просто гуляем
 
@@ -138,19 +136,19 @@ public class EnemyPatrol : MonoBehaviour
         
         Debug.DrawRay(transform.position, rayLeft.direction * 10, Color.white);
         Debug.DrawRay(transform.position, rayRight.direction * 10, Color.white);
-        Debug.DrawRay(transform.position, rayLeft.direction * 1.3f, Color.red);
-        Debug.DrawRay(transform.position, rayRight.direction * 1.3f, Color.red);
+        Debug.DrawRay(transform.position, rayLeft.direction * 1.4f, Color.red);
+        Debug.DrawRay(transform.position, rayRight.direction * 1.4f, Color.red);
 
         RaycastHit2D[] rays = new RaycastHit2D[2];
 
         //В зависимости от положения спрайта меняем направление лучей
         if (!sr.flipX) {
             rays[0] = Physics2D.Raycast(transform.position, rayLeft.direction, 10f);
-            rays[1] = Physics2D.Raycast(transform.position, rayLeft.direction, 1.3f);
+            rays[1] = Physics2D.Raycast(transform.position, rayLeft.direction, 1.4f);
         }
         else {
             rays[0] = Physics2D.Raycast(transform.position, rayRight.direction, 10f);
-            rays[1] = Physics2D.Raycast(transform.position, rayRight.direction, 1.3f);
+            rays[1] = Physics2D.Raycast(transform.position, rayRight.direction, 1.4f);
         }
         
         return rays;
@@ -164,14 +162,15 @@ public class EnemyPatrol : MonoBehaviour
         //Бежим к врагу с удвоенной скоростью
         
         if (!closeAttack) {
-            transform.position = Vector2.MoveTowards(transform.position, enemyPosition, Time.deltaTime * speed * 3.5f);
-            animator.SetBool("attack", false);
+            transform.position = Vector2.MoveTowards(transform.position, enemyPosition, Time.deltaTime * speed * 3.5f);           
             animator.SetFloat("velocity", 1f);
             animator.speed = 2f;
         }
         else {
+            transform.position = Vector2.MoveTowards(transform.position, enemyPosition, Time.deltaTime * speed * 0.5f);
             animator.speed = 1f;
             animator.SetBool("attack", true);
+
         }
 
     }
