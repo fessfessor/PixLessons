@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject SwordRight;
     [SerializeField] private GameObject SwordLeft;
+    [SerializeField] private GameObject SpawnPoint;
      bool isRightDirection;
 
     private Vector3 jumpDirection;
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour
      bool isAttacking;
 
     [SerializeField] private float swordAttackTime;
+    [SerializeField] private GameObject magicBall;
+
     
 
     
@@ -48,8 +51,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-     
         
+
 
         //Анимации
         animator.SetBool("isGrounded", groundD.isGrounded);
@@ -118,9 +121,12 @@ public class Player : MonoBehaviour
         canMove = true;
         canAttack = true;
     }
-    
 
-    
+    private void Update() {
+        //Стрельба
+        CheckShoot();
+    }
+
     void Jump() {
         isJumping = true;
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
@@ -175,6 +181,13 @@ public class Player : MonoBehaviour
             PlayerInventory.Instance.cointsCount++;
             Debug.Log("coints = " + PlayerInventory.Instance.cointsCount);
             Destroy(col.gameObject);
+        }
+    }
+
+    void CheckShoot() {
+        if (Input.GetMouseButtonDown(1)) {
+            GameObject prefab =  Instantiate(magicBall, SpawnPoint.transform.position, Quaternion.identity);
+            prefab.GetComponent<MagicBall>().SetImpulse(Vector2.right, force * 2);
         }
     }
 
