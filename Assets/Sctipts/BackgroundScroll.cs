@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BackgroundScroll : MonoBehaviour
 {
-    public bool scrolling, parallax;
-    public float backgroundSize;
-    public float parallaxSpeed;
+    [SerializeField] private bool scrolling, parallax;
+    [SerializeField] private float backgroundSize;
+    [SerializeField] private float parallaxSpeed;
 
     private Transform cameraTranform;
     private Transform[] layers; // транформы фонов

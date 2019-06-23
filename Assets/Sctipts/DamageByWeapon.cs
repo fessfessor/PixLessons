@@ -11,7 +11,7 @@ public class DamageByWeapon : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag(colTriggerTag)) {
             Health health = gameObject.GetComponent<Health>();
-            health.takeHit(col.gameObject.GetComponent<Damage>().swordDamage);
+            health.takeHit(col.gameObject.GetComponent<Damage>().SwordDamage);
             //Debug.Log("Triggered by " + col.gameObject.transform.name);
             //Показать хелс бар
             // Берем все чайлды, находим хелс бар и показываем его

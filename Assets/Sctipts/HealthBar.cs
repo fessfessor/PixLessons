@@ -24,7 +24,7 @@ public class HealthBar : MonoBehaviour
         if (sr.enabled && hideProcess == null)
             hideProcess =  StartCoroutine(hideHealthBar());
 
-        localScale.x = gameObject.GetComponentInParent<Health>().health * 0.01f;
+        localScale.x = gameObject.GetComponentInParent<Health>().HealthCount * 0.01f;
         transform.localScale = localScale;
     }
 

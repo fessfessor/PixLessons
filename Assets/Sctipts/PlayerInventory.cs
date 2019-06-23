@@ -5,12 +5,18 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public int cointsCount;
+    public static PlayerInventory Instance = null;
 
-    private void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.CompareTag("Coin")) {
-            cointsCount++;
-            Debug.Log("coints = " + cointsCount);
-            Destroy(col.gameObject);
-        } 
+    
+
+    // Singleton
+    void Awake() {
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
+            Destroy(gameObject);
     }
+
+
+    
 }

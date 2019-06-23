@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class Damage : MonoBehaviour
 {
-    public int swordDamage;
+    [SerializeField] private int swordDamage;
+    public int SwordDamage {
+        get { return swordDamage; }
+        set { swordDamage = value; }
+
+    }
 }

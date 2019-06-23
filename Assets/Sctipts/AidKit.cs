@@ -10,19 +10,19 @@ public class AidKit : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         Health health = col.gameObject.GetComponent<Health>();
         if (health != null) {
-            health.health += healthSize;
+            health.HealthCount += healthSize;
             Destroy(gameObject);
         }
-        Debug.Log(col.gameObject.transform.childCount);
+        //Debug.Log(col.gameObject.transform.childCount);
         //Показать хелс бар
         // Берем все чайлды, находим хелс бар и показываем его
         for (int i = 0; i < col.gameObject.transform.childCount; i++) {
             if (col.gameObject.transform.GetChild(i).transform.name == "HealthBar") {
-                Debug.Log(col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled);
+                //Debug.Log(col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled);
                 col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;
-                Debug.Log(col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled);
+                //Debug.Log(col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled);
             }
-            Debug.Log(col.gameObject.transform.GetChild(i).transform.name);
+           // Debug.Log(col.gameObject.transform.GetChild(i).transform.name);
         }
     }
 

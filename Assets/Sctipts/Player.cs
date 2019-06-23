@@ -4,30 +4,33 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 1.0f;
-    public float force = 1.0f;
-    public Rigidbody2D rb;   
-    public float minHeight = -50.0f;
-    public GroundDetection groundD;
+    [SerializeField] private float speed = 1.0f;
+    [SerializeField] private float force = 1.0f;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float minHeight = -50.0f;
+    [SerializeField] private GroundDetection groundD;
     private Vector3 direction;
-    public SpriteRenderer spriteR;
+    [SerializeField] private SpriteRenderer spriteR;
+    [SerializeField] private Health health;
 
-    public Animator animator;
+    [SerializeField] private Animator animator;
 
-    public GameObject SwordRight;
-    public GameObject SwordLeft;
-    public bool isRightDirection;
+    [SerializeField] private GameObject SwordRight;
+    [SerializeField] private GameObject SwordLeft;
+     bool isRightDirection;
 
     private Vector3 jumpDirection;
     private bool isJumping;
     private bool canMove;
     private bool canAttack;
-    public bool isAttacking;
+     bool isAttacking;
 
-    public float swordAttackTime;
+    [SerializeField] private float swordAttackTime;
     
 
-    public float timeRemaining = 3.0f;
+    
+
+   
 
     
     
@@ -37,13 +40,17 @@ public class Player : MonoBehaviour
         isAttacking = false;
         canAttack = true;
         canMove = true;
-              
+        health = transform.GetComponent<Health>();
+
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+     
         
+
         //Анимации
         animator.SetBool("isGrounded", groundD.isGrounded);
         if(!isJumping && !groundD.isGrounded)
@@ -162,7 +169,14 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(0, 0);
     }
 
-   
+
+    private void OnTriggerEnter2D(Collider2D col) {
+        if (col.gameObject.CompareTag("Coin")) {
+            PlayerInventory.Instance.cointsCount++;
+            Debug.Log("coints = " + PlayerInventory.Instance.cointsCount);
+            Destroy(col.gameObject);
+        }
+    }
 
 
 }

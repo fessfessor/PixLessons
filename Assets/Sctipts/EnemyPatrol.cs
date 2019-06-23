@@ -6,7 +6,7 @@ public class EnemyPatrol : MonoBehaviour
 {
     public GameObject leftBorder;
     public GameObject rigthBorder;
-    public GameObject head;
+    
 
     public Rigidbody2D rb;
     public Health healthComponent;
@@ -26,26 +26,30 @@ public class EnemyPatrol : MonoBehaviour
 
     public bool isWaiting;
     public bool isAttacking;
-
-    
+    public bool checkArea;
 
     bool closeAttack;
 
     private int currentHealth;
+    private RaycastHit2D[] hits;
+
+
     private void Start() {
         healthComponent = transform.GetComponent<Health>();
         isWaiting = true;
         isAttacking = false;
         closeAttack = false;
+        checkArea = false;
 
-
+        if(isEnableAI)
+            StartCoroutine(checkAreaCour());
 
 
     }
 
     private void Update() {
 
-        currentHealth = healthComponent.health;
+        currentHealth = healthComponent.HealthCount;
         animator.SetInteger("health", currentHealth);
 
  
@@ -56,8 +60,6 @@ public class EnemyPatrol : MonoBehaviour
             if(closeAttack)
                 animator.SetBool("attack", false);
 
-            // проверяем область патрулирования
-            RaycastHit2D[] hits = CheckArea();
 
             // Если в большой луч попал игрок бежим к нему
             if(hits[0] && !hits[1]) {
@@ -99,6 +101,14 @@ public class EnemyPatrol : MonoBehaviour
 
     }
 
+
+    IEnumerator checkAreaCour() {
+        while (true) {
+            hits = CheckArea();
+            yield return new WaitForSeconds(0.5f);
+            
+        }           
+    }
     
     //Создает видимость прогулки с моментами отдыха
     IEnumerator runAndWait() {
@@ -131,6 +141,7 @@ public class EnemyPatrol : MonoBehaviour
 
     //Проверяем территории между 2 границ
     RaycastHit2D[] CheckArea() {
+        //Debug.Log("CHECK");
         Ray2D rayLeft = new Ray2D(transform.position, transform.position * Vector2.left);
         Ray2D rayRight = new Ray2D(transform.position, transform.position * Vector2.right);
         
@@ -167,7 +178,7 @@ public class EnemyPatrol : MonoBehaviour
             animator.speed = 2f;
         }
         else {
-            transform.position = Vector2.MoveTowards(transform.position, enemyPosition, Time.deltaTime * speed * 0.5f);
+            //transform.position = Vector2.MoveTowards(transform.position, enemyPosition, Time.deltaTime * speed * 0.5f);
             animator.speed = 1f;
             animator.SetBool("attack", true);
 
