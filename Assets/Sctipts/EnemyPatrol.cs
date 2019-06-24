@@ -51,6 +51,7 @@ public class EnemyPatrol : MonoBehaviour
     private void Update() {
 
         currentHealth = healthComponent.HealthCount;
+        
         animator.SetInteger("health", currentHealth);
 
         //отключаем коллайдер, чтобы анимация смерти не дамажила
@@ -58,6 +59,7 @@ public class EnemyPatrol : MonoBehaviour
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
             collider.enabled = false;
+            
         }
             
             
@@ -179,7 +181,9 @@ public class EnemyPatrol : MonoBehaviour
 
     void MoveToEnemy(Vector2 enemyPosition) {
         //Бежим к врагу с удвоенной скоростью
-        
+        if (currentHealth < 0)
+            return;
+
         if (!closeAttack) {
             transform.position = Vector2.MoveTowards(transform.position, enemyPosition, Time.deltaTime * speed * 3.5f);           
             animator.SetFloat("velocity", 1f);

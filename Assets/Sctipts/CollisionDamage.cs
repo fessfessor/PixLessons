@@ -29,7 +29,7 @@ public class CollisionDamage : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D col) {
         health = col.gameObject.GetComponent<Health>();
-        //col.gameObject.GetComponent<Rigidbody2D>().WakeUp(); 
+        col.gameObject.GetComponent<Rigidbody2D>().WakeUp(); 
     }
 
     

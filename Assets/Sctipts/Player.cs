@@ -25,8 +25,10 @@ public class Player : MonoBehaviour
     private bool canMove;
     private bool canAttack;
      bool isAttacking;
+    private bool shootReady;
 
     [SerializeField] private float swordAttackTime;
+    [SerializeField] private float shootForce;
     [SerializeField] private GameObject magicBall;
 
     
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
         isAttacking = false;
         canAttack = true;
         canMove = true;
+        shootReady = true;
         health = transform.GetComponent<Health>();
 
         
@@ -105,10 +108,45 @@ public class Player : MonoBehaviour
         //    transform.position = Vector3.Lerp(transform.position, new Vector2(transform.position.x + 0.0001f, transform.position.y), 1f);
 
     }
+
+
+    private void Update() {
+        //Стрельба
+        if (shootReady) {
+            if (Input.GetMouseButtonDown(1) && groundD.isGrounded) {               
+                StartCoroutine(MagicAttack());
+            }
+            
+        }
+            
+    }
+
+
    
-   // Корутина чтобы останавливать персонажа,когда он бьет мечом 
-   // и чтобы нельзя было закликивать атаку
-   IEnumerator SwordAttack() {
+
+
+
+    IEnumerator MagicAttack() {
+        animator.SetTrigger("isShooting");
+        isAttacking = true;
+        shootReady = false;
+        canAttack = false;
+        canMove = false;
+        rb.velocity = Vector2.zero;
+        yield return new WaitForSeconds(1.2f);
+        isAttacking = false;
+        canMove = true;
+        canAttack = true;
+        yield return new WaitForSeconds(0.8f);
+        shootReady = true;
+
+        
+    }
+
+
+    // Корутина чтобы останавливать персонажа,когда он бьет мечом 
+    // и чтобы нельзя было закликивать атаку
+    IEnumerator SwordAttack() {
         Attack();
         isAttacking = true;
         //Если на земле тормозимся
@@ -122,10 +160,7 @@ public class Player : MonoBehaviour
         canAttack = true;
     }
 
-    private void Update() {
-        //Стрельба
-        CheckShoot();
-    }
+   
 
     void Jump() {
         isJumping = true;
@@ -184,12 +219,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    //todo доделать поворот
+    
     void CheckShoot() {
-        if (Input.GetMouseButtonDown(1)) {
+                  
             GameObject prefab =  Instantiate(magicBall, SpawnPoint.transform.position, Quaternion.identity);
-            prefab.GetComponent<MagicBall>().SetImpulse(Vector2.right, 20);
-        }
+            prefab.GetComponent<MagicBall>().SetImpulse(Vector2.right, spriteR.flipX ? -shootForce : shootForce);
+        
     }
 
 
