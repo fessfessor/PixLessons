@@ -7,41 +7,29 @@ public class CollisionDamage : MonoBehaviour
     [Range(10,100)]
     [SerializeField] private int damage = 10;
 
-
-    
     private Health health;
 
     
 
-    //Сюда надо передать тег КОГО дамажим при касании
-   
 
     private void OnCollisionEnter2D(Collision2D col) {
         //Debug.Log("CollisionEnter");
         health = col.gameObject.GetComponent<Health>();
         if (health != null) {
             health.takeHit(damage);
+
+            //Если есть еще хп, показываем хелсбар
+            if(health.HealthCount > 0)
+                PlatformerTools.ShowHealthBar(col.gameObject);
         }
-        // Берем все чайлды, находим хелс бар и показываем его
-        for (int i = 0; i < col.gameObject.transform.childCount; i++) {
-            if (col.gameObject.transform.GetChild(i).transform.name == "HealthBar") {
-                col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;
-            }
-        }
+        
+        
+        
     }
 
     private void OnTriggerStay2D(Collider2D col) {
-        
-
         health = col.gameObject.GetComponent<Health>();
-        col.gameObject.GetComponent<Rigidbody2D>().WakeUp();
-        
-        // Берем все чайлды, находим хелс бар и показываем его
-        for (int i = 0; i < col.gameObject.transform.childCount; i++) {
-            if (col.gameObject.transform.GetChild(i).transform.name == "HealthBar") {
-                col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;
-            }
-        }
+        //col.gameObject.GetComponent<Rigidbody2D>().WakeUp(); 
     }
 
     
@@ -52,6 +40,7 @@ public class CollisionDamage : MonoBehaviour
         
         if (health != null) {
             health.takeHit(damage);
+            
         }
         health = null;
     }

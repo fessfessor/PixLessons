@@ -184,10 +184,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    //todo доделать поворот
     void CheckShoot() {
         if (Input.GetMouseButtonDown(1)) {
             GameObject prefab =  Instantiate(magicBall, SpawnPoint.transform.position, Quaternion.identity);
-            prefab.GetComponent<MagicBall>().SetImpulse(Vector2.right, force * 2);
+            prefab.GetComponent<MagicBall>().SetImpulse(Vector2.right, 20);
         }
     }
 

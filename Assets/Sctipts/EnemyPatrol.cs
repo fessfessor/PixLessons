@@ -10,6 +10,7 @@ public class EnemyPatrol : MonoBehaviour
 
     public Rigidbody2D rb;
     public Health healthComponent;
+    [SerializeField] Collider2D collider;
    
     public Animator animator;
 
@@ -52,7 +53,14 @@ public class EnemyPatrol : MonoBehaviour
         currentHealth = healthComponent.HealthCount;
         animator.SetInteger("health", currentHealth);
 
- 
+        //отключаем коллайдер, чтобы анимация смерти не дамажила
+        if (currentHealth < 0) {
+            rb.velocity = Vector2.zero;
+            rb.gravityScale = 0;
+            collider.enabled = false;
+        }
+            
+            
         
         // Некое подобие ИИ, враг патрулирует территории, иногда останавливается отдохнуть, 
         // и затем снова на идет патрулировать. Ускоряется если видит игрока
