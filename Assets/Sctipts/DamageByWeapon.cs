@@ -13,24 +13,28 @@ public class DamageByWeapon : MonoBehaviour
 
     
     private void OnTriggerEnter2D(Collider2D col) {
+        
+        // Чтобы мы не дамажили своим же оружием себя
+        if (parent != null && parent.transform.name != col.transform.name) {           
+                if (GameManager.Instance.healthContainer.ContainsKey(col.gameObject)) {
+                    var health = GameManager.Instance.healthContainer[col.gameObject];
+                    // Если есть здоровье, его больше 0 и 
+                    if (health != null && health.HealthCount > 0) {
+                        health.takeHit(damage);
 
-        if (parent != null) {
-            if (col.gameObject.transform.name != parent.transform.name) {
-                Health health = col.gameObject.GetComponent<Health>();
-                // Если есть здоровье, его больше 0 и 
-                if (health != null && health.HealthCount > 0) {
-                    health.takeHit(damage);
 
-
-                    // Берем все чайлды, находим хелс бар и показываем его
-                    if (health.HealthCount > 0)
-                        PlatformerTools.ShowHealthBar(col.gameObject);
+                        // Берем все чайлды, находим хелс бар и показываем его
+                        if (health.HealthCount > 0)
+                            PlatformerTools.ShowHealthBar(col.gameObject);
+                    }
                 }
-            }
-        }
+            
+                
+         }
+    }
         
        
             
  
-    }
 }
+

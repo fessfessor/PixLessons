@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GroundDetection groundD;
     private Vector3 direction;
     [SerializeField] private SpriteRenderer spriteR;
-    [SerializeField] private Health health;
+    
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject SwordRight;
     [SerializeField] private GameObject SwordLeft;
@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
         canAttack = true;
         canMove = true;
         shootReady = true;
-        health = transform.GetComponent<Health>();
+        
 
         
     }

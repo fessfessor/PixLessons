@@ -19,8 +19,8 @@ public class MagicBall : MonoBehaviour , IObjectDestroyer
     // Свой метод "уничтожения", помещаем обратно в пул объект, после его анимации
     public IEnumerator Destroy(GameObject gameObject, float duration) {       
         yield return new WaitForSeconds(duration);
-        rb.gravityScale = 1;
-        animator.SetBool("Explosive", false);
+        animator.WriteDefaultValues();
+        rb.gravityScale = 1;               
         player.ReturnBallToPoll(this);
     }
 
@@ -43,7 +43,7 @@ public class MagicBall : MonoBehaviour , IObjectDestroyer
     
 
     private void OnTriggerEnter2D(Collider2D col) {
-        //Debug.Log("PArent - " + player.transform.name + " COLL - " + col.transform.name);
+        Debug.Log("PArent - " + player.transform.name + " COLL - " + col.transform.name);
         if (col.gameObject != player.gameObject) {
             // Тормозим объект в месте попадания
             rb.velocity = Vector2.zero;

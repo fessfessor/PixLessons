@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692508816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.85, y: 0, z: 0}
+  m_LocalPosition: {x: 0.16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6091518693444855418}
@@ -308,9 +308,11 @@ MonoBehaviour:
   SwordRight: {fileID: 1993397791}
   SwordLeft: {fileID: 1920639417}
   SpawnPoint: {fileID: 1692508816}
-  swordAttackTime: 0.6
-  magicBall: {fileID: 6888292196518972721, guid: 28d1981ebddeef7418d0b0d06b338d36,
+  swordAttackTime: 0.5
+  shootForce: 20
+  magicBall: {fileID: 6657278866043608775, guid: 28d1981ebddeef7418d0b0d06b338d36,
     type: 3}
+  ballsCoulnt: 3
 --- !u!114 &5901913269585613015
 MonoBehaviour:
   m_ObjectHideFlags: 0

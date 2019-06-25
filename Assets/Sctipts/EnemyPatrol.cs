@@ -4,17 +4,13 @@ using UnityEngine;
 
 public class EnemyPatrol : MonoBehaviour
 {
-    public GameObject leftBorder;
-    public GameObject rigthBorder;
-    
-
-    public Rigidbody2D rb;
-    public Health healthComponent;
-    [SerializeField] Collider2D collider;
-   
-    public Animator animator;
-
-    public SpriteRenderer sr;
+    [SerializeField] private GameObject leftBorder;
+    [SerializeField] private GameObject rigthBorder;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Health healthComponent;
+    [SerializeField] private  Collider2D collider;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer sr;
 
     public bool isRightDirection;
 
@@ -36,7 +32,7 @@ public class EnemyPatrol : MonoBehaviour
 
 
     private void Start() {
-        healthComponent = transform.GetComponent<Health>();
+        healthComponent = GameManager.Instance.healthContainer[gameObject];
         isWaiting = true;
         isAttacking = false;
         closeAttack = false;
@@ -51,8 +47,8 @@ public class EnemyPatrol : MonoBehaviour
     private void Update() {
 
         currentHealth = healthComponent.HealthCount;
-        
-        animator.SetInteger("health", currentHealth);
+        if (currentHealth < 0)
+            animator.SetTrigger("isDeath");
 
         //отключаем коллайдер, чтобы анимация смерти не дамажила
         if (currentHealth < 0) {
