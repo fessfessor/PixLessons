@@ -47,7 +47,7 @@ public class EnemyPatrol : MonoBehaviour
     private void Update() {
 
         currentHealth = healthComponent.HealthCount;
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
             animator.SetTrigger("isDeath");
 
         //отключаем коллайдер, чтобы анимация смерти не дамажила
@@ -64,7 +64,7 @@ public class EnemyPatrol : MonoBehaviour
         // и затем снова на идет патрулировать. Ускоряется если видит игрока
         if (isEnableAI) {
             if(closeAttack)
-                animator.SetBool("attack", false);
+                animator.SetTrigger("isAttack");
 
 
             // Если в большой луч попал игрок бежим к нему
@@ -188,7 +188,7 @@ public class EnemyPatrol : MonoBehaviour
         else {
             //transform.position = Vector2.MoveTowards(transform.position, enemyPosition, Time.deltaTime * speed * 0.5f);
             animator.speed = 1f;
-            animator.SetBool("attack", true);
+            animator.SetTrigger("isAttack");
 
         }
 
