@@ -12,9 +12,7 @@ public class Player : MonoBehaviour
     private Vector3 direction;
     [SerializeField] private SpriteRenderer spriteR;
     [SerializeField] private Health health;
-
     [SerializeField] private Animator animator;
-
     [SerializeField] private GameObject SwordRight;
     [SerializeField] private GameObject SwordLeft;
     [SerializeField] private GameObject SpawnPoint;
@@ -29,19 +27,26 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float swordAttackTime;
     [SerializeField] private float shootForce;
-    [SerializeField] private GameObject magicBall;
+    [SerializeField] private MagicBall magicBall;
+    [SerializeField] private int ballsCoulnt = 3;
+
+    private List<MagicBall> ballPool;
 
     
 
     
 
-   
-
-    
     
     // Start is called before the first frame update
     void Start()
     {
+        ballPool = new List<MagicBall>();
+        for (int i=0; i < ballsCoulnt; i++) {
+            MagicBall poolingBall = Instantiate(magicBall, SpawnPoint.transform);
+            ballPool.Add(poolingBall);
+            poolingBall.gameObject.SetActive(false);
+        }
+
         isAttacking = false;
         canAttack = true;
         canMove = true;
@@ -55,7 +60,6 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         
-
 
         //Анимации
         animator.SetBool("isGrounded", groundD.isGrounded);
@@ -101,12 +105,6 @@ public class Player : MonoBehaviour
             spriteR.flipX = true;
         }
 
-
-        //Потрясающий костыль, решающий проблему ,что когда коллайдер оружия появляется во враге и их кколлайдеры не движутся
-        //относительно друг друга коллизии не происходит. Эта строка при каждой атаке совсем чуть двигает персонажа и вызвает коллизию
-        //if (isAttacking)
-        //    transform.position = Vector3.Lerp(transform.position, new Vector2(transform.position.x + 0.0001f, transform.position.y), 1f);
-
     }
 
 
@@ -121,10 +119,7 @@ public class Player : MonoBehaviour
             
     }
 
-
-   
-
-
+    #region Attack
 
     IEnumerator MagicAttack() {
         animator.SetTrigger("isShooting");
@@ -139,10 +134,10 @@ public class Player : MonoBehaviour
         canAttack = true;
         yield return new WaitForSeconds(0.8f);
         shootReady = true;
-
-        
+       
     }
 
+    
 
     // Корутина чтобы останавливать персонажа,когда он бьет мечом 
     // и чтобы нельзя было закликивать атаку
@@ -160,26 +155,19 @@ public class Player : MonoBehaviour
         canAttack = true;
     }
 
-   
-
-    void Jump() {
-        isJumping = true;
-        rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
-    }
-
     void Attack() {
-       canAttack = false;
-       canMove = false;       
-        animator.SetTrigger("isSwordAttack");       
+        canAttack = false;
+        canMove = false;
+        animator.SetTrigger("isSwordAttack");
 
 
     }
-    
+
     //методы для ивента. Появление\исчезание коллайдера меча
     void SwordAttackColliderStart() {
         rb.WakeUp();
         if (isRightDirection)
-            SwordRight.SetActive(true);        
+            SwordRight.SetActive(true);
         else
             SwordLeft.SetActive(true);
     }
@@ -191,6 +179,24 @@ public class Player : MonoBehaviour
             SwordLeft.SetActive(false);
     }
 
+    void CheckShoot() {
+
+        MagicBall prefab = GetMagicBallFromPoll();
+        
+        prefab.SetImpulse(Vector2.right, spriteR.flipX ? -shootForce : shootForce, this);
+
+    }
+
+    void Jump() {
+        isJumping = true;
+        rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+    }
+
+    #endregion
+
+
+
+    #region Move
     void Move() {
         direction = Vector3.zero;
 
@@ -210,6 +216,8 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(0, 0);
     }
 
+    #endregion
+
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Coin")) {
@@ -220,12 +228,36 @@ public class Player : MonoBehaviour
     }
 
     
-    void CheckShoot() {
-                  
-            GameObject prefab =  Instantiate(magicBall, SpawnPoint.transform.position, Quaternion.identity);
-            prefab.GetComponent<MagicBall>().SetImpulse(Vector2.right, spriteR.flipX ? -shootForce : shootForce);
+   
+
+    #region Pool
+
+    private MagicBall GetMagicBallFromPoll() {
+        if(ballPool.Count > 0) {
+            var ballTemp = ballPool[0];
+            ballPool.Remove(ballTemp);
+            ballTemp.gameObject.SetActive(true);
+            ballTemp.transform.parent = null;
+            ballTemp.transform.position = SpawnPoint.transform.position;
+            return ballTemp;
+        }
+        return Instantiate(magicBall, SpawnPoint.transform.position, Quaternion.identity);
+    }
+
+    public void ReturnBallToPoll(MagicBall ballTemp) {       
+        if (!ballPool.Contains(ballTemp))
+            ballPool.Add(ballTemp);
+
+        ballTemp.gameObject.SetActive(false);
+        ballTemp.transform.parent = SpawnPoint.transform;
+        ballTemp.transform.position = SpawnPoint.transform.position;
         
     }
+
+
+
+
+    #endregion
 
 
 }
