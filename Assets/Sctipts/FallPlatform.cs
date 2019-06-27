@@ -18,6 +18,8 @@ public class FallPlatform : MonoBehaviour
             PlatformManager.Instance.StartCoroutine("SpawnPlatform", new Vector2(transform.position.x, transform.position.y));    
             StartCoroutine(DropPlatform());
             
+        } else {
+            Destroy(gameObject);
         }
     }
 
@@ -28,6 +30,8 @@ public class FallPlatform : MonoBehaviour
         rb.isKinematic = false;
         Destroy(gameObject, 2f);
     }
+
+
 
    
 }
