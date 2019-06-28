@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 2052669106}
   - component: {fileID: 3597829330073629890}
   - component: {fileID: 2052669104}
+  - component: {fileID: 834969917}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -252,7 +253,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: e4a804e6342723c42b83c71f2bd12610, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -303,8 +304,8 @@ MonoBehaviour:
   minHeight: -50
   groundD: {fileID: 3074909453322150774}
   spriteR: {fileID: 6091518693444855419}
-  health: {fileID: 0}
   animator: {fileID: 2052669104}
+  cameraShaker: {fileID: 0}
   SwordRight: {fileID: 1993397791}
   SwordLeft: {fileID: 1920639417}
   SpawnPoint: {fileID: 1692508816}
@@ -397,6 +398,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &834969917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6091518693444855422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6f971402d923dc4b96521fb3b38a350, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeMagnitude: 0.05
+  shakeTime: 0.5
+  mainCamera: {fileID: 0}
 --- !u!1001 &904429267049847667
 PrefabInstance:
   m_ObjectHideFlags: 0

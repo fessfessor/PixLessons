@@ -7350,6 +7350,7 @@ CompositeCollider2D:
       - {x: -14, y: -5}
       - {x: -9, y: -5}
   m_VertexDistance: 0.0005
+  m_OffsetDistance: 0.000005
 --- !u!50 &1885369194
 Rigidbody2D:
   serializedVersion: 4
@@ -7386,6 +7387,7 @@ TilemapCollider2D:
   m_UsedByComposite: 1
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
+  m_ExtrusionFactor: 0.00001
 --- !u!1 &2027010199
 GameObject:
   m_ObjectHideFlags: 0
@@ -8160,12 +8162,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855419, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 291340794}
+    m_RemovedComponents:
+    - {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
 --- !u!1001 &6511865882625205155
 PrefabInstance:

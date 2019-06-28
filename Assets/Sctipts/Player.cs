@@ -13,6 +13,9 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteR;
     
     [SerializeField] private Animator animator;
+    [SerializeField] private CameraShake cameraShaker;
+    
+    private int currentHealth;
     [SerializeField] private GameObject SwordRight;
     [SerializeField] private GameObject SwordLeft;
     [SerializeField] private GameObject SpawnPoint;
@@ -51,7 +54,10 @@ public class Player : MonoBehaviour
         canAttack = true;
         canMove = true;
         shootReady = true;
-        
+
+        currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+
+        cameraShaker = new CameraShake();
 
         
     }
@@ -59,7 +65,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //При уменьшении здоровья дрясем камеру
+        if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount)
+            cameraShaker.Shake();
+        else
+            currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+
         
+
+
 
         //Анимации
         animator.SetBool("isGrounded", groundD.isGrounded);
