@@ -13,7 +13,10 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteR;
     
     [SerializeField] private Animator animator;
+
     [SerializeField] private CameraShake cameraShaker;
+    [SerializeField] private bool ShakeCameraOnDamage;
+    [SerializeField] private bool isDamaged;
     
     private int currentHealth;
     [SerializeField] private GameObject SwordRight;
@@ -54,10 +57,11 @@ public class Player : MonoBehaviour
         canAttack = true;
         canMove = true;
         shootReady = true;
+        isDamaged = false;
 
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
 
-        cameraShaker = new CameraShake();
+        cameraShaker = transform.GetComponent<CameraShake>();
 
         
     }
@@ -65,14 +69,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //При уменьшении здоровья дрясем камеру
-        if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount)
-            cameraShaker.Shake();
-        else
-            currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-
         
-
 
 
         //Анимации
@@ -123,6 +120,21 @@ public class Player : MonoBehaviour
 
 
     private void Update() {
+        // Проверка на дамаг
+        if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
+            isDamaged = true;
+            currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+        }
+        else {
+            isDamaged = false;
+            currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+        }
+
+        //При уменьшении здоровья трясем камеру
+        if (isDamaged && ShakeCameraOnDamage) 
+        cameraShaker.Shake();
+            
+
         //Стрельба
         if (shootReady) {
             if (Input.GetMouseButtonDown(1) && groundD.isGrounded) {               
