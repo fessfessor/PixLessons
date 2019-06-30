@@ -21,8 +21,11 @@ public class HealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sr.enabled && hideProcess == null)
-            hideProcess =  StartCoroutine(hideHealthBar());
+        if (sr.enabled && hideProcess == null) {
+            StopAllCoroutines();
+            hideProcess = StartCoroutine(hideHealthBar());
+        }
+            
 
         localScale.x = gameObject.GetComponentInParent<Health>().HealthCount * 0.01f;
         transform.localScale = localScale;

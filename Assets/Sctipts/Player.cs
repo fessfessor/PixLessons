@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         ballPool = new List<MagicBall>();
         for (int i=0; i < ballsCoulnt; i++) {
             MagicBall poolingBall = Instantiate(magicBall, SpawnPoint.transform);
@@ -131,8 +132,11 @@ public class Player : MonoBehaviour
         }
 
         //При уменьшении здоровья трясем камеру
-        if (isDamaged && ShakeCameraOnDamage) 
-        cameraShaker.Shake();
+        if (isDamaged && ShakeCameraOnDamage) {
+            cameraShaker.Shake();
+            PlatformerTools.ShowHealthBar(gameObject);
+        }
+        
             
 
         //Стрельба
@@ -245,16 +249,7 @@ public class Player : MonoBehaviour
     #endregion
 
 
-    private void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.CompareTag("Coin")) {
-            PlayerInventory.Instance.cointsCount++;
-            Debug.Log("coints = " + PlayerInventory.Instance.cointsCount);
-            Destroy(col.gameObject);
-        }
-    }
 
-    
-   
 
     #region Pool
 

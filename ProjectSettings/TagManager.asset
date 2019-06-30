@@ -13,6 +13,7 @@ TagManager:
   - BackMount
   - BackGrave
   - Ground
+  - NonShootable
   layers:
   - Default
   - TransparentFX

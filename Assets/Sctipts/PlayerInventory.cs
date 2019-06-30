@@ -5,18 +5,18 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public int cointsCount;
-    public static PlayerInventory Instance = null;
-
     
 
-    // Singleton
-    void Awake() {
-        if (Instance == null)
-            Instance = this;
-        else if (Instance != this)
-            Destroy(gameObject);
+
+    private void OnTriggerEnter2D(Collider2D col) {
+        if (GameManager.Instance.flameCoinContainer.ContainsKey(col.gameObject)) {
+            cointsCount++;
+            var flameCoin = GameManager.Instance.flameCoinContainer[col.gameObject];
+            flameCoin.StartDestroy();
+            
+        }
     }
 
 
-    
+
 }

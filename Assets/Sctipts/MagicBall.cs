@@ -43,8 +43,15 @@ public class MagicBall : MonoBehaviour , IObjectDestroyer
     
 
     private void OnTriggerEnter2D(Collider2D col) {
-        Debug.Log("PArent - " + player.transform.name + " COLL - " + col.transform.name);
-        if (col.gameObject != player.gameObject) {
+        // Маска для моих монеток, чтобы шар пролетал сквозь
+        bool isNonTriggerObj = false;
+        if (GameManager.Instance.flameCoinContainer.ContainsKey(col.gameObject) 
+            || col.gameObject.transform.CompareTag("NonShootable")
+            )
+        isNonTriggerObj = true;
+        
+        //Debug.Log("PArent - " + player.transform.name + " COLL - " + col.transform.name);
+        if (col.gameObject != player.gameObject && !isNonTriggerObj) {
             // Тормозим объект в месте попадания
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;

@@ -1,0 +1,304 @@
+fileFormatVersion: 2
+guid: 617893238a27ca549b3c52c977717882
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7894266012345292381
+    second: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_0
+  - first:
+      213: 1420229538289473493
+    second: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_1
+  - first:
+      213: -5843839753532810866
+    second: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_2
+  - first:
+      213: -7439079140266458036
+    second: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_3
+  - first:
+      213: 7291358999626871213
+    second: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_4
+  - first:
+      213: -1916547999989572574
+    second: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_5
+  - first:
+      213: 8323841463552932695
+    second: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_6
+  - first:
+      213: -6241874092679457752
+    second: FlameEffects_0
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 2
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 512
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 689
+        width: 374
+        height: 248
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acdf1c30100206a48b7d86c307238490
+      internalID: 7894266012345292381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_1
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 211
+        width: 90
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e638913c962c5db42808d31c13f93871
+      internalID: 1420229538289473493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_2
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 210
+        width: 90
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 567eadd1a972dc14da87f1ad2ef64e60
+      internalID: -5843839753532810866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_3
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 211
+        width: 90
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a31e170686864474fb91d1271ee53d22
+      internalID: -7439079140266458036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_4
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 23
+        width: 90
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4aae5e0dd6cfe5b4e96b5cc017b8a97d
+      internalID: 7291358999626871213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_5
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 21
+        width: 90
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 879527289c84aa44eb0005980c93af97
+      internalID: -1916547999989572574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: kisspng-light-flame-animation-red-red-fresh-flame-effect-element-5a9f0371444741.6094603415203705452797_6
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 31
+        width: 90
+        height: 144
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 133935a83211cc94daad63e853349360
+      internalID: 8323841463552932695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FlameEffects_0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 0
+        width: 374
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c23cd3ebb90f1a346ad08c1fb764dc58
+      internalID: -6241874092679457752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: dc2fe361f76f9944e8776f4c9c448041
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

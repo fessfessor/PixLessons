@@ -41,12 +41,11 @@ public class CameraShake : MonoBehaviour
 
     void StopCameraShaking() {
         CancelInvoke("StartCameraShaking");
-        mainCamera.transform.position = cameraInitialPosition;
+        //mainCamera.transform.position = cameraInitialPosition;
     }
 
-    void BloodySpray() {
-        
-        
+    // Метод для появления "кровавых разводов" по краям при получении дамага
+    void BloodySpray() {  
         StartCoroutine(LerpAlpha());
     }
 
@@ -58,6 +57,7 @@ public class CameraShake : MonoBehaviour
         }
         
         StartCoroutine(LerpAlphaOut());
+        yield break;
     }
 
     IEnumerator LerpAlphaOut() {       
@@ -65,6 +65,7 @@ public class CameraShake : MonoBehaviour
             bloodRender.color = Color.Lerp(endColor, startColor, t / fadeTimeBloodOut);
             yield return null;
         }
+        yield break;
     }
 }
 
