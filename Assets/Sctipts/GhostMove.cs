@@ -17,6 +17,7 @@ public class GhostMove : MonoBehaviour
     private bool isShoot;
     private Vector3 targetPosition;
     private GameObject ball;
+    private GameObject player;
     
 
     
@@ -65,16 +66,13 @@ public class GhostMove : MonoBehaviour
             Destroy(ball, 1.5f);
         }
 
+       
 
         //todo сделать что-нибудь с этим getComponent
         if(ball && ball.transform.position == targetPosition) {
             ball.GetComponent<EnemyMagicBall>().DestroyBall();
         }
             
-
-
-
-
 
         isShoot = false;     
     }
@@ -89,9 +87,14 @@ public class GhostMove : MonoBehaviour
         transform.position = pos + transform.up * Mathf.Sin(Time.time * frequency) * magnitude;
     }
 
+
+    // todo возможно сделать легкую самонаводку
+
+
     //Получаем в кого стрелять 
     // todo переписать на пул объектов, пока так
     public void StopAndShoot(GameObject player) {
+        this.player = player;
         targetPosition = player.transform.position;
         ball = Instantiate(EnemyMagicBall, transform.position, Quaternion.identity);
         isShoot = true;

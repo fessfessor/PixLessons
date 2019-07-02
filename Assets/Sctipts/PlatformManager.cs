@@ -21,7 +21,7 @@ public class PlatformManager : MonoBehaviour
 
     //Спавн платформы после того как она упала
     IEnumerator SpawnPlatform (Vector2 sp) {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         Instantiate(disPlatformPrefab, sp, disPlatformPrefab.transform.rotation, parent.transform);
     }
 }

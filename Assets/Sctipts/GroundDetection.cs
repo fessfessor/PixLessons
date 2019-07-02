@@ -11,7 +11,7 @@ public class GroundDetection : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D col) {
         // Debug.Log("tag - " + col.gameObject.transform.parent.transform.tag);
         Transform parent = col.gameObject.transform.parent;
-        Debug.Log("Enter - " + countCollision);
+        //Debug.Log("Enter - " + countCollision);
         if (parent) {
             if (parent.name == "Ground" || parent.CompareTag("Ground")) {
                 countCollision++;

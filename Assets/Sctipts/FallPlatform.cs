@@ -5,6 +5,7 @@ using UnityEngine;
 public class FallPlatform : MonoBehaviour
 {
     Rigidbody2D rb;
+    [SerializeField]private Collider2D collider;
    
     
     void Start(){
@@ -26,8 +27,9 @@ public class FallPlatform : MonoBehaviour
    
 
     IEnumerator DropPlatform() {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         rb.isKinematic = false;
+        collider.enabled = false;
         Destroy(gameObject, 2f);
     }
 
