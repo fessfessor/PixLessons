@@ -7,12 +7,15 @@ public class GameManager : MonoBehaviour {
 
     public Dictionary<GameObject, Health> healthContainer;
     public Dictionary<GameObject, FlameCoin> flameCoinContainer;
+    public Dictionary<GameObject, GhostMove> ghostContainer;
 
     private void Awake() {
         Instance = this;
         healthContainer = new Dictionary<GameObject, Health>();
         flameCoinContainer = new Dictionary<GameObject, FlameCoin>();
-        
+        ghostContainer = new Dictionary<GameObject, GhostMove>();
+
+
     }
 
     private void Start() {

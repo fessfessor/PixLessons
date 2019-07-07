@@ -1,20 +1,24 @@
 ﻿
+using System.Collections;
 using UnityEngine;
 
 public class GhostMove : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float frequency = 20f;
-    [SerializeField] float magnitude = 0.5f;
-    [SerializeField] float timePatrol = 3f;
-    [SerializeField] float shootBallSpeed = 3f;
-    [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] GameObject EnemyMagicBall;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField]private float frequency = 20f;
+    [SerializeField]private float magnitude = 0.5f;
+    [SerializeField]private float timePatrol = 3f;
+    [SerializeField]private float shootBallSpeed = 3f;
+    [SerializeField]private float timeOfHoming = 0f;        // Время которое шар будет наводиться на игрока, чем больше , тем сложнее увернуться
+    [SerializeField]private SpriteRenderer spriteRenderer;
+    [SerializeField]private GameObject EnemyMagicBall;
+    [SerializeField]private Animator animator;
     private bool facingRight;
 
     private Vector3 pos, localScale;
     private float currentTime;
     private bool isShoot;
+    private bool stopHoming;
     private Vector3 targetPosition;
     private GameObject ball;
     private GameObject player;
@@ -23,12 +27,14 @@ public class GhostMove : MonoBehaviour
     
     void Start()
     {
+        GameManager.Instance.ghostContainer.Add(gameObject, this);
         // Вначале призрак направлен вправо
         facingRight = true;
         pos = transform.position;
         localScale = transform.localScale;
         currentTime = 0f;
         isShoot = false;
+        stopHoming = false;
     }
 
     
@@ -61,9 +67,16 @@ public class GhostMove : MonoBehaviour
         }
 
         // Если шар создан
-        if (ball) {           
-            ball.transform.position = Vector3.MoveTowards(ball.transform.position, targetPosition, shootBallSpeed * Time.deltaTime);
-            Destroy(ball, 1.5f);
+        if (ball) {
+            if (!stopHoming) { // Какое время наводимся на цель, беря ее координаты в апдейте
+                ball.transform.position = Vector3.MoveTowards(ball.transform.position, player.transform.position, shootBallSpeed * Time.deltaTime);
+            }
+            else { // Потом шар летит просто в последнюю координату
+                ball.transform.position = Vector3.MoveTowards(ball.transform.position, targetPosition, shootBallSpeed * Time.deltaTime);
+            }
+
+            
+            Destroy(ball, 5f);
         }
 
        
@@ -74,7 +87,7 @@ public class GhostMove : MonoBehaviour
         }
             
 
-        isShoot = false;     
+            
     }
 
     void MoveRight() {
@@ -87,19 +100,35 @@ public class GhostMove : MonoBehaviour
         transform.position = pos + transform.up * Mathf.Sin(Time.time * frequency) * magnitude;
     }
 
+    // Корутина на остановку самонаводки
+    IEnumerator Homing(){
+        yield return new WaitForSeconds(timeOfHoming);
+        stopHoming = true;
+        targetPosition = player.transform.position;
 
-    // todo возможно сделать легкую самонаводку
+    }
 
-
+    //todo исправить ситуацию когда игрок заходит и выходит из зоны и создается куча шаров
     //Получаем в кого стрелять 
     // todo переписать на пул объектов, пока так
     public void StopAndShoot(GameObject player) {
         this.player = player;
         targetPosition = player.transform.position;
-        ball = Instantiate(EnemyMagicBall, transform.position, Quaternion.identity);
-        isShoot = true;
+        ball = Instantiate(EnemyMagicBall, transform.position, Quaternion.identity, transform);
+        
+        stopHoming = false;
+        StartCoroutine(Homing());
+
+
 
         Debug.Log("Shoot in " + player.transform.name);
+    }
+
+    // Способ убить призрака
+    public void KillYouSelf() {
+
+        animator.SetTrigger("isDeath");
+        Debug.Log(transform.name + " kill!");
     }
 
     

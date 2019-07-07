@@ -7,6 +7,7 @@ public class Health : MonoBehaviour {
     [SerializeField]private int healthCount;
 
 
+
     private void Start() {
         GameManager.Instance.healthContainer.Add(gameObject, this);
     }

@@ -24,38 +24,52 @@ public class SimplePatrol : MonoBehaviour
 
 
     private void Start() {
-        healthComponent = GameManager.Instance.healthContainer[gameObject];
+        healthComponent = GetComponent<Health>();
         isRised = false;
     }
 
     private void Update() {
+        
 
         currentHealth = healthComponent.HealthCount;
         //Debug.Log(currentHealth);
         if (currentHealth <= 0)
             Death();
 
-        if(isRised)
+        if (isRised && animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) {
+            collider.enabled = true;
+            rb.gravityScale = 1;
             Move();
-        
+        } else {
+            NonCollision();
+        }
+            
+
 
     }
 
+    
+
     public void Rise() {
-        animator.SetTrigger("Rise");
+        animator.SetTrigger("Rise");       
         isRised = true;
     }
 
 
     void Death() {
         animator.SetTrigger("isDeath");
+        NonCollision();
+    }
+
+    // отключаем коллизию , на сулчай смерти или же пока скелет еще закопан в земле, об него нельзя было пораниться
+    void NonCollision() {
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0;
         collider.enabled = false;
     }
 
 
-
+    //Простое движение
     void Move() {
         if (isRightDirection && currentHealth > 0) {
             sr.flipX = true;
