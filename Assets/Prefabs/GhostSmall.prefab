@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 1459091643128681728}
-  shootFrequency: 2
+  shootFrequency: 4
 --- !u!61 &7788141458910280061
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d00a65ffeeac4e24da93e33c0ec7979e, type: 3}
-  m_Color: {r: 0, g: 0.8235119, b: 0.8867924, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -198,7 +198,7 @@ MonoBehaviour:
   magnitude: 1
   timePatrol: 3
   shootBallSpeed: 4
-  timeOfHoming: 3
+  timeOfHoming: 1
   spriteRenderer: {fileID: 1459091643128681730}
   EnemyMagicBall: {fileID: 6337347837625079815, guid: 73c657e9c3f7ead4aadab51e3b8fa200,
     type: 3}

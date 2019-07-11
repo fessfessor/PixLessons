@@ -5,13 +5,14 @@ using UnityEngine;
 public class GhostAreaCollider : MonoBehaviour
 {
     [SerializeField] GameObject parent;
-    [SerializeField] float shootFrequency;
+    private float shootFrequency;
     private GhostMove parentGhostMove;
     private bool inArea;
 
 
     private void Start() {
         parentGhostMove = parent.GetComponent<GhostMove>();
+        shootFrequency = parentGhostMove.shootFrequency;
     }
 
     private void OnTriggerEnter2D(Collider2D col) {

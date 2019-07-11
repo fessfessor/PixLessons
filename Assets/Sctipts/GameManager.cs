@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    private void Start() {
-        Debug.Log(string.Join(";", healthContainer));
-    }
+    
 
 }   

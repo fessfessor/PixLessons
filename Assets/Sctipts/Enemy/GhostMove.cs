@@ -10,6 +10,7 @@ public class GhostMove : MonoBehaviour
     [SerializeField]private float timePatrol = 3f;
     [SerializeField]private float shootBallSpeed = 3f;
     [SerializeField]private float timeOfHoming = 0f;        // Время которое шар будет наводиться на игрока, чем больше , тем сложнее увернуться
+    [SerializeField]public float shootFrequency;
     [SerializeField]private SpriteRenderer spriteRenderer;
     [SerializeField]private GameObject EnemyMagicBall;
     [SerializeField]private Animator animator;
