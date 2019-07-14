@@ -13,7 +13,7 @@ public class GroundDetection : MonoBehaviour
         Transform parent = col.gameObject.transform.parent;
         //Debug.Log("Enter - " + countCollision);
         if (parent) {
-            if (parent.name == "Ground" || parent.CompareTag("Ground")) {
+            if (parent.name == "Ground" || parent.CompareTag("Ground") || col.gameObject.CompareTag("Ground")) {
                 countCollision++;
                 isGrounded = countCollision > 0 ? true : false;
             }
@@ -25,7 +25,7 @@ public class GroundDetection : MonoBehaviour
         Transform parent = col.gameObject.transform.parent;
         //Debug.Log("Exit - " + countCollision);
         if (parent) {
-            if (parent.name == "Ground" || parent.CompareTag("Ground")) {
+            if (parent.name == "Ground" || parent.CompareTag("Ground") || col.gameObject.CompareTag("Ground")) {
                 countCollision--;
                 isGrounded = countCollision > 0 ? true : false;
             }

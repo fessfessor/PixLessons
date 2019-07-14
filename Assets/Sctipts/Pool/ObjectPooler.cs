@@ -34,7 +34,7 @@ public class ObjectPooler : MonoBehaviour
             Queue<GameObject> objectPool = new Queue<GameObject>();
             // наполняем ее объектами
             for(int i=0; i < pool.size; i++) {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(pool.prefab, transform);
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -51,18 +51,35 @@ public class ObjectPooler : MonoBehaviour
             Debug.LogWarning("Pool with tag " + tag + " doesn`t exist!");
             return null;
         }
-
+        
         GameObject objectToSpawn =  poolDictionary[tag].Dequeue();
+        //Debug.Log(poolDictionary[tag].Count);
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
-
-        poolDictionary[tag].Enqueue(objectToSpawn);
-
+        //Debug.Log(objectToSpawn.transform.position);
         return objectToSpawn;
     }
 
+    //Возвращаем в пул
+    public void ReturnToPool(string tag, GameObject obj) {
+        //Если нет такого объекта, возвращаем его в пул
+        if (!poolDictionary[tag].Contains(obj)) {
+            obj.SetActive(false);
+            obj.transform.parent = transform;
+            obj.transform.position = transform.position;
 
+            poolDictionary[tag].Enqueue(obj);
+        }
+
+        
+
+
+    }
+
+    
+
+    
 
    
 }

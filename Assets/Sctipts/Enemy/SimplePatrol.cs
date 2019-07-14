@@ -26,6 +26,7 @@ public class SimplePatrol : MonoBehaviour
     private void Start() {
         healthComponent = GetComponent<Health>();
         isRised = false;
+
     }
 
     private void Update() {
@@ -86,7 +87,7 @@ public class SimplePatrol : MonoBehaviour
             }
         }
         else if (currentHealth < 0)
-            rb.velocity = new Vector2(0, 0); // Тормозим объект если убили
+            rb.velocity = Vector3.zero; // Тормозим объект если убили
     }
 
 

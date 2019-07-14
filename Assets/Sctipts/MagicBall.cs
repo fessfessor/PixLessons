@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicBall : MonoBehaviour , IObjectDestroyer
+public class MagicBall : MonoBehaviour , IPooledObject
 {
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Rigidbody2D rb;
@@ -11,22 +11,16 @@ public class MagicBall : MonoBehaviour , IObjectDestroyer
     [SerializeField] private Animator animator;   
     [SerializeField] private float deathAnimationDuration;   
     private Player player;
-    private IObjectDestroyer objectDestroyer;
+    private IPooledObject pooledObject;
+    private ObjectPooler pooler;
     public float Force { get => force; set => force = value;}
 
 
 
-    // Свой метод "уничтожения", помещаем обратно в пул объект, после его анимации
-    public IEnumerator Destroy(GameObject gameObject, float duration) {       
-        yield return new WaitForSeconds(duration);
-        animator.WriteDefaultValues();
-        rb.gravityScale = 1;               
-        player.ReturnBallToPoll(this);
-    }
+    
 
-
-    public void Init(IObjectDestroyer objectDestroyer) {
-        this.objectDestroyer = objectDestroyer;
+    public void Init(IPooledObject pooledObject) {
+        this.pooledObject = pooledObject;
     }
 
     public void SetImpulse(Vector2 direction, float force, Player player) {
@@ -34,6 +28,10 @@ public class MagicBall : MonoBehaviour , IObjectDestroyer
         this.player = player;
         // Инициализируем интерфейс
         Init(this);
+
+        // Инициализируем пул
+        if(!pooler)
+            pooler = ObjectPooler.Instance;
 
         // Непосредственно работаем с префабом
         rb.AddForce(direction* force, ForceMode2D.Impulse);
@@ -56,10 +54,10 @@ public class MagicBall : MonoBehaviour , IObjectDestroyer
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
             // Запускаем свое "уничтожение"
-            if (objectDestroyer == null)
+            if (pooledObject == null)
                 Destroy(gameObject);
             else
-                StartCoroutine(objectDestroyer.Destroy(gameObject, deathAnimationDuration));
+                StartCoroutine(pooledObject.OnReturnToPool(gameObject, deathAnimationDuration));
 
             animator.SetBool("Explosive", true);
 
@@ -68,18 +66,28 @@ public class MagicBall : MonoBehaviour , IObjectDestroyer
 
     private IEnumerator LifeCircle() {
         yield return new WaitForSeconds(lifeTime);
-        if (objectDestroyer == null)
+        if (pooledObject == null)
             Destroy(gameObject);
         else
-           StartCoroutine(objectDestroyer.Destroy(gameObject, deathAnimationDuration));
+           StartCoroutine(pooledObject.OnReturnToPool(gameObject, deathAnimationDuration));
         yield break;
 
     }
 
-    
+
+    // Свой метод "уничтожения", помещаем обратно в пул объект, после его анимации
+    public IEnumerator OnReturnToPool(GameObject gameObject, float delay) {
+        yield return new WaitForSeconds(delay);
+        animator.WriteDefaultValues();
+        rb.gravityScale = 1;
+        //Здесь вызываю возврат объекта в пул
+        pooler.ReturnToPool("MagicBall", this.gameObject);
+    }
+
+    //Действия при спавне здесь не требуются
+    public IEnumerator OnSpawnFromPool(float delay) {
+        throw new System.NotImplementedException();
+    }
 }
 
 
-public interface IObjectDestroyer {   
-    IEnumerator Destroy(GameObject gameObject, float delay);
-}

@@ -36,7 +36,8 @@ public class Player : MonoBehaviour
     [SerializeField] private MagicBall magicBall;
     [SerializeField] private int ballsCoulnt = 3;
 
-    private List<MagicBall> ballPool;
+
+    private ObjectPooler pooler;
 
     
 
@@ -46,15 +47,9 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pooler = ObjectPooler.Instance;
 
-        ballPool = new List<MagicBall>();
-        for (int i=0; i < ballsCoulnt; i++) {
-            MagicBall poolingBall = Instantiate(magicBall, SpawnPoint.transform);
-            ballPool.Add(poolingBall);
-            poolingBall.gameObject.SetActive(false);
-        }
-
-        isAttacking = false;
+         isAttacking = false;
         canAttack = true;
         canMove = true;
         shootReady = true;
@@ -209,11 +204,11 @@ public class Player : MonoBehaviour
             SwordLeft.SetActive(false);
     }
 
+    // Вызывается из анимации 
     void CheckShoot() {
-
-        MagicBall prefab = GetMagicBallFromPoll();
-        
-        prefab.SetImpulse(Vector2.right, spriteR.flipX ? -shootForce : shootForce, this);
+        GameObject spawnedObj = pooler.SpawnFromPool("MagicBall", transform.position, Quaternion.identity);
+        MagicBall mb = spawnedObj.GetComponent<MagicBall>();
+        mb.SetImpulse(Vector2.right, spriteR.flipX ? -shootForce : shootForce, this);
 
     }
 
@@ -249,36 +244,7 @@ public class Player : MonoBehaviour
     #endregion
 
 
-
-
-    #region Pool
-
-    private MagicBall GetMagicBallFromPoll() {
-        if(ballPool.Count > 0) {
-            var ballTemp = ballPool[0];
-            ballPool.Remove(ballTemp);
-            ballTemp.gameObject.SetActive(true);
-            ballTemp.transform.parent = null;
-            ballTemp.transform.position = SpawnPoint.transform.position;
-            return ballTemp;
-        }
-        return Instantiate(magicBall, SpawnPoint.transform.position, Quaternion.identity);
-    }
-
-    public void ReturnBallToPoll(MagicBall ballTemp) {       
-        if (!ballPool.Contains(ballTemp))
-            ballPool.Add(ballTemp);
-
-        ballTemp.gameObject.SetActive(false);
-        ballTemp.transform.parent = SpawnPoint.transform;
-        ballTemp.transform.position = SpawnPoint.transform.position;
-        
-    }
-
-
-
-
-    #endregion
+   
 
 
 }

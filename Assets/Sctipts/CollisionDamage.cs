@@ -41,9 +41,7 @@ public class CollisionDamage : MonoBehaviour
     
 
     public void SetDamage() {
-       // Debug.Log("HEALTH NULL " + (health == null));
-        //Debug.Log("SET DAMAGE " + health.health);
-        
+
         if (health != null) {
             health.takeHit(damage);
            
