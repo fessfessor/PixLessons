@@ -33,7 +33,7 @@ Transform:
   - {fileID: 400008}
   m_Father: {fileID: 400004}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -86.39186}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 67.19176}
 --- !u!212 &21200002
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -173,7 +173,7 @@ Animation:
   m_GameObject: {fileID: 100004}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 1bbe3181db7d261448a9a3747b8c55ad, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 1bbe3181db7d261448a9a3747b8c55ad, type: 2}
   m_WrapMode: 0
@@ -192,6 +192,7 @@ GameObject:
   - component: {fileID: 21200008}
   - component: {fileID: 5800002}
   - component: {fileID: 5800000}
+  - component: {fileID: 6260917511682958619}
   m_Layer: 0
   m_Name: Swing01
   m_TagString: Untagged
@@ -294,6 +295,19 @@ CircleCollider2D:
   m_Offset: {x: -0.00000008241893, y: 0.41973045}
   serializedVersion: 2
   m_Radius: 0.66972995
+--- !u!114 &6260917511682958619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55b54e694c878984489b55c4bb708a79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
 --- !u!1 &100010
 GameObject:
   m_ObjectHideFlags: 0
