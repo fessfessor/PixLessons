@@ -62,7 +62,7 @@ public class ObjectPooler : MonoBehaviour
 
     //Возвращаем в пул
     public void ReturnToPool(string tag, GameObject obj) {
-        Debug.Log( tag + " " +poolDictionary[tag].Count);
+        //Debug.Log( tag + " " +poolDictionary[tag].Count);
         //Если нет такого объекта, возвращаем его в пул
         if (!poolDictionary[tag].Contains(obj)) {
             obj.SetActive(false);
@@ -71,17 +71,30 @@ public class ObjectPooler : MonoBehaviour
 
             poolDictionary[tag].Enqueue(obj);
 
-            Debug.Log(poolDictionary[tag].Count);
+          //  Debug.Log(poolDictionary[tag].Count);
         }
-
-        
-
-
     }
 
-    
+    //Перегрузка с родителем
+    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation, GameObject parent) {
+        // Если нет искомого пула, то ничего не делаем
+        if (!poolDictionary.ContainsKey(tag)) {
+            Debug.LogWarning("Pool with tag " + tag + " doesn`t exist!");
+            return null;
+        }
 
-    
+        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        objectToSpawn.SetActive(true);
+        objectToSpawn.transform.position = position;
+        objectToSpawn.transform.rotation = rotation;
+        objectToSpawn.transform.SetParent(parent.transform, false);
 
-   
+        return objectToSpawn;
+    }
+
+
+
+
+
+
 }

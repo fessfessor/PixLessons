@@ -22,10 +22,6 @@ public class DamageByWeapon : MonoBehaviour
                     if (health != null && health.HealthCount > 0) {
                         health.takeHit(damage);
 
-
-                        // Берем все чайлды, находим хелс бар и показываем его
-                        if (health.HealthCount > 0)
-                            PlatformerTools.ShowHealthBar(col.gameObject);
                     }
                 }
             

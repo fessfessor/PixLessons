@@ -7,12 +7,12 @@ public class SimplePatrol : MonoBehaviour
     [SerializeField] private GameObject leftBorder;
     [SerializeField] private GameObject rigthBorder;
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Health healthComponent;
-    [SerializeField] private Collider2D collider;
+    
+    [SerializeField] private Collider2D coll;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer sr;
 
-    public bool isRightDirection;
+   
 
     [Range(1.0f, 10.0f)]
     public float speed = 1.0f;
@@ -20,25 +20,36 @@ public class SimplePatrol : MonoBehaviour
 
     private int currentHealth;
     private bool isRised;
-   
+    private bool isDamaged;
+    
+
+
+    public bool isRightDirection;
+
+
 
 
     private void Start() {
-        healthComponent = GetComponent<Health>();
+
+        isDamaged = false;
         isRised = false;
+        
 
     }
 
     private void Update() {
+        currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+
+
+       
         
 
-        currentHealth = healthComponent.HealthCount;
         //Debug.Log(currentHealth);
         if (currentHealth <= 0)
             Death();
 
         if (isRised && animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) {
-            collider.enabled = true;
+            coll.enabled = true;
             rb.gravityScale = 1;
             Move();
         } else {
@@ -66,7 +77,7 @@ public class SimplePatrol : MonoBehaviour
     void NonCollision() {
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0;
-        collider.enabled = false;
+        coll.enabled = false;
     }
 
 

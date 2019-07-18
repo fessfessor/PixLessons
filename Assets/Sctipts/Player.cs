@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -58,7 +59,11 @@ public class Player : MonoBehaviour
         shootReady = true;
         isDamaged = false;
 
-        currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+        try {
+            currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+        }
+        catch (Exception e) { Debug.Log(e.Message); }
+        
 
         cameraShaker = transform.GetComponent<CameraShake>();
 
@@ -68,7 +73,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log("Ground - " + groundD.isGrounded);
+        //Debug.Log("Ground - " + groundD.isGrounded);
 
 
         //Анимации
@@ -119,6 +124,8 @@ public class Player : MonoBehaviour
 
 
     private void Update() {
+        
+
         // Проверка на дамаг
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
             isDamaged = true;

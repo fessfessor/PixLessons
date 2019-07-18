@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1692508816
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1692508817}
-  m_Layer: 8
-  m_Name: SpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1692508817
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692508816}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6091518693444855418}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1920639417
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6091518693444855418}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1920639419
 BoxCollider2D:
@@ -132,7 +102,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6091518693444855418}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1993397793
 BoxCollider2D:
@@ -210,10 +180,8 @@ Transform:
   m_LocalPosition: {x: 0.05, y: 2.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6091518694275010717}
   - {fileID: 1993397792}
   - {fileID: 1920639418}
-  - {fileID: 1692508817}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -306,14 +274,16 @@ MonoBehaviour:
   spriteR: {fileID: 6091518693444855419}
   animator: {fileID: 2052669104}
   cameraShaker: {fileID: 0}
+  ShakeCameraOnDamage: 0
+  isDamaged: 0
   SwordRight: {fileID: 1993397791}
   SwordLeft: {fileID: 1920639417}
-  SpawnPoint: {fileID: 1692508816}
   swordAttackTime: 0.5
   shootForce: 20
   magicBall: {fileID: 6657278866043608775, guid: 28d1981ebddeef7418d0b0d06b338d36,
     type: 3}
   ballsCoulnt: 3
+  health: {fileID: 0}
 --- !u!114 &5901913269585613015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cointsCount: 0
+  flameCoinsText: {fileID: 0}
 --- !u!61 &3597829330073629890
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -413,83 +384,9 @@ MonoBehaviour:
   shakeMagnitude: 0.05
   shakeTime: 0.5
   mainCamera: {fileID: 0}
---- !u!1001 &904429267049847667
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 6091518693444855418}
-    m_Modifications:
-    - target: {fileID: 6342271527740820461, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_Name
-      value: HealthBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820461, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.422
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.079
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 191a35d19f0fcb845b9a13aac809016b, type: 3}
---- !u!4 &6091518694275010717 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6342271527740820462, guid: 191a35d19f0fcb845b9a13aac809016b,
-    type: 3}
-  m_PrefabInstance: {fileID: 904429267049847667}
-  m_PrefabAsset: {fileID: 0}
+  bloodOnScreen: {fileID: 0}
+  startColor: {r: 0, g: 0, b: 0, a: 0}
+  endColor: {r: 0, g: 0, b: 0, a: 0}
+  fadeTimeBlood: 1
+  fadeTimeBloodOut: 2
+  fadedelay: 3
