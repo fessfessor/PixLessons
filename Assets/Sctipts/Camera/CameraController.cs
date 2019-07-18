@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
 
     private void Update() {
         Vector3 position = target.position;
+        position.x += 5f;
         position.z = -10.0F;
         position.y += 1.0F;
         //интерполяция положения камеры для плавности

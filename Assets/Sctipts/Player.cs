@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     private int currentHealth;
     [SerializeField] private GameObject SwordRight;
     [SerializeField] private GameObject SwordLeft;
-    [SerializeField] private GameObject SpawnPoint;
+    
      bool isRightDirection;
 
     private Vector3 jumpDirection;
@@ -35,6 +35,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float shootForce;
     [SerializeField] private MagicBall magicBall;
     [SerializeField] private int ballsCoulnt = 3;
+    [SerializeField] private Health health;
+    public Health Health { get { return health; } }
+
 
 
     private ObjectPooler pooler;

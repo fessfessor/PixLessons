@@ -18,6 +18,14 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    // Кнопка паузы
+    public void OnClickPause() {
+        if (Time.timeScale > 0)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
+    }
+
     
 
 }   

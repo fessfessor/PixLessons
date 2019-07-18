@@ -16,9 +16,6 @@ public class GroundDetection : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         coll = gameObject.GetComponent<Collider2D>();
         
-        
-        //Debug.Log(downPoint);
-        
     }
 
     
@@ -28,14 +25,14 @@ public class GroundDetection : MonoBehaviour
         if (col.gameObject.CompareTag("Ground")) {
             // Дополнительная проверка лучом для того чтобы не было ситуаций, когда касаемся головой платформы и считаем что на земле
             // Берем нижнюю точку на коллайдере
-            ray = Physics2D.Raycast(new Vector3(coll.bounds.center.x, coll.bounds.min.y), Vector3.down, 0.2f);
+            //ray = Physics2D.Raycast(new Vector3(coll.bounds.center.x, coll.bounds.min.y), Vector3.down, 0.2f);
 
-            if (ray.collider != null && ray.collider.gameObject.CompareTag("Ground")) {
-                Debug.Log("OnCollisionEnter2D " + ray.transform.name);
-               
+            //if (ray.collider != null && ray.collider.gameObject.CompareTag("Ground")) {
+              //  Debug.Log("OnCollisionEnter2D " + ray.transform.name);
+               if (rb.velocity.y <  0.1f)
                 isGrounded =  true;
 
-            }
+            //}
         }
         
         
@@ -46,10 +43,11 @@ public class GroundDetection : MonoBehaviour
     private void OnCollisionExit2D(Collision2D col) {
         
         if (col.gameObject.CompareTag("Ground")) {
-            ray = Physics2D.Raycast(new Vector3(coll.bounds.center.x, coll.bounds.min.y), Vector3.down, 0.2f);
-            if (ray.collider != null && ray.collider.gameObject.CompareTag("Ground")) {
+            // ray = Physics2D.Raycast(new Vector3(coll.bounds.center.x, coll.bounds.min.y), Vector3.down, 0.2f);
+            // if (ray.collider != null && ray.collider.gameObject.CompareTag("Ground")) {
+            if (rb.velocity.y > 0.1)
                 isGrounded = false;           
-            }
+           // }
 
         }
     }

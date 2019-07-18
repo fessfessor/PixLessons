@@ -52,17 +52,17 @@ public class ObjectPooler : MonoBehaviour
             return null;
         }
         
-        GameObject objectToSpawn =  poolDictionary[tag].Dequeue();
-        //Debug.Log(poolDictionary[tag].Count);
+        GameObject objectToSpawn =  poolDictionary[tag].Dequeue();        
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
-        //Debug.Log(objectToSpawn.transform.position);
+       
         return objectToSpawn;
     }
 
     //Возвращаем в пул
     public void ReturnToPool(string tag, GameObject obj) {
+        Debug.Log( tag + " " +poolDictionary[tag].Count);
         //Если нет такого объекта, возвращаем его в пул
         if (!poolDictionary[tag].Contains(obj)) {
             obj.SetActive(false);
@@ -70,6 +70,8 @@ public class ObjectPooler : MonoBehaviour
             obj.transform.position = transform.position;
 
             poolDictionary[tag].Enqueue(obj);
+
+            Debug.Log(poolDictionary[tag].Count);
         }
 
         
