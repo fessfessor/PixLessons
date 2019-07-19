@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Debug.Log("Ground - " + groundD.isGrounded);
+        Debug.Log("Ground - " + groundD.isGrounded);
 
 
         //Анимации
@@ -103,8 +103,7 @@ public class Player : MonoBehaviour
         //Атака
         if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack){
             StartCoroutine(SwordAttack());
-           // canMove = false;
-           // canAttack = false;
+         
         }
 
         // телепортация обратно на платформу

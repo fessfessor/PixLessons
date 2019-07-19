@@ -29,7 +29,7 @@ public class GroundDetection : MonoBehaviour
 
             //if (ray.collider != null && ray.collider.gameObject.CompareTag("Ground")) {
               //  Debug.Log("OnCollisionEnter2D " + ray.transform.name);
-               if (rb.velocity.y <  0.1f)
+               if (rb.velocity.y <  0.01f)
                 isGrounded =  true;
 
             //}
@@ -45,7 +45,7 @@ public class GroundDetection : MonoBehaviour
         if (col.gameObject.CompareTag("Ground")) {
             // ray = Physics2D.Raycast(new Vector3(coll.bounds.center.x, coll.bounds.min.y), Vector3.down, 0.2f);
             // if (ray.collider != null && ray.collider.gameObject.CompareTag("Ground")) {
-            if (rb.velocity.y > 0.1)
+            if (rb.velocity.y > 0.01)
                 isGrounded = false;           
            // }
 
