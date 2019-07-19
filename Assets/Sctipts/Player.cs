@@ -223,6 +223,8 @@ public class Player : MonoBehaviour
 
     void Jump() {
         isJumping = true;
+        groundD.isGrounded = false;
+        rb.velocity = Vector2.zero;
         rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
     }
 

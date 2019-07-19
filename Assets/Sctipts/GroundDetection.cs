@@ -12,14 +12,45 @@ public class GroundDetection : MonoBehaviour
     private Vector3 downPoint;
     private RaycastHit2D ray;
 
+    [SerializeField] private float minManualSet = 0.1f;
+    private bool inManualState = false;
+    private bool manualState = false;
+    private WaitForSeconds delay;
+
+    private int groundCount = 0;
+
+    /*
+    public bool IsGrounded {
+        get { return inManualState ? manualState : isGrounded; }
+        set { inManualState = true;
+            manualState = value;
+            StartCoroutine(ManualSet());
+        }
+    }
+
+    private void Awake() {
+        delay = new WaitForSeconds(minManualSet);
+    }
+
+    IEnumerator ManualSet() {
+        yield return delay;
+        inManualState = false;
+    }
+
+
+*/
     private void Start() {
         rb = gameObject.GetComponent<Rigidbody2D>();
         coll = gameObject.GetComponent<Collider2D>();
         
     }
-
     
 
+
+
+
+
+    /*
     private void OnCollisionEnter2D(Collision2D col) {
         
         if (col.gameObject.CompareTag("Ground")) {
@@ -51,5 +82,30 @@ public class GroundDetection : MonoBehaviour
 
         }
     }
-    
+    */
+
+
+    private void OnTriggerEnter2D(Collider2D col) {
+        if (col.gameObject.CompareTag("Ground")) {
+            if (rb.velocity.y < 0.01) {
+                isGrounded = true;
+                groundCount++;
+            }
+                
+ 
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D col) {
+        
+        if (col.gameObject.CompareTag("Ground")) {           
+            if (rb.velocity.y > 0.01)
+                groundCount--;
+
+            if (groundCount == 0 ) 
+                isGrounded = false;
+                
+        }
+    }
+
 }
