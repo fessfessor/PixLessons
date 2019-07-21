@@ -45,7 +45,7 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
         // Проверка на дамаг
         if (maxHealth > currentHealth && !isDamaged) {
             // Спавним хелс бар, по координатам в центр-верх спрайта и родителем ставим этот объект
-            healthObj = pooler.SpawnFromPool("EnemyHealthBar", new Vector3(sr.bounds.center.x, sr.bounds.max.y + 0.5f), Quaternion.identity, canvas);
+            healthObj = pooler.SpawnFromPool("EnemyHealthBar", new Vector3(sr.bounds.center.x, sr.bounds.max.y + 2f), Quaternion.identity, canvas);
 
             healthRect = healthObj.GetComponent<RectTransform>();
             //Безумная конструкция чтобы получить image заспавненного хелсбара

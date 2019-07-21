@@ -81,17 +81,17 @@ public class Player : MonoBehaviour
 
 #if UNITY_EDITOR
 
-       // if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack) 
-       //     Attack();
+        if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack) 
+            Attack();
         
 
-       // if (shootReady) {
-       //     if (Input.GetMouseButtonDown(1) && groundD.isGrounded) 
-       //         Shoot();
-       // }
+        if (shootReady) {
+            if (Input.GetMouseButtonDown(1) && groundD.isGrounded) 
+                Shoot();
+        }
 
-        //if (Input.GetKeyDown(KeyCode.Space)) 
-        //    Jump();
+        if (Input.GetKeyDown(KeyCode.Space)) 
+            Jump();
         
 
 
@@ -174,10 +174,13 @@ public class Player : MonoBehaviour
    
 
     void Attack() {
-        canAttack = false;
-        canMove = false;
-        animator.SetTrigger("isSwordAttack");
-        StartCoroutine(SwordAttack());
+        if (!isAttacking) {
+            canAttack = false;
+            canMove = false;
+            animator.SetTrigger("isSwordAttack");
+            StartCoroutine(SwordAttack());
+        }
+        
 
     }
     // Корутина чтобы останавливать персонажа,когда он бьет мечом 
@@ -268,9 +271,9 @@ public class Player : MonoBehaviour
 
     public void InitUIController() {
         controller = GameManager.Instance.uiConroller;
-        controller.Jump.onClick.AddListener(Jump);
-        controller.Attack.onClick.AddListener(Attack);
-        controller.Fire.onClick.AddListener(Shoot);
+       // controller.Jump.onClick.AddListener(Jump);
+       // controller.Attack.onClick.AddListener(Attack);
+       // controller.Fire.onClick.AddListener(Shoot);
     }
 
 
