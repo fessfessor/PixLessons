@@ -66,7 +66,7 @@ public class ObjectPooler : MonoBehaviour
         //Если нет такого объекта, возвращаем его в пул
         if (!poolDictionary[tag].Contains(obj)) {
             obj.SetActive(false);
-            obj.transform.parent = transform;
+            obj.transform.SetParent(transform);
             obj.transform.position = transform.position;
 
             poolDictionary[tag].Enqueue(obj);

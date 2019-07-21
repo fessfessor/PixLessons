@@ -66,6 +66,7 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
     }
 
     public IEnumerator OnReturnToPool(GameObject gameObject, float delay) {
+        healthObj.SetActive(false);
         healthFiller.fillAmount = 1f;
         yield return new WaitForSeconds(delay);
         pooler.ReturnToPool("EnemyHealthBar", gameObject);
