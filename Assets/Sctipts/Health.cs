@@ -14,7 +14,7 @@ public class Health : MonoBehaviour {
         maxHealth = healthCount;
     }
 
-    public int HealthCount { get => healthCount; set => healthCount = maxHealth < value ? maxHealth : value; }
+    public int HealthCount { get => healthCount; set => healthCount = (value < maxHealth) ? value : maxHealth; }
     
 
     public void takeHit(int damage) {

@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate() {
 
-        //Debug.Log("Ground - " + groundD.isGrounded);
+        Debug.Log("Ground - " + groundD.isGrounded);
 
 
         //Анимации

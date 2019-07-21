@@ -56,6 +56,7 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
         }
 
         if (isDamaged) {
+            // Выставляем позицию для хелс бара над объектом
             healthRect.anchoredPosition = screenPoint - canvasRectT.sizeDelta / 2f;
             healthFiller.fillAmount = currentHealth / 100.0f;
         }
@@ -66,7 +67,8 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
     }
 
     public IEnumerator OnReturnToPool(GameObject gameObject, float delay) {
-        healthObj.SetActive(false);
+        // Заполняем хелс бар и возвращаем обратно
+        gameObject.SetActive(false);
         healthFiller.fillAmount = 1f;
         yield return new WaitForSeconds(delay);
         pooler.ReturnToPool("EnemyHealthBar", gameObject);
