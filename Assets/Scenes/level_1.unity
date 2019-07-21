@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1157595009}
-  uiConroller: {fileID: 0}
+  uiConroller: {fileID: 1809612011}
 --- !u!4 &35750189
 Transform:
   m_ObjectHideFlags: 0

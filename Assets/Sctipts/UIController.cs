@@ -10,18 +10,13 @@ public class UIController : MonoBehaviour
     [SerializeField] private Button jump;
     [SerializeField] private Button fire;
     
+    
 
     public PressedButton Left { get => left; }
     public PressedButton Right { get => right; }
     public Button Attack { get => attack; }
     public Button Jump { get => jump; }
     public Button Fire { get => fire; }
-
-
-    private void Start() {
-        GameManager.Instance.uiConroller = this;
-    }
-    
 
    
 }
