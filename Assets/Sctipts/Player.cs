@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
     [SerializeField] private Health health;
     [SerializeField] private GameObject SwordRight;
     [SerializeField] private GameObject SwordLeft;
+    [SerializeField] bool useComputerMode;
+    [SerializeField] private Joystick joystick;
     
     
     private  bool isRightDirection;
@@ -60,8 +62,6 @@ public class Player : MonoBehaviour
 
     void FixedUpdate() {
 
-        Debug.Log("Ground - " + groundD.isGrounded);
-
 
         //Анимации
         animator.SetBool("isGrounded", groundD.isGrounded);
@@ -79,22 +79,24 @@ public class Player : MonoBehaviour
             Move();
         }
 
-#if UNITY_EDITOR
-
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack) 
-            Attack();
-        
-
-        if (shootReady) {
-            if (Input.GetMouseButtonDown(1) && groundD.isGrounded) 
-                Shoot();
+        float vetricalMove = joystick.Vertical;
+        if (vetricalMove >= .5f) {
+            Jump();
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) 
-            Jump();
-        
+#if UNITY_EDITOR
+            if (useComputerMode) {
+            if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack)
+                Attack();
 
 
+            if (shootReady && Input.GetMouseButtonDown(1) && groundD.isGrounded && !isAttacking)               
+                Shoot();
+            
+
+            if (Input.GetKeyDown(KeyCode.Space))
+                Jump();
+        }
 #endif
 
         // телепортация обратно на платформу
@@ -128,26 +130,17 @@ public class Player : MonoBehaviour
         }
 
         //При уменьшении здоровья трясем камеру
-        if (isDamaged && ShakeCameraOnDamage) {
-            cameraShaker.Shake();
-            PlatformerTools.ShowHealthBar(gameObject);
-        }
-        
-            
+        if (isDamaged && ShakeCameraOnDamage) 
+            cameraShaker.Shake();            
 
-        
             
     }
 
     #region Attack
 
     void Shoot() {
-        if (shootReady) {
-            if (groundD.isGrounded) {
-                StartCoroutine(MagicAttack());
-            }
-
-        }
+        if (shootReady && groundD.isGrounded && !isAttacking) 
+            StartCoroutine(MagicAttack());          
     }
 
     IEnumerator MagicAttack() {
@@ -164,14 +157,10 @@ public class Player : MonoBehaviour
         canAttack = true;
         // Время перезарядки
         yield return new WaitForSeconds(0.8f);
-        shootReady = true;
-       
+        shootReady = true;      
     }
 
     
-    
-
-   
 
     void Attack() {
         if (!isAttacking) {
@@ -180,11 +169,7 @@ public class Player : MonoBehaviour
             animator.SetTrigger("isSwordAttack");
             StartCoroutine(SwordAttack());
         }
-        
-
-    }
-    // Корутина чтобы останавливать персонажа,когда он бьет мечом 
-    // и чтобы нельзя было закликивать атаку
+    }   
     IEnumerator SwordAttack() {
         isAttacking = true;
         //Если на земле тормозимся
@@ -228,8 +213,10 @@ public class Player : MonoBehaviour
 
 
     #region Move
-    void Jump() {       
+    void Jump() {
         //if (Input.GetKeyDown(KeyCode.Space) &&  groundD.isGrounded) {
+        
+        
         if ( groundD.isGrounded) {
             isJumping = true;
             rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
@@ -241,24 +228,46 @@ public class Player : MonoBehaviour
         direction = Vector3.zero;
 
 #if UNITY_EDITOR
-        if (Input.GetKey(KeyCode.A)) {
-            direction = Vector3.left;
-        }
-        else if (Input.GetKey(KeyCode.D)) {
-            direction = Vector3.right;
+        if (useComputerMode) {
+            if (Input.GetKey(KeyCode.A)) {
+                direction = Vector3.left;
+            }
+            else if (Input.GetKey(KeyCode.D)) {
+                direction = Vector3.right;
+            }
         }
 
 #endif
-
+        /*
         if (controller.Left.IsPressed) {
             direction = Vector3.left;
         }
         else if (controller.Right.IsPressed) {
             direction = Vector3.right;
         }
-        direction *= speed;
+         direction *= speed;
         direction.y = rb.velocity.y;
         rb.velocity = direction;
+        */
+
+        //Управление джойстиком
+        if (joystick.Horizontal >= .2f) {
+            direction = Vector3.right * speed;
+            direction.y = rb.velocity.y;
+            rb.velocity = direction;
+        }
+        else if (joystick.Horizontal <= -.2f) {
+            direction = Vector3.left * speed;
+            direction.y = rb.velocity.y;
+            rb.velocity = direction;
+        }
+        else {
+            direction = Vector3.zero;
+            direction.y = rb.velocity.y;
+            rb.velocity = direction;
+        }
+       
+
     }
 
     void resetHeroPoition() {
@@ -271,9 +280,9 @@ public class Player : MonoBehaviour
 
     public void InitUIController() {
         controller = GameManager.Instance.uiConroller;
-       // controller.Jump.onClick.AddListener(Jump);
-       // controller.Attack.onClick.AddListener(Attack);
-       // controller.Fire.onClick.AddListener(Shoot);
+        controller.Jump.onClick.AddListener(Jump);
+        controller.Attack.onClick.AddListener(Attack);
+        controller.Fire.onClick.AddListener(Shoot);
     }
 
 

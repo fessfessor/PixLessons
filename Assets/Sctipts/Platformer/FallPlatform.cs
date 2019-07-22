@@ -15,15 +15,22 @@ public class FallPlatform : MonoBehaviour, IPooledObject
         pooler = ObjectPooler.Instance;
     }
 
-    private void OnCollisionEnter2D(Collision2D col) {
+    private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
             //Если на платформу прыгнул игрок, то запускаем спавн платформы на том же месте, а старую дропаем в пул
             StartCoroutine(OnSpawnFromPool(3f));
             StartCoroutine(OnReturnToPool(gameObject, 2f));
-        } else {
+        }
+       
+    }
+
+    private void OnCollisionEnter2D(Collision2D col) {
+        if (!col.gameObject.CompareTag("Player")) {
             StartCoroutine(OnReturnToPool(gameObject, 0f));
         }
     }
+
+
 
 
 

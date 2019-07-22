@@ -17,7 +17,7 @@ public class GroundDetection : MonoBehaviour
     private bool manualState = false;
     private WaitForSeconds delay;
 
-    private int groundCount = 0;
+    public int groundCount = 0;
 
     /*
     public bool IsGrounded {
@@ -44,7 +44,7 @@ public class GroundDetection : MonoBehaviour
         coll = gameObject.GetComponent<Collider2D>();
         
     }
-    
+
 
 
 
@@ -83,13 +83,15 @@ public class GroundDetection : MonoBehaviour
         }
     }
     */
+   
+
 
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Ground")) {
             if (rb.velocity.y < 0.01) {
                 isGrounded = true;
-                groundCount++;
+                //groundCount++;
             }
                 
  
@@ -100,9 +102,9 @@ public class GroundDetection : MonoBehaviour
         
         if (col.gameObject.CompareTag("Ground")) {           
             if (rb.velocity.y > 0.01)
-                groundCount--;
+               // groundCount--;
 
-            if (groundCount == 0 ) 
+           // if (groundCount == 0 ) 
                 isGrounded = false;
                 
         }
