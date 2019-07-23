@@ -1,6 +1,7 @@
 ﻿
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class UIController : MonoBehaviour
 {
@@ -18,5 +19,4 @@ public class UIController : MonoBehaviour
     public Button Jump { get => jump; }
     public Button Fire { get => fire; }
 
-   
 }

@@ -98,6 +98,8 @@ public class GhostMove : MonoBehaviour
 
         // Death
         if(GameManager.Instance.healthContainer[gameObject].HealthCount <= 0) {
+            if(ball)
+                StartCoroutine(ball.GetComponent<EnemyMagicBall>().OnReturnToPool(ball, 0.5f));
             animator.SetTrigger("isDeath");
         }
 

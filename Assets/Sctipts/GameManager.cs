@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public Dictionary<GameObject, Health> healthContainer;
     public Dictionary<GameObject, FlameCoin> flameCoinContainer;
     public Dictionary<GameObject, GhostMove> ghostContainer;
+    public Dictionary<GameObject, BuffReciever> buffRecieverContainer;
     public UIController uiConroller;
 
     private void Awake() {
@@ -20,7 +21,9 @@ public class GameManager : MonoBehaviour {
         healthContainer = new Dictionary<GameObject, Health>();
         flameCoinContainer = new Dictionary<GameObject, FlameCoin>();
         ghostContainer = new Dictionary<GameObject, GhostMove>();
-       
+        buffRecieverContainer = new Dictionary<GameObject, BuffReciever>();
+
+
 
 
     }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
@@ -138,7 +139,7 @@ public class Player : MonoBehaviour
 
     #region Attack
 
-    void Shoot() {
+    public void Shoot() {
         if (shootReady && groundD.isGrounded && !isAttacking) 
             StartCoroutine(MagicAttack());          
     }
@@ -162,7 +163,7 @@ public class Player : MonoBehaviour
 
     
 
-    void Attack() {
+    public void Attack() {
         if (!isAttacking) {
             canAttack = false;
             canMove = false;
@@ -219,6 +220,7 @@ public class Player : MonoBehaviour
         
         if ( groundD.isGrounded) {
             isJumping = true;
+            rb.velocity = Vector3.zero;
             rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             animator.SetTrigger("startJump");
         } 
@@ -227,17 +229,6 @@ public class Player : MonoBehaviour
     void Move() {
         direction = Vector3.zero;
 
-#if UNITY_EDITOR
-        if (useComputerMode) {
-            if (Input.GetKey(KeyCode.A)) {
-                direction = Vector3.left;
-            }
-            else if (Input.GetKey(KeyCode.D)) {
-                direction = Vector3.right;
-            }
-        }
-
-#endif
         /*
         if (controller.Left.IsPressed) {
             direction = Vector3.left;
@@ -266,7 +257,23 @@ public class Player : MonoBehaviour
             direction.y = rb.velocity.y;
             rb.velocity = direction;
         }
-       
+
+#if UNITY_EDITOR
+        if (useComputerMode) {
+            //Debug.Log("useComputerMode");
+            if (Input.GetKey(KeyCode.A)) {
+                direction = Vector3.left;
+            }
+            else if (Input.GetKey(KeyCode.D)) {
+                direction = Vector3.right;
+            }
+            direction *= speed;
+            direction.y = rb.velocity.y;
+            rb.velocity = direction;
+        }
+
+#endif
+
 
     }
 
@@ -280,9 +287,11 @@ public class Player : MonoBehaviour
 
     public void InitUIController() {
         controller = GameManager.Instance.uiConroller;
-        controller.Jump.onClick.AddListener(Jump);
-        controller.Attack.onClick.AddListener(Attack);
-        controller.Fire.onClick.AddListener(Shoot);
+        //controller.Jump.onClick.AddListener(Jump);
+        //controller.Attack.onClick.AddListener(Attack);
+        //controller.Fire.onClick.AddListener(Shoot);
+
+  
     }
 
 

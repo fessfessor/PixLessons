@@ -89,10 +89,10 @@ public class GroundDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Ground")) {
-            if (rb.velocity.y < 0.01) {
+            //if (rb.velocity.y < 0.01) {
                 isGrounded = true;
-                //groundCount++;
-            }
+                groundCount++;
+            //}
                 
  
         }
@@ -101,10 +101,10 @@ public class GroundDetection : MonoBehaviour
     private void OnTriggerExit2D(Collider2D col) {
         
         if (col.gameObject.CompareTag("Ground")) {           
-            if (rb.velocity.y > 0.01)
-               // groundCount--;
+            //if (rb.velocity.y > 0.01)
+                groundCount--;
 
-           // if (groundCount == 0 ) 
+            if (groundCount == 0 ) 
                 isGrounded = false;
                 
         }
