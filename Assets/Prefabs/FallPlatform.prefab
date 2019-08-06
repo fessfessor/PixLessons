@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 1475187629539953709}
+  fallingDelay: 3
 --- !u!251 &1387601669
 PlatformEffector2D:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class FallPlatform : MonoBehaviour, IPooledObject
 {
     Rigidbody2D rb;
     [SerializeField]private Collider2D collider;
+    [SerializeField]private float fallingDelay;
 
     private ObjectPooler pooler;
 
@@ -18,8 +19,8 @@ public class FallPlatform : MonoBehaviour, IPooledObject
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.CompareTag("Player")) {
             //Если на платформу прыгнул игрок, то запускаем спавн платформы на том же месте, а старую дропаем в пул
-            StartCoroutine(OnSpawnFromPool(3f));
-            StartCoroutine(OnReturnToPool(gameObject, 2f));
+            StartCoroutine(OnSpawnFromPool(fallingDelay +  3f));
+            StartCoroutine(OnReturnToPool(gameObject,fallingDelay + 2f));
         }
        
     }
@@ -36,8 +37,8 @@ public class FallPlatform : MonoBehaviour, IPooledObject
 
     // Действия при возврате платформы
     public IEnumerator OnReturnToPool(GameObject gameObject, float delay) {
-        // Ждем секунду до начала падения
-        yield return new WaitForSeconds(1f);
+        
+        yield return new WaitForSeconds(fallingDelay);
         rb.isKinematic = false;
         collider.enabled = false;       
         yield return new WaitForSeconds(delay);

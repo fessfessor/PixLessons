@@ -37,4 +37,15 @@ public class Menu : MonoBehaviour
         menuPanel.SetActive(true);
         levels.SetActive(false);
     }
+
+    #region selectLevel
+    public void Level1()
+    {
+        SceneManager.LoadScene(1);
+    }
+    public void Level2()
+    {
+        SceneManager.LoadScene(2);
+    }
+    #endregion
 }

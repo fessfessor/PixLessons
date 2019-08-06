@@ -10,7 +10,10 @@ public class CollisionDamage : MonoBehaviour
     private Health health;
     private GameObject collisionObject;
 
-    
+    private void Start()
+    {
+        
+    }
 
 
     private void OnCollisionEnter2D(Collision2D col) {
