@@ -25,11 +25,11 @@ public class FallPlatform : MonoBehaviour, IPooledObject
        
     }
 
-    private void OnCollisionEnter2D(Collision2D col) {
-        if (!col.gameObject.CompareTag("Player")) {
-            StartCoroutine(OnReturnToPool(gameObject, 0f));
-        }
-    }
+   // private void OnCollisionEnter2D(Collision2D col) {
+    //    if (!col.gameObject.CompareTag("Player")) {
+   //         StartCoroutine(OnReturnToPool(gameObject, 0f));
+   //     }
+   // }
 
 
 

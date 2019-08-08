@@ -13,5 +13,5 @@ public interface IBoss
     // Ослабленный босс
      void OnSpawnLightBoss();
 
-    void SetPlayerPosition(Vector3 position, bool inArea, GameObject sideObject);
+ 
 }

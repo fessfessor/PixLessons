@@ -10,16 +10,30 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Transform target;
 
+    [SerializeField] public bool bossCamera = false; 
+
     private void Awake() {
         if (!target) target = FindObjectOfType<Player>().transform;
     }
 
     private void Update() {
         Vector3 position = target.position;
-        position.x += 5f;
-        position.z = -10.0F;
-        position.y += 1.0F;
-        //интерполяция положения камеры для плавности
-        transform.position = Vector3.Lerp(transform.position, position, speed * Time.deltaTime);
+        if (!bossCamera)
+        {
+            position.x += 5f;
+            position.z = -10.0F;
+            position.y += 1.0F;
+            //интерполяция положения камеры для плавности
+            transform.position = Vector3.Lerp(transform.position, position, speed * Time.deltaTime);
+        }
+        else
+        {
+            position.x += 0f;
+            position.z = -10.0F;
+            position.y += 1.0F;
+            //интерполяция положения камеры для плавности
+            transform.position = Vector3.Lerp(transform.position, position, speed * Time.deltaTime);
+        }
+        
     }
 }

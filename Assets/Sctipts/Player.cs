@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private CameraShake cameraShaker;
     [SerializeField] private bool ShakeCameraOnDamage;
     [SerializeField] private bool isDamaged;
+    public bool IsDamaged { get => isDamaged; }
     [SerializeField] private float swordAttackTime;
     [SerializeField] private float shootForce;
     [SerializeField] private MagicBall magicBall;
@@ -39,6 +40,9 @@ public class Player : MonoBehaviour
     private ObjectPooler pooler;
     private UIController controller;
 
+    private Collider2D SwordRightCollider;
+    private Collider2D SwordLeftCollider;
+
 
     public Health Health { get { return health; } }
 
@@ -56,8 +60,11 @@ public class Player : MonoBehaviour
         currentHealth = Health.HealthCount;
         cameraShaker = transform.GetComponent<CameraShake>();
 
-        InitUIController();
-        
+        SwordRightCollider = SwordRight.GetComponent<Collider2D>();
+        SwordLeftCollider = SwordLeft.GetComponent<Collider2D>();
+
+       // InitUIController();
+
     }
 
 
@@ -188,16 +195,20 @@ public class Player : MonoBehaviour
     void SwordAttackColliderStart() {
         rb.WakeUp();
         if (isRightDirection)
-            SwordRight.SetActive(true);
+            SwordRightCollider.enabled = true;
+        //SwordRight.SetActive(true);
         else
-            SwordLeft.SetActive(true);
+            SwordLeftCollider.enabled = true;
+        //SwordLeft.SetActive(true);
     }
 
     void SwordAttackColliderDone() {
         if (isRightDirection)
-            SwordRight.SetActive(false);
+            SwordRightCollider.enabled = false;
+        //SwordRight.SetActive(false);
         else
-            SwordLeft.SetActive(false);
+            SwordLeftCollider.enabled = false;
+        //SwordLeft.SetActive(false);
     }
 
     // Вызывается из анимации 
@@ -285,14 +296,14 @@ public class Player : MonoBehaviour
     #endregion
 
 
-    public void InitUIController() {
-        controller = GameManager.Instance.uiConroller;
+   // public void InitUIController() {
+   //     controller = GameManager.Instance.uiConroller;
         //controller.Jump.onClick.AddListener(Jump);
         //controller.Attack.onClick.AddListener(Attack);
         //controller.Fire.onClick.AddListener(Shoot);
 
   
-    }
+   // }
 
 
    

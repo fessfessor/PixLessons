@@ -16,11 +16,20 @@ public class BossBehaviour : MonoBehaviour, IBoss
     [SerializeField] GameObject LeftArea;
     [SerializeField] GameObject RightArea;
     [SerializeField] float checkFreq;
+    [SerializeField] float speed;
     [SerializeField] int layer;
+    [SerializeField] GameObject mainCamera;
+    private  SpriteRenderer sr;
 
     private bool inArea = false;
     private Vector3 playerPosition;
-    private Collider2D hit = null;
+    private Collider2D[] hits;
+    private CameraController cameraController;
+    private GameObject player = null;
+    private bool playerRight;
+    
+    
+
     
     
 
@@ -32,6 +41,8 @@ public class BossBehaviour : MonoBehaviour, IBoss
         coll = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        cameraController = mainCamera.GetComponent<CameraController>();
 
         // Выключаем коллайдер,гравитацию и частицы для босса пока он не заспавнен
         rb.isKinematic = true;
@@ -39,13 +50,17 @@ public class BossBehaviour : MonoBehaviour, IBoss
         ps.Stop();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        // Debug.Log("Player position - " + playerPosition + " inArea - " + inArea);
+        if (player)
+        {
+            Move();
+        }
+           // Debug.Log("Player position - " + player.transform.position);
         
-        if (hit)
-            Debug.Log("Check - " + hit.name);
+        
+            
     }
 
 
@@ -65,17 +80,9 @@ public class BossBehaviour : MonoBehaviour, IBoss
         animator.SetTrigger("Spawn");
         healthBarBoss.SetActive(true);
         bossNameText.text = bossName; 
-        EnableBoss(true);   
-    }
-
-    // Координаты игрока приходят из зон атак
-    public void SetPlayerPosition(Vector3 position, bool inArea, GameObject side)
-    {
-        playerPosition = position;
-        this.inArea = inArea;
-         
-
-        //Debug.Log(side.transform.name);
+        EnableBoss(true);
+        //Камера сдвигается в центр при битве с боссом, чтобы было удобнее
+        cameraController.bossCamera = true;
     }
 
 
@@ -113,14 +120,50 @@ public class BossBehaviour : MonoBehaviour, IBoss
 
     }
 
-    IEnumerator CheckArea()
+    private void Move()
     {
-        
+        animator.SetTrigger("Run");
+        if (playerRight)
+        {
+            sr.flipX = true;
+            rb.velocity = Vector2.right * speed;           
+        }
+        else if (!playerRight)
+        {
+            rb.velocity = Vector2.left * speed;
+            sr.flipX = false;           
+        }
+    }
+
+    IEnumerator CheckArea()
+    {       
         while (true)
         {
             yield return new WaitForSeconds(checkFreq);
-            hit =  Physics2D.OverlapCircle(transform.position, 15f, layer);
-   
+
+
+            //Находим в радиусе игрока
+            hits =  Physics2D.OverlapCircleAll(transform.position, 15f);
+            if (hits.Length > 0)
+            {
+                for (int i = 0; i < hits.Length; i++)
+                {                   
+                    if (hits[i].gameObject.transform.name == "Player")
+                    {
+                        player = hits[i].gameObject;
+                        // Определяем с какой стороны игрок
+                        if (player.transform.position.x - transform.position.x < 0)
+                            playerRight = false;
+                        else
+                            playerRight = true;
+                        break;
+                    }
+                    else
+                    {
+                        player = null;
+                    }                       
+                }                  
+            }
         }
         
     }

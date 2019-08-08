@@ -9,9 +9,17 @@ public class DamageByWeapon : MonoBehaviour
 
     [SerializeField] GameObject parent;
 
-    
+    private ObjectPooler pooler;
+    private GameObject BloodSplash;
 
-    
+    private void Start()
+    {
+        pooler = ObjectPooler.Instance;
+    }
+
+
+
+
     private void OnTriggerEnter2D(Collider2D col) {
         
         // Чтобы мы не дамажили своим же оружием себя
@@ -21,12 +29,24 @@ public class DamageByWeapon : MonoBehaviour
                     // Если есть здоровье, его больше 0 и 
                     if (health != null && health.HealthCount > 0) {
                         health.takeHit(damage);
+                        StartCoroutine(Blood(col.transform.position));
+                        
 
                     }
                 }
             
                 
-         }
+        }
+    }
+
+    IEnumerator Blood(Vector2 position)
+    {
+        BloodSplash = pooler.SpawnFromPool("BloodSplash", position, Quaternion.identity);
+        yield return new WaitForSeconds(1f);       
+        BloodSplash.GetComponent<Animator>().WriteDefaultValues();
+        pooler.ReturnToPool("BloodSplash", BloodSplash);
+        
+
     }
         
        

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6828742094872275507}
   - component: {fileID: 6828742094872275506}
   - component: {fileID: 6828742094872275517}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TrapMoss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 861fb0140ede03944a533a14e644431e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 6828742094926087542}
   - component: {fileID: 6828742094926087540}
   - component: {fileID: 6828742094926087543}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
