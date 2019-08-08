@@ -9,19 +9,21 @@ public class HealthBar : MonoBehaviour
     private float healthCount;
     private float currentHealth;
     private Player player;
+    private float playerHealthFloat;
 
 
 
     void Start()
     {
         player = FindObjectOfType<Player>();
-        healthCount = player.Health.HealthCount / 100.0f;
+        playerHealthFloat = player.Health.HealthCount;
+        healthCount = player.Health.HealthCount / playerHealthFloat;
     }
 
     
     void Update()
     {
-        currentHealth = player.Health.HealthCount / 100.0f;
+        currentHealth = player.Health.HealthCount / playerHealthFloat;
 
         if (currentHealth > healthCount)
             healthCount += healthDelta;
