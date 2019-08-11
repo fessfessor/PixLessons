@@ -11,9 +11,11 @@ public class DamageByWeapon : MonoBehaviour
 
     private ObjectPooler pooler;
     private GameObject BloodSplash;
+    private List<GameObject> splashes;
 
     private void Start()
     {
+        splashes = new List<GameObject>();
         pooler = ObjectPooler.Instance;
     }
 
@@ -41,10 +43,13 @@ public class DamageByWeapon : MonoBehaviour
 
     IEnumerator Blood(Vector2 position)
     {
-        BloodSplash = pooler.SpawnFromPool("BloodSplash", position, Quaternion.identity);
-        yield return new WaitForSeconds(1f);       
-        BloodSplash.GetComponent<Animator>().WriteDefaultValues();
-        pooler.ReturnToPool("BloodSplash", BloodSplash);
+               
+        splashes.Add(pooler.SpawnFromPool("BloodSplash", position, Quaternion.identity));
+        int index = splashes.Count - 1;
+        yield return new WaitForSeconds(1f);
+        splashes[index].GetComponent<Animator>().WriteDefaultValues();
+        pooler.ReturnToPool("BloodSplash", splashes[index]);
+        splashes.Remove(splashes[index]);
         
 
     }
