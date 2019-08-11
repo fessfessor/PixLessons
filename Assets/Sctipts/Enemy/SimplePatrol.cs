@@ -26,9 +26,6 @@ public class SimplePatrol : MonoBehaviour
 
     public bool isRightDirection;
 
-
-
-
     private void Start() {
 
         isDamaged = false;
@@ -39,10 +36,6 @@ public class SimplePatrol : MonoBehaviour
 
     private void Update() {
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-
-
-       
-        
 
         //Debug.Log(currentHealth);
         if (currentHealth <= 0)
@@ -55,16 +48,19 @@ public class SimplePatrol : MonoBehaviour
         } else {
             NonCollision();
         }
-            
-
 
     }
 
     
 
     public void Rise() {
-        animator.SetTrigger("Rise");       
-        isRised = true;
+        if (!isRised) {
+            animator.SetTrigger("Rise");
+            AudioManager.Instance.Play("Zomby");
+            AudioManager.Instance.Play("ZombyRaise");
+            isRised = true;
+        }
+               
     }
 
 

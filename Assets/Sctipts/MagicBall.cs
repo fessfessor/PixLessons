@@ -13,6 +13,7 @@ public class MagicBall : MonoBehaviour , IPooledObject
     private Player player;
     private IPooledObject pooledObject;
     private ObjectPooler pooler;
+    
     public float Force { get => force; set => force = value;}
 
 
@@ -60,6 +61,7 @@ public class MagicBall : MonoBehaviour , IPooledObject
                 StartCoroutine(pooledObject.OnReturnToPool(gameObject, deathAnimationDuration));
 
             animator.SetBool("Explosive", true);
+            AudioManager.Instance.Play("FireballExplode");
 
         }
     }

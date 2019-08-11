@@ -45,22 +45,9 @@ public class ObjectPooler : MonoBehaviour
 
     }
 
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation) {
-        // Если нет искомого пула, то ничего не делаем
-        if (!poolDictionary.ContainsKey(tag)) {
-            Debug.LogWarning("Pool with tag " + tag + " doesn`t exist!");
-            return null;
-        }
-        
-        GameObject objectToSpawn =  poolDictionary[tag].Dequeue();        
-        objectToSpawn.SetActive(true);
-        objectToSpawn.transform.position = position;
-        objectToSpawn.transform.rotation = rotation;
-       
-        return objectToSpawn;
-    }
+   
 
-    //Возвращаем в пул
+    // Простой возврат в пул
     public void ReturnToPool(string tag, GameObject obj) {
         //Debug.Log( tag + " " +poolDictionary[tag].Count);
         //Если нет такого объекта, возвращаем его в пул
@@ -73,6 +60,46 @@ public class ObjectPooler : MonoBehaviour
 
           //  Debug.Log(poolDictionary[tag].Count);
         }
+    }
+
+
+
+    //Возврат в пул объекта с анимацией, которую надо сбросить
+    public void ReturnToPool(string tag, GameObject obj, float animationDuration ) {
+        if (!poolDictionary[tag].Contains(obj)) {
+            
+            if(obj.GetComponent<Animator>() != null) 
+                StartCoroutine(ObjectAnimation(tag, obj, animationDuration));
+        }
+    }
+
+    IEnumerator ObjectAnimation(string tag, GameObject obj, float animationDuration) {
+        yield return new WaitForSeconds(animationDuration);
+        if (obj.GetComponent<Animator>() != null)            
+            obj.GetComponent<Animator>().WriteDefaultValues();
+                   
+        obj.SetActive(false);
+        obj.transform.SetParent(transform);
+        obj.transform.position = transform.position;
+        poolDictionary[tag].Enqueue(obj);
+
+
+    }
+
+
+    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation) {
+        // Если нет искомого пула, то ничего не делаем
+        if (!poolDictionary.ContainsKey(tag)) {
+            Debug.LogWarning("Pool with tag " + tag + " doesn`t exist!");
+            return null;
+        }
+
+        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        objectToSpawn.SetActive(true);
+        objectToSpawn.transform.position = position;
+        objectToSpawn.transform.rotation = rotation;
+
+        return objectToSpawn;
     }
 
     //Перегрузка с родителем

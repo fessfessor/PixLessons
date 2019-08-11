@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
     private bool shootReady;
     private ObjectPooler pooler;
     private UIController controller;
+    private AudioManager audioManager;
 
     private Collider2D SwordRightCollider;
     private Collider2D SwordLeftCollider;
@@ -51,6 +52,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         pooler = ObjectPooler.Instance;
+        audioManager = AudioManager.Instance;
 
         isAttacking = false;
         canAttack = true;
@@ -158,6 +160,8 @@ public class Player : MonoBehaviour
         canAttack = false;
         canMove = false;
         rb.velocity = Vector2.zero;
+        AudioManager.Instance.Play("FireballCast");
+        
         // Время анимации
         yield return new WaitForSeconds(0.8f);
         isAttacking = false;
