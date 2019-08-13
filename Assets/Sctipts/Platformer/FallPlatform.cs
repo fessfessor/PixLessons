@@ -4,54 +4,56 @@ using UnityEngine;
 
 public class FallPlatform : MonoBehaviour, IPooledObject
 {
-    Rigidbody2D rb;
-    [SerializeField]private Collider2D collider;
+    private Rigidbody2D rb;
+    private Vector3 tempPosition;
+    private Collider2D coll;
     [SerializeField]private float fallingDelay;
+    [SerializeField]private float spawnDelay;
 
     private ObjectPooler pooler;
 
     void Start(){
         // Инициализируем компонент и пул
         rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
+        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);      
         pooler = ObjectPooler.Instance;
+        
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        if (col.gameObject.CompareTag("Player")) {
+        if (col.gameObject == GameManager.Instance.player) {
             //Если на платформу прыгнул игрок, то запускаем спавн платформы на том же месте, а старую дропаем в пул
-            StartCoroutine(OnSpawnFromPool(fallingDelay +  3f));
-            StartCoroutine(OnReturnToPool(gameObject,fallingDelay + 2f));
+            StartCoroutine(Falling());            
         }
        
     }
 
-   // private void OnCollisionEnter2D(Collision2D col) {
-    //    if (!col.gameObject.CompareTag("Player")) {
-   //         StartCoroutine(OnReturnToPool(gameObject, 0f));
-   //     }
-   // }
 
+    // Падение платформы, тут же вызывается спавн
+    public IEnumerator Falling() {
+        tempPosition = transform.position;
 
-
-
-
-    // Действия при возврате платформы
-    public IEnumerator OnReturnToPool(GameObject gameObject, float delay) {
-        
         yield return new WaitForSeconds(fallingDelay);
         rb.isKinematic = false;
-        collider.enabled = false;       
-        yield return new WaitForSeconds(delay);
-        rb.isKinematic = true;
-        collider.enabled = true;
-        pooler.ReturnToPool("FallingPlatform", this.gameObject);
+        coll.enabled = false;
+        StartCoroutine(Spawn());
+        yield return new WaitForSeconds(2f);
+        pooler.ReturnToPool("FallingPlatform", gameObject);
+    }
+
+    IEnumerator Spawn() {
+        yield return new WaitForSeconds(spawnDelay);
+        pooler.SpawnFromPool("FallingPlatform", tempPosition, Quaternion.identity);
+    }
+
+
+    public void OnSpawnFromPool() {
         
     }
 
-    public IEnumerator OnSpawnFromPool(float delay) {
-        //Сохраняем начальную позицию
-        Vector3 temp = transform.position;
-        yield return new WaitForSeconds(delay);
-        pooler.SpawnFromPool("FallingPlatform", temp, Quaternion.identity);
+    public void OnReturnToPool() {
+        rb.isKinematic = true;
+        coll.enabled = true;
     }
 }

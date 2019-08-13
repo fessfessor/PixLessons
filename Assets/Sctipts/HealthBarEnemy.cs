@@ -34,6 +34,8 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
         isDamaged = false;
         maxHealth = GetComponent<Health>().HealthCount;
         pooler = ObjectPooler.Instance;
+        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
+
     }
 
 
@@ -56,28 +58,24 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
         }
 
         if (isDamaged) {
-            // Выставляем позицию для хелс бара над объектом
-            
+            // Выставляем позицию для хелс бара над объектом          
             healthRect.anchoredPosition = screenPoint - canvasRectT.sizeDelta / 2f;           
             healthFiller.fillAmount = currentHealth / 100.0f;
         }
 
-        if(currentHealth <= 0) {
-            StartCoroutine(OnReturnToPool(healthObj, 0f));
-        }
+        if(currentHealth <= 0)            
+            pooler.ReturnToPool("EnemyHealthBar", healthObj);
+                   
     }
 
-    public IEnumerator OnReturnToPool(GameObject gameObject, float delay) {
-        // Заполняем хелс бар и возвращаем обратно
+
+
+    public void OnSpawnFromPool() {
+
+    }
+
+    public void OnReturnToPool() {       
         gameObject.SetActive(false);
         healthFiller.fillAmount = 1f;
-        yield return new WaitForSeconds(delay);
-        pooler.ReturnToPool("EnemyHealthBar", gameObject);
-
     }
-
-    public IEnumerator OnSpawnFromPool(float delay) {
-        throw new System.NotImplementedException();
-    }
-
 }

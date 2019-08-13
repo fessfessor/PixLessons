@@ -7,36 +7,29 @@ public class MagicBall : MonoBehaviour , IPooledObject
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float force;
-    [SerializeField] private float lifeTime;
-    [SerializeField] private Animator animator;   
-    [SerializeField] private float deathAnimationDuration;   
-    private Player player;
-    private IPooledObject pooledObject;
+    [SerializeField] private float lifeTime;      
+    [SerializeField] private float deathAnimationDuration;
+
+    private Animator animator;
+    private Player player;    
     private ObjectPooler pooler;
     
     public float Force { get => force; set => force = value;}
 
 
+    private void Start() {
+        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
+        animator = GetComponent<Animator>();
+        pooler = ObjectPooler.Instance;
+    }
+
 
     
 
-    public void Init(IPooledObject pooledObject) {
-        this.pooledObject = pooledObject;
-    }
-
-    public void SetImpulse(Vector2 direction, float force, Player player) {
-        // Инициализируем класс игрока
+    public void SetImpulse(Vector2 direction, float force, Player player) {       
         this.player = player;
-        // Инициализируем интерфейс
-        Init(this);
-
-        // Инициализируем пул
-        if(!pooler)
-            pooler = ObjectPooler.Instance;
-
         // Непосредственно работаем с префабом
-        rb.AddForce(direction* force, ForceMode2D.Impulse);
-        StartCoroutine(LifeCircle());
+        rb.AddForce(direction* force, ForceMode2D.Impulse);       
     }
 
     
@@ -49,46 +42,27 @@ public class MagicBall : MonoBehaviour , IPooledObject
             )
         isNonTriggerObj = true;
         
-        //Debug.Log("PArent - " + player.transform.name + " COLL - " + col.transform.name);
+       
         if (col.gameObject != player.gameObject && !isNonTriggerObj) {
             // Тормозим объект в месте попадания
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
-            // Запускаем свое "уничтожение"
-            if (pooledObject == null)
-                Destroy(gameObject);
-            else
-                StartCoroutine(pooledObject.OnReturnToPool(gameObject, deathAnimationDuration));
-
             animator.SetBool("Explosive", true);
             AudioManager.Instance.Play("FireballExplode");
+            pooler.ReturnToPool("MagicBall", gameObject, 0.4f);
 
         }
     }
 
-    private IEnumerator LifeCircle() {
-        yield return new WaitForSeconds(lifeTime);
-        if (pooledObject == null)
-            Destroy(gameObject);
-        else
-           StartCoroutine(pooledObject.OnReturnToPool(gameObject, deathAnimationDuration));
-        yield break;
 
+    public void OnSpawnFromPool() {
+        throw new System.NotImplementedException();
     }
 
-
-    // Свой метод "уничтожения", помещаем обратно в пул объект, после его анимации
-    public IEnumerator OnReturnToPool(GameObject gameObject, float delay) {
-        yield return new WaitForSeconds(delay);
+    public void OnReturnToPool() {
+        Debug.Log("OnReturnToPool!");
         animator.WriteDefaultValues();
         rb.gravityScale = 1;
-        //Здесь вызываю возврат объекта в пул
-        pooler.ReturnToPool("MagicBall", this.gameObject);
-    }
-
-    //Действия при спавне здесь не требуются
-    public IEnumerator OnSpawnFromPool(float delay) {
-        throw new System.NotImplementedException();
     }
 }
 

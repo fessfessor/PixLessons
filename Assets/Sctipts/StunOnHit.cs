@@ -53,13 +53,11 @@ public class StunOnHit : MonoBehaviour
             StartCoroutine(Stunned());
             // Спавним иконку стана в топ-центр картинки
             stunIcon = pooler.SpawnFromPool("StunIcon", new Vector2(renderer2D.bounds.center.x, renderer2D.bounds.max.y), Quaternion.identity);
-            StartCoroutine(stunIcon.GetComponent<StunIcon>().OnReturnToPool(stunIcon, animationDelay));
+            pooler.ReturnToPool("StunIcon", stunIcon, stunDuration);
 
-            
         }
 
-        if (onStun) {
-            
+        if (onStun) {            
             transform.position = stunPosition;
         }
 

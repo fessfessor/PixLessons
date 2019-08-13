@@ -90,16 +90,16 @@ public class GhostMove : MonoBehaviour
 
 
         // Возвращам шар обратно в пул когда достиг цели
-        if(ball && (ball.transform.position == targetPosition) && readyToReturn) {            
-           StartCoroutine(ball.GetComponent<EnemyMagicBall>().OnReturnToPool(ball, 0.5f));
-           
+        if(ball && (ball.transform.position == targetPosition) && readyToReturn) {
+            pooler.ReturnToPool("EnemyMagicBall", gameObject);
+
             readyToReturn = false;
         }
 
         // Death
         if(GameManager.Instance.healthContainer[gameObject].HealthCount <= 0) {
             if(ball)
-                StartCoroutine(ball.GetComponent<EnemyMagicBall>().OnReturnToPool(ball, 0.5f));
+                pooler.ReturnToPool("EnemyMagicBall", gameObject);
             animator.SetTrigger("isDeath");
         }
 

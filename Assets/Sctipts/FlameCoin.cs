@@ -4,26 +4,40 @@ using UnityEngine;
 
 public class FlameCoin : MonoBehaviour, IPooledObject
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject particle;
+    private Animator animator;
     private ObjectPooler pooler;
+    private ParticleSystem particleComponent;
 
     private void Start() {
         // Добавляем себя в гейм менеджер
         GameManager.Instance.flameCoinContainer.Add(gameObject,this);
-
-        //Получаем инстанс пулера
-        if (!pooler)
-            pooler = ObjectPooler.Instance;
+        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
+        pooler = ObjectPooler.Instance;
+        animator = GetComponent<Animator>();
+        particleComponent = particle.GetComponent<ParticleSystem>();
     }
 
-    public IEnumerator OnSpawnFromPool(float delay) {
-        throw new System.NotImplementedException();
+   
+
+    public void OnSpawnFromPool() {
+        
     }
 
-    public IEnumerator OnReturnToPool(GameObject gameObject, float delay) {
-        animator.SetTrigger("TakeFlame");
-        yield return new WaitForSeconds(delay);
+    public void TakeCoin() {
+        //animator.SetTrigger("TakeFlame");
+    }
+
+    public void OnReturnToPool() {
         animator.WriteDefaultValues();
-        pooler.ReturnToPool("FlameCoin", gameObject);
+    }
+
+    
+
+    private void OnTriggerEnter2D(Collider2D col) {
+        if (col.gameObject == GameManager.Instance.player) {
+            Debug.Log("Play!");
+            particleComponent.Play();
+        }
     }
 }

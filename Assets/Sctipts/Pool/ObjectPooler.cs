@@ -52,8 +52,13 @@ public class ObjectPooler : MonoBehaviour
         //Debug.Log( tag + " " +poolDictionary[tag].Count);
         //Если нет такого объекта, возвращаем его в пул
         if (!poolDictionary[tag].Contains(obj)) {
-            obj.SetActive(false);
-            obj.transform.SetParent(transform);
+            //Дополнительные действия для объектов с анимациями и т.п.
+            if (GameManager.Instance.pooledObjectContainer.ContainsKey(obj)) {
+                GameManager.Instance.pooledObjectContainer[obj].OnReturnToPool();
+            } 
+            
+            obj.SetActive(false);           
+            obj.transform.SetParent(GameManager.Instance.player.transform);
             obj.transform.position = transform.position;
 
             poolDictionary[tag].Enqueue(obj);
@@ -64,29 +69,28 @@ public class ObjectPooler : MonoBehaviour
 
 
 
-    //Возврат в пул объекта с анимацией, которую надо сбросить
-    public void ReturnToPool(string tag, GameObject obj, float animationDuration ) {
+    //Возврат в пул объекта с задержкой
+    public void ReturnToPool(string tag, GameObject obj, float delay ) {
         if (!poolDictionary[tag].Contains(obj)) {
-            
-            if(obj.GetComponent<Animator>() != null) 
-                StartCoroutine(ObjectAnimation(tag, obj, animationDuration));
+            StartCoroutine(ReturnObjWithDelay( tag,  obj, delay));            
         }
     }
 
-    IEnumerator ObjectAnimation(string tag, GameObject obj, float animationDuration) {
-        yield return new WaitForSeconds(animationDuration);
-        if (obj.GetComponent<Animator>() != null)            
-            obj.GetComponent<Animator>().WriteDefaultValues();
-                   
+    IEnumerator ReturnObjWithDelay(string tag, GameObject obj, float delay) {
+        yield return new WaitForSeconds(delay);
+        if (GameManager.Instance.pooledObjectContainer.ContainsKey(obj)) {
+            GameManager.Instance.pooledObjectContainer[obj].OnReturnToPool();
+        }
         obj.SetActive(false);
         obj.transform.SetParent(transform);
         obj.transform.position = transform.position;
-        poolDictionary[tag].Enqueue(obj);
 
+        poolDictionary[tag].Enqueue(obj);
 
     }
 
 
+    // Обычный спавн
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation) {
         // Если нет искомого пула, то ничего не делаем
         if (!poolDictionary.ContainsKey(tag)) {
@@ -101,6 +105,8 @@ public class ObjectPooler : MonoBehaviour
 
         return objectToSpawn;
     }
+
+    
 
     //Перегрузка с родителем
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation, GameObject parent) {

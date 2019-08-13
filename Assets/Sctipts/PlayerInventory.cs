@@ -5,9 +5,11 @@ public class PlayerInventory : MonoBehaviour
 {
     public int cointsCount;
     [SerializeField] private Text flameCoinsText;
+    private ObjectPooler pooler;
 
     private void Start() {
         flameCoinsText.text = cointsCount + "";
+        pooler = ObjectPooler.Instance;
     }
 
 
@@ -18,13 +20,11 @@ public class PlayerInventory : MonoBehaviour
             flameCoinsText.text = cointsCount + ""; 
 
             var flameCoin = GameManager.Instance.flameCoinContainer[col.gameObject];
-            StartCoroutine(flameCoin.OnReturnToPool(col.gameObject, 0.5f));
-            
+            flameCoin.TakeCoin();
+            pooler.ReturnToPool("FlameCoin", col.gameObject, 3f);
 
 
 
-
-            
         }
     }
 

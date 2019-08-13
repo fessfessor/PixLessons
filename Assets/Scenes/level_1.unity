@@ -228,9 +228,9 @@ Transform:
   m_LocalPosition: {x: -1.8811324, y: -2.9807134, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1866524499}
   - {fileID: 177186104}
   - {fileID: 1392938889}
-  - {fileID: 1496976080}
   - {fileID: 1035664911}
   - {fileID: 898715305}
   - {fileID: 106341814}
@@ -528,6 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1157595009}
   uiConroller: {fileID: 1809612011}
+  player: {fileID: 0}
 --- !u!4 &35750189
 Transform:
   m_ObjectHideFlags: 0
@@ -2185,6 +2186,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2223,7 +2229,7 @@ PrefabInstance:
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
@@ -2240,6 +2246,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1563419605, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419608, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419608, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.8490566
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419608, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.13253161
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419608, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.028034903
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419606, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: targetObject
+      value: 
+      objectReference: {fileID: 1113396692}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
 --- !u!4 &177186104 stripped
@@ -2948,6 +2978,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3001,6 +3036,10 @@ PrefabInstance:
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419605, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -5424,6 +5463,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6621,6 +6665,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6674,6 +6723,10 @@ PrefabInstance:
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419605, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -7163,7 +7216,7 @@ MonoBehaviour:
   - tag: MagicBall
     prefab: {fileID: 6888292196518972721, guid: 28d1981ebddeef7418d0b0d06b338d36,
       type: 3}
-    size: 3
+    size: 5
   - tag: EnemyMagicBall
     prefab: {fileID: 6337347837625079815, guid: 73c657e9c3f7ead4aadab51e3b8fa200,
       type: 3}
@@ -7175,7 +7228,7 @@ MonoBehaviour:
   - tag: StunIcon
     prefab: {fileID: 5217615317448779872, guid: 1fb9bd0bdb5772c42a26605b6154e5c0,
       type: 3}
-    size: 10
+    size: 2
   - tag: AidKit
     prefab: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
       type: 3}
@@ -7217,6 +7270,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameCoin (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
@@ -7374,6 +7432,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7448,6 +7511,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameCoin (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
@@ -9352,6 +9420,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10580,6 +10653,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10639,6 +10717,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419605, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
@@ -11360,6 +11442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameCoin (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
@@ -13940,6 +14027,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14344,6 +14436,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14382,7 +14479,7 @@ PrefabInstance:
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
@@ -14403,6 +14500,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419605, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
@@ -19898,6 +19999,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20322,86 +20428,6 @@ MonoBehaviour:
   parallax: 1
   backgroundSize: 19
   parallaxSpeed: 0.8
---- !u!1001 &1496976079
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 9286472}
-    m_Modifications:
-    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_Name
-      value: FlameCoin (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 20.470758
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.42236638
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2822986232854940407, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
---- !u!4 &1496976080 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1496976079}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1498781195
 GameObject:
   m_ObjectHideFlags: 0
@@ -20934,6 +20960,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FlameCoin (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
@@ -21625,6 +21656,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21926,6 +21962,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 84655949, guid: 31f51f1b18d3cef4496ef7369cf54fd5, type: 3}
+      propertyPath: stunDuration
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31f51f1b18d3cef4496ef7369cf54fd5, type: 3}
@@ -24081,6 +24121,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1862790867}
   m_CullTransparentMesh: 0
+--- !u!1 &1866524498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001888584}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1866524499 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2001888584}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1867921182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39986,7 +40038,7 @@ Transform:
   m_Children:
   - {fileID: 1399480933}
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1942277055
 MonoBehaviour:
@@ -40291,6 +40343,91 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 467123548}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2001888584
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9286472}
+    m_Modifications:
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_Name
+      value: FlameCoin
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.98450613
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.69974804
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419609, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419609, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563419606, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: targetObject
+      value: 
+      objectReference: {fileID: 1866524498}
+    - target: {fileID: 1563419606, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
+      propertyPath: followSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: daf7d8ecb1f2d9640b07f66bbafc97f2, type: 3}
 --- !u!1001 &2001938288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45880,6 +46017,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FlameCoin (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2822986232854940408, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -46542,7 +46684,7 @@ PrefabInstance:
     - target: {fileID: 7981469637462526235, guid: d4268448989f8644aa853674427422e9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 7981469637462526235, guid: d4268448989f8644aa853674427422e9,
         type: 3}

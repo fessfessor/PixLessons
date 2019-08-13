@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IPooledObject {
 
-    IEnumerator OnSpawnFromPool(float delay);
+    void OnSpawnFromPool();
 
-    IEnumerator OnReturnToPool(GameObject gameObject, float delay);
+    void OnReturnToPool();
 }

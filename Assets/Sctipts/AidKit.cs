@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AidKit : MonoBehaviour, IPooledObject {
     [SerializeField] private int healthSize;
-    [SerializeField] Animator anim;
+    private Animator animator;
 
     ObjectPooler pooler;
 
@@ -12,25 +12,28 @@ public class AidKit : MonoBehaviour, IPooledObject {
     private void Start() {
         if (!pooler)
             pooler = ObjectPooler.Instance;
+
+        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
+        animator = GetComponent<Animator>();
     }
 
-    public IEnumerator OnReturnToPool(GameObject gameObject, float delay) {       
-        yield return new WaitForSeconds(delay);
-        anim.WriteDefaultValues();
-        pooler.ReturnToPool("AidKit", gameObject);
+    public void OnSpawnFromPool() {
+        
     }
 
-    public IEnumerator OnSpawnFromPool(float delay) {
-        throw new System.NotImplementedException();
+    public void OnReturnToPool() {
+        animator.WriteDefaultValues();
     }
+
+   
 
     private void OnTriggerEnter2D(Collider2D col) {
         Health health = col.gameObject.GetComponent<Health>();
         if (health != null) {
             health.HealthCount += healthSize;
-            anim.SetTrigger("isConsume");
+            animator.SetTrigger("isConsume");
             // Закидываем объект в пул
-            StartCoroutine(OnReturnToPool(gameObject, 1f));
+            pooler.ReturnToPool("AidKit", gameObject, 0.5f);
         }
         
         //Показать хелс бар
@@ -43,6 +46,5 @@ public class AidKit : MonoBehaviour, IPooledObject {
         }
     }
 
-
-
+    
 }

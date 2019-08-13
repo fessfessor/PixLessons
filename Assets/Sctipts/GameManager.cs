@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour {
     public Dictionary<GameObject, FlameCoin> flameCoinContainer;
     public Dictionary<GameObject, GhostMove> ghostContainer;
     public Dictionary<GameObject, BuffReciever> buffRecieverContainer;
+    public Dictionary<GameObject, IPooledObject> pooledObjectContainer;
     public UIController uiConroller;
+    public GameObject player;
 
     private void Awake() {
         Instance = this;
@@ -22,7 +24,8 @@ public class GameManager : MonoBehaviour {
         flameCoinContainer = new Dictionary<GameObject, FlameCoin>();
         ghostContainer = new Dictionary<GameObject, GhostMove>();
         buffRecieverContainer = new Dictionary<GameObject, BuffReciever>();
-
+        pooledObjectContainer = new Dictionary<GameObject, IPooledObject>();
+        player = FindObjectOfType<Player>().gameObject;
 
 
 
