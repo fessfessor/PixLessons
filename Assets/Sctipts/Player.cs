@@ -132,6 +132,7 @@ public class Player : MonoBehaviour
         // Проверка на дамаг
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
             isDamaged = true;
+            AudioManager.Instance.Play("Pain");
             currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
         }
         else {
@@ -178,6 +179,7 @@ public class Player : MonoBehaviour
         if (!isAttacking) {
             canAttack = false;
             canMove = false;
+            AudioManager.Instance.Play("SwordSwing");
             animator.SetTrigger("isSwordAttack");
             StartCoroutine(SwordAttack());
         }
@@ -236,9 +238,14 @@ public class Player : MonoBehaviour
         if ( groundD.isGrounded) {
             isJumping = true;
             rb.velocity = Vector3.zero;
+            AudioManager.Instance.Play("Jump");
             rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
             animator.SetTrigger("startJump");
         } 
+    }
+
+    void JumpLanding() {
+        AudioManager.Instance.Play("JumpLanding");
     }
 
     void Move() {

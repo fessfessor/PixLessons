@@ -21,6 +21,7 @@ public class SimplePatrol : MonoBehaviour
     private int currentHealth;
     private bool isRised;
     private bool isDamaged;
+    private bool isDeath = false;
     
 
 
@@ -38,7 +39,7 @@ public class SimplePatrol : MonoBehaviour
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
 
         //Debug.Log(currentHealth);
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDeath)
             Death();
 
         if (isRised && animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) {
@@ -65,7 +66,11 @@ public class SimplePatrol : MonoBehaviour
 
 
     void Death() {
-        animator.SetTrigger("isDeath");
+        isDeath = true;
+        AudioManager.Instance.Play("ZombyDie");
+        AudioManager.Instance.Stop("Zomby");
+        
+        animator.SetTrigger("isDeath");      
         NonCollision();
     }
 

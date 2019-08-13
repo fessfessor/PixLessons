@@ -33,9 +33,10 @@ public class DamageByWeapon : MonoBehaviour
                 
                 if (health != null && health.HealthCount > 0) {
                         health.takeHit(damage);
+                    AudioManager.Instance.Play("SwordAttack");
 
                     //todo возможно стоит вынести данный функционал в отдельный компонент. Кровавые брызги при ударе. Проверка для того чтобы на анимации смерти не было крови 
-                        if(health.HealthCount > 0)
+                    if (health.HealthCount > 0)
                             StartCoroutine(Blood(col.transform.position));
                         
                         

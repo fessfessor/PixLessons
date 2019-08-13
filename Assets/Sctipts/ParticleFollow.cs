@@ -35,23 +35,14 @@ public class ParticleFollow : MonoBehaviour
             for (int i = 0; i < particles.GetUpperBound(0); i++) {
                 // float ForceToAdd = (particles[i].startLifetime - particles[i].remainingLifetime) * (10 * Vector3.Distance(targetObject.transform.position, particles[i].position));
                 // particles[i].velocity = (targetObject.transform.position - particles[i].position) * ForceToAdd * Time.deltaTime * followSpeed;
-                //todo Непонятно что с Y координатой
-                particles[i].position = Vector3.MoveTowards(particles[i].position, Vector2.one, Time.deltaTime * followSpeed);
-                //Debug.Log(particles[i].position);
-
                 
+                particles[i].position = Vector2.MoveTowards(particles[i].position,targetObject.transform.position - transform.position , Time.deltaTime * followSpeed);
 
             }
-
-            
-
             partSystem.SetParticles(particles, particles.Length);
         }
 
-
-
-        
-            
+     
     }
 
     IEnumerator FollowDelay() {

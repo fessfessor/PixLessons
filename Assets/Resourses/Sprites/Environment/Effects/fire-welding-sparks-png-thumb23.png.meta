@@ -1,0 +1,547 @@
+fileFormatVersion: 2
+guid: 1b4f10f1747da474880d3a9be02b006f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3228774115972199962
+    second: fire-welding-sparks-png-thumb23_0
+  - first:
+      213: -5087421223739248382
+    second: fire-welding-sparks-png-thumb23_1
+  - first:
+      213: 8541656374157853852
+    second: fire-welding-sparks-png-thumb23_2
+  - first:
+      213: -3649357536633221985
+    second: fire-welding-sparks-png-thumb23_3
+  - first:
+      213: -6316032944674435112
+    second: fire-welding-sparks-png-thumb23_4
+  - first:
+      213: 5197284615302038727
+    second: fire-welding-sparks-png-thumb23_5
+  - first:
+      213: 3764844708148350680
+    second: fire-welding-sparks-png-thumb23_6
+  - first:
+      213: 1938829597035753145
+    second: fire-welding-sparks-png-thumb23_7
+  - first:
+      213: 2814130263817646500
+    second: fire-welding-sparks-png-thumb23_8
+  - first:
+      213: -2453638433367009040
+    second: fire-welding-sparks-png-thumb23_9
+  - first:
+      213: -910490201567178478
+    second: fire-welding-sparks-png-thumb23_10
+  - first:
+      213: 1367086880740355441
+    second: fire-welding-sparks-png-thumb23_11
+  - first:
+      213: -7615481990834852644
+    second: fire-welding-sparks-png-thumb23_12
+  - first:
+      213: -3827999818349018806
+    second: fire-welding-sparks-png-thumb23_13
+  - first:
+      213: -6513493119095744030
+    second: fire-welding-sparks-png-thumb23_14
+  - first:
+      213: -3342451522936156830
+    second: fire-welding-sparks-png-thumb23_15
+  - first:
+      213: 7576513130542897737
+    second: fire-welding-sparks-png-thumb23_16
+  - first:
+      213: 8076946293477350008
+    second: fire-welding-sparks-png-thumb23_17
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_0
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 391
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b31af50b370476408c33436c29fe1e7
+      internalID: -3228774115972199962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_1
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 395
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8d7dfd8788ddfc40b0a36bcc73c8680
+      internalID: -5087421223739248382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_2
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 398
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77503ac08d0a2ca4fa3b97def9edae90
+      internalID: 8541656374157853852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_3
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 440
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 680e9b6d50d5fdf4489051c9fda525a2
+      internalID: -3649357536633221985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_4
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 437
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7f45f6c7df2dbe4686ec66dacde1022
+      internalID: -6316032944674435112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_5
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 331
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54e975e6e86702045919314845e26a53
+      internalID: 5197284615302038727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_6
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 307
+        width: 19
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41a48597148d63046babe962e21bb2dc
+      internalID: 3764844708148350680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_7
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 390
+        width: 13
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33d26d1b60a2ecb45ad91ed50b0b65a9
+      internalID: 1938829597035753145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_8
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 369
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4555c3f60c9cb93469b5ce3c3e0f1a29
+      internalID: 2814130263817646500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_9
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 390
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5023e49dd1968214e85f03d6172e8d9e
+      internalID: -2453638433367009040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_10
+      rect:
+        serializedVersion: 2
+        x: 366
+        y: 474
+        width: 13
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f22cc313e990c34cb7411e28de63677
+      internalID: -910490201567178478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_11
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 498
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ffe883dc45fd8e47b3ca5fe71d9bb11
+      internalID: 1367086880740355441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_12
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 537
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4308700534fa234e8a9d074cdaa461e
+      internalID: -7615481990834852644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_13
+      rect:
+        serializedVersion: 2
+        x: 510
+        y: 472
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cab30c63317d334cb6f7ef6494643c0
+      internalID: -3827999818349018806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_14
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 420
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89606bb15c56b474499755737683b954
+      internalID: -6513493119095744030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_15
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 535
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64a9d9279bf6ebf45ba51fa5fdbb09c5
+      internalID: -3342451522936156830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_16
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 513
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0faaf14dabb9bb24b8b06feeadadcee8
+      internalID: 7576513130542897737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: fire-welding-sparks-png-thumb23_17
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 571
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9d5742e1d5a2a34fb1eaaedb03d9549
+      internalID: 8076946293477350008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

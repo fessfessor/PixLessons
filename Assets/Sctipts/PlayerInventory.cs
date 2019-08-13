@@ -21,7 +21,7 @@ public class PlayerInventory : MonoBehaviour
 
             var flameCoin = GameManager.Instance.flameCoinContainer[col.gameObject];
             flameCoin.TakeCoin();
-            pooler.ReturnToPool("FlameCoin", col.gameObject, 3f);
+            pooler.ReturnToPool("FlameCoin", col.gameObject, 2f);
 
 
 

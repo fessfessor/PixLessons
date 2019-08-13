@@ -8,6 +8,9 @@ public class FlameCoin : MonoBehaviour, IPooledObject
     private Animator animator;
     private ObjectPooler pooler;
     private ParticleSystem particleComponent;
+    private SpriteRenderer sr;
+    private Collider2D coll;
+    
 
     private void Start() {
         // Добавляем себя в гейм менеджер
@@ -15,6 +18,8 @@ public class FlameCoin : MonoBehaviour, IPooledObject
         GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
         pooler = ObjectPooler.Instance;
         animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        coll = GetComponent<Collider2D>();
         particleComponent = particle.GetComponent<ParticleSystem>();
     }
 
@@ -29,6 +34,8 @@ public class FlameCoin : MonoBehaviour, IPooledObject
     }
 
     public void OnReturnToPool() {
+        sr.enabled = true;
+        coll.enabled = true;
         animator.WriteDefaultValues();
     }
 
@@ -36,7 +43,8 @@ public class FlameCoin : MonoBehaviour, IPooledObject
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject == GameManager.Instance.player) {
-            Debug.Log("Play!");
+            sr.enabled = false;
+            coll.enabled = false;
             particleComponent.Play();
         }
     }
