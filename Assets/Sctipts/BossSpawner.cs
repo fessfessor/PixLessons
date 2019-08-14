@@ -10,7 +10,7 @@ public class BossSpawner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        isPlayer = col.gameObject.transform.name == "Player";
+        isPlayer = col.gameObject == GameManager.Instance.player;
         if (isPlayer)
         {
             bossMenu.SetActive(true);
@@ -19,7 +19,7 @@ public class BossSpawner : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D col)
     {
-        isPlayer = col.gameObject.transform.name == "Player";
+        isPlayer = col.gameObject == GameManager.Instance.player;
         if (isPlayer)
         {
             bossMenu.SetActive(false);

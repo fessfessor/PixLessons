@@ -50,20 +50,23 @@ public class BossMenu : MonoBehaviour
     public void SpawnSimpleBoss()
     {
         // Трясем камеру, опасность же
-        shaker.Shake();
-        
+        shaker.Shake();       
         boss.OnSpawnSimpleBoss();
         StartCoroutine(StartFightWithBoss());
     }
 
     public void SpawnBloodBoss()
     {
-        Debug.Log("SpawnBloodBoss");
+        shaker.Shake();
+        boss.OnSpawnBloodBoss();
+        StartCoroutine(StartFightWithBoss());
     }
 
     public void SpawnLightBoss()
     {
-        Debug.Log("SpawnLightBoss");
+        shaker.Shake();
+        boss.OnSpawnLightBoss();
+        StartCoroutine(StartFightWithBoss());
     }
 
     

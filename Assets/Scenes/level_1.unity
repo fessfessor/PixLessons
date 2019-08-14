@@ -18587,66 +18587,91 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+    isPlaying: 0
   - name: FireballCast
     clip: {fileID: 8300000, guid: fb13325b5247cbb4286f0010977e336f, type: 3}
     volume: 0.2
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    isPlaying: 0
   - name: FireballExplode
     clip: {fileID: 8300000, guid: 858809b396dc3ad498758d37172aa30c, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    isPlaying: 0
   - name: Zomby
     clip: {fileID: 8300000, guid: 288853e12a58e654f981e5702295c3cf, type: 3}
     volume: 1
     pitch: 1
     loop: 1
     source: {fileID: 0}
+    isPlaying: 0
   - name: ZombyRaise
     clip: {fileID: 8300000, guid: 233ae23192008c64e947f13e63c545ca, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    isPlaying: 0
   - name: ZombyDie
     clip: {fileID: 8300000, guid: a2a5f2bf5dd07d649a6448f4c8157327, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    isPlaying: 0
   - name: SwordAttack
     clip: {fileID: 8300000, guid: b15a7361d334db245a6cb6d599963bcd, type: 3}
     volume: 0.6
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    isPlaying: 0
   - name: SwordSwing
     clip: {fileID: 8300000, guid: 5aa40cbbc3425b74f9c7866fd4116405, type: 3}
     volume: 0.8
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    isPlaying: 0
   - name: Jump
     clip: {fileID: 8300000, guid: b36f2a32d98e5014888f05d49013965c, type: 3}
     volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    isPlaying: 0
   - name: JumpLanding
     clip: {fileID: 8300000, guid: 843e9e795aac90245a045d6042a25da0, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    isPlaying: 0
   - name: Pain
     clip: {fileID: 8300000, guid: fa5d6a31ee6f66846ab14ac749cb261e, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+    isPlaying: 0
+  - name: PlayerFootsteps
+    clip: {fileID: 8300000, guid: 4abc6e46ca1a3c44cba981cca46c56fd, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: MenuTheme
+    clip: {fileID: 8300000, guid: 6306a81689822694896cacaafe3d3b45, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    isPlaying: 0
 --- !u!4 &1441767500
 Transform:
   m_ObjectHideFlags: 0
@@ -38720,6 +38745,7 @@ GameObject:
   - component: {fileID: 1942277059}
   - component: {fileID: 1942277060}
   - component: {fileID: 1942277061}
+  - component: {fileID: 1942277062}
   m_Layer: 9
   m_Name: BossLevel1
   m_TagString: Untagged
@@ -38934,6 +38960,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
+--- !u!114 &1942277062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942277051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2103abebcf6ca044d8aa9aecfae08cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkFreq: 1
+  checkRadius: 15
+  searchTarget: {fileID: 1113396692}
+  target: {fileID: 0}
+  inArea: 0
+  targetPosition: {x: 0, y: 0, z: 0}
 --- !u!4 &1949616436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2353366830033099436, guid: 31f51f1b18d3cef4496ef7369cf54fd5,
@@ -45029,12 +45073,12 @@ PrefabInstance:
     - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.1
+      value: 269.31
       objectReference: {fileID: 0}
     - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
@@ -45145,6 +45189,11 @@ PrefabInstance:
         type: 3}
       propertyPath: useComputerMode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855417, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: healthByShoot
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2052669106, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
       propertyPath: flameCoinsText

@@ -13,6 +13,8 @@ public class Menu : MonoBehaviour
         if (PlayerPrefs.HasKey("PlayerName")) {
             nameField.text = PlayerPrefs.GetString("PlayerName");
         }
+
+        AudioManager.Instance.Play("MenuTheme");
     }
 
     public void OnEndEditName() {

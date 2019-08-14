@@ -22,18 +22,17 @@ public class BossBehaviour : MonoBehaviour, IBoss
     private  SpriteRenderer sr;
 
     private bool inArea = false;
+    private bool bossActive = false;
     private Vector3 playerPosition;
     private Collider2D[] hits;
     private CameraController cameraController;
     private GameObject player = null;
     private bool playerRight;
+    private DetectInArea detecter;
+    private Health health;
+    private int healthCount;
     
     
-
-    
-    
-
-
 
 
     void Start()
@@ -43,6 +42,8 @@ public class BossBehaviour : MonoBehaviour, IBoss
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         cameraController = mainCamera.GetComponent<CameraController>();
+        detecter = GetComponent<DetectInArea>();
+        health = GetComponent<Health>();
 
         // Выключаем коллайдер,гравитацию и частицы для босса пока он не заспавнен
         rb.isKinematic = true;
@@ -53,26 +54,61 @@ public class BossBehaviour : MonoBehaviour, IBoss
     
     void Update()
     {
+        healthCount = health.HealthCount;
+
+        //Ищем игрока
+        if (bossActive)
+            player = detecter.target;
+        else
+            player = null;
+
         if (player)
         {
             Move();
+
+            if (player.transform.position.x - transform.position.x < 0)
+                playerRight = false;
+            else
+                playerRight = true;
         }
-           // Debug.Log("Player position - " + player.transform.position);
-        
-        
-            
+
+        //Выбор действия
+        if (bossActive) {
+            int rand = (int)Random.value * 3;
+        }
+
+
     }
 
 
     // Каждый босс наследует этот интерфейс и соответственно будет легко настраиваться поведение при разных видах спавна
     public void OnSpawnBloodBoss()
     {
-        throw new System.NotImplementedException();
+        //Спавнится усиленный босс, с большим количеством хп, + хп игрока будет срезано, но награды будет больше
+        health.HealthCount = healthCount + (healthCount / 100) * 20;
+        int playerHealth = GameManager.Instance.healthContainer[GameManager.Instance.player].HealthCount;
+        GameManager.Instance.healthContainer[GameManager.Instance.player].HealthCount -= playerHealth / 100 * 50;
+        speed += 1.5f;
+
+        animator.SetTrigger("Spawn");
+        healthBarBoss.SetActive(true);
+        bossNameText.text = bossName;
+        EnableBoss(true);
+        //Камера сдвигается в центр при битве с боссом, чтобы было удобнее
+        cameraController.bossCamera = true;
     }
 
     public void OnSpawnLightBoss()
     {
-        
+        //Спавнется ослабленный босс с меньшим количеством хп. Допустим 20%. Награды будет меньше
+        health.HealthCount = healthCount - (healthCount / 100) * 20;
+
+        animator.SetTrigger("Spawn");
+        healthBarBoss.SetActive(true);
+        bossNameText.text = bossName;
+        EnableBoss(true);
+        //Камера сдвигается в центр при битве с боссом, чтобы было удобнее
+        cameraController.bossCamera = true;
     }
 
     public void OnSpawnSimpleBoss()
@@ -94,19 +130,16 @@ public class BossBehaviour : MonoBehaviour, IBoss
             rb.isKinematic = false;
             coll.enabled = true;
             ps.Play();
-            //LeftArea.SetActive(true);
-            //RightArea.SetActive(true);
-            StartCoroutine(CheckArea());
+            bossActive = true;
 
         }
         else
-        {
+        {           
             rb.isKinematic = true;
             coll.enabled = false;
             ps.Stop();
-            //LeftArea.SetActive(false);
-            //RightArea.SetActive(false);
-            StopCoroutine(CheckArea());
+            bossActive = false;
+
         }
     }
 
@@ -135,47 +168,10 @@ public class BossBehaviour : MonoBehaviour, IBoss
         }
     }
 
-    IEnumerator CheckArea()
-    {       
-        while (true)
-        {
-            yield return new WaitForSeconds(checkFreq);
+    
 
 
-            //Находим в радиусе игрока
-            hits =  Physics2D.OverlapCircleAll(transform.position, 15f);
-            if (hits.Length > 0)
-            {
-                for (int i = 0; i < hits.Length; i++)
-                {                   
-                    if (hits[i].gameObject.transform.name == "Player")
-                    {
-                        player = hits[i].gameObject;
-                        // Определяем с какой стороны игрок
-                        if (player.transform.position.x - transform.position.x < 0)
-                            playerRight = false;
-                        else
-                            playerRight = true;
-                        break;
-                    }
-                    else
-                    {
-                        player = null;
-                    }                       
-                }                  
-            }
-        }
-        
-    }
-
-
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, 15);
-        
-    }
+    
 
 
 }

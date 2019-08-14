@@ -26,12 +26,16 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject SwordLeft;
     [SerializeField] bool useComputerMode;
     [SerializeField] private Joystick joystick;
+    [SerializeField] private int healthByMeleeAttack;
+    [SerializeField] private int healthByShoot;
+    [SerializeField] private int healthReturnByHit;
     
     
     private  bool isRightDirection;
     private Vector3 jumpDirection;
     private bool isJumping;
     private bool canMove;
+    private bool isMoving;
     private bool canAttack;
     private Vector3 direction;
     private int currentHealth;
@@ -43,6 +47,10 @@ public class Player : MonoBehaviour
 
     private Collider2D SwordRightCollider;
     private Collider2D SwordLeftCollider;
+    private RaycastHit2D[] hits = new RaycastHit2D[10];
+    private int numberHits = 0;
+
+
 
 
     public Health Health { get { return health; } }
@@ -72,6 +80,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate() {
 
+        
 
         //Анимации
         animator.SetBool("isGrounded", groundD.isGrounded);
@@ -126,8 +135,7 @@ public class Player : MonoBehaviour
     }
 
 
-    private void Update() {
-        
+    private void Update() {      
 
         // Проверка на дамаг
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
@@ -142,7 +150,15 @@ public class Player : MonoBehaviour
 
         //При уменьшении здоровья трясем камеру
         if (isDamaged && ShakeCameraOnDamage) 
-            cameraShaker.Shake();            
+            cameraShaker.Shake();
+        
+        // Звуки шагов
+        if (isMoving && !AudioManager.Instance.isPlaying("PlayerFootsteps")) {
+            AudioManager.Instance.Play("PlayerFootsteps");
+        }
+        else if(!isMoving && AudioManager.Instance.isPlaying("PlayerFootsteps")) {
+            AudioManager.Instance.Stop("PlayerFootsteps");
+        }
 
             
     }
@@ -162,6 +178,8 @@ public class Player : MonoBehaviour
         canMove = false;
         rb.velocity = Vector2.zero;
         AudioManager.Instance.Play("FireballCast");
+        //За выстрел платим здоровьем
+        LostHealth(healthByShoot);
         
         // Время анимации
         yield return new WaitForSeconds(0.8f);
@@ -200,21 +218,29 @@ public class Player : MonoBehaviour
     //методы для ивента. Появление\исчезание коллайдера меча
     void SwordAttackColliderStart() {
         rb.WakeUp();
-        if (isRightDirection)
-            SwordRightCollider.enabled = true;
-        //SwordRight.SetActive(true);
-        else
+        if (isRightDirection) {
+            SwordRightCollider.enabled = true;            
+            numberHits = SwordRightCollider.Cast(Vector2.right, hits, 100f);
+            Debug.DrawRay(SwordRightCollider.transform.position, Vector3.right, Color.red,3f);
+            Debug.Log("Right - " + numberHits + " " + hits[0].transform.name + " " + hits[1].transform.name);
+        }
+        else {
             SwordLeftCollider.enabled = true;
-        //SwordLeft.SetActive(true);
+            numberHits = SwordLeftCollider.Cast(Vector2.left, hits);
+            Debug.Log("Left - " + numberHits + " " + hits[0].transform.name + " " + hits[1].transform.name);
+        }
+            
+        
     }
 
     void SwordAttackColliderDone() {
         if (isRightDirection)
             SwordRightCollider.enabled = false;
-        //SwordRight.SetActive(false);
         else
             SwordLeftCollider.enabled = false;
-        //SwordLeft.SetActive(false);
+
+
+       
     }
 
     // Вызывается из анимации 
@@ -268,16 +294,21 @@ public class Player : MonoBehaviour
             direction = Vector3.right * speed;
             direction.y = rb.velocity.y;
             rb.velocity = direction;
+            if(!isJumping)
+                isMoving = true;
         }
         else if (joystick.Horizontal <= -.2f) {
             direction = Vector3.left * speed;
             direction.y = rb.velocity.y;
             rb.velocity = direction;
+            if (!isJumping)
+                isMoving = true;
         }
         else {
             direction = Vector3.zero;
             direction.y = rb.velocity.y;
             rb.velocity = direction;
+            isMoving = false;
         }
 
 #if UNITY_EDITOR
@@ -285,9 +316,16 @@ public class Player : MonoBehaviour
             //Debug.Log("useComputerMode");
             if (Input.GetKey(KeyCode.A)) {
                 direction = Vector3.left;
+                if (!isJumping)
+                    isMoving = true;
             }
             else if (Input.GetKey(KeyCode.D)) {
                 direction = Vector3.right;
+                if (!isJumping)
+                    isMoving = true;
+            }
+            else {
+                isMoving = false;
             }
             direction *= speed;
             direction.y = rb.velocity.y;
@@ -307,17 +345,34 @@ public class Player : MonoBehaviour
     #endregion
 
 
-   // public void InitUIController() {
-   //     controller = GameManager.Instance.uiConroller;
-        //controller.Jump.onClick.AddListener(Jump);
-        //controller.Attack.onClick.AddListener(Attack);
-        //controller.Fire.onClick.AddListener(Shoot);
-
-  
-   // }
+    // public void InitUIController() {
+    //     controller = GameManager.Instance.uiConroller;
+    //controller.Jump.onClick.AddListener(Jump);
+    //controller.Attack.onClick.AddListener(Attack);
+    //controller.Fire.onClick.AddListener(Shoot);
+    // }
 
 
-   
+
+
+    #region bloodMechanics
+    // Механика "кровавых атак". 
+
+        //Если промахиваемся мечом - теряем хп. Шар впринципе запускается за хп
+    void LostHealth(int healthCountMiss) {
+        int currentHealth = health.HealthCount;
+
+        health.HealthCount -= healthCountMiss;
+
+
+    }
+
+    void HittingCheck() {
+
+    }
+
+
+    #endregion
 
 
 }
