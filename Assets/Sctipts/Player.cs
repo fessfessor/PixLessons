@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
         float vetricalMove = joystick.Vertical;
         if (vetricalMove >= .5f) {
             Jump();
+            isMoving = false;
         }
 
 #if UNITY_EDITOR
@@ -309,6 +310,7 @@ public class Player : MonoBehaviour
             direction.y = rb.velocity.y;
             rb.velocity = direction;
             isMoving = false;
+            
         }
 
 #if UNITY_EDITOR
