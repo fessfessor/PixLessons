@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float force = 1.0f;
+    [SerializeField] private float shootRecharge = 3.0f;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private float minHeight = -50.0f;
     [SerializeField] private GroundDetection groundD;   
@@ -19,8 +21,7 @@ public class Player : MonoBehaviour
     public bool IsDamaged { get => isDamaged; }
     [SerializeField] private float swordAttackTime;
     [SerializeField] private float shootForce;
-    [SerializeField] private MagicBall magicBall;
-    [SerializeField] private int ballsCoulnt = 3;
+    [SerializeField] private MagicBall magicBall;   
     [SerializeField] private Health health;
     [SerializeField] private GameObject SwordRight;
     [SerializeField] private GameObject SwordLeft;
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int healthByMeleeAttack;
     [SerializeField] private int healthByShoot;
     [SerializeField] private int healthReturnByHit;
+    [SerializeField] private GameObject fireButton;
     
     
     private  bool isRightDirection;
@@ -49,6 +51,8 @@ public class Player : MonoBehaviour
     private Collider2D SwordLeftCollider;
     private RaycastHit2D[] hits = new RaycastHit2D[10];
     private int numberHits = 0;
+    private Image fireButtonImage;
+    private float rechargeTimer;
 
 
 
@@ -72,6 +76,9 @@ public class Player : MonoBehaviour
 
         SwordRightCollider = SwordRight.GetComponent<Collider2D>();
         SwordLeftCollider = SwordLeft.GetComponent<Collider2D>();
+        fireButtonImage = fireButton.GetComponent<Image>();
+
+        rechargeTimer = shootRecharge;
 
        // InitUIController();
 
@@ -136,7 +143,16 @@ public class Player : MonoBehaviour
     }
 
 
-    private void Update() {      
+    private void Update() {
+        //Таймер перезарядки выстрела
+        if (rechargeTimer < shootRecharge) {
+            rechargeTimer += Time.deltaTime;
+            fireButtonImage.fillAmount = rechargeTimer / shootRecharge;
+        }
+        else
+            rechargeTimer = shootRecharge;
+
+
 
         // Проверка на дамаг
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
@@ -164,6 +180,8 @@ public class Player : MonoBehaviour
             
     }
 
+    
+
     #region Attack
 
     public void Shoot() {
@@ -172,6 +190,7 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator MagicAttack() {
+        rechargeTimer = 0f;
         animator.SetTrigger("isShooting");
         isAttacking = true;
         shootReady = false;
@@ -188,7 +207,7 @@ public class Player : MonoBehaviour
         canMove = true;
         canAttack = true;
         // Время перезарядки
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(shootRecharge - 0.8f);
         shootReady = true;      
     }
 

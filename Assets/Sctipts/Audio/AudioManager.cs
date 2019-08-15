@@ -6,7 +6,10 @@ using UnityEngine.Audio;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
-    
+    private bool isOn;
+
+
+
 
     public Sound[] sounds;
 
@@ -24,7 +27,21 @@ public class AudioManager : MonoBehaviour
     }
 
     private void Start() {
-        if(SceneManager.GetActiveScene().buildIndex != 0)
+        
+        if (PlayerPrefs.HasKey("GameSound")) {
+            isOn = PlayerPrefs.GetInt("GameSound") == 1 ? true : false;
+        }
+        else {
+            isOn = true;
+        }
+
+        if (isOn)
+            AudioListener.volume = 1;
+        else
+            AudioListener.volume = 0;
+
+
+        if (SceneManager.GetActiveScene().buildIndex != 0)
             Play("Theme");
     }
 
@@ -43,6 +60,12 @@ public class AudioManager : MonoBehaviour
     public bool isPlaying(string name) {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         return s.isPlaying;
+    }
+
+    public void Mute(string name, bool isMute) {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.mute = isMute;
+        
     }
 
     

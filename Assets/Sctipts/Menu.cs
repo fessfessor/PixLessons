@@ -7,14 +7,37 @@ public class Menu : MonoBehaviour
    [SerializeField] InputField nameField;
    [SerializeField] GameObject levels;
    [SerializeField] GameObject menuPanel;
+   [SerializeField] GameObject soundToggle;
+
+    private bool menuSoundOn;
 
 
     private void Start() {
+        
         if (PlayerPrefs.HasKey("PlayerName")) {
             nameField.text = PlayerPrefs.GetString("PlayerName");
         }
 
+#region MenuSound
+
+        menuSoundOn = PlayerPrefs.GetInt("MenuSound") == 1 ? true : false;
         AudioManager.Instance.Play("MenuTheme");
+        if (!menuSoundOn)
+            AudioListener.volume = 0;
+
+#endregion
+
+    }
+
+    private void Update() {
+        // отключение звука
+        menuSoundOn = soundToggle.GetComponent<Toggle>().isOn;
+
+        if(menuSoundOn)
+            AudioListener.volume = 1;
+        else
+            AudioListener.volume = 0;
+
     }
 
     public void OnEndEditName() {
@@ -40,14 +63,13 @@ public class Menu : MonoBehaviour
         levels.SetActive(false);
     }
 
+    
+
     #region selectLevel
-    public void Level1()
+    public void Level(int sceneNumber)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(sceneNumber);
     }
-    public void Level2()
-    {
-        SceneManager.LoadScene(2);
-    }
+   
     #endregion
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
@@ -8,6 +9,10 @@ public class GameManager : MonoBehaviour {
 
     public static bool isPaused = false;
     [SerializeField] GameObject pauseMenuUI;
+    
+
+    
+    
 
 
     public Dictionary<GameObject, Health> healthContainer;
@@ -16,7 +21,7 @@ public class GameManager : MonoBehaviour {
     public Dictionary<GameObject, BuffReciever> buffRecieverContainer;
     public Dictionary<GameObject, IPooledObject> pooledObjectContainer;
     public UIController uiConroller;
-    public GameObject player;
+    [HideInInspector]public GameObject player;
 
     private void Awake() {
         Instance = this;
@@ -28,7 +33,7 @@ public class GameManager : MonoBehaviour {
         player = FindObjectOfType<Player>().gameObject;
 
 
-
+        
     }
 
     // Кнопка паузы
@@ -64,6 +69,22 @@ public class GameManager : MonoBehaviour {
 
     public void Sound() {
 
+        if(AudioListener.volume == 0) {
+            AudioListener.volume = 1;
+            PlayerPrefs.SetInt("GameSound", 1);            
+        }
+        else {
+            AudioListener.volume = 0;
+            PlayerPrefs.SetInt("GameSound", 0);           
+        }
+
+  
+    }
+
+    public void Restart() {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+        
     }
 
     
