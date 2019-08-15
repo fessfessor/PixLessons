@@ -35,15 +35,12 @@ public class AidKit : MonoBehaviour, IPooledObject {
             // Закидываем объект в пул
             pooler.ReturnToPool("AidKit", gameObject, 0.5f);
         }
-        
-        //Показать хелс бар
-        // Берем все чайлды, находим хелс бар и показываем его
-        for (int i = 0; i < col.gameObject.transform.childCount; i++) {
-            if (col.gameObject.transform.GetChild(i).transform.name == "HealthBar") {               
-                col.gameObject.transform.GetChild(i).GetComponent<SpriteRenderer>().enabled = true;                
-            }
-           
+
+        if(col.gameObject == GameManager.Instance.player) {
+            AudioManager.Instance.Play("AidTake");
         }
+        
+        
     }
 
     

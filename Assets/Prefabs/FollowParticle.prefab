@@ -4829,4 +4829,4 @@ MonoBehaviour:
     type: 3}
   affectDistance: 5
   followDelay: 1
-  followSpeed: 3
+  followSpeed: 2.5

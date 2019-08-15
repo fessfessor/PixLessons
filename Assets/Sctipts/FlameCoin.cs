@@ -46,6 +46,7 @@ public class FlameCoin : MonoBehaviour, IPooledObject
             sr.enabled = false;
             coll.enabled = false;
             particleComponent.Play();
+            AudioManager.Instance.Play("FireTake");
         }
     }
 }

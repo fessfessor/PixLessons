@@ -19,7 +19,7 @@ public class Health : MonoBehaviour {
 
     public void takeHit(int damage) {
         HealthCount -= damage;
-        if (HealthCount <= 0)
+        if (HealthCount <= 0 && gameObject != GameManager.Instance.player)
             Destroy(gameObject, 0.5f);      
     }
 

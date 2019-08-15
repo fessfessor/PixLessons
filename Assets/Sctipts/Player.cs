@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     [SerializeField] private int healthByShoot;
     [SerializeField] private int healthReturnByHit;
     [SerializeField] private GameObject fireButton;
+    [SerializeField] private GameObject dieMenu;
     
     
     private  bool isRightDirection;
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     private Vector3 direction;
     private int currentHealth;
     private bool isAttacking;
+    private bool isDeath;
     private bool shootReady;
     private ObjectPooler pooler;
     private UIController controller;
@@ -156,13 +158,23 @@ public class Player : MonoBehaviour
 
         // Проверка на дамаг
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
-            isDamaged = true;
-            AudioManager.Instance.Play("Pain");
+            isDamaged = true; 
             currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+            if(currentHealth > 0)
+                AudioManager.Instance.Play("Pain");
         }
         else {
             isDamaged = false;
             currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+        }
+
+        // Гибель
+        if(currentHealth <= 0 && !isDeath) {
+            dieMenu.SetActive(true);
+            isMoving = false;
+            isDeath = true;
+            AudioManager.Instance.Play("PlayerDie");
+            Time.timeScale = 0.1f;
         }
 
         //При уменьшении здоровья трясем камеру
