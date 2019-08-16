@@ -417,6 +417,7 @@ public class Player : MonoBehaviour
     IEnumerator SelfDamage() {
         isDamaged = false;
         yield return new WaitForSeconds(0.5f);
+        isBloodLost = false;
         isDamaged = true;
     }
 

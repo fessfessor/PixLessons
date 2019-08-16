@@ -61,10 +61,14 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
             // Выставляем позицию для хелс бара над объектом          
             healthRect.anchoredPosition = screenPoint - canvasRectT.sizeDelta / 2f;           
             healthFiller.fillAmount = currentHealth / 100.0f;
+            //Debug.Log(healthRect.anchoredPosition);
         }
 
-        if(currentHealth <= 0)            
+        if(currentHealth <= 0) {
             pooler.ReturnToPool("EnemyHealthBar", healthObj);
+            
+        }        
+            
                    
     }
 
@@ -74,8 +78,11 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
 
     }
 
-    public void OnReturnToPool() {       
-        gameObject.SetActive(false);
+    public void OnReturnToPool() {
+        //TODO Почему то у этого объекта при возвращении в пул меняется скейл на супер мелкий
+        
+
+        gameObject.SetActive(false);       
         healthFiller.fillAmount = 1f;
     }
 }

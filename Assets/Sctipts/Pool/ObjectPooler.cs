@@ -49,7 +49,7 @@ public class ObjectPooler : MonoBehaviour
 
     // Простой возврат в пул
     public void ReturnToPool(string tag, GameObject obj) {
-        //Debug.Log( tag + " " +poolDictionary[tag].Count);
+        //Debug.Log("Pooler - " +  tag + " " +poolDictionary[tag].Count);
         //Если нет такого объекта, возвращаем его в пул
         if (!poolDictionary[tag].Contains(obj)) {
             //Дополнительные действия для объектов с анимациями и т.п.
@@ -58,12 +58,12 @@ public class ObjectPooler : MonoBehaviour
             } 
             
             obj.SetActive(false);           
-            obj.transform.SetParent(GameManager.Instance.player.transform);
+            obj.transform.SetParent(transform);
             obj.transform.position = transform.position;
 
             poolDictionary[tag].Enqueue(obj);
 
-          //  Debug.Log(poolDictionary[tag].Count);
+            //Debug.Log("Pooler after return - " + poolDictionary[tag].Count);
         }
     }
 

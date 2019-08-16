@@ -9306,7 +9306,7 @@ MonoBehaviour:
   - tag: StunIcon
     prefab: {fileID: 5217615317448779872, guid: 1fb9bd0bdb5772c42a26605b6154e5c0,
       type: 3}
-    size: 2
+    size: 10
   - tag: AidKit
     prefab: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
       type: 3}
@@ -9318,11 +9318,11 @@ MonoBehaviour:
   - tag: EnemyHealthBar
     prefab: {fileID: 6211908140791974500, guid: 15326cb2baf0a7449982adfc15f9be11,
       type: 3}
-    size: 15
+    size: 30
   - tag: BloodSplash
     prefab: {fileID: 7981469637462526246, guid: d4268448989f8644aa853674427422e9,
       type: 3}
-    size: 3
+    size: 5
 --- !u!4 &705681887
 Transform:
   m_ObjectHideFlags: 0
@@ -54898,70 +54898,57 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -3.64
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 291340794}
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: shakeMagnitude
+      value: 0.05
       objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalRotation.w
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: bloodOnScreen
+      value: 
+      objectReference: {fileID: 128854685}
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: startColor.r
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: startColor.a
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: startColor.g
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: startColor.b
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855419, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 20
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: endColor.r
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6091518693444855420, guid: 2a5e9d80768d2404da804b437e297077,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 2
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: endColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: endColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: endColor.a
+      value: 0.5058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: fadeTimeBlood
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: fadeTimeBloodOut
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6091518693444855417, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
@@ -55048,62 +55035,75 @@ PrefabInstance:
       propertyPath: healthByMeleeAttack
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855419, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855420, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2052669106, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
       propertyPath: flameCoinsText
       value: 
       objectReference: {fileID: 60855157}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 291340794}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: shakeMagnitude
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: bloodOnScreen
-      value: 
-      objectReference: {fileID: 128854685}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: startColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: startColor.a
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: startColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: startColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: endColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: endColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: endColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: endColor.a
-      value: 0.5058824
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: fadeTimeBlood
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 834969917, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: fadeTimeBloodOut
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1993397791, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
       propertyPath: m_IsActive
       value: 1
