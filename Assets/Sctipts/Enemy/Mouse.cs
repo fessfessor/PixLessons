@@ -24,6 +24,7 @@ public class Mouse : MonoBehaviour
         animator = GetComponent<Animator>();
         health = GetComponent<Health>();
         coll = GetComponent<Collider2D>();
+        
     }
 
     // Update is called once per frame

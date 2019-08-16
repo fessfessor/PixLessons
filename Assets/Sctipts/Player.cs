@@ -27,9 +27,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject SwordLeft;
     [SerializeField] bool useComputerMode;
     [SerializeField] private Joystick joystick;
-    [SerializeField] private int healthByMeleeAttack;
+    [SerializeField] private int healthByMeleeAttack; 
     [SerializeField] private int healthByShoot;
-    [SerializeField] private int healthReturnByHit;
+    [SerializeField] private int healthReturnByHit; 
     [SerializeField] private GameObject fireButton;
     [SerializeField] private GameObject dieMenu;
     
@@ -51,10 +51,12 @@ public class Player : MonoBehaviour
 
     private Collider2D SwordRightCollider;
     private Collider2D SwordLeftCollider;
-    private RaycastHit2D[] hits = new RaycastHit2D[10];
-    private int numberHits = 0;
+    
     private Image fireButtonImage;
     private float rechargeTimer;
+    private bool isBloodLost = false;
+    public bool IsBloodLost { get => isBloodLost; set => isBloodLost = value;}
+    private Invulnerability invulnerability;
 
 
 
@@ -82,6 +84,8 @@ public class Player : MonoBehaviour
 
         rechargeTimer = shootRecharge;
 
+        invulnerability = GetComponent<Invulnerability>();
+
        // InitUIController();
 
     }
@@ -90,7 +94,6 @@ public class Player : MonoBehaviour
     void FixedUpdate() {
 
         
-
         //Анимации
         animator.SetBool("isGrounded", groundD.isGrounded);
         if (!isJumping && !groundD.isGrounded)
@@ -160,7 +163,7 @@ public class Player : MonoBehaviour
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
             isDamaged = true; 
             currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-            if(currentHealth > 0)
+            if(currentHealth > 0 && !isBloodLost)
                 AudioManager.Instance.Play("Pain");
         }
         else {
@@ -170,15 +173,11 @@ public class Player : MonoBehaviour
 
         // Гибель
         if(currentHealth <= 0 && !isDeath) {
-            dieMenu.SetActive(true);
-            isMoving = false;
-            isDeath = true;
-            AudioManager.Instance.Play("PlayerDie");
-            Time.timeScale = 0.1f;
+            Death();
         }
 
         //При уменьшении здоровья трясем камеру
-        if (isDamaged && ShakeCameraOnDamage) 
+        if (isDamaged && ShakeCameraOnDamage && !isBloodLost) 
             cameraShaker.Shake();
         
         // Звуки шагов
@@ -193,6 +192,15 @@ public class Player : MonoBehaviour
     }
 
     
+    void Death() {
+        health.HealthCount = 0;
+        dieMenu.SetActive(true);
+        isMoving = false;
+        isDeath = true;
+        AudioManager.Instance.Play("PlayerDie");
+        Time.timeScale = 0.1f;
+    }
+
 
     #region Attack
 
@@ -210,11 +218,12 @@ public class Player : MonoBehaviour
         canMove = false;
         rb.velocity = Vector2.zero;
         AudioManager.Instance.Play("FireballCast");
+        AudioManager.Instance.Play("BloodLoss");
         //За выстрел платим здоровьем
-        LostHealth(healthByShoot);
+        HealthChange(healthByShoot, true);
         
         // Время анимации
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.8f);        
         isAttacking = false;
         canMove = true;
         canAttack = true;
@@ -235,6 +244,7 @@ public class Player : MonoBehaviour
         }
     }   
     IEnumerator SwordAttack() {
+        HealthChange(healthByMeleeAttack, true);
         isAttacking = true;
         //Если на земле тормозимся
         if (groundD.isGrounded)
@@ -252,14 +262,12 @@ public class Player : MonoBehaviour
         rb.WakeUp();
         if (isRightDirection) {
             SwordRightCollider.enabled = true;            
-            numberHits = SwordRightCollider.Cast(Vector2.right, hits, 100f);
-            Debug.DrawRay(SwordRightCollider.transform.position, Vector3.right, Color.red,3f);
-            Debug.Log("Right - " + numberHits + " " + hits[0].transform.name + " " + hits[1].transform.name);
+            
         }
         else {
             SwordLeftCollider.enabled = true;
-            numberHits = SwordLeftCollider.Cast(Vector2.left, hits);
-            Debug.Log("Left - " + numberHits + " " + hits[0].transform.name + " " + hits[1].transform.name);
+            //numberHits = SwordLeftCollider.Cast(Vector2.left, hits);
+            //Debug.Log("Left - " + numberHits + " " + hits[0].transform.name + " " + hits[1].transform.name);
         }
             
         
@@ -271,8 +279,6 @@ public class Player : MonoBehaviour
         else
             SwordLeftCollider.enabled = false;
 
-
-       
     }
 
     // Вызывается из анимации 
@@ -302,6 +308,7 @@ public class Player : MonoBehaviour
         } 
     }
 
+    // Звук приземления , вызывается из анимации
     void JumpLanding() {
         AudioManager.Instance.Play("JumpLanding");
     }
@@ -391,18 +398,31 @@ public class Player : MonoBehaviour
     #region bloodMechanics
     // Механика "кровавых атак". 
 
-        //Если промахиваемся мечом - теряем хп. Шар впринципе запускается за хп
-    void LostHealth(int healthCountMiss) {
+        //Если промахиваемся мечом - теряем хп. Шар впринципе запускается за хп. Попадаем мечом - восстанавливаем хп
+    public void HealthChange(int healthCountMiss,bool lost) {       
         int currentHealth = health.HealthCount;
 
-        health.HealthCount -= healthCountMiss;
+        isBloodLost = true;
+        health.HealthCount -= healthCountMiss;        
+        
+        StartCoroutine(SelfDamage());
 
+        // Если попадаем мечом по врагу, то восстанавливаем здоровье
+        if (!lost) {
+            health.HealthCount += healthCountMiss + healthReturnByHit;
+        }
 
     }
 
-    void HittingCheck() {
-
+    IEnumerator SelfDamage() {
+        isDamaged = false;
+        yield return new WaitForSeconds(0.5f);
+        isDamaged = true;
     }
+
+   
+
+    
 
 
     #endregion

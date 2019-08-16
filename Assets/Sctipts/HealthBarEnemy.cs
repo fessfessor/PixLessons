@@ -28,7 +28,7 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
     void Start()
     {
         
-        canvas = GameObject.Find("Canvas");
+        canvas = GameObject.Find("MainUICanvas");
         canvasRectT = canvas.GetComponent<RectTransform>();
         sr = GetComponent<SpriteRenderer>();
         isDamaged = false;

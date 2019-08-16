@@ -12,12 +12,15 @@ public class DamageByWeapon : MonoBehaviour
     [SerializeField] Side side;
 
     private ObjectPooler pooler;
+    private Player playerScript;
+
+
    
 
     private void Start()
     {
-       
-        pooler = ObjectPooler.Instance;
+        playerScript = GameManager.Instance.player.GetComponent<Player>();
+         pooler = ObjectPooler.Instance;
     }
 
 
@@ -28,16 +31,20 @@ public class DamageByWeapon : MonoBehaviour
         // Чтобы мы не дамажили своим же оружием себя
         if (parent != null && parent.transform.name != col.transform.name) {           
                 if (GameManager.Instance.healthContainer.ContainsKey(col.gameObject)) {
-                    var health = GameManager.Instance.healthContainer[col.gameObject];
-                // Если есть здоровье, его больше 0 и 
+                    var health = GameManager.Instance.healthContainer[col.gameObject];               
                 
-                if (health != null && health.HealthCount > 0) {
+                    if (health != null && health.HealthCount > 0) {                        
                         health.takeHit(damage);
-                    AudioManager.Instance.Play("SwordAttack");
-
-                    //todo возможно стоит вынести данный функционал в отдельный компонент. Кровавые брызги при ударе. Проверка для того чтобы на анимации смерти не было крови 
-                    if (health.HealthCount > 0)
-                            StartCoroutine(Blood(col.transform.position));
+                        
+                    //Условия для меча, звук, брызги крови и восстановление хп при ударе
+                        if(transform.tag == "HeroSword") {
+                            playerScript.HealthChange(0, false);
+                            AudioManager.Instance.Play("SwordAttack");
+                            //todo возможно стоит вынести данный функционал в отдельный компонент. Кровавые брызги при ударе. Проверка для того чтобы на анимации смерти не было крови 
+                            if (health.HealthCount > 0)
+                                StartCoroutine(Blood(col.transform.position));
+                        }
+                        
                         
                         
 
