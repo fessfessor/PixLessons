@@ -54,7 +54,7 @@ public class ObjectPooler : MonoBehaviour
         if (!poolDictionary[tag].Contains(obj)) {
             //Дополнительные действия для объектов с анимациями и т.п.
             if (GameManager.Instance.pooledObjectContainer.ContainsKey(obj)) {
-                GameManager.Instance.pooledObjectContainer[obj].OnReturnToPool();
+                GameManager.Instance.pooledObjectContainer[obj].OnReturnToPool();               
             } 
             
             obj.SetActive(false);           
@@ -98,11 +98,18 @@ public class ObjectPooler : MonoBehaviour
             return null;
         }
 
+
+        
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        Debug.Log("Spqwn - " + GameManager.Instance.pooledObjectContainer.ContainsKey(objectToSpawn) + " " + GameManager.Instance.pooledObjectContainer.Count);
+
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
 
+        if (GameManager.Instance.pooledObjectContainer.ContainsKey(objectToSpawn)) {
+            GameManager.Instance.pooledObjectContainer[objectToSpawn].OnSpawnFromPool();
+        }
         return objectToSpawn;
     }
 

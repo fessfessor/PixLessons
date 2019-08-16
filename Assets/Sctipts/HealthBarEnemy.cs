@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarEnemy : MonoBehaviour, IPooledObject
+public class HealthBarEnemy : MonoBehaviour
 {
     private Image healthFiller;
     private int healthCount;
@@ -34,7 +34,7 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
         isDamaged = false;
         maxHealth = GetComponent<Health>().HealthCount;
         pooler = ObjectPooler.Instance;
-        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
+        
 
     }
 
@@ -74,15 +74,5 @@ public class HealthBarEnemy : MonoBehaviour, IPooledObject
 
 
 
-    public void OnSpawnFromPool() {
-
-    }
-
-    public void OnReturnToPool() {
-        //TODO Почему то у этого объекта при возвращении в пул меняется скейл на супер мелкий
-        
-
-        gameObject.SetActive(false);       
-        healthFiller.fillAmount = 1f;
-    }
+    
 }

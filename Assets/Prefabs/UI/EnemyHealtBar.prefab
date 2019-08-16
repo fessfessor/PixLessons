@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6211908140791974501}
   - component: {fileID: 6211908140791974503}
   - component: {fileID: 6211908140791974502}
+  - component: {fileID: -223488336877122464}
   m_Layer: 5
   m_Name: EnemyHealtBar
   m_TagString: Untagged
@@ -55,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6211908140791974500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -75,6 +76,20 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-223488336877122464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6211908140791974500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d43edf46e7079498a068a2a7bdebdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  filler: {fileID: 6211908140584482545}
 --- !u!1 &6211908141752072837
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,7 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6211908141752072837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -150,6 +165,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1001 &5323663639531722022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -269,6 +285,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a544f6b70337da244975b511295fde73, type: 3}
+--- !u!1 &6211908140584482545 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2293548637295649751, guid: a544f6b70337da244975b511295fde73,
+    type: 3}
+  m_PrefabInstance: {fileID: 5323663639531722022}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6211908140584482546 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2293548637295649748, guid: a544f6b70337da244975b511295fde73,

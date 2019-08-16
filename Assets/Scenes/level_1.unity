@@ -9314,11 +9314,11 @@ MonoBehaviour:
   - tag: FlameCoin
     prefab: {fileID: 2822986232854940405, guid: daf7d8ecb1f2d9640b07f66bbafc97f2,
       type: 3}
-    size: 50
+    size: 10
   - tag: EnemyHealthBar
     prefab: {fileID: 6211908140791974500, guid: 15326cb2baf0a7449982adfc15f9be11,
       type: 3}
-    size: 30
+    size: 1
   - tag: BloodSplash
     prefab: {fileID: 7981469637462526246, guid: d4268448989f8644aa853674427422e9,
       type: 3}
