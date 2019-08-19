@@ -10,10 +10,18 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private Transform target;
 
-    [SerializeField] public bool bossCamera = false; 
+    [SerializeField] public bool bossCamera = false;
+
+    [SerializeField] GameObject mainBackground;
+
+    private Transform backPosition;
 
     private void Awake() {
         if (!target) target = FindObjectOfType<Player>().transform;
+    }
+
+    private void Start() {
+        backPosition = mainBackground.transform;
     }
 
     private void Update() {

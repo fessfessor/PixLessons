@@ -60,6 +60,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -142,8 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d18224f5823889948a61f66df805d56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthSize: 20
-  anim: {fileID: 1346641178655288217}
+  healthSize: 30
 --- !u!95 &1346641178655288217
 Animator:
   serializedVersion: 3

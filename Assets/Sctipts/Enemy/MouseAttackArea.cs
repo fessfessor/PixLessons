@@ -15,7 +15,7 @@ public class MouseAttackArea : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        bool isPlayer = col.gameObject.transform.name == "Player";
+        bool isPlayer = col.gameObject == GameManager.Instance.player;
         if (isPlayer && !inArea)
         {
             playerPosition = col.gameObject.transform.position;

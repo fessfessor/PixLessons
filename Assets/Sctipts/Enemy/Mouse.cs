@@ -14,7 +14,9 @@ public class Mouse : MonoBehaviour
     private SpriteRenderer sr;
     private Animator animator;
     private Health health;
-    private bool isPlayer = false;
+    private bool playerCollision = false;
+    private bool soundPlay = false;
+    private bool explode = false;
     Collider2D coll;
 
     // Start is called before the first frame update
@@ -32,35 +34,59 @@ public class Mouse : MonoBehaviour
     {
         if (inArea)
         {
-            if (!isPlayer)
+            if (!playerCollision)
             {
                 animator.SetTrigger("InArea");
-                transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed);
+                if (!sr.flipX)                   
+                    transform.position += Vector3.left * speed * Time.deltaTime;
+                else
+                    transform.position += Vector3.right * speed * Time.deltaTime;
+
+                if (!soundPlay) {
+                    AudioManager.Instance.Play("MouseSqueak");
+                    soundPlay = true;
+                }
+                
+                    
+
+                //transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed);
+            }
+
+            if (!explode) {
+                if (transform.position.x - PlayerPosition.x < 0.5f || playerCollision) {
+                    coll.enabled = false;
+                    Destroy(gameObject, 0.5f);
+                    animator.SetTrigger("Explosion");
+                    AudioManager.Instance.Play("FireballExplode");
+                    explode = true;
+                }
+
+                
             }
             
-
-            if (transform.position == playerPosition || isPlayer)
-            {
-                coll.enabled = false;
-                Destroy(gameObject, 0.5f);
-                animator.SetTrigger("Explosion");
-            }
                 
         }
 
-        if(health.HealthCount <= 0)
-        {
-            coll.enabled = false;
-            inArea = false;
-            Destroy(gameObject, 0.5f);
-            animator.SetTrigger("Explosion");
+        if (health.HealthCount <= 0) {
+            if (!explode) {
+            
+                coll.enabled = false;
+                inArea = false;
+                Destroy(gameObject, 0.5f);
+                animator.SetTrigger("Explosion");
+                AudioManager.Instance.Play("FireballExplode");
+                explode = true;
+            }
+
+            
         }
+        
 
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        isPlayer = col.gameObject.transform.name == "Player";
+        playerCollision = col.gameObject == GameManager.Instance.player;
     }
 
 }
