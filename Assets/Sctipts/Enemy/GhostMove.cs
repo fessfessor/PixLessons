@@ -91,7 +91,7 @@ public class GhostMove : MonoBehaviour
 
         // Возвращам шар обратно в пул когда достиг цели
         if(ball && (ball.transform.position == targetPosition) && readyToReturn) {
-            pooler.ReturnToPool("EnemyMagicBall", gameObject);
+            pooler.ReturnToPool("EnemyMagicBall", ball);
 
             readyToReturn = false;
         }
@@ -99,7 +99,7 @@ public class GhostMove : MonoBehaviour
         // Death
         if(GameManager.Instance.healthContainer[gameObject].HealthCount <= 0) {
             if(ball)
-                pooler.ReturnToPool("EnemyMagicBall", gameObject);
+                pooler.ReturnToPool("EnemyMagicBall", ball);
             animator.SetTrigger("isDeath");
         }
 

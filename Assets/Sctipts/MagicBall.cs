@@ -18,7 +18,7 @@ public class MagicBall : MonoBehaviour , IPooledObject
 
 
     private void Start() {
-        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
+        //GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
         animator = GetComponent<Animator>();
         pooler = ObjectPooler.Instance;
     }
@@ -56,7 +56,7 @@ public class MagicBall : MonoBehaviour , IPooledObject
 
 
     public void OnSpawnFromPool() {
-        throw new System.NotImplementedException();
+
     }
 
     public void OnReturnToPool() {

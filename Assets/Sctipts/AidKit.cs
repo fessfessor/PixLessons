@@ -13,7 +13,7 @@ public class AidKit : MonoBehaviour, IPooledObject {
         if (!pooler)
             pooler = ObjectPooler.Instance;
 
-        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
+        //GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
         animator = GetComponent<Animator>();
     }
 

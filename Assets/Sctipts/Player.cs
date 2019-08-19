@@ -163,8 +163,11 @@ public class Player : MonoBehaviour
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
             isDamaged = true; 
             currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-            if(currentHealth > 0 && !isBloodLost)
+            if(currentHealth > 0 && !isBloodLost) {
+                StartCoroutine(invulnerability.GetInvulnerability());
                 AudioManager.Instance.Play("Pain");
+            }
+                
         }
         else {
             isDamaged = false;
@@ -416,17 +419,19 @@ public class Player : MonoBehaviour
 
     IEnumerator SelfDamage() {
         isDamaged = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.2f);
         isBloodLost = false;
         isDamaged = true;
     }
 
-   
-
-    
 
 
     #endregion
+
+
+
+
+
 
 
 }

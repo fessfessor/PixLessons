@@ -35,6 +35,11 @@ public class ObjectPooler : MonoBehaviour
             // наполняем ее объектами
             for(int i=0; i < pool.size; i++) {
                 GameObject obj = Instantiate(pool.prefab, transform);
+
+                // Сразу добавляем объект в коллекцию
+                if (!GameManager.Instance.pooledObjectContainer.ContainsKey(obj))
+                    GameManager.Instance.pooledObjectContainer.Add(obj, obj.GetComponent<IPooledObject>());
+
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
@@ -49,7 +54,7 @@ public class ObjectPooler : MonoBehaviour
 
     // Простой возврат в пул
     public void ReturnToPool(string tag, GameObject obj) {
-        //Debug.Log("Pooler - " +  tag + " " +poolDictionary[tag].Count);
+      //  Debug.Log("Pooler - " +  tag + " " +poolDictionary[tag].Count + " Contains - " + GameManager.Instance.pooledObjectContainer.ContainsKey(obj));
         //Если нет такого объекта, возвращаем его в пул
         if (!poolDictionary[tag].Contains(obj)) {
             //Дополнительные действия для объектов с анимациями и т.п.
@@ -97,11 +102,8 @@ public class ObjectPooler : MonoBehaviour
             Debug.LogWarning("Pool with tag " + tag + " doesn`t exist!");
             return null;
         }
-
-
-        
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
-        Debug.Log("Spqwn - " + GameManager.Instance.pooledObjectContainer.ContainsKey(objectToSpawn) + " " + GameManager.Instance.pooledObjectContainer.Count);
+        //Debug.Log("Spawn - " + GameManager.Instance.pooledObjectContainer.ContainsKey(objectToSpawn) + objectToSpawn.transform.name);
 
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
@@ -124,10 +126,17 @@ public class ObjectPooler : MonoBehaviour
         }
 
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+       // Debug.Log("Spawn - " + GameManager.Instance.pooledObjectContainer.ContainsKey(objectToSpawn) + " " + objectToSpawn.transform.name);
         objectToSpawn.SetActive(true);
+        //Debug.Log("Spawn 2 - " + GameManager.Instance.pooledObjectContainer.ContainsKey(objectToSpawn) + " " + objectToSpawn.transform.name);
         objectToSpawn.transform.position = position;
+
         objectToSpawn.transform.rotation = rotation;
         objectToSpawn.transform.SetParent(parent.transform, false);
+
+        if (GameManager.Instance.pooledObjectContainer.ContainsKey(objectToSpawn)) {
+            GameManager.Instance.pooledObjectContainer[objectToSpawn].OnSpawnFromPool();
+        }
 
         return objectToSpawn;
     }

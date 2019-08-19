@@ -15,12 +15,13 @@ public class EnemyMagicBall : MonoBehaviour, IPooledObject
         pooler = ObjectPooler.Instance;
         animator = GetComponent<Animator>();
         pooler = ObjectPooler.Instance;
+        
     }
 
 
 
     private void OnTriggerEnter2D(Collider2D col) {
-        bool isPlayer = col.gameObject.transform.name == "Player";
+        bool isPlayer = col.gameObject == GameManager.Instance.player;
         
 
         if (isPlayer) {
@@ -40,7 +41,7 @@ public class EnemyMagicBall : MonoBehaviour, IPooledObject
     }
 
     public void OnSpawnFromPool() {
-        throw new System.NotImplementedException();
+
     }
 
     public void OnReturnToPool() {

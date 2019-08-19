@@ -36,6 +36,12 @@ public class GameManager : MonoBehaviour {
         
     }
 
+    private void Start() {
+        foreach (KeyValuePair<GameObject, IPooledObject> el in pooledObjectContainer) {
+            Debug.Log("Key = " + el.Key.transform.name);
+        }
+    }
+
     // Кнопка паузы
     public void OnClickPause() {
         if (Time.timeScale > 0) {

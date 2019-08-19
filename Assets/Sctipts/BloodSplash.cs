@@ -11,12 +11,12 @@ public class BloodSplash : MonoBehaviour, IPooledObject
     }
 
     public void OnSpawnFromPool() {
-        throw new System.NotImplementedException();
+
     }
 
     void Start()
     {
-        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
+        //GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
         animator = GetComponent<Animator>();
     }
 

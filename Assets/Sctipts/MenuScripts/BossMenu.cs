@@ -73,6 +73,8 @@ public class BossMenu : MonoBehaviour
 
     IEnumerator  StartFightWithBoss()
     {
+        AudioManager.Instance.Mute("Theme", true);
+        AudioManager.Instance.Play("BossFight");
         leftAnim.SetTrigger("StartFight");
         rightAnim.SetTrigger("StartFight");
     yield return new WaitForSeconds(1f);      

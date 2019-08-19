@@ -15,7 +15,7 @@ public class FlameCoin : MonoBehaviour, IPooledObject
     private void Start() {
         // Добавляем себя в гейм менеджер
         GameManager.Instance.flameCoinContainer.Add(gameObject,this);
-        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
+        //GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
         pooler = ObjectPooler.Instance;
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();

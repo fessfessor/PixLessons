@@ -16,7 +16,6 @@ public class FallPlatform : MonoBehaviour, IPooledObject
         // Инициализируем компонент и пул
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
-        GameManager.Instance.pooledObjectContainer.Add(gameObject, this);      
         pooler = ObjectPooler.Instance;
         
     }
