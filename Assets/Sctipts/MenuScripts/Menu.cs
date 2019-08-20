@@ -7,6 +7,7 @@ public class Menu : MonoBehaviour
    [SerializeField] InputField nameField;
    [SerializeField] GameObject levels;
    [SerializeField] GameObject menuPanel;
+   [SerializeField] GameObject optionPanel;
    [SerializeField] GameObject soundToggle;
 
     private bool menuSoundOn;
@@ -61,6 +62,11 @@ public class Menu : MonoBehaviour
     public void OnClickBack() {
         menuPanel.SetActive(true);
         levels.SetActive(false);
+    }
+
+    public void OnClickOption() {
+        optionPanel.SetActive(true);
+        menuPanel.SetActive(false);
     }
 
     
