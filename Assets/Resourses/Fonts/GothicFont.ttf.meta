@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7bf2117ccac58da4a9857f02b73fd914
+guid: 0121618e65a574c4f912c44182b1b809
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Long Shot
+  fontName: Augusta Modern
   fontNames:
-  - Long Shot
+  - Augusta Modern
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
