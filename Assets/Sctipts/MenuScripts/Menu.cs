@@ -59,9 +59,14 @@ public class Menu : MonoBehaviour
         levels.SetActive(true);
     }
 
-    public void OnClickBack() {
-        menuPanel.SetActive(true);
-        levels.SetActive(false);
+    public void OnClickBack() {        
+        if (optionPanel.active) {
+            menuPanel.SetActive(true);
+            optionPanel.SetActive(false);
+        } else if (levels.active) {
+            menuPanel.SetActive(true);
+            levels.SetActive(false);
+        }
     }
 
     public void OnClickOption() {
@@ -69,7 +74,9 @@ public class Menu : MonoBehaviour
         menuPanel.SetActive(false);
     }
 
-    
+    public void SaveLocalization(string localization) {
+        PlayerPrefs.SetString("localization", localization);
+    }
 
     #region selectLevel
     public void Level(int sceneNumber)
