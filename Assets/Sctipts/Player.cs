@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     private bool isBloodLost = false;
     public bool IsBloodLost { get => isBloodLost; set => isBloodLost = value;}
     private Invulnerability invulnerability;
+    private bool jumpButtonEnabled;
 
 
 
@@ -86,6 +87,14 @@ public class Player : MonoBehaviour
 
         invulnerability = GetComponent<Invulnerability>();
 
+        if (PlayerPrefs.HasKey("jumpButton")) {
+            jumpButtonEnabled = PlayerPrefs.GetInt("jumpButton") == 0 ? false : true;
+        }
+        else {
+            jumpButtonEnabled = false;
+        }
+        
+
        // InitUIController();
 
     }
@@ -111,9 +120,8 @@ public class Player : MonoBehaviour
         }
 
         float vetricalMove = joystick.Vertical;
-        if (vetricalMove >= .5f) {
-            Jump();
-            isMoving = false;
+        if (vetricalMove >= .5f && !jumpButtonEnabled) {
+            Jump();           
         }
 
 #if UNITY_EDITOR
@@ -298,10 +306,11 @@ public class Player : MonoBehaviour
 
 
     #region Move
-    void Jump() {
+    public void Jump() {
+        isMoving = false;
         //if (Input.GetKeyDown(KeyCode.Space) &&  groundD.isGrounded) {
-        
-        
+
+
         if ( groundD.isGrounded) {
             isJumping = true;
             rb.velocity = Vector3.zero;

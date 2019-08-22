@@ -1,0 +1,72 @@
+{
+  "items": [
+    {
+      "key": "game_title",
+      "value": "Run in Dark"
+    },
+    {
+      "key": "start_button",
+      "value": "Start"
+    },
+    {
+      "key": "option_label",
+      "value": "Options"
+    },
+    {
+      "key": "play",
+      "value": "Play"
+    },
+    {
+      "key": "exit",
+      "value": "Exit"
+    },
+    {
+      "key": "levels",
+      "value": "Levels"
+    },
+    {
+      "key": "resume",
+      "value": "Resume"
+    },
+    {
+      "key": "menu",
+      "value": "Menu"
+    },
+    {
+      "key": "sound",
+      "value": "Sound"
+    },
+    {
+      "key": "language",
+      "value": "Language"
+    },
+    {
+      "key": "name_placeholder",
+      "value": "Enter your name"
+    },
+    {
+      "key": "volume",
+      "value": "Volume"
+    },
+    {
+      "key": "jump",
+      "value": "Jump"
+    },
+    {
+      "key": "button",
+      "value": "Button"
+    },
+    {
+      "key": "joystick",
+      "value": "Joystick"
+    },
+    {
+      "key": "jumpButton",
+      "value": "Jump button"
+    },
+    {
+      "key": "levels_label",
+      "value": "Select level"
+    }
+  ]
+}

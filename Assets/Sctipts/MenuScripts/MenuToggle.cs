@@ -30,7 +30,10 @@ public class MenuToggle : MonoBehaviour
         if (isOn) {
             PlayerPrefs.SetInt("MenuSound", 1);
             backgroundImage.sprite = OnImage;
-            AudioListener.volume = 1;
+            if(PlayerPrefs.HasKey("volume"))
+                AudioListener.volume = PlayerPrefs.GetFloat("volume");
+            else
+                AudioListener.volume = 1f;
         }
         else {
             PlayerPrefs.SetInt("MenuSound", 0);
@@ -43,7 +46,10 @@ public class MenuToggle : MonoBehaviour
         if (isOn) {
             GetComponent<Toggle>().isOn = true;
             backgroundImage.sprite = OnImage;
-            AudioListener.volume = 1;
+            if (PlayerPrefs.HasKey("volume"))
+                AudioListener.volume = PlayerPrefs.GetFloat("volume");
+            else
+                AudioListener.volume = 1f;
         }
         else {
             GetComponent<Toggle>().isOn = false;

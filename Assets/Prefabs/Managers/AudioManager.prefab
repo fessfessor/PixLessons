@@ -1,0 +1,186 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3488091649215128418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3488091649215128420}
+  - component: {fileID: 3488091649215128419}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3488091649215128420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3488091649215128418}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3488091649215128419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3488091649215128418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afea7b201a738e479e838ca5a1de639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Theme
+    clip: {fileID: 8300000, guid: 509ab4de8fdf62f47979de1dd0d9b7d6, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: FireballCast
+    clip: {fileID: 8300000, guid: fb13325b5247cbb4286f0010977e336f, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: FireballExplode
+    clip: {fileID: 8300000, guid: 858809b396dc3ad498758d37172aa30c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: Zomby
+    clip: {fileID: 8300000, guid: 288853e12a58e654f981e5702295c3cf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: ZombyRaise
+    clip: {fileID: 8300000, guid: 233ae23192008c64e947f13e63c545ca, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: ZombyDie
+    clip: {fileID: 8300000, guid: a2a5f2bf5dd07d649a6448f4c8157327, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: SwordAttack
+    clip: {fileID: 8300000, guid: b15a7361d334db245a6cb6d599963bcd, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: SwordSwing
+    clip: {fileID: 8300000, guid: 5aa40cbbc3425b74f9c7866fd4116405, type: 3}
+    volume: 0.8
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: Jump
+    clip: {fileID: 8300000, guid: b36f2a32d98e5014888f05d49013965c, type: 3}
+    volume: 0.5
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: JumpLanding
+    clip: {fileID: 8300000, guid: 843e9e795aac90245a045d6042a25da0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: Pain
+    clip: {fileID: 8300000, guid: fa5d6a31ee6f66846ab14ac749cb261e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: PlayerFootsteps
+    clip: {fileID: 8300000, guid: 4abc6e46ca1a3c44cba981cca46c56fd, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: MenuTheme
+    clip: {fileID: 8300000, guid: 6306a81689822694896cacaafe3d3b45, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: ButtonSound
+    clip: {fileID: 8300000, guid: da57619db12329747a915b6d4e6f2158, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: FireTake
+    clip: {fileID: 8300000, guid: dd28aedf037315b479ed3cc0b7f8501d, type: 3}
+    volume: 0.5
+    pitch: 0.7
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: AidTake
+    clip: {fileID: 8300000, guid: 78a4f270d11f2ea45b39efba15ee8cb6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: PlayerDie
+    clip: {fileID: 8300000, guid: 72bf846ec37f8d64a945db5505a6708e, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: BloodLoss
+    clip: {fileID: 8300000, guid: 3d98d80b7019b4248a8970072e78e2bf, type: 3}
+    volume: 1
+    pitch: 0.9
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: BossFight
+    clip: {fileID: 8300000, guid: ddc7bd2261a96384a81f8429a063e6c1, type: 3}
+    volume: 0.9
+    pitch: 0.9
+    loop: 1
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: MouseSqueak
+    clip: {fileID: 8300000, guid: 1713576c1d642264b949c63912e81198, type: 3}
+    volume: 0.9
+    pitch: 0.7
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0

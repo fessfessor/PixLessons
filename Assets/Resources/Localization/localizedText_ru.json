@@ -1,0 +1,30 @@
+{"items":[{"key":"game_title","value":"Бег в темноте"},{"key":"start_button","value":"Старт"},{"key":"option_label","value":"Опции"},{"key":"play","value":"Играть"},{"key":"exit","value":"Выход"},{"key":"levels","value":"Уровни"},{"key":"resume","value":"Продолжить"},{"key":"menu","value":"Меню"},{"key":"sound","value":"Звук"},{"key":"language","value":"Язык"},
+    {
+      "key": "name_placeholder",
+      "value": "Введите имя"
+    },
+    {
+      "key": "levels_label",
+      "value": "Выберите уровень"
+    },
+    {
+      "key": "volume",
+      "value": "Громкость"
+    },
+    {
+      "key": "jump",
+      "value": "Прыжок"
+    },
+    {
+      "key": "button",
+      "value": "Кнопка"
+    },
+    {
+      "key": "joystick",
+      "value": "Джойстик"
+    },
+    {
+      "key": "jumpButton",
+      "value": "Кнопка для прыжка"
+    }
+	]}

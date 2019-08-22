@@ -8,6 +8,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
     private bool isOn;
 
+    private int currentScene;
+
 
 
 
@@ -24,9 +26,12 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
 
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {
+
         
         if (PlayerPrefs.HasKey("GameSound")) {
             isOn = PlayerPrefs.GetInt("GameSound") == 1 ? true : false;
@@ -36,13 +41,22 @@ public class AudioManager : MonoBehaviour
         }
 
         if (isOn)
-            AudioListener.volume = 1;
+            Play("Theme_" + SceneManager.GetActiveScene().buildIndex);
         else
             AudioListener.volume = 0;
+        
+        currentScene = SceneManager.GetActiveScene().buildIndex;
 
+        //if (SceneManager.GetActiveScene().buildIndex != 0)
+       //     Play("Theme");
+    }
 
-        if (SceneManager.GetActiveScene().buildIndex != 0)
-            Play("Theme");
+    private void Update() {
+        if(SceneManager.GetActiveScene().buildIndex != currentScene) {
+            Play("Theme_" + SceneManager.GetActiveScene().buildIndex);
+            Stop("Theme_" + currentScene);
+            currentScene = SceneManager.GetActiveScene().buildIndex;
+        }
     }
 
     public void Play(string name) {

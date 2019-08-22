@@ -42,11 +42,14 @@ public class LocalizationManager : MonoBehaviour
 
     public void LoadLocalizedText(string fileName) {
         localizedText = new Dictionary<string, string>();
-        string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+        string filePath = Path.Combine("Localization", fileName);
+        //Debug.Log(Resources.Load<TextAsset>(filePath));
 
 //Читаем все из файла
-        if (File.Exists(filePath)) {
-            string dataJson = File.ReadAllText(filePath);
+        if (Resources.Load<TextAsset>(filePath)!= null) {
+            //string dataJson = File.ReadAllText(filePath+".json");
+            string dataJson = Resources.Load<TextAsset>(filePath).text;            
+
             LocalizationData loadedData = JsonUtility.FromJson<LocalizationData>(dataJson);
 //Заполняем коллекцию
             for(int i=0; i< loadedData.items.Length; i++) {

@@ -47,17 +47,14 @@ public class GameManager : MonoBehaviour {
         if (Time.timeScale > 0) {
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0f;
-            isPaused = true;
-            if(AudioListener.volume != 0)
-                AudioListener.volume = 0.5f;
+            isPaused = true;          
 
         }
         else {
             pauseMenuUI.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
-            if (AudioListener.volume != 0)
-                AudioListener.volume = 1f;
+           
         }
     }
 
@@ -65,8 +62,7 @@ public class GameManager : MonoBehaviour {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
-        if (AudioListener.volume != 0)
-            AudioListener.volume = 1f;
+        
 
     }
 
