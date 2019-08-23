@@ -59,6 +59,8 @@ public class Player : MonoBehaviour
     private Invulnerability invulnerability;
     private bool jumpButtonEnabled;
 
+    [SerializeField]private Item item;
+
 
 
 
@@ -68,6 +70,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(item.ToString());
+
         pooler = ObjectPooler.Instance;
         audioManager = AudioManager.Instance;
 
@@ -436,8 +440,6 @@ public class Player : MonoBehaviour
 
 
     #endregion
-
-
 
 
 

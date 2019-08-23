@@ -54440,6 +54440,12 @@ PrefabInstance:
       propertyPath: useComputerMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855417, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 4d416c2b9566d6343bf8bdf71aa59f68,
+        type: 2}
     - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
       propertyPath: m_LocalPosition.x
