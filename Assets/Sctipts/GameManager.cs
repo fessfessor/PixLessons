@@ -11,16 +11,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField] GameObject pauseMenuUI;
     
 
-    
-    
-
-
     public Dictionary<GameObject, Health> healthContainer;
     public Dictionary<GameObject, FlameCoin> flameCoinContainer;
     public Dictionary<GameObject, GhostMove> ghostContainer;
     public Dictionary<GameObject, BuffReciever> buffRecieverContainer;
     public Dictionary<GameObject, IPooledObject> pooledObjectContainer;
+    public Dictionary<GameObject, ItemComponent> itemsContainer;
     public UIController uiConroller;
+    public ItemBase itemBase;
+    public PlayerInventory inventory;
     [HideInInspector]public GameObject player;
 
     private void Awake() {
@@ -30,6 +29,7 @@ public class GameManager : MonoBehaviour {
         ghostContainer = new Dictionary<GameObject, GhostMove>();
         buffRecieverContainer = new Dictionary<GameObject, BuffReciever>();
         pooledObjectContainer = new Dictionary<GameObject, IPooledObject>();
+        itemsContainer = new Dictionary<GameObject, ItemComponent>();
         player = FindObjectOfType<Player>().gameObject;
 
 

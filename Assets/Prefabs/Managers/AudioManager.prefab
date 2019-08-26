@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Theme
+  - name: Theme_1
     clip: {fileID: 8300000, guid: 509ab4de8fdf62f47979de1dd0d9b7d6, type: 3}
     volume: 0.2
     pitch: 1
@@ -128,7 +128,7 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
     isPlaying: 0
-  - name: MenuTheme
+  - name: Theme_0
     clip: {fileID: 8300000, guid: 6306a81689822694896cacaafe3d3b45, type: 3}
     volume: 1
     pitch: 1
@@ -181,6 +181,13 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: 1713576c1d642264b949c63912e81198, type: 3}
     volume: 0.9
     pitch: 0.7
+    loop: 0
+    source: {fileID: 0}
+    isPlaying: 0
+  - name: ButtonSound
+    clip: {fileID: 8300000, guid: da57619db12329747a915b6d4e6f2158, type: 3}
+    volume: 1
+    pitch: 1
     loop: 0
     source: {fileID: 0}
     isPlaying: 0

@@ -7,8 +7,11 @@ public class ItemBase : ScriptableObject
 {
     [SerializeField] private List<Item> items;
     [SerializeField] private Item currentItem;
+    
 
     private int currentIndex;
+
+    
 
     public void CreateItem() {
         if (items == null)
@@ -19,6 +22,7 @@ public class ItemBase : ScriptableObject
         currentItem = item;
         currentIndex = items.Count - 1;
     }
+   
 
     public void RemoveItem() {
         if (items == null || currentItem == null)
@@ -47,10 +51,14 @@ public class ItemBase : ScriptableObject
             currentItem = items[currentIndex];
         }
     }
+
+    public Item GetItemOfID(int id) {
+        return items.Find(t => t.ID == id);
+    }
 }
 
 
-
+[System.Serializable]
 public class Item {
     [SerializeField] private int id;
     public int ID { get => id; }
@@ -62,10 +70,13 @@ public class Item {
     public string Description { get => description; }
 
     [SerializeField] private BuffType buffType;
-    public BuffType BuffType { get => buffType; }
+    public BuffType BuffType { get => buffType; set => buffType = value; }
 
     [SerializeField] private float value;
     public float Value { get => value; }
+
+    [SerializeField] private Sprite icon;
+    public Sprite Icon { get => icon; }
 
     public override string ToString() {
         return "Id - " + id + " .Description - " + description + " .Buff type - " + buffType + " .Value - " + value;

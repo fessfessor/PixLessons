@@ -33,5 +33,5 @@ public class Buff {
 }
 
 public enum BuffType {
-    MeleeDamage, Force, Armour, Health , RangeDamage
+    MeleeDamage, Armor, Health , RangeDamage
 }
