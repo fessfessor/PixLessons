@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossMenu : MonoBehaviour
 {
@@ -73,7 +74,7 @@ public class BossMenu : MonoBehaviour
 
     IEnumerator  StartFightWithBoss()
     {
-        AudioManager.Instance.Mute("Theme", true);
+        AudioManager.Instance.Mute("Theme_" + SceneManager.GetActiveScene().buildIndex, true);
         AudioManager.Instance.Play("BossFight");
         leftAnim.SetTrigger("StartFight");
         rightAnim.SetTrigger("StartFight");

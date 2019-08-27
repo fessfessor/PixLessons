@@ -196,10 +196,10 @@ public class Player : MonoBehaviour
             cameraShaker.Shake();
         
         // Звуки шагов
-        if (isMoving && !AudioManager.Instance.isPlaying("PlayerFootsteps")) {
+        if (isMoving && !AudioManager.Instance.isPlaying("PlayerFootsteps") && groundD.isGrounded) {
             AudioManager.Instance.Play("PlayerFootsteps");
         }
-        else if(!isMoving && AudioManager.Instance.isPlaying("PlayerFootsteps")) {
+        else if((!isMoving || !groundD.isGrounded) && AudioManager.Instance.isPlaying("PlayerFootsteps")) {
             AudioManager.Instance.Stop("PlayerFootsteps");
         }
 
