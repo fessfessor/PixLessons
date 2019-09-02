@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 
     public static bool isPaused = false;
     [SerializeField] GameObject pauseMenuUI;
+    [SerializeField] GameObject inventoryMenuUI;
     
 
     public Dictionary<GameObject, Health> healthContainer;
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour {
     public Dictionary<GameObject, ItemComponent> itemsContainer;
     public UIController uiConroller;
     public ItemBase itemBase;
-    public PlayerInventory inventory;
+    [HideInInspector]public PlayerInventory inventory;
     [HideInInspector]public GameObject player;
 
     private void Awake() {
@@ -49,13 +50,26 @@ public class GameManager : MonoBehaviour {
             Time.timeScale = 0f;
             isPaused = true;          
 
-        }
-        else {
+        }else {
             pauseMenuUI.SetActive(false);
             Time.timeScale = 1f;
             isPaused = false;
            
         }
+    }
+
+    public void OnClickInventory() {
+        if (Time.timeScale > 0) {
+            inventoryMenuUI.SetActive(true);
+            Time.timeScale = 0f;
+            isPaused = true;
+
+        }else {
+            inventoryMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            isPaused = false;
+        }
+
     }
 
     public void Resume() {

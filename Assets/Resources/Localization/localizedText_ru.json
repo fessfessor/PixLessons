@@ -26,5 +26,9 @@
     {
       "key": "jumpButton",
       "value": "Кнопка для прыжка"
+    },
+    {
+      "key": "inventory_label",
+      "value": "Инвентарь"
     }
 	]}
