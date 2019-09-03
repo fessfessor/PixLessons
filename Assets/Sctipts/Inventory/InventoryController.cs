@@ -12,19 +12,11 @@ public class InventoryController : MonoBehaviour
 
     PlayerInventory inventory;
 
-    void Start()
-    {
-        cells = new Cell[cellCount];
-        for(int i = 0; i < cellCount; i++) {
-            cells[i] = Instantiate(cellPrefab, rootParent);
-            cellPrefab.gameObject.SetActive(false);
-        }
-
-       
-    }
-
 
     private void OnEnable() {
+        if (cells == null || cells.Length <= 0)
+            Init();
+
         var inventory = GameManager.Instance.inventory;
         for (int i = 0; i < inventory.Items.Count; i++) {
             if (i < cells.Length)
@@ -32,4 +24,20 @@ public class InventoryController : MonoBehaviour
 
         }
     }
+
+    void Init()
+    {
+        cells = new Cell[cellCount];
+        for(int i = 0; i < cellCount; i++) {
+            cells[i] = Instantiate(cellPrefab, rootParent);
+            cellPrefab.gameObject.SetActive(false);
+
+            
+        }
+
+       
+    }
+
+
+   
 }

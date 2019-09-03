@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(item.ToString());
+        //Debug.Log($"Speed : {speed} Forse : {force} ShootRechardge: {shootRecharge}");
 
         pooler = ObjectPooler.Instance;
         audioManager = AudioManager.Instance;

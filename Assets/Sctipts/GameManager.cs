@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public void OnClickInventory() {
-        if (Time.timeScale > 0) {
+        if (inventoryMenuUI.active == false) {
             inventoryMenuUI.SetActive(true);
             Time.timeScale = 0f;
             isPaused = true;
