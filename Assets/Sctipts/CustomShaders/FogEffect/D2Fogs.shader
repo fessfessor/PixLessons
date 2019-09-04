@@ -27,6 +27,7 @@ Shader "Scripts/FogEffect/D2Fogs" {
 
             #include "UnityCG.cginc"
 
+
             #pragma vertex vert
             #pragma fragment frag
 

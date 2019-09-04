@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
 
 
 
+
     public Sound[] sounds;
 
     private void Awake() {

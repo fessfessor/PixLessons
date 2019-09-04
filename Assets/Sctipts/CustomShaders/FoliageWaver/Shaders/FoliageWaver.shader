@@ -1,4 +1,7 @@
-﻿Shader "Custom/FoliageShader"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
+
+Shader "Sprites/Waver"
 {
 	Properties
 	{
@@ -6,7 +9,9 @@
 		_Color("Tint", Color) = (1, 1, 1, 1)
 
 		_Cutoff("Alpha Cutoff", Range(0,1)) = 0.5
+		_ZOffset("Z Offset", Range(0, 0.1)) = 0.05
 	}
+
 		SubShader
 		{
 			Tags
@@ -24,8 +29,6 @@
 
 			#pragma surface surf Lambert vertex:vert nofog alphatest:_Cutoff
 			#pragma target 3.0
-
-			#include "ComposerEffects.cginc"
 
 			sampler2D _MainTex;
 
@@ -48,6 +51,8 @@
 			float3 _FoliageRotation;
 			float3 _FoliageTransformRotation;
 
+			float _ZOffset;
+
 			float4 _FastSin(float4 val)
 			{
 				val = val * 6.408849 - 3.1415927;
@@ -61,7 +66,6 @@
 				return val + r1 * sin7.y + r2 * sin7.z + r3 * sin7.w;
 			}
 
-
 			float4x4 _RotationMatrix(float angle_)
 			{
 				float sinX = sin(angle_);
@@ -73,7 +77,6 @@
 													 0,    0,     0, 1);
 				return rotation_matrix;
 			}
-
 
 			float2 _Rotate(float2 point_, float angle_)
 			{
@@ -127,7 +130,7 @@
 
 				float3 wave_move = float3 (0, 0, 0);
 				wave_move.x = dot(s, wave_x_move);
-				vertex_.x += mul((float3x3)_World2Object, wave_move).x *  shake_amount;
+				vertex_.x += mul((float3x3)unity_WorldToObject, wave_move).x *  shake_amount;
 				vertex_ = _RotateAbout(vertex_, float2(rotation_pivot.x - world_pos_.x, rotation_pivot.y - world_pos_.y), rotation_amount * texcoord_.y);
 
 				//Rotate back
@@ -148,21 +151,22 @@
 
 				UNITY_INITIALIZE_OUTPUT(Input, o);
 				o.color = v.color * _Color;
-				o.worldPos = mul(_Object2World, v.vertex);
+				o.worldPos = mul(unity_ObjectToWorld, v.vertex);
 
-				//Plant waving          
-				v.vertex.xy = wave(v.vertex.xy, v.texcoord, o.worldPos);
-
+				//Plant waving
+				v.vertex.xy = wave( v.vertex.xy, v.texcoord, o.worldPos );
+				v.vertex.z = ( uint)( v.texcoord.x * 1000 ) % 2 == 0 ? -_ZOffset : _ZOffset;
 			}
 
-			void surf(Input i, inout SurfaceOutput o)
+			void surf( Input i, inout SurfaceOutput o )
 			{
-				fixed4 color = tex2D(_MainTex, i.uv_MainTex) * i.color;
+				fixed4 color = tex2D( _MainTex, i.uv_MainTex ) * i.color;
 
 				o.Albedo = color.rgb * color.a;
 				o.Alpha = color.a;
 			}
 			ENDCG
 		}
-    FallBack "Diffuse"
+
+			FallBack "Diffuse"
 }
