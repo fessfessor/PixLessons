@@ -5,7 +5,7 @@ Shader "Sprites/Waver"
 {
 	Properties
 	{
-		_MainTex("Texture", 2D) = "black" { }
+		_MainTex("Texture", 2D) = "white" { }
 		_Color("Tint", Color) = (1, 1, 1, 1)
 
 		_Cutoff("Alpha Cutoff", Range(0,1)) = 0.5

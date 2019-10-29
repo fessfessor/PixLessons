@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
     private Invulnerability invulnerability;
     private bool jumpButtonEnabled;
 
-    [SerializeField]private Item item;
+    
 
 
 
