@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
+    #region variables
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float force = 1.0f;
     [SerializeField] private float shootRecharge = 3.0f;
@@ -66,7 +67,8 @@ public class Player : MonoBehaviour
 
     public Health Health { get { return health; } }
 
-    
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {

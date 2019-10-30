@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimplePatrol : MonoBehaviour
+public class SimplePatrol : MonoBehaviour, IListener
 {
+    #region variables
     [SerializeField] private GameObject leftBorder;
     [SerializeField] private GameObject rigthBorder;
     [SerializeField] private Rigidbody2D rb;
@@ -26,9 +27,13 @@ public class SimplePatrol : MonoBehaviour
 
 
     public bool isRightDirection;
+    #endregion
 
+
+    #region startUpdate
     private void Start() {
-
+        EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, this);
+        currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
         isDamaged = false;
         isRised = false;
         
@@ -36,7 +41,19 @@ public class SimplePatrol : MonoBehaviour
     }
 
     private void Update() {
+        //Проверяем изменение здоровья
+        if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
+            isDamaged = true;
+            //Уведомляем слушателей, что у скелета изменилось здоровье
+            EventManager.Instance.PostNotification(EVENT_TYPE.HEALTH_CHANGE, this, GameManager.Instance.healthContainer[gameObject]);
+        }
+        else 
+            isDamaged = false;
+            
+        
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+
+        
 
         //Debug.Log(currentHealth);
         if (currentHealth <= 0 && !isDeath)
@@ -52,7 +69,8 @@ public class SimplePatrol : MonoBehaviour
 
     }
 
-    
+    #endregion
+
 
     public void Rise() {
         if (!isRised) {
@@ -102,5 +120,9 @@ public class SimplePatrol : MonoBehaviour
             rb.velocity = Vector3.zero; // Тормозим объект если убили
     }
 
-
+    public void OnEvent(EVENT_TYPE eventType, Component sender, Object param = null) {
+        if(eventType == EVENT_TYPE.HEALTH_CHANGE) {
+            Debug.Log($"Изменилось здоровье у {sender.name}. Стало {(Health)param}");
+        }
+    }
 }
