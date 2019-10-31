@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimplePatrol : MonoBehaviour, IListener
+public class SimplePatrol : MonoBehaviour
 {
     #region variables
     [SerializeField] private GameObject leftBorder;
@@ -32,13 +33,14 @@ public class SimplePatrol : MonoBehaviour, IListener
 
     #region startUpdate
     private void Start() {
-        EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, this);
+        EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, OnEvent);
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
         isDamaged = false;
         isRised = false;
         
 
     }
+
 
     private void Update() {
         //Проверяем изменение здоровья
@@ -120,9 +122,27 @@ public class SimplePatrol : MonoBehaviour, IListener
             rb.velocity = Vector3.zero; // Тормозим объект если убили
     }
 
-    public void OnEvent(EVENT_TYPE eventType, Component sender, Object param = null) {
-        if(eventType == EVENT_TYPE.HEALTH_CHANGE) {
-            Debug.Log($"Изменилось здоровье у {sender.name}. Стало {(Health)param}");
+   
+    private void OnEvent(EVENT_TYPE eventType, Component sender, object param = null) {
+        switch (eventType) {
+            case EVENT_TYPE.GAME_INIT:
+                break;
+            case EVENT_TYPE.GAME_END:
+                break;
+            case EVENT_TYPE.HEALTH_CHANGE:
+                OnHealthChange(sender, (Health)param);
+                break;
+            case EVENT_TYPE.PLAYER_DEATH:
+                break;
+            default:
+                break;
         }
+ 
     }
+
+    private void OnHealthChange(Component sender, Health health) {
+        Debug.Log($"Изменилось здоровье у {sender.name}. Стало {health.HealthCount}");       
+    }
+
+    
 }

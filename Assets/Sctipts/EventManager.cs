@@ -10,12 +10,17 @@ public class EventManager : MonoBehaviour
     }
     #endregion
 
-    #region переменные
+    #region variables
     private static EventManager instance = null;
-    private Dictionary<EVENT_TYPE, List<IListener>> Listeners = new Dictionary<EVENT_TYPE, List<IListener>>();
+
+    // Делегат, обрабатывающий события
+    public delegate void OnEvent(EVENT_TYPE eventType, Component sender, object param = null);
+    // Главная коллекция с событиями
+    private Dictionary<EVENT_TYPE, List<OnEvent>> Listeners = new Dictionary<EVENT_TYPE, List<OnEvent>>();
 
     #endregion
 
+    #region awake
     private void Awake() {
         if (instance == null) {
             instance = this;
@@ -25,11 +30,12 @@ public class EventManager : MonoBehaviour
             DestroyImmediate(this);
     }
 
-    
+    #endregion
 
-    public void AddListener(EVENT_TYPE eventType, IListener Listener) {
+
+    public void AddListener(EVENT_TYPE eventType, OnEvent Listener) {
         //Список получателей
-        List<IListener> ListenList = null;
+        List<OnEvent> ListenList = null;
 
         //Проверка типа события
         if(Listeners.TryGetValue(eventType, out ListenList)) {
@@ -38,21 +44,21 @@ public class EventManager : MonoBehaviour
         }
 
         //Если списка нет
-        ListenList = new List<IListener>();
+        ListenList = new List<OnEvent>();
         ListenList.Add(Listener);
         Listeners.Add(eventType, ListenList);
     }
 
     //Посылаем события получателям
     public void PostNotification(EVENT_TYPE eventType, Component sender, Object param = null) {
-        List<IListener> ListenList = null;
+        List<OnEvent> ListenList = null;
         if (!Listeners.TryGetValue(eventType, out ListenList))
             return;
 
         // Получатели есть 
         for (int i = 0; i < ListenList.Count; i++) {
             if (!ListenList[i].Equals(null)) {
-                ListenList[i].OnEvent(eventType, sender, param);
+                ListenList[i](eventType, sender,param);
             }
         }
         
@@ -65,7 +71,7 @@ public class EventManager : MonoBehaviour
 
     //удаляем избыточные записи из словаря
     public void RemoveRedundancies() {
-        Dictionary<EVENT_TYPE, List<IListener>> tmpListeners = new Dictionary<EVENT_TYPE, List<IListener>>();
+        Dictionary<EVENT_TYPE, List<OnEvent>> tmpListeners = new Dictionary<EVENT_TYPE, List<OnEvent>>();
 
         foreach (var item in Listeners) {
             //Удаляем пустые ссылки
@@ -88,4 +94,14 @@ public class EventManager : MonoBehaviour
     }
 
 
+}
+
+
+// тип событий
+public enum EVENT_TYPE {
+    GAME_INIT,
+    GAME_END,
+    HEALTH_CHANGE,
+    PLAYER_DEATH,
+    KILL_ENEMY
 }

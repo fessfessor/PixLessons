@@ -8,9 +8,3 @@ public interface IListener
 }
 
 
-public enum EVENT_TYPE {
-    GAME_INIT,
-    GAME_END,
-    HEALTH_CHANGE,
-    PLAYER_DEATH
-}
