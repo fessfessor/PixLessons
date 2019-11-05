@@ -51,6 +51,13 @@ public class MagicBall : MonoBehaviour , IPooledObject
             AudioManager.Instance.Play("FireballExplode");
             pooler.ReturnToPool("MagicBall", gameObject, 0.4f);
 
+            //"Кровавая механика", размещаем информацию о событии попадания или промаха
+            if (col.gameObject.tag == "Enemy")
+                EventManager.Instance.PostNotification(EVENT_TYPE.BLD_BALL_HIT, this);
+            else
+                EventManager.Instance.PostNotification(EVENT_TYPE.BLD_BALL_MISS, this);
+
+
         }
     }
 

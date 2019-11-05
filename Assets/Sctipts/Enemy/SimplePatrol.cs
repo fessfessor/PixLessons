@@ -34,7 +34,9 @@ public class SimplePatrol : MonoBehaviour
     #region startUpdate
     private void Start() {
         EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, OnEvent);
+        GameManager.Instance.enemyDangerContainer.Add(gameObject, ENEMY_DANGER.low);
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+
         isDamaged = false;
         isRised = false;
         

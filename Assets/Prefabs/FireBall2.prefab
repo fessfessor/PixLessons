@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6888292196518972722}
   m_Layer: 0
   m_Name: FireBall2
-  m_TagString: Untagged
+  m_TagString: Fireball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,6 +61,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -156,7 +157,6 @@ MonoBehaviour:
   rb: {fileID: 3336795804136084723}
   force: 0
   lifeTime: 2
-  animator: {fileID: 6888292196518972720}
   deathAnimationDuration: 0.35
 --- !u!114 &6888292196518972722
 MonoBehaviour:
@@ -172,3 +172,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 20
   parent: {fileID: 6091518693444855422, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+  splashDuration: 0
+  side: 0

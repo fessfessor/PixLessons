@@ -30,28 +30,28 @@ public class DamageByWeapon : MonoBehaviour
         
         // Чтобы мы не дамажили своим же оружием себя
         if (parent != null && parent.transform.name != col.transform.name) {           
-                if (GameManager.Instance.healthContainer.ContainsKey(col.gameObject)) {
-                    var health = GameManager.Instance.healthContainer[col.gameObject];               
+            if (GameManager.Instance.healthContainer.ContainsKey(col.gameObject)) {
+                var health = GameManager.Instance.healthContainer[col.gameObject];               
                 
-                    if (health != null && health.HealthCount > 0) {                        
-                        health.takeHit(damage);
+                if (health != null && health.HealthCount > 0) {                        
+                    health.takeHit(damage);
                         
-                    //Условия для меча, звук, брызги крови и восстановление хп при ударе
-                        if(transform.tag == "HeroSword") {
-                            playerScript.HealthChange(0, false);
-                            AudioManager.Instance.Play("SwordAttack");
-                            //todo возможно стоит вынести данный функционал в отдельный компонент. Кровавые брызги при ударе. Проверка для того чтобы на анимации смерти не было крови 
-                            if (health.HealthCount > 0)
-                                StartCoroutine(Blood(col.transform.position));
-                        }
-                        
-                        
-                        
+                //Условия для меча, звук, брызги крови и восстановление хп при ударе
+                    if(transform.tag == "HeroSword") {
+                          
 
+                        AudioManager.Instance.Play("SwordAttack");
+                        //todo возможно стоит вынести данный функционал в отдельный компонент. Кровавые брызги при ударе. Проверка для того чтобы на анимации смерти не было крови 
+                        if (health.HealthCount > 0)
+                            StartCoroutine(Blood(col.transform.position));
+
+                        //"Кровавая механика"
+                        if (col.transform.tag == "Enemy")
+                            EventManager.Instance.PostNotification(EVENT_TYPE.BLD_MELEE_HIT, this);                           
                     }
+                        
                 }
-            
-                
+            }     
         }
     }
 

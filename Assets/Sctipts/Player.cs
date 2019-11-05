@@ -8,31 +8,42 @@ using UnityEngine.EventSystems;
 public class Player : MonoBehaviour
 {
     #region variables
+    [Header("Физические параметры")]
     [SerializeField] private float speed = 1.0f;
     [SerializeField] private float force = 1.0f;
-    [SerializeField] private float shootRecharge = 3.0f;
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private float shootRecharge = 3.0f;   
     [SerializeField] private float minHeight = -50.0f;
+    [SerializeField] private float swordAttackTime;
+    [SerializeField] private float shootForce;
+
+    [Header("Компоненты")]
+    [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GroundDetection groundD;   
     [SerializeField] private SpriteRenderer spriteR;   
     [SerializeField] private Animator animator;
     [SerializeField] private CameraShake cameraShaker;
-    [SerializeField] private bool ShakeCameraOnDamage;
-    [SerializeField] private bool isDamaged;
-    public bool IsDamaged { get => isDamaged; }
-    [SerializeField] private float swordAttackTime;
-    [SerializeField] private float shootForce;
-    [SerializeField] private MagicBall magicBall;   
+    [SerializeField] private MagicBall magicBall;
     [SerializeField] private Health health;
     [SerializeField] private GameObject SwordRight;
     [SerializeField] private GameObject SwordLeft;
-    [SerializeField] bool useComputerMode;
-    [SerializeField] private Joystick joystick;
-    [SerializeField] private int healthByMeleeAttack; 
-    [SerializeField] private int healthByShoot;
-    [SerializeField] private int healthReturnByHit; 
     [SerializeField] private GameObject fireButton;
     [SerializeField] private GameObject dieMenu;
+    [SerializeField] private Joystick joystick;
+
+    [Header("События при дамаге")]
+    [SerializeField] private bool ShakeCameraOnDamage;
+    [SerializeField] private bool isDamaged;
+    public bool IsDamaged { get => isDamaged; }
+
+    [Header("Компьютерный мод")]
+    [SerializeField] bool useComputerMode;
+
+    [Header("Механика кровавого меча")]
+    [SerializeField] private int healthLossByHit; 
+    [SerializeField] private int healthLossByShoot;
+    [SerializeField] private int healthReturnByHit; 
+    [SerializeField] private int healthReturnByShoot; 
+    
     
     
     private  bool isRightDirection;
@@ -54,11 +65,11 @@ public class Player : MonoBehaviour
     private Collider2D SwordLeftCollider;
     
     private Image fireButtonImage;
-    private float rechargeTimer;
-    private bool isBloodLost = false;
-    public bool IsBloodLost { get => isBloodLost; set => isBloodLost = value;}
+    private float rechargeTimer;    
     private Invulnerability invulnerability;
     private bool jumpButtonEnabled;
+
+    private bool bloodLoss = false;
 
     
 
@@ -73,6 +84,12 @@ public class Player : MonoBehaviour
     void Start()
     {
         //Debug.Log($"Speed : {speed} Forse : {force} ShootRechardge: {shootRecharge}");
+
+        //Подписываемся на события "кровавой механики"
+        EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_HIT, OnEvent);
+        EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_MISS, OnEvent);
+        EventManager.Instance.AddListener(EVENT_TYPE.BLD_MELEE_HIT, OnEvent);
+        EventManager.Instance.AddListener(EVENT_TYPE.BLD_MELEE_MISS, OnEvent);
 
         pooler = ObjectPooler.Instance;
         audioManager = AudioManager.Instance;
@@ -177,7 +194,7 @@ public class Player : MonoBehaviour
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
             isDamaged = true; 
             currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-            if(currentHealth > 0 && !isBloodLost) {
+            if(currentHealth > 0 && !bloodLoss) {
                 StartCoroutine(invulnerability.GetInvulnerability());
                 AudioManager.Instance.Play("Pain");
             }
@@ -194,7 +211,7 @@ public class Player : MonoBehaviour
         }
 
         //При уменьшении здоровья трясем камеру
-        if (isDamaged && ShakeCameraOnDamage && !isBloodLost) 
+        if (isDamaged && ShakeCameraOnDamage && !bloodLoss) 
             cameraShaker.Shake();
         
         // Звуки шагов
@@ -237,7 +254,7 @@ public class Player : MonoBehaviour
         AudioManager.Instance.Play("FireballCast");
         AudioManager.Instance.Play("BloodLoss");
         //За выстрел платим здоровьем
-        HealthChange(healthByShoot, true);
+        //HealthChange(healthByShoot, true);
         
         // Время анимации
         yield return new WaitForSeconds(0.8f);        
@@ -261,14 +278,14 @@ public class Player : MonoBehaviour
         }
     }   
     IEnumerator SwordAttack() {
-        HealthChange(healthByMeleeAttack, true);
+      
         isAttacking = true;
         //Если на земле тормозимся
         if (groundD.isGrounded)
             rb.velocity = new Vector2(0, 0);
 
-        yield return new WaitForSeconds(swordAttackTime);
-
+        yield return new WaitForSeconds(swordAttackTime);        
+        BloodLoss(healthLossByHit);
         isAttacking = false;
         canMove = true;
         canAttack = true;
@@ -408,40 +425,57 @@ public class Player : MonoBehaviour
     //controller.Jump.onClick.AddListener(Jump);
     //controller.Attack.onClick.AddListener(Attack);
     //controller.Fire.onClick.AddListener(Shoot);
-    // }
-
+    // 
 
 
 
     #region bloodMechanics
     // Механика "кровавых атак". 
+    
 
-        //Если промахиваемся мечом - теряем хп. Шар впринципе запускается за хп. Попадаем мечом - восстанавливаем хп
-    public void HealthChange(int healthCountMiss,bool lost) {       
-        int currentHealth = health.HealthCount;
-
-        isBloodLost = true;
-        health.HealthCount -= healthCountMiss;        
+    private void BloodLoss(int healthCount) {
+        health.HealthCount -= healthCount;
+        StartCoroutine(bloodDelay());
         
-        StartCoroutine(SelfDamage());
+    }
 
-        // Если попадаем мечом по врагу, то восстанавливаем здоровье
-        if (!lost) {
-            health.HealthCount += healthCountMiss + healthReturnByHit;
+    private void BloodVampire(int healthCount) {
+        health.HealthCount += healthCount;
+    }
+   
+    IEnumerator bloodDelay() {
+        bloodLoss = true;
+        for (int i = 0; i < 2; i++) {
+            yield return null;
         }
-
+        bloodLoss = false;
     }
-
-    IEnumerator SelfDamage() {
-        isDamaged = false;
-        yield return new WaitForSeconds(0.2f);
-        isBloodLost = false;
-        isDamaged = true;
-    }
-
-
 
     #endregion
+
+    #region events
+    void OnEvent(EVENT_TYPE eventType, Component sender, object param = null) {
+        switch (eventType) {            
+            case EVENT_TYPE.BLD_BALL_HIT:
+                BloodVampire(healthReturnByShoot);
+                break;
+            case EVENT_TYPE.BLD_BALL_MISS:
+                BloodLoss(healthLossByShoot);
+                break;
+            case EVENT_TYPE.BLD_MELEE_HIT:
+                BloodVampire(healthReturnByHit);
+                break;
+            case EVENT_TYPE.BLD_MELEE_MISS:
+                BloodLoss(healthLossByHit);
+                break;
+            default:
+                break;
+        }
+    }
+
+    #endregion
+
+
 
 
 

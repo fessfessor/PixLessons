@@ -15,6 +15,7 @@ TagManager:
   - Ground
   - NonShootable
   - Potion
+  - Fireball
   layers:
   - Default
   - TransparentFX

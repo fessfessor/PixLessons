@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour {
     public Dictionary<GameObject, BuffReciever> buffRecieverContainer;
     public Dictionary<GameObject, IPooledObject> pooledObjectContainer;
     public Dictionary<GameObject, ItemComponent> itemsContainer;
+    public Dictionary<GameObject, ENEMY_DANGER> enemyDangerContainer; 
     public UIController uiConroller;
     public ItemBase itemBase;
     [HideInInspector]public PlayerInventory inventory;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour {
         buffRecieverContainer = new Dictionary<GameObject, BuffReciever>();
         pooledObjectContainer = new Dictionary<GameObject, IPooledObject>();
         itemsContainer = new Dictionary<GameObject, ItemComponent>();
+        enemyDangerContainer = new Dictionary<GameObject, ENEMY_DANGER>();
         player = FindObjectOfType<Player>().gameObject;
 
 
@@ -116,4 +118,6 @@ public class GameManager : MonoBehaviour {
 
 
 
-}   
+}
+
+public enum ENEMY_DANGER { veryLow, low, medium, semiHight, hight, veryHight, boss = 10 }
