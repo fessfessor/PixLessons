@@ -35,6 +35,12 @@ public class DamageByWeapon : MonoBehaviour
                 
                 if (health != null && health.HealthCount > 0) {                        
                     health.takeHit(damage);
+
+                    // Если мы убили врага, то отправляем событие об этом
+                    if (health.HealthCount <= 0 && col.gameObject.transform.tag == "Enemy")
+                        EventManager.Instance.PostNotification(EVENT_TYPE.PLAYER_KILL_ENEMY, this, col);
+
+
                         
                 //Условия для меча, звук, брызги крови и восстановление хп при ударе
                     if(transform.tag == "HeroSword") {

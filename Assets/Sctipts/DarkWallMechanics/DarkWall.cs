@@ -22,6 +22,7 @@ public class DarkWall : MonoBehaviour {
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        EventManager.Instance.AddListener(EVENT_TYPE.PLAYER_KILL_ENEMY, OnEvent);
     }
 
     
@@ -80,5 +81,21 @@ public class DarkWall : MonoBehaviour {
         yield return new WaitForSeconds(stunTime);
         isStunning = false;
 
+    }
+
+    void DecreasedSpeed(object param) {
+        // TODO Доделать событие
+        //var
+        //int dangerClass = GameManager.Instance.enemyDangerContainer[(gameObject)param]
+    }
+
+    void OnEvent(EVENT_TYPE eventType, Component sender, object param = null) {
+        switch (eventType) {
+            case EVENT_TYPE.PLAYER_KILL_ENEMY:
+                DecreasedSpeed(param);
+                break;           
+            default:
+                break;
+        }
     }
 }

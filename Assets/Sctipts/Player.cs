@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Com.LuisPedroFonseca.ProCamera2D;
 
 public class Player : MonoBehaviour
 {
@@ -90,6 +91,7 @@ public class Player : MonoBehaviour
         EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_MISS, OnEvent);
         EventManager.Instance.AddListener(EVENT_TYPE.BLD_MELEE_HIT, OnEvent);
         EventManager.Instance.AddListener(EVENT_TYPE.BLD_MELEE_MISS, OnEvent);
+        
 
         pooler = ObjectPooler.Instance;
         audioManager = AudioManager.Instance;
@@ -211,8 +213,11 @@ public class Player : MonoBehaviour
         }
 
         //При уменьшении здоровья трясем камеру
-        if (isDamaged && ShakeCameraOnDamage && !bloodLoss) 
-            cameraShaker.Shake();
+        if (isDamaged && ShakeCameraOnDamage && !bloodLoss) {
+            ProCamera2DShake.Instance.ShakeUsingPreset("PlayerPain");
+            //cameraShaker.Shake();
+        }
+            
         
         // Звуки шагов
         if (isMoving && !AudioManager.Instance.isPlaying("PlayerFootsteps") && groundD.isGrounded) {
@@ -467,7 +472,7 @@ public class Player : MonoBehaviour
                 break;
             case EVENT_TYPE.BLD_MELEE_MISS:
                 BloodLoss(healthLossByHit);
-                break;
+                break;          
             default:
                 break;
         }
