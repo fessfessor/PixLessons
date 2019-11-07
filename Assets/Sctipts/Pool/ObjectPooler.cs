@@ -141,6 +141,24 @@ public class ObjectPooler : MonoBehaviour
         return objectToSpawn;
     }
 
+    //Получаем список тегов пулов
+    public HashSet<string> getSetOfNamesObjects(string regex = "") {
+        HashSet<string> names = new HashSet<string>();
+        if(regex == "") {
+            foreach (var pool in pools) {
+                names.Add(pool.tag);
+            }
+        }
+        else {
+            foreach (var pool in pools) {
+                if(pool.tag.Contains(regex))
+                    names.Add(pool.tag);
+            }
+        }
+        
+        return names;
+    }
+
 
 
 

@@ -13,6 +13,7 @@ public class SimplePatrol : MonoBehaviour
     [SerializeField] private Collider2D coll;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private ENEMY_DANGER dangerClass;
 
    
 
@@ -34,7 +35,7 @@ public class SimplePatrol : MonoBehaviour
     #region startUpdate
     private void Start() {
         EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, OnEvent);
-        GameManager.Instance.enemyDangerContainer.Add(gameObject, ENEMY_DANGER.low);
+        GameManager.Instance.enemyDangerContainer.Add(gameObject, dangerClass);
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
 
         isDamaged = false;
