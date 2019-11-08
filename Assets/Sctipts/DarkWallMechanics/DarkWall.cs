@@ -84,9 +84,11 @@ public class DarkWall : MonoBehaviour {
     }
 
     void DecreasedSpeed(object param) {
-        // TODO Доделать событие
-        //var
-        //int dangerClass = GameManager.Instance.enemyDangerContainer[(gameObject)param]
+
+        var enemy = ((Collider2D)param).gameObject;
+        int dangerClass = (int)GameManager.Instance.enemyDangerContainer[enemy];       
+        force += -dangerClass / 10f;
+        
     }
 
     void OnEvent(EVENT_TYPE eventType, Component sender, object param = null) {

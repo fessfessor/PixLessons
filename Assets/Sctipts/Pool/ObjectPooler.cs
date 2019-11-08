@@ -7,9 +7,9 @@ public class ObjectPooler : MonoBehaviour
 
     #region Singleton
     public static ObjectPooler Instance;
-    private void Awake() {
-        Instance = this;
-    }
+   // private void Awake() {
+        
+   // }
     #endregion
 
     [System.Serializable]
@@ -24,8 +24,9 @@ public class ObjectPooler : MonoBehaviour
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        Instance = this;
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
         //Наполняем пул
@@ -102,6 +103,7 @@ public class ObjectPooler : MonoBehaviour
             Debug.LogWarning("Pool with tag " + tag + " doesn`t exist!");
             return null;
         }
+        int a = poolDictionary[tag].Count;
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();
         //Debug.Log("Spawn - " + GameManager.Instance.pooledObjectContainer.ContainsKey(objectToSpawn) + objectToSpawn.transform.name);
 
@@ -139,6 +141,24 @@ public class ObjectPooler : MonoBehaviour
         }
 
         return objectToSpawn;
+    }
+
+    //Получаем список тегов пулов
+    public HashSet<string> getSetOfNamesObjects(string regex = "") {
+        HashSet<string> names = new HashSet<string>();
+        if(regex == "") {
+            foreach (var pool in pools) {
+                names.Add(pool.tag);
+            }
+        }
+        else {
+            foreach (var pool in pools) {
+                if(pool.tag.Contains(regex))
+                    names.Add(pool.tag);
+            }
+        }
+        
+        return names;
     }
 
 

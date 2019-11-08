@@ -40,9 +40,9 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Start() {
-        foreach (KeyValuePair<GameObject, IPooledObject> el in pooledObjectContainer) {
-            Debug.Log("Key = " + el.Key.transform.name);
-        }
+        //foreach (KeyValuePair<GameObject, IPooledObject> el in pooledObjectContainer) {
+       //     Debug.Log("Key = " + el.Key.transform.name);
+       // }
     }
 
     // Кнопка паузы
