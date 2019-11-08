@@ -5,11 +5,10 @@ using UnityEngine;
 public class SpawnGround : MonoBehaviour, IPooledObject
 {
     public void OnReturnToPool() {
-        throw new System.NotImplementedException();
+        
     }
 
     public void OnSpawnFromPool() {
-        throw new System.NotImplementedException();
     }
 
     // Start is called before the first frame update
