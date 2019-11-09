@@ -1,37 +1,46 @@
 fileFormatVersion: 2
-guid: bb1d2aa1d64c89a4cbe1324d7ff5851b
+guid: f2a1033d317dd7945b52c4425cecde73
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8020792422996973119
-    second: tileset-sliced_0
+      213: -3878557786174838139
+    second: ground_0
   - first:
-      213: 7622575126782243504
-    second: tileset-sliced_1
+      213: -4419227343285247731
+    second: ground_1
   - first:
-      213: -5056025633293989528
-    second: tileset-sliced_2
+      213: -1977380741081267030
+    second: ground_2
   - first:
-      213: 5333720824279054982
-    second: tileset-sliced_3
+      213: 2270332835960527861
+    second: ground_3
   - first:
-      213: -5232436616217831087
-    second: tileset-sliced_4
+      213: 5602472716659199906
+    second: ground_4
   - first:
-      213: 8187979096719078458
-    second: tileset-sliced_5
+      213: -5561606140109812095
+    second: ground_5
   - first:
-      213: -2235941659904884338
-    second: tileset-sliced_6
+      213: 1269115465126947162
+    second: ground_6
   - first:
-      213: -2168684223711406176
-    second: tileset-sliced_7
+      213: 6922181128366143233
+    second: ground_7
   - first:
-      213: -1085757764421800911
-    second: tileset-sliced_8
+      213: 6955847195254428025
+    second: ground_8
   - first:
-      213: 4973835992339445236
-    second: tileset-sliced_9
+      213: 3215127950514980561
+    second: ground_9
+  - first:
+      213: 1481100579729305086
+    second: ground_10
+  - first:
+      213: 1363345801621341485
+    second: ground_11
+  - first:
+      213: 3809333609213854930
+    second: ground_12
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -90,7 +99,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -102,7 +111,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -114,7 +123,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -128,97 +137,34 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tileset-sliced_0
+      name: ground_0
       rect:
         serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 41
+        x: 32
+        y: 853
+        width: 961
+        height: 137
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 9}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dff3987e8f5cb924196ccea638ef7517
-      internalID: 8020792422996973119
+      spriteID: 71b9f58cd2f5d5a42896fe506c90c6a5
+      internalID: -3878557786174838139
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset-sliced_1
+      name: ground_1
       rect:
         serializedVersion: 2
-        x: 224
-        y: 16
-        width: 32
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 11be617d86aaaa5478b1eddff168d9d7
-      internalID: 7622575126782243504
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset-sliced_2
-      rect:
-        serializedVersion: 2
-        x: 304
-        y: 96
-        width: 96
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd231a52046b57d4e9badc8abd69cd2c
-      internalID: -5056025633293989528
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset-sliced_3
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 48
-        width: 32
-        height: 48
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 613d2cf3ee86699418a6b995832cb7c4
-      internalID: 5333720824279054982
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset-sliced_4
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 48
-        width: 32
-        height: 48
+        x: 32
+        y: 689
+        width: 192
+        height: 137
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,113 +172,239 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5c40014af9c11345a508cdc8b773ba9
-      internalID: -5232436616217831087
+      spriteID: d7ae47b66e41cf3409e10d19032b8008
+      internalID: -4419227343285247731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset-sliced_5
+      name: ground_2
       rect:
         serializedVersion: 2
-        x: 260
-        y: 64
-        width: 24
-        height: 32
+        x: 259
+        y: 689
+        width: 192
+        height: 136
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8cbbc44adb3f1446bd941bce8f269aa
-      internalID: 8187979096719078458
+      spriteID: 7948a1aff0e3bf94f973491f21deec8b
+      internalID: -1977380741081267030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset-sliced_6
+      name: ground_3
       rect:
         serializedVersion: 2
-        x: 278
-        y: 16
+        x: 472
+        y: 689
         width: 148
         height: 73
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 035f4cca44883f947b478734d2ddfc36
-      internalID: -2235941659904884338
+      spriteID: 4ef55c0d32416d644877a4570584fbf8
+      internalID: 2270332835960527861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset-sliced_7
+      name: ground_4
       rect:
         serializedVersion: 2
-        x: 128
-        y: 64
-        width: 32
-        height: 41
+        x: 652
+        y: 689
+        width: 148
+        height: 131
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 252d9a0ebbee28245a1aac15817a682b
-      internalID: -2168684223711406176
+      spriteID: bc4913a02b0d9014d997d23350619c3b
+      internalID: 5602472716659199906
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset-sliced_8
+      name: ground_5
       rect:
         serializedVersion: 2
-        x: 224
-        y: 64
-        width: 32
-        height: 32
+        x: 32
+        y: 537
+        width: 62
+        height: 127
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d55224de97265347ab91bb11226e9f3
-      internalID: -1085757764421800911
+      spriteID: 100c01f4db7b0654c8c0215907cbdbd7
+      internalID: -5561606140109812095
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset-sliced_9
+      name: ground_6
       rect:
         serializedVersion: 2
-        x: 224
-        y: 96
+        x: 110
+        y: 537
         width: 32
-        height: 16
+        height: 54
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 87f0bde28fbcd3b4a9e5caef98acfda6
-      internalID: 4973835992339445236
+      spriteID: 2fb5ad947ae606547acf4ce0bb450a1a
+      internalID: 1269115465126947162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_7
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 537
+        width: 32
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 756ff1806d4d2474e89fe274df7f74c9
+      internalID: 6922181128366143233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_8
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 537
+        width: 32
+        height: 90
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f38dc235e7763f948ad00acb4e0cfd37
+      internalID: 6955847195254428025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_9
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 537
+        width: 32
+        height: 118
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10e647e62f33cc2498f773c80a0bc390
+      internalID: 3215127950514980561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_10
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 521
+        width: 32
+        height: 153
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3c1333a25b79374a8fbbb9c295b0f7e
+      internalID: 1481100579729305086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_11
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 552
+        width: 561
+        height: 112
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8299572290e0e244a9764aa3916afd28
+      internalID: 1363345801621341485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ground_12
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 359
+        width: 367
+        height: 137
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a4299f929427ee4a9d852cb2f19dddb
+      internalID: 3809333609213854930
       vertices: []
       indices: 
       edges: []
@@ -340,7 +412,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 878b4812a23798f498770db4334840f4
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

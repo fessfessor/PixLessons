@@ -69,7 +69,7 @@ public class SpawnManager : MonoBehaviour
 
 
 
-        SpawnGround(GROUND_TYPE.empty);
+        //SpawnGround(GROUND_TYPE.empty);
         StartCoroutine(checkDistance());
 
         //Debug.Log($"Grounds - {string.Join(",",groundNames)}  Count - {groundNames.Count}");
@@ -82,7 +82,7 @@ public class SpawnManager : MonoBehaviour
     {
         distance = Mathf.Abs(player.transform.position.x - currentEdge.x);
 
-        Debug.Log($"Distance - {distance}");
+        //Debug.Log($"Distance - {distance}");
 
         
     }
@@ -90,11 +90,15 @@ public class SpawnManager : MonoBehaviour
     IEnumerator checkDistance() {
         while (true) {
             yield return new WaitForSeconds(0.5f);
-            if (distance < 10) {
+            if (distance < 20) {
                 SpawnGround(GROUND_TYPE.empty);
             }
         }
         
+    }
+
+    private void DespawnGround() {
+
     }
 
     private void SpawnGround(GROUND_TYPE type, int count = 1) {
@@ -115,6 +119,7 @@ public class SpawnManager : MonoBehaviour
             block = pooler.SpawnFromPool(blockName, new Vector3(0, 0, -20), Quaternion.identity);
 
             var blockCol = block.GetComponent<Collider2D>();
+            
             //Ставим блок впритык к предыдущему
             block.transform.position = new Vector3( currentEdge.x + blockCol.bounds.size.x / 2, 
                                                     currentEdge.y - blockCol.bounds.size.y / 2, 
@@ -122,10 +127,19 @@ public class SpawnManager : MonoBehaviour
 
             // Устанавливаем новую границу и новый конечный объект
             currentLastBlock = block;
-            currentEdge = blockCol.bounds.max;
+            currentEdge = new Vector3(  block.transform.position.x + blockCol.bounds.size.x / 2,
+                                        block.transform.position.y + blockCol.bounds.size.y / 2,
+                                        block.transform.position.z);
 
         }               
 
+    }
+
+    private void OnDrawGizmos() {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(currentEdge, 0.5f);
+        
+        
     }
 }
 

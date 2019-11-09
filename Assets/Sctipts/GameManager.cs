@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour {
     public ItemBase itemBase;
     [HideInInspector]public PlayerInventory inventory;
     [HideInInspector]public GameObject player;
+    [HideInInspector]public GameObject darkWall;
 
     private void Awake() {
         Instance = this;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour {
         itemsContainer = new Dictionary<GameObject, ItemComponent>();
         enemyDangerContainer = new Dictionary<GameObject, ENEMY_DANGER>();
         player = FindObjectOfType<Player>().gameObject;
+        darkWall = FindObjectOfType<DarkWall>().gameObject;
 
 
         
