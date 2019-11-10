@@ -53,7 +53,8 @@ public class SpawnManager : MonoBehaviour
 
         // Текущая граница последнего объекта земли
         currentLastBlock = firstBlock;
-        currentEdge = firstBlock.GetComponent<Collider2D>().bounds.max;
+        //currentEdge = firstBlock.GetComponent<Collider2D>().bounds.max;
+        currentEdge = firstBlock.transform.Find("edge").transform.position;
 
         //Получаем из пула список доступных префабов для постройки уровня. Ищем по тегу "ground_"
         groundNames = pooler.getSetOfNamesObjects("ground_");
@@ -117,7 +118,15 @@ public class SpawnManager : MonoBehaviour
         for (int i = 0; i < count; i++) {
             blockName = groundType[Random.Range(0, groundType.Count - 1)];
             block = pooler.SpawnFromPool(blockName, new Vector3(0, 0, -20), Quaternion.identity);
+            block.transform.position = currentEdge;
 
+            var blockEdge = block.transform.Find("edge").transform.position;
+
+
+            currentLastBlock = block;
+            currentEdge = blockEdge;
+
+            /*
             var blockCol = block.GetComponent<Collider2D>();
             
             //Ставим блок впритык к предыдущему
@@ -130,6 +139,10 @@ public class SpawnManager : MonoBehaviour
             currentEdge = new Vector3(  block.transform.position.x + blockCol.bounds.size.x / 2,
                                         block.transform.position.y + blockCol.bounds.size.y / 2,
                                         block.transform.position.z);
+
+            */
+
+
 
         }               
 
