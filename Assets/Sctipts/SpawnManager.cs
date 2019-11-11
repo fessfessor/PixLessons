@@ -120,8 +120,8 @@ public class SpawnManager : MonoBehaviour
             block = pooler.SpawnFromPool(blockName, new Vector3(0, 0, -20), Quaternion.identity);
             block.transform.position = currentEdge;
 
+            //Край блока
             var blockEdge = block.transform.Find("edge").transform.position;
-
 
             currentLastBlock = block;
             currentEdge = blockEdge;
@@ -141,7 +141,6 @@ public class SpawnManager : MonoBehaviour
                                         block.transform.position.z);
 
             */
-
 
 
         }               
