@@ -134,7 +134,8 @@ MonoBehaviour:
   coll: {fileID: 1763795314}
   animator: {fileID: 1132305191}
   sr: {fileID: 2353366830144256324}
-  speed: 2.02
+  dangerClass: 0
+  speed: 2
   isRightDirection: 0
 --- !u!114 &1763795321
 MonoBehaviour:
@@ -269,12 +270,12 @@ PrefabInstance:
     - target: {fileID: 1969574824735446544, guid: 8a5046eceb6a64a4b87b781e65836f49,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.03
+      value: -8.78
       objectReference: {fileID: 0}
     - target: {fileID: 1969574824735446544, guid: 8a5046eceb6a64a4b87b781e65836f49,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.45
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 1969574824735446544, guid: 8a5046eceb6a64a4b87b781e65836f49,
         type: 3}
@@ -303,6 +304,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1969574824735446545, guid: 8a5046eceb6a64a4b87b781e65836f49,
         type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 1969574824735446545, guid: 8a5046eceb6a64a4b87b781e65836f49,
+        type: 3}
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
@@ -325,6 +331,11 @@ PrefabInstance:
     - target: {fileID: 1969574824735446545, guid: 8a5046eceb6a64a4b87b781e65836f49,
         type: 3}
       propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969574824735446545, guid: 8a5046eceb6a64a4b87b781e65836f49,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1969574824735446546, guid: 8a5046eceb6a64a4b87b781e65836f49,
