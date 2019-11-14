@@ -19,22 +19,10 @@ public class SpawnGround : MonoBehaviour, IPooledObject
     }
 
     public void OnSpawnFromPool() {
-        //StartCoroutine(Despawn());
-        //Debug.Log($"NAME - {transform.name}");
+        
     }
 
-    /*
-    IEnumerator Despawn() {
-        while (true) {
-            yield return timer;         
-            if(Mathf.Abs(GameManager.Instance.player.transform.position.x - transform.position.x) > 50) {
-                pooler.ReturnToPool(transform.name.Replace("(Clone)", ""), gameObject);
-            }
-
-
-        }
-    }
-    */
+    
 
     private void OnTriggerStay2D(Collider2D col) {
         if(col.gameObject == GameManager.Instance.darkWall) {

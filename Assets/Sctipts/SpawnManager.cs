@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     #endregion
 
     /*
-     *  Должен быть отдельный пул для объектов уровня
+     *  
      * По мере движения игрока перед ним достраивается уровень
      *  Т.к. есть стена смерти, то можно за ней убирать объекты обратно в пул и использовать повторно, 
      * избежав таким образом создания объектов во время игрового процесса
@@ -37,7 +37,14 @@ public class SpawnManager : MonoBehaviour
     private GameObject currentLastBlock;
     private Vector3 currentEdge;
 
-    private List<string> groundType;
+    //Количество типов
+    private int countOfTypes;
+
+    //Небольшой лог в который будут записываться все заспавненные блоки
+    private List<GROUND_TYPE> spawnedGroundLog;
+
+    //коллекции с разными видами блоков
+   
 
     private float distance;
 
@@ -45,15 +52,18 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        groundType = new List<string>();
+        
+
         player = GameManager.Instance.player;
         groundNames = new HashSet<string>();
+        spawnedGroundLog = new List<GROUND_TYPE>();
         pooler = ObjectPooler.Instance;
         firstBlock = GameObject.Find("ground_first_block");
 
+        countOfTypes = Enum.GetNames(typeof(GROUND_TYPE)).Length;
+
         // Текущая граница последнего объекта земли
-        currentLastBlock = firstBlock;
-        //currentEdge = firstBlock.GetComponent<Collider2D>().bounds.max;
+        currentLastBlock = firstBlock;       
         currentEdge = firstBlock.transform.Find("edge").transform.position;
 
         //Получаем из пула список доступных префабов для постройки уровня. Ищем по тегу "ground_"
@@ -66,16 +76,11 @@ public class SpawnManager : MonoBehaviour
          * ground_boss_1 - кусок с ареной первого босса
          * 
          */
-        // Спавним первые 3 куска земли
+       
 
 
 
-        //SpawnGround(GROUND_TYPE.empty);
         StartCoroutine(checkDistance());
-
-        //Debug.Log($"Grounds - {string.Join(",",groundNames)}  Count - {groundNames.Count}");
-
-
     }
 
     
@@ -92,27 +97,28 @@ public class SpawnManager : MonoBehaviour
         while (true) {
             yield return new WaitForSeconds(0.5f);
             if (distance < 20) {
-                SpawnGround(GROUND_TYPE.empty);
+                SpawnLogic();               
             }
         }
         
     }
 
-    private void DespawnGround() {
+   
 
-    }
+
 
     private void SpawnGround(GROUND_TYPE type, int count = 1) {
         string blockName;
-        GameObject block;       
-        //Debug.Log($"Enum - {type.ToString()}");
+        GameObject block;
+        List<string> groundType = new List<string>();
 
-        // заполняем коллекцию в зависимости от типа, возможно это стоит сделать зараннее
-        foreach (var el in groundNames) {
-            if (el.Contains(type.ToString())) 
-                groundType.Add(el);
-                       
+        foreach (var item in groundNames) {
+            if (item.Contains(type.ToString()))
+                groundType.Add(item);
+
         }
+
+
         //По дефолту спавнится 1 блок, но можно указать и несколько
         // Из нового списка с однотипными блоками выбираем случайный, для того чтобы его заспавнить
         for (int i = 0; i < count; i++) {
@@ -126,26 +132,39 @@ public class SpawnManager : MonoBehaviour
             currentLastBlock = block;
             currentEdge = blockEdge;
 
-            /*
-            var blockCol = block.GetComponent<Collider2D>();
-            
-            //Ставим блок впритык к предыдущему
-            block.transform.position = new Vector3( currentEdge.x + blockCol.bounds.size.x / 2, 
-                                                    currentEdge.y - blockCol.bounds.size.y / 2, 
-                                                    currentEdge.z);
 
-            // Устанавливаем новую границу и новый конечный объект
-            currentLastBlock = block;
-            currentEdge = new Vector3(  block.transform.position.x + blockCol.bounds.size.x / 2,
-                                        block.transform.position.y + blockCol.bounds.size.y / 2,
-                                        block.transform.position.z);
-
-            */
-
-
+            //spawnedGroundLog.Add(blockName);
         }               
+    }
+
+    private void SpawnLogic() {
+        // Пока что логика будет ограничиваться тем что нельзя заспавнить больше 2 в ряд одинаковых блоков
+
+        if (spawnedGroundLog.Count < 2) {
+            SpawnGround((GROUND_TYPE)Random.Range(0, countOfTypes - 1));
+        }
+        else {
+            //Если уже есть с чем сравнивать, то смотрим на 2 последних блока и если они одинакового типа, не спавним такой же 3
+            var lastType = (spawnedGroundLog[spawnedGroundLog.Count - 1]);
+            var preLastType = spawnedGroundLog[spawnedGroundLog.Count - 2];
+            //if(GetTypeByString() == preLastB) {
+//
+            //}
+
+        }
+        
+        SpawnGround(GROUND_TYPE.empty);
+
+
+
 
     }
+
+
+
+    
+
+
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -153,6 +172,24 @@ public class SpawnManager : MonoBehaviour
         
         
     }
+
+
+    private GROUND_TYPE GetTypeByString(string s) {
+        string[] enumNames = Enum.GetNames(typeof(GROUND_TYPE));
+
+        foreach (var item in enumNames) {
+            if (item.Contains(s))
+                return ParseEnum<GROUND_TYPE>(item);
+        }
+        throw new Exception("Нет такого элемента в перечислении!");
+    }
+
+
+    public static T ParseEnum<T>(string value) {
+        return (T)Enum.Parse(typeof(T), value, true);
+    }
+
+
 }
 
 enum GROUND_TYPE { empty, withEnemy, withBoss, withTraps }

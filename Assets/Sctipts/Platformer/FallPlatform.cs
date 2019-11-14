@@ -7,8 +7,10 @@ public class FallPlatform : MonoBehaviour, IPooledObject
     private Rigidbody2D rb;
     private Vector3 tempPosition;
     private Collider2D coll;
+    private SpriteRenderer sr;
     [SerializeField]private float fallingDelay;
     [SerializeField]private float spawnDelay;
+    [SerializeField]private bool isFalling = true;
 
     private ObjectPooler pooler;
 
@@ -17,13 +19,21 @@ public class FallPlatform : MonoBehaviour, IPooledObject
         rb = GetComponent<Rigidbody2D>();
         coll = GetComponent<Collider2D>();
         pooler = ObjectPooler.Instance;
+        sr = GetComponent<SpriteRenderer>();
+
+        if (!isFalling)
+            sr.color = Color.white;
+        else
+            sr.color = new Color(160, 50, 50);
+
         
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject == GameManager.Instance.player) {
             //Если на платформу прыгнул игрок, то запускаем спавн платформы на том же месте, а старую дропаем в пул
-            StartCoroutine(Falling());            
+            if(isFalling)
+                StartCoroutine(Falling());            
         }
        
     }
