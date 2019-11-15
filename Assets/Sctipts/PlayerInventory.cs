@@ -33,7 +33,7 @@ public class PlayerInventory : MonoBehaviour
 
         }
 
-        Debug.Log(col.transform.name + " " + GameManager.Instance.itemsContainer.ContainsKey(col.gameObject));
+        //Debug.Log(col.transform.name + " " + GameManager.Instance.itemsContainer.ContainsKey(col.gameObject));
         if (GameManager.Instance.itemsContainer.ContainsKey(col.gameObject)) {
             var itemComponent = GameManager.Instance.itemsContainer[col.gameObject];
             items.Add(itemComponent.Item);

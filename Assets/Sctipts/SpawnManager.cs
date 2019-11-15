@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -43,10 +44,10 @@ public class SpawnManager : MonoBehaviour
     //Небольшой лог в который будут записываться все заспавненные блоки
     private List<GROUND_TYPE> spawnedGroundLog;
 
-    //коллекции с разными видами блоков
-   
 
     private float distance;
+
+    private int bossCount = 0;
 
 
 
@@ -90,7 +91,6 @@ public class SpawnManager : MonoBehaviour
 
         //Debug.Log($"Distance - {distance}");
 
-        
     }
 
     IEnumerator checkDistance() {
@@ -133,36 +133,63 @@ public class SpawnManager : MonoBehaviour
             currentEdge = blockEdge;
 
 
-            //spawnedGroundLog.Add(blockName);
+            spawnedGroundLog.Add(type);
+            bossCount++;
         }               
     }
 
     private void SpawnLogic() {
-        // Пока что логика будет ограничиваться тем что нельзя заспавнить больше 2 в ряд одинаковых блоков
+        /* Пока что логика будет ограничиваться тем что нельзя заспавнить больше 2 в ряд одинаковых блоков
+         * И тем что босс будет появляться каждые 50 блоков 
+         * 
+         * 
+         */
+       
 
         if (spawnedGroundLog.Count < 2) {
-            SpawnGround((GROUND_TYPE)Random.Range(0, countOfTypes - 1));
+            SpawnGround(GetRandomGround());
+        }
+        else if(bossCount < 30){
+            //Если уже есть с чем сравнивать, то смотрим на 2 последних блока и если они одинакового типа, не спавним такой же 3
+            var lastBlockType = (spawnedGroundLog[spawnedGroundLog.Count - 1]);
+            var preLastBlockType = spawnedGroundLog[spawnedGroundLog.Count - 2];
+            //Если 2 блока одинаковые спавним третий иной
+            if(lastBlockType == preLastBlockType) {
+                SpawnGround(GetRandomGround(lastBlockType));
+                //Debug.Log("Последние 2 блока одинаковые, спавним 3 другой!");
+            }
+            else {
+                SpawnGround(GetRandomGround());
+            }
+
+
         }
         else {
-            //Если уже есть с чем сравнивать, то смотрим на 2 последних блока и если они одинакового типа, не спавним такой же 3
-            var lastType = (spawnedGroundLog[spawnedGroundLog.Count - 1]);
-            var preLastType = spawnedGroundLog[spawnedGroundLog.Count - 2];
-            //if(GetTypeByString() == preLastB) {
-//
-            //}
 
         }
         
-        SpawnGround(GROUND_TYPE.empty);
-
-
-
 
     }
 
 
+    //Иммитация вероятностей от 0 до 100%
+    private int RandomPercent() {
+        return Random.Range(0, 100);
+    }
 
-    
+    private GROUND_TYPE GetRandomGround(params GROUND_TYPE[] types) {
+        GROUND_TYPE randomType = (GROUND_TYPE)Random.Range(1, countOfTypes);
+        //Если нет исключений , ролим любой блок и возвращаем
+        if (types.Length == 0)
+            return randomType;
+        else {
+            while (types.Contains(randomType)) {
+                randomType = (GROUND_TYPE)Random.Range(1, countOfTypes);
+            }
+            return randomType;
+        }
+      
+    }
 
 
 
@@ -192,5 +219,5 @@ public class SpawnManager : MonoBehaviour
 
 }
 
-enum GROUND_TYPE { empty, withEnemy, withBoss, withTraps }
+enum GROUND_TYPE { empty=1, withEnemy=2, withBoss=3, withTraps=4 }
 
