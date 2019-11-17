@@ -6,7 +6,7 @@ public class SpawnGround : MonoBehaviour, IPooledObject
 {
     private WaitForSeconds timer;
     ObjectPooler pooler;
-    private Collider2D collider2d;
+    private Collider2D collider2d;   
 
     private void Start() {
         timer = new WaitForSeconds(0.5f);
@@ -19,7 +19,7 @@ public class SpawnGround : MonoBehaviour, IPooledObject
     }
 
     public void OnSpawnFromPool() {
-        
+        EventManager.Instance.PostNotification(EVENT_TYPE.SPAWN_ENEMY, this);
     }
 
     

@@ -25,6 +25,7 @@ public class SimplePatrol : MonoBehaviour
     private bool isRised;
     private bool isDamaged;
     private bool isDeath = false;
+    private Vector3 startPosition;
     
 
 
@@ -38,6 +39,7 @@ public class SimplePatrol : MonoBehaviour
         GameManager.Instance.enemyDangerContainer.Add(gameObject, dangerClass);
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
 
+        startPosition = transform.position;
         isDamaged = false;
         isRised = false;
         

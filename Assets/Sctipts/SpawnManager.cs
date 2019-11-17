@@ -28,6 +28,8 @@ public class SpawnManager : MonoBehaviour
      * Есть какой-то первоначальный кусок земли, а затем , по мере движения игрока уровень достраивается
      * 
      */
+    [SerializeField] private int bossSpawnCount = 10;
+
 
     private ObjectPooler pooler;
     private HashSet<string> groundNames;
@@ -47,7 +49,7 @@ public class SpawnManager : MonoBehaviour
 
     private float distance;
 
-    private int bossCount = 0;
+    private int blockCount = 0;
 
 
 
@@ -70,6 +72,10 @@ public class SpawnManager : MonoBehaviour
         //Получаем из пула список доступных префабов для постройки уровня. Ищем по тегу "ground_"
         groundNames = pooler.getSetOfNamesObjects("ground_");
 
+        //foreach (var item in groundNames) {
+        //    Debug.Log(item);
+        //}
+
         // У всех кусков карты есть число после подчеркивания, с помощью рандомайзера выбираем кусок карты и достраиваем
         // Идентификаторы
         /*
@@ -77,9 +83,8 @@ public class SpawnManager : MonoBehaviour
          * ground_boss_1 - кусок с ареной первого босса
          * 
          */
-       
 
-
+        
 
         StartCoroutine(checkDistance());
     }
@@ -117,12 +122,10 @@ public class SpawnManager : MonoBehaviour
                 groundType.Add(item);
 
         }
-
-
         //По дефолту спавнится 1 блок, но можно указать и несколько
         // Из нового списка с однотипными блоками выбираем случайный, для того чтобы его заспавнить
         for (int i = 0; i < count; i++) {
-            blockName = groundType[Random.Range(0, groundType.Count - 1)];
+            blockName = groundType[Random.Range(0, groundType.Count)];
             block = pooler.SpawnFromPool(blockName, new Vector3(0, 0, -20), Quaternion.identity);
             block.transform.position = currentEdge;
 
@@ -134,37 +137,65 @@ public class SpawnManager : MonoBehaviour
 
 
             spawnedGroundLog.Add(type);
-            bossCount++;
-        }               
+            blockCount++;
+        }
+        Debug.Log($"Спавним - {spawnedGroundLog.Last().ToString()}");
+        Debug.Log($"Блоков до босса - {blockCount}");
     }
+
+
 
     private void SpawnLogic() {
         /* Пока что логика будет ограничиваться тем что нельзя заспавнить больше 2 в ряд одинаковых блоков
-         * И тем что босс будет появляться каждые 50 блоков 
+         * И тем что босс будет появляться каждые сколько то блоков 
          * 
          * 
          */
-       
-
-        if (spawnedGroundLog.Count < 2) {
-            SpawnGround(GetRandomGround());
-        }
-        else if(bossCount < 30){
-            //Если уже есть с чем сравнивать, то смотрим на 2 последних блока и если они одинакового типа, не спавним такой же 3
-            var lastBlockType = (spawnedGroundLog[spawnedGroundLog.Count - 1]);
-            var preLastBlockType = spawnedGroundLog[spawnedGroundLog.Count - 2];
-            //Если 2 блока одинаковые спавним третий иной
-            if(lastBlockType == preLastBlockType) {
-                SpawnGround(GetRandomGround(lastBlockType));
-                //Debug.Log("Последние 2 блока одинаковые, спавним 3 другой!");
-            }
-            else {
+        if(blockCount < bossSpawnCount){
+            if(spawnedGroundLog.Count > 2) {
+                //Если уже есть с чем сравнивать, то смотрим на 2 последних блока и если они одинакового типа, не спавним такой же 3
+                var lastBlockType = (spawnedGroundLog[spawnedGroundLog.Count - 1]);
+                var preLastBlockType = spawnedGroundLog[spawnedGroundLog.Count - 2];
+                //Если 2 блока одинаковые спавним третий иной
+                if (lastBlockType == preLastBlockType) {
+                    SpawnGround(GetRandomGround(false,lastBlockType));
+                    //Debug.Log("Последние 2 блока одинаковые, спавним 3 другой!");
+                }else
+                    SpawnGround(GetRandomGround());
+                
+            }else
                 SpawnGround(GetRandomGround());
+
+
+
+        }else{ // Если время спавнить босса 
+            if(blockCount < bossSpawnCount + 2) {
+                if (!RandomPercent(25))
+                    SpawnGround(GetRandomGround());
+                else {
+                    SpawnGround(GROUND_TYPE.withBoss);
+                    blockCount = 0;
+                }                   
             }
-
-
-        }
-        else {
+            else if(blockCount < bossSpawnCount + 3) {
+                if (!RandomPercent(50))
+                    SpawnGround(GetRandomGround());
+                else {
+                    SpawnGround(GROUND_TYPE.withBoss);
+                    blockCount = 0;
+                }
+            }
+            else if (blockCount < bossSpawnCount + 5) {
+                if (!RandomPercent(75))
+                    SpawnGround(GetRandomGround());
+                else {
+                    SpawnGround(GROUND_TYPE.withBoss);
+                    blockCount = 0;
+                }
+            }
+            else if (blockCount < bossSpawnCount + 7) {             
+                    SpawnGround(GROUND_TYPE.withBoss);
+            }
 
         }
         
@@ -172,22 +203,36 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-    //Иммитация вероятностей от 0 до 100%
-    private int RandomPercent() {
-        return Random.Range(0, 100);
+    //Иммитация вероятностей от 0 до 100%, передаем желаемую вероятность и получаем результат, попали или нет
+    public static bool RandomPercent(int persent) {
+        int rnd = Random.Range(0, 100);
+        Debug.Log($"ROLL - {rnd}. PERSENT  - {persent}");
+        if (rnd <= persent) 
+            return true;        
+        else
+            return false;
+        
     }
 
-    private GROUND_TYPE GetRandomGround(params GROUND_TYPE[] types) {
-        GROUND_TYPE randomType = (GROUND_TYPE)Random.Range(1, countOfTypes);
-        //Если нет исключений , ролим любой блок и возвращаем
-        if (types.Length == 0)
-            return randomType;
-        else {
-            while (types.Contains(randomType)) {
-                randomType = (GROUND_TYPE)Random.Range(1, countOfTypes);
+    private GROUND_TYPE GetRandomGround(bool withBoss = false, params GROUND_TYPE[] ExTypes) {
+        GROUND_TYPE randomType = (GROUND_TYPE)Random.Range(1, countOfTypes+1);
+
+
+        // По дефолту босс исключается из рандомной выдачи блоков     
+        //Если нет исключений , ролим любой блок и возвращаем 
+        if (!withBoss) {
+            while (ExTypes.Contains(randomType) || (randomType == GROUND_TYPE.withBoss)) 
+               {
+                randomType = (GROUND_TYPE)Random.Range(1, countOfTypes+1);
+               }
+        }else {
+            while (ExTypes.Contains(randomType)){
+                randomType = (GROUND_TYPE)Random.Range(1, countOfTypes+1);
             }
-            return randomType;
         }
+       
+        return randomType;
+        
       
     }
 
@@ -203,7 +248,6 @@ public class SpawnManager : MonoBehaviour
 
     private GROUND_TYPE GetTypeByString(string s) {
         string[] enumNames = Enum.GetNames(typeof(GROUND_TYPE));
-
         foreach (var item in enumNames) {
             if (item.Contains(s))
                 return ParseEnum<GROUND_TYPE>(item);
@@ -220,4 +264,6 @@ public class SpawnManager : MonoBehaviour
 }
 
 enum GROUND_TYPE { empty=1, withEnemy=2, withBoss=3, withTraps=4 }
+
+enum ENEMY_TYPE { SKELETON, GHOST, MOUSE }
 
