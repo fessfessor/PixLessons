@@ -29,6 +29,7 @@ public class SpawnManager : MonoBehaviour
      * 
      */
     [SerializeField] private int bossSpawnCount = 10;
+    public string isTest = "";
 
 
     private ObjectPooler pooler;
@@ -126,7 +127,11 @@ public class SpawnManager : MonoBehaviour
         // Из нового списка с однотипными блоками выбираем случайный, для того чтобы его заспавнить
         for (int i = 0; i < count; i++) {
             blockName = groundType[Random.Range(0, groundType.Count)];
-            block = pooler.SpawnFromPool(blockName, new Vector3(0, 0, -20), Quaternion.identity);
+            if(isTest == "")
+                block = pooler.SpawnFromPool(blockName, new Vector3(0, 0, -20), Quaternion.identity);
+            else
+                block = pooler.SpawnFromPool(isTest, new Vector3(0, 0, -20), Quaternion.identity);
+
             block.transform.position = currentEdge;
 
             //Край блока
@@ -265,5 +270,5 @@ public class SpawnManager : MonoBehaviour
 
 enum GROUND_TYPE { empty=1, withEnemy=2, withBoss=3, withTraps=4 }
 
-enum ENEMY_TYPE { SKELETON, GHOST, MOUSE }
+enum SPAWN { SKELETON, GHOST, MOUSE }
 

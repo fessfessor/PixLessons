@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class SpawnGround : MonoBehaviour, IPooledObject
 {
@@ -15,11 +16,13 @@ public class SpawnGround : MonoBehaviour, IPooledObject
     }
 
     public void OnReturnToPool() {
+        // Тут реализовываем возврат куска земли в первоначальное состояние - со всеми врагами и расходными материалами
         
+
     }
 
     public void OnSpawnFromPool() {
-        EventManager.Instance.PostNotification(EVENT_TYPE.SPAWN_ENEMY, this);
+        EventManager.Instance.PostNotification(EVENT_TYPE.SPAWN_GROUND, this);
     }
 
     

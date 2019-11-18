@@ -4,25 +4,26 @@ using UnityEngine;
 
 public class SpawnPoint : MonoBehaviour {
 
-    [SerializeField] ENEMY_TYPE enemyType;
+    [SerializeField] SPAWN SPAWN;
 
-    private SpawnGround parent;
+    private GameObject parent;
     private ObjectPooler pooler;
 
     void Start() {
-        EventManager.Instance.AddListener(EVENT_TYPE.SPAWN_ENEMY, OnEvent);
-        parent = GetComponentInParent<SpawnGround>();
+        EventManager.Instance.AddListener(EVENT_TYPE.SPAWN_GROUND, OnEvent);
+        parent = transform.parent.gameObject;
         pooler = ObjectPooler.Instance;
+
     }
+
+
 
     
 
     void OnEvent(EVENT_TYPE eventType, Component sender, object param = null) {
-        if(eventType == EVENT_TYPE.SPAWN_ENEMY) {
-            if(sender == parent) { // Если отправитель это наш кусок земли, то спавним врагов
-                if (SpawnManager.RandomPercent(100)) {
-                    SpawnEnemy();
-                }
+        if(eventType == EVENT_TYPE.SPAWN_GROUND) {
+            if(sender.transform.gameObject == parent) { // Если отправитель это наш кусок земли, то спавним врагов              
+                    Spawn();               
             }
         }
 
@@ -34,10 +35,12 @@ public class SpawnPoint : MonoBehaviour {
 
     }
 
-    void SpawnEnemy() {
+    void Spawn() {
         Debug.Log("SKELETON!");
 
-        pooler.SpawnFromPool(enemyType.ToString(), transform.position, Quaternion.identity);
+        pooler.SpawnFromPool(SPAWN.ToString(), transform.position, Quaternion.identity);
     }
+
+    
    
 }

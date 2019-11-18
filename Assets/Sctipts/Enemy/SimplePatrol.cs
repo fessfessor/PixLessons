@@ -37,7 +37,7 @@ public class SimplePatrol : MonoBehaviour
     private void Start() {
         EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, OnEvent);
         GameManager.Instance.enemyDangerContainer.Add(gameObject, dangerClass);
-        currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+        currentHealth = GetComponent<Health>().HealthCount;
 
         startPosition = transform.position;
         isDamaged = false;
