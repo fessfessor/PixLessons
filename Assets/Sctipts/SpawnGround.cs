@@ -21,8 +21,8 @@ public class SpawnGround : MonoBehaviour, IPooledObject
 
     }
 
-    public void OnSpawnFromPool() {
-        EventManager.Instance.PostNotification(EVENT_TYPE.SPAWN_GROUND, this);
+    public void OnSpawnFromPool() {    
+        
     }
 
     

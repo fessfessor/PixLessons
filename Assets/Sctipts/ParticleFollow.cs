@@ -33,10 +33,9 @@ public class ParticleFollow : MonoBehaviour
             partSystem.GetParticles(particles);
 
             for (int i = 0; i < particles.GetUpperBound(0); i++) {
-                // float ForceToAdd = (particles[i].startLifetime - particles[i].remainingLifetime) * (10 * Vector3.Distance(targetObject.transform.position, particles[i].position));
-                // particles[i].velocity = (targetObject.transform.position - particles[i].position) * ForceToAdd * Time.deltaTime * followSpeed;
                 
-                particles[i].position = Vector2.MoveTowards(particles[i].position,targetObject.transform.position - transform.position , Time.deltaTime * followSpeed);
+                // Пока что жестко зашито следование за игроком. Как понадобится можно довести до ума с targetObject
+                particles[i].position = Vector2.MoveTowards(particles[i].position,GameManager.Instance.player.transform.position - transform.position , Time.deltaTime * followSpeed);
 
             }
             partSystem.SetParticles(particles, particles.Length);

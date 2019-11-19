@@ -39,18 +39,22 @@ public class EventManager : MonoBehaviour
 
         //Проверка типа события
         if(Listeners.TryGetValue(eventType, out ListenList)) {
-            ListenList.Add(Listener);
+            if(!ListenList.Contains(Listener))
+                ListenList.Add(Listener);
             return;
         }
 
         //Если списка нет
         ListenList = new List<OnEvent>();
-        ListenList.Add(Listener);
+        if (!ListenList.Contains(Listener))
+            ListenList.Add(Listener);
+        
+        //Добавляем в главную коллекцию
         Listeners.Add(eventType, ListenList);
     }
 
     //Посылаем события получателям
-    public void PostNotification(EVENT_TYPE eventType, Component sender, Object param = null) {
+    public void PostNotification(EVENT_TYPE eventType, Component sender, object param = null) {
         List<OnEvent> ListenList = null;
         if (!Listeners.TryGetValue(eventType, out ListenList))
             return;

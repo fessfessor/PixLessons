@@ -7,7 +7,7 @@ public class SimplePatrol : MonoBehaviour
 {
     #region variables
     [SerializeField] private GameObject leftBorder;
-    [SerializeField] private GameObject rigthBorder;
+    [SerializeField] private GameObject rightBorder;
     [SerializeField] private Rigidbody2D rb;
     
     [SerializeField] private Collider2D coll;
@@ -26,7 +26,11 @@ public class SimplePatrol : MonoBehaviour
     private bool isDamaged;
     private bool isDeath = false;
     private Vector3 startPosition;
-    
+    private Vector3 leftBorderPosition;
+    private Vector3 rightBorderPosition;
+    private bool isAttacking = false;
+
+
 
 
     public bool isRightDirection;
@@ -40,6 +44,8 @@ public class SimplePatrol : MonoBehaviour
         currentHealth = GetComponent<Health>().HealthCount;
 
         startPosition = transform.position;
+        leftBorderPosition = leftBorder.transform.position;
+        rightBorderPosition = rightBorder.transform.position;
         isDamaged = false;
         isRised = false;
         
@@ -109,22 +115,25 @@ public class SimplePatrol : MonoBehaviour
 
     //Простое движение
     void Move() {
-        if (isRightDirection && currentHealth > 0) {
-            sr.flipX = true;
-            rb.velocity = Vector2.right * speed;
-            if (transform.position.x > rigthBorder.transform.position.x) {
-                isRightDirection = false;
+        if (!isAttacking) {
+            if (isRightDirection && currentHealth > 0) {
+                sr.flipX = true;
+                rb.velocity = Vector2.right * speed;
+                if (transform.position.x > rightBorderPosition.x) {
+                    isRightDirection = false;
+                }
             }
-        }
-        else if (!isRightDirection && currentHealth > 0) {
-            rb.velocity = Vector2.left * speed;
-            sr.flipX = false;
-            if (transform.position.x < leftBorder.transform.position.x) {
-                isRightDirection = true;
+            else if (!isRightDirection && currentHealth > 0) {
+                rb.velocity = Vector2.left * speed;
+                sr.flipX = false;
+                if (transform.position.x < leftBorderPosition.x) {
+                    isRightDirection = true;
+                }
             }
+            else if (currentHealth < 0)
+                rb.velocity = Vector3.zero; // Тормозим объект если убили
         }
-        else if (currentHealth < 0)
-            rb.velocity = Vector3.zero; // Тормозим объект если убили
+        
     }
 
    
@@ -149,5 +158,15 @@ public class SimplePatrol : MonoBehaviour
         Debug.Log($"Изменилось здоровье у {sender.name}. Стало {health.HealthCount}");       
     }
 
+
+
+    public void Attack(bool isAttacking) {
+        this.isAttacking = isAttacking;
+
+        if (isAttacking)                   
+            Debug.Log("Skeleton attack!");
+        else
+            Debug.Log("Skeleton STOP attack!");
+    }
     
 }

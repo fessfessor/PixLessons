@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Skeleton : MonoBehaviour, IPooledObject {
 
-    private void Start() {
-        
-    }
-
+    
 
     public void OnReturnToPool() {
-        Debug.Log("Skeleton spawned!");
+        Debug.Log("Skeleton despawned!");
     }
 
     public void OnSpawnFromPool() {
-        Debug.Log("Skeleton despawned!");
+        Debug.Log("Skeleton spawned!");
     }
 }

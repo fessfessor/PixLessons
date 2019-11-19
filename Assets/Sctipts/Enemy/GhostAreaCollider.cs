@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GhostAreaCollider : MonoBehaviour
 {
-    [SerializeField] GameObject parent;
+    
     private float shootFrequency;
     private GhostMove parentGhostMove;
     private bool inArea;
@@ -16,7 +16,7 @@ public class GhostAreaCollider : MonoBehaviour
 
         readyToShoot = true;
         inArea = false;
-        parentGhostMove = parent.GetComponent<GhostMove>();
+        parentGhostMove = transform.parent.GetComponent<GhostMove>();
         // частота стрельбы
         shootFrequency = parentGhostMove.shootFrequency;
         drawGizmos = parentGhostMove.drawGizmos;

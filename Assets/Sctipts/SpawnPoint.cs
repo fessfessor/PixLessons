@@ -9,20 +9,27 @@ public class SpawnPoint : MonoBehaviour {
     private GameObject parent;
     private ObjectPooler pooler;
 
-    void Start() {
-        EventManager.Instance.AddListener(EVENT_TYPE.SPAWN_GROUND, OnEvent);
-        parent = transform.parent.gameObject;
-        pooler = ObjectPooler.Instance;
+   
+
+    private void OnEnable() {
+        if(parent ==null)
+            parent = transform.parent.gameObject;
+
+        if(pooler==null)
+            pooler = ObjectPooler.Instance;
+
+        if(EventManager.Instance != null)
+            EventManager.Instance.AddListener(EVENT_TYPE.SPAWN_GROUND, OnEvent);
 
     }
 
 
 
-    
 
-    void OnEvent(EVENT_TYPE eventType, Component sender, object param = null) {
+
+    void OnEvent(EVENT_TYPE eventType, Component sender, object param = null) {      
         if(eventType == EVENT_TYPE.SPAWN_GROUND) {
-            if(sender.transform.gameObject == parent) { // Если отправитель это наш кусок земли, то спавним врагов              
+            if((Object)param == parent) { // Если отправитель это наш кусок земли, то спавним            
                     Spawn();               
             }
         }
@@ -30,13 +37,15 @@ public class SpawnPoint : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 0.1f);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(transform.position, 0.15f);
 
     }
 
+
+
+    // Главный метод спавна, который в зависимости от того что выбрано в точке спавна, спавнит это при появлении блока земли
     void Spawn() {
-        Debug.Log("SKELETON!");
 
         pooler.SpawnFromPool(SPAWN.ToString(), transform.position, Quaternion.identity);
     }

@@ -143,6 +143,9 @@ public class SpawnManager : MonoBehaviour
 
             spawnedGroundLog.Add(type);
             blockCount++;
+
+            // Сообщаем что заспавнили блок земли
+            Notification(block);
         }
         Debug.Log($"Спавним - {spawnedGroundLog.Last().ToString()}");
         Debug.Log($"Блоков до босса - {blockCount}");
@@ -251,18 +254,8 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-    private GROUND_TYPE GetTypeByString(string s) {
-        string[] enumNames = Enum.GetNames(typeof(GROUND_TYPE));
-        foreach (var item in enumNames) {
-            if (item.Contains(s))
-                return ParseEnum<GROUND_TYPE>(item);
-        }
-        throw new Exception("Нет такого элемента в перечислении!");
-    }
-
-
-    public static T ParseEnum<T>(string value) {
-        return (T)Enum.Parse(typeof(T), value, true);
+    private void Notification(UnityEngine.Object sender) {
+        EventManager.Instance.PostNotification(EVENT_TYPE.SPAWN_GROUND, this, sender);
     }
 
 
@@ -270,5 +263,5 @@ public class SpawnManager : MonoBehaviour
 
 enum GROUND_TYPE { empty=1, withEnemy=2, withBoss=3, withTraps=4 }
 
-enum SPAWN { SKELETON, GHOST, MOUSE }
+enum SPAWN { SKELETON, GHOST, MOUSE , FlameCoin}
 
