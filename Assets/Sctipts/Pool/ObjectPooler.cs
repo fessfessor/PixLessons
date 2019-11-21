@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
@@ -7,22 +9,31 @@ public class ObjectPooler : MonoBehaviour
 
     #region Singleton
     public static ObjectPooler Instance;
-   // private void Awake() {
-        
-   // }
-    #endregion
+    // private void Awake() {
 
+    // }
+    #endregion
     [System.Serializable]
     public class Pool {
         public string tag;
         public GameObject prefab;
         public int size;
 
+
     }
 
     public List<Pool> pools;
+
+    [SerializeField] public Pool currentPool;
+
+  
+
+    
+    
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
+
+    private int currentPoolCount = 0;    
     // Start is called before the first frame update
     void Awake()
     {
@@ -51,7 +62,11 @@ public class ObjectPooler : MonoBehaviour
 
     }
 
-   
+    private void Start() {
+        
+    }
+
+
 
     // Простой возврат в пул
     public void ReturnToPool(string tag, GameObject obj) {
@@ -163,7 +178,64 @@ public class ObjectPooler : MonoBehaviour
 
 
 
+    #region editor
+
+    public void Add() {
+        Pool newPool = new Pool();
+        pools.Add(newPool);
+        currentPool = newPool;
+        currentPoolCount = pools.Count - 1;
+        
+    }
+
+    public void Prev() {
+        if (currentPoolCount > 0) {
+            currentPoolCount--;
+            currentPool = pools[currentPoolCount];
+
+        }
+        
+    }
+
+    public void Next() {
+        if(currentPoolCount+1 < pools.Count) {
+            currentPoolCount++;
+            currentPool = pools[currentPoolCount];
+            
+        }
+        
+    }
+
+    public void Delete() {
+
+        pools.Remove(currentPool);
+
+        if (pools.Count > 0)
+            currentPool = pools[currentPoolCount - 1];
+        else
+            Add();
+
+        currentPoolCount--;
+        
+
+    }
+
+
+
+    #endregion
+
+    private string getPoolsNames() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < pools.Count; i++) {
+            builder.Append(" " + pools[i].tag + " - " + pools[i].size + "\n");
+        }
+        return builder.ToString();
+        
+    }
 
 
 
 }
+
+
+

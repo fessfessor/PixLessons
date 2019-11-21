@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8fce69b4dcacd84d81f43ebc7b8da0e, type: 3}
+  m_Name: Enemies
+  m_EditorClassIdentifier: 
+  enemies:
+  - id: 0
+    enemyName: Skeleton
+    description: "\u041F\u0440\u043E\u0441\u0442\u043E\u0439 \u0441\u043A\u0435\u043B\u0435\u0442\u044F\u043A\u0430"
+    enemyHealth: 100
+    damage: 25
+    speed: 2
+    dangerClass: 2
+  - id: 1
+    enemyName: Ghost
+    description: "\u041F\u0440\u043E\u0441\u0442\u043E\u0439 \u043F\u0440\u0438\u0437\u0440\u0430\u043A"
+    enemyHealth: 40
+    damage: 20
+    speed: 7
+    dangerClass: 2
+  - id: 2
+    enemyName: Mouse
+    description: "\u0414\u0438\u043A\u0438\u0439 \u043C\u044B\u0448"
+    enemyHealth: 15
+    damage: 20
+    speed: 10
+    dangerClass: 2
+  currentEnemy:
+    id: 0
+    enemyName: Skeleton
+    description: "\u041F\u0440\u043E\u0441\u0442\u043E\u0439 \u0441\u043A\u0435\u043B\u0435\u0442\u044F\u043A\u0430"
+    enemyHealth: 100
+    damage: 25
+    speed: 2
+    dangerClass: 2

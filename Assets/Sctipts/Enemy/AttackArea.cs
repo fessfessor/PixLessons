@@ -5,11 +5,14 @@ using UnityEngine;
 public class AttackArea : MonoBehaviour
 {
     private SimplePatrol simplePatrol;
+   
+    
     
 
     private void Start() {
         simplePatrol = transform.parent.GetComponent<SimplePatrol>();
-
+       
+       
     }
 
 
@@ -26,4 +29,10 @@ public class AttackArea : MonoBehaviour
             simplePatrol.Attack(false);
         }
     }
+
+   
+
+   
+
+   
 }

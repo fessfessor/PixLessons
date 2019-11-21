@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
     public Dictionary<GameObject, ENEMY_DANGER> enemyDangerContainer; 
     public UIController uiConroller;
     public ItemBase itemBase;
+    public EnemyBase enemyBase;
     [HideInInspector]public PlayerInventory inventory;
     [HideInInspector]public GameObject player;
     [HideInInspector]public GameObject darkWall;
@@ -36,9 +37,11 @@ public class GameManager : MonoBehaviour {
         enemyDangerContainer = new Dictionary<GameObject, ENEMY_DANGER>();
         player = FindObjectOfType<Player>().gameObject;
         darkWall = FindObjectOfType<DarkWall>().gameObject;
-
-
         
+
+
+
+
     }
 
     private void Start() {

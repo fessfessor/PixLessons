@@ -9,11 +9,16 @@ public class Health : MonoBehaviour {
 
     private Vector3 startPosition;
 
+    private bool isPooledObj;
+
 
 
     private void Start() {
         GameManager.Instance.healthContainer.Add(gameObject, this);
-        maxHealth = healthCount;      
+        
+        maxHealth = healthCount;
+
+        isPooledObj = GetComponent<IPooledObject>() != null;
     }
 
     private void OnEnable() {
@@ -26,15 +31,18 @@ public class Health : MonoBehaviour {
     public void takeHit(int damage) {
         HealthCount -= damage;
         if (HealthCount <= 0 && gameObject != GameManager.Instance.player) {
-            Destroy(gameObject, 0.5f);
+            if (isPooledObj) {// Если это объект из пула ,возвращаем его туда
+                
+                ObjectPooler.Instance.ReturnToPool(transform.name, gameObject);
+            }
+            else {
+                Destroy(gameObject, 0.5f);
+            }
+            
         }
-            //     
+              
     }
 
-    IEnumerator CustomDestroy() {
-        yield return new WaitForSeconds(0.5f);
-
-    }
    
 
 }

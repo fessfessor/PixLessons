@@ -29,6 +29,8 @@ public class SimplePatrol : MonoBehaviour
     private Vector3 leftBorderPosition;
     private Vector3 rightBorderPosition;
     private bool isAttacking = false;
+    private EnemyBase enemyBase;
+    
 
 
 
@@ -39,8 +41,17 @@ public class SimplePatrol : MonoBehaviour
 
     #region startUpdate
     private void Start() {
+        enemyBase = GameManager.Instance.enemyBase;
+        //Устанавливаем значение здоровья из базы данных
+
+        dangerClass = enemyBase.GetEnemyOfID(0).DangerClass;
+        GetComponent<Health>().HealthCount = 100;
+
+
         EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, OnEvent);
         GameManager.Instance.enemyDangerContainer.Add(gameObject, dangerClass);
+
+        
         currentHealth = GetComponent<Health>().HealthCount;
 
         startPosition = transform.position;
@@ -48,6 +59,7 @@ public class SimplePatrol : MonoBehaviour
         rightBorderPosition = rightBorder.transform.position;
         isDamaged = false;
         isRised = false;
+        
         
 
     }
@@ -117,15 +129,17 @@ public class SimplePatrol : MonoBehaviour
     void Move() {
         if (!isAttacking) {
             if (isRightDirection && currentHealth > 0) {
-                sr.flipX = true;
-                rb.velocity = Vector2.right * speed;
+                //sr.flipX = true;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+                rb.velocity = Vector2.right * enemyBase.GetEnemyOfID(0).Speed;
                 if (transform.position.x > rightBorderPosition.x) {
                     isRightDirection = false;
                 }
             }
             else if (!isRightDirection && currentHealth > 0) {
-                rb.velocity = Vector2.left * speed;
-                sr.flipX = false;
+                rb.velocity = Vector2.left * enemyBase.GetEnemyOfID(0).Speed;
+                //sr.flipX = false;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
                 if (transform.position.x < leftBorderPosition.x) {
                     isRightDirection = true;
                 }

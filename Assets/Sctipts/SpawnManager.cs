@@ -263,5 +263,5 @@ public class SpawnManager : MonoBehaviour
 
 enum GROUND_TYPE { empty=1, withEnemy=2, withBoss=3, withTraps=4 }
 
-enum SPAWN { SKELETON, GHOST, MOUSE , FlameCoin}
+enum SPAWN { Skeleton, Ghost, Mouse , FlameCoin}
 
