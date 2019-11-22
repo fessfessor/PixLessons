@@ -19,14 +19,14 @@ public class AttackArea : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         bool isPlayer = col.gameObject == GameManager.Instance.player;
         if (isPlayer) {
-            simplePatrol.Attack(true);
+            simplePatrol.Attack(true, col.gameObject);
         }
     }
 
     private void OnTriggerExit2D(Collider2D col) {
         bool isPlayer = col.gameObject == GameManager.Instance.player;
         if (isPlayer) {
-            simplePatrol.Attack(false);
+            simplePatrol.Attack(false, null);
         }
     }
 

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1344657104777902531}
   - component: {fileID: 1344657104777902530}
   - component: {fileID: 1344657104777902529}
-  - component: {fileID: 3603434038480855540}
   - component: {fileID: 3603434038853835681}
+  - component: {fileID: 6699059868216997059}
   - component: {fileID: 4681950420272693686}
   - component: {fileID: 3603434040022613963}
   - component: {fileID: 3603434038480855536}
@@ -114,32 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &3603434038480855540
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344657104777902535}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.078428745, y: -0.21963143}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.76, y: 2.08}
-    newSize: {x: 0.04, y: 0.04}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.1605616, y: 1.640737}
-  m_EdgeRadius: 0
 --- !u!95 &3603434038853835681
 Animator:
   serializedVersion: 3
@@ -159,6 +133,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &6699059868216997059
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344657104777902535}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.013279438, y: -0.23239112}
+  m_Size: {x: 0.8835535, y: 1.6152177}
+  m_Direction: 0
 --- !u!114 &4681950420272693686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +191,7 @@ MonoBehaviour:
   leftBorder: {fileID: 1344657106005743630}
   rightBorder: {fileID: 1344657105390667819}
   rb: {fileID: 1344657104777902529}
-  coll: {fileID: 3603434038480855540}
+  coll: {fileID: 6699059868216997059}
   animator: {fileID: 3603434038853835681}
   sr: {fileID: 1344657104777902530}
   dangerClass: 0

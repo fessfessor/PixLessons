@@ -30,6 +30,10 @@ public class SimplePatrol : MonoBehaviour
     private Vector3 rightBorderPosition;
     private bool isAttacking = false;
     private EnemyBase enemyBase;
+    private AttackArea attackArea;
+    private GameObject enemy;
+
+    
     
 
 
@@ -42,17 +46,15 @@ public class SimplePatrol : MonoBehaviour
     #region startUpdate
     private void Start() {
         enemyBase = GameManager.Instance.enemyBase;
-        //Устанавливаем значение здоровья из базы данных
 
-        dangerClass = enemyBase.GetEnemyOfID(0).DangerClass;
-        GetComponent<Health>().HealthCount = 100;
+        currentHealth = GetComponent<Health>().HealthCount;
 
+        attackArea = GetComponent<AttackArea>();
 
         EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, OnEvent);
         GameManager.Instance.enemyDangerContainer.Add(gameObject, dangerClass);
 
-        
-        currentHealth = GetComponent<Health>().HealthCount;
+                
 
         startPosition = transform.position;
         leftBorderPosition = leftBorder.transform.position;
@@ -77,7 +79,7 @@ public class SimplePatrol : MonoBehaviour
             
         
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-
+        Debug.Log($"Current HEALTH - {currentHealth}");
         
 
         //Debug.Log(currentHealth);
@@ -169,18 +171,29 @@ public class SimplePatrol : MonoBehaviour
     }
 
     private void OnHealthChange(Component sender, Health health) {
-        Debug.Log($"Изменилось здоровье у {sender.name}. Стало {health.HealthCount}");       
+        //Debug.Log($"Изменилось здоровье у {sender.name}. Стало {health.HealthCount}");       
     }
 
 
-
-    public void Attack(bool isAttacking) {
+    //Вызывается из дочернего объекта "Attack Area"
+    public void Attack(bool isAttacking, GameObject enemy) {
         this.isAttacking = isAttacking;
+        this.enemy = enemy;
 
-        if (isAttacking)                   
-            Debug.Log("Skeleton attack!");
-        else
-            Debug.Log("Skeleton STOP attack!");
+        if (isAttacking) {
+            animator.SetTrigger("Attack");
+        }
+        else { 
+            animator.SetTrigger("EndAttack");
+        }
     }
+
+    public void Damage() {
+        if (isAttacking && enemy!=null) {
+            //TODO дописать атаку скелету
+        }
+    }
+
+    
     
 }
