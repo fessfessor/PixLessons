@@ -140,30 +140,31 @@ public class Player : MonoBehaviour
 
 
         //Движение
-        if (canMove) {
-            Move();
-        }
+        if (!isDeath) {
+            if (canMove) {
+                Move();
+            }
 
-        float vetricalMove = joystick.Vertical;
-        if (vetricalMove >= .5f && !jumpButtonEnabled) {
-            Jump();           
-        }
+            float vetricalMove = joystick.Vertical;
+            if (vetricalMove >= .5f && !jumpButtonEnabled) {
+                Jump();
+            }
 
 #if UNITY_EDITOR
             if (useComputerMode) {
-            if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack)
-                Attack();
+                if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack)
+                    Attack();
 
 
-            if (shootReady && Input.GetMouseButtonDown(1) && groundD.isGrounded && !isAttacking)               
-                Shoot();
-            
+                if (shootReady && Input.GetMouseButtonDown(1) && groundD.isGrounded && !isAttacking)
+                    Shoot();
 
-            if (Input.GetKeyDown(KeyCode.Space))
-                Jump();
-        }
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                    Jump();
+            }
 #endif
-
+        }
         // телепортация обратно на платформу
         if (transform.position.y < minHeight)
             resetHeroPoition();
@@ -199,6 +200,11 @@ public class Player : MonoBehaviour
             if(currentHealth > 0 && !bloodLoss) {
                 StartCoroutine(invulnerability.GetInvulnerability());
                 AudioManager.Instance.Play("Pain");
+                animator.SetTrigger("hit");
+                if (groundD.isGrounded)                  
+                    rb.velocity = new Vector2(0,0); // TODO Непонятно почем у не работает
+
+
             }
                 
         }
@@ -237,7 +243,9 @@ public class Player : MonoBehaviour
         isMoving = false;
         isDeath = true;
         AudioManager.Instance.Play("PlayerDie");
-        Time.timeScale = 0.1f;
+        animator.SetTrigger("death");
+        //Time.timeScale = 0.1f;
+
     }
 
 
@@ -262,19 +270,19 @@ public class Player : MonoBehaviour
         //HealthChange(healthByShoot, true);
         
         // Время анимации
-        yield return new WaitForSeconds(0.8f);        
+        yield return new WaitForSeconds(1.25f);        
         isAttacking = false;
         canMove = true;
         canAttack = true;
         // Время перезарядки
-        yield return new WaitForSeconds(shootRecharge - 0.8f);
+        yield return new WaitForSeconds(shootRecharge - 1.25f);
         shootReady = true;      
     }
 
     
 
     public void Attack() {
-        if (!isAttacking) {
+        if (!isAttacking && !isJumping) {
             canAttack = false;
             canMove = false;
             AudioManager.Instance.Play("SwordSwing");
