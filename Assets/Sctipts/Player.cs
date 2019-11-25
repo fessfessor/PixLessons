@@ -72,6 +72,10 @@ public class Player : MonoBehaviour
 
     private bool bloodLoss = false;
 
+
+    private int comboCount = 0;
+    private float comboTimer = 0;
+
     
 
 
@@ -127,7 +131,11 @@ public class Player : MonoBehaviour
 
     void FixedUpdate() {
 
-        
+        //Таймер для комбо
+        if (comboCount > 0)
+            comboTimer += Time.deltaTime;
+        animator.SetInteger("comboCount", comboCount);
+
         //Анимации
         animator.SetBool("isGrounded", groundD.isGrounded);
         if (!isJumping && !groundD.isGrounded)
@@ -185,6 +193,9 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);
 
         }
+
+
+        //Debug.Log($"TIMER - " + comboTimer);
 
  
     }
@@ -291,11 +302,31 @@ public class Player : MonoBehaviour
 
     public void Attack() {
         if (!isAttacking && !isJumping) {
+
             canAttack = false;
             canMove = false;
             AudioManager.Instance.Play("SwordSwing");
-            animator.SetTrigger("isSwordAttack");
+
+
+            switch (comboCount) {
+                case 0:
+                    animator.SetTrigger("isSwordAttack");
+                    break;
+                case 1:
+                    animator.SetTrigger("Attack2");
+                    break;
+                case 2:
+                    animator.SetTrigger("Attack3");
+                    break;
+                case 3:
+                    animator.SetTrigger("Attack4");
+                    break;
+                default:
+                    break;
+            }
+
             StartCoroutine(SwordAttack());
+
         }
     }   
     IEnumerator SwordAttack() {
@@ -305,11 +336,27 @@ public class Player : MonoBehaviour
         if (groundD.isGrounded)
             rb.velocity = new Vector2(0, 0);
 
-        yield return new WaitForSeconds(swordAttackTime);        
+
+        comboCount++;       
+        if (comboTimer < 3f) {           
+            comboTimer = 0f;
+            Debug.Log("HERE!");
+            StopCoroutine(ComboDelay());
+           // StartCoroutine(ComboDelay());
+        }
+        yield return new WaitForSeconds(swordAttackTime);      
+
         BloodLoss(healthLossByHit);
         isAttacking = false;
         canMove = true;
         canAttack = true;
+    }
+
+   
+    IEnumerator ComboDelay() {
+        yield return new WaitForSeconds(3f);
+        comboCount = 0;
+        comboTimer = 0f;
     }
 
     //методы для ивента. Появление\исчезание коллайдера меча. Вызывается из анимации
@@ -419,10 +466,10 @@ public class Player : MonoBehaviour
     public void Roll() {
         if (!isJumping && !isAttacking) {            
             animator.SetTrigger("roll");
-            if (isRightDirection)
-                rb.AddForce(Vector2.right * 10000, ForceMode2D.Force);
-            else
-                rb.AddForce(Vector2.left * 1000);
+           // if (isRightDirection)
+          //      rb.AddForce(Vector2.right * 10000, ForceMode2D.Force);
+          //  else
+           //     rb.AddForce(Vector2.left * 1000);
 
         }
     }

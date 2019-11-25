@@ -79,7 +79,7 @@ public class SimplePatrol : MonoBehaviour
             
         
         currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-        Debug.Log($"Current HEALTH - {currentHealth}");
+        
         
 
         //Debug.Log(currentHealth);

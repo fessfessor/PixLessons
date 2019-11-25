@@ -3336,6 +3336,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (14)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3390,11 +3395,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (14)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -3591,6 +3591,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 622868065}
     m_Modifications:
+    - target: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
+        type: 3}
+      propertyPath: m_Name
+      value: AidKit (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 1346641178655288220, guid: b503e210987ba4f45995c923a0c1cab6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3645,11 +3650,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
-        type: 3}
-      propertyPath: m_Name
-      value: AidKit (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1346641178655288216, guid: b503e210987ba4f45995c923a0c1cab6,
         type: 3}
@@ -4586,6 +4586,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (10)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4640,11 +4645,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (10)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -6497,6 +6497,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (15)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6551,11 +6556,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (15)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -7268,6 +7268,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 622868065}
     m_Modifications:
+    - target: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
+        type: 3}
+      propertyPath: m_Name
+      value: AidKit
+      objectReference: {fileID: 0}
     - target: {fileID: 1346641178655288220, guid: b503e210987ba4f45995c923a0c1cab6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7322,11 +7327,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
-        type: 3}
-      propertyPath: m_Name
-      value: AidKit
       objectReference: {fileID: 0}
     - target: {fileID: 1346641178655288216, guid: b503e210987ba4f45995c923a0c1cab6,
         type: 3}
@@ -7821,6 +7821,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7875,11 +7880,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (5)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -9121,6 +9121,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (9)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9175,11 +9180,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (9)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -9671,6 +9671,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9725,11 +9730,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -10159,7 +10159,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9a5f3daaae6bf7b4b830f93f27330c03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6a586cefc440434da2fc88d74709c27, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11097,6 +11097,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11151,11 +11156,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -12588,6 +12588,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
+        type: 3}
+      propertyPath: m_Name
+      value: LampWithChain (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 5886832347021737547, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12642,11 +12647,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
-        type: 3}
-      propertyPath: m_Name
-      value: LampWithChain (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5886832345223353714, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
@@ -12783,6 +12783,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (13)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12837,11 +12842,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (13)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -22321,6 +22321,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (7)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22375,11 +22380,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (7)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -24201,6 +24201,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24256,11 +24261,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_SortingOrder
@@ -24286,6 +24286,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (6)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24340,11 +24345,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (6)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -25968,6 +25968,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26022,11 +26027,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -47318,6 +47318,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (8)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -47372,11 +47377,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (8)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -47899,6 +47899,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (11)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -47953,11 +47958,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (11)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -48351,6 +48351,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (12)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -48405,11 +48410,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (12)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -48521,6 +48521,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 934550771}
     m_Modifications:
+    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
+        type: 3}
+      propertyPath: m_Name
+      value: LampWithChain (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 5886832347021737547, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -48575,11 +48580,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
-        type: 3}
-      propertyPath: m_Name
-      value: LampWithChain (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5886832345223353714, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
@@ -54254,16 +54254,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8343959927357817744, guid: 2b75023c8c3db6c40b0bc8b42e6e5155,
-        type: 3}
-      propertyPath: fallingDelay
-      value: 1.2
-      objectReference: {fileID: 0}
     - target: {fileID: 3854131659587392882, guid: 2b75023c8c3db6c40b0bc8b42e6e5155,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 8343959927357817744, guid: 2b75023c8c3db6c40b0bc8b42e6e5155,
+        type: 3}
+      propertyPath: fallingDelay
+      value: 1.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b75023c8c3db6c40b0bc8b42e6e5155, type: 3}
 --- !u!4 &2116661907 stripped
@@ -56186,6 +56186,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 934550771}
     m_Modifications:
+    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
+        type: 3}
+      propertyPath: m_Name
+      value: LampWithChain
+      objectReference: {fileID: 0}
     - target: {fileID: 5886832347021737547, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -56240,11 +56245,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
-        type: 3}
-      propertyPath: m_Name
-      value: LampWithChain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0901fdb2adc6bf47ba3368dcbde482a, type: 3}
@@ -56339,6 +56339,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1993397791, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993397791, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_Name
+      value: Attack1HitBox
+      objectReference: {fileID: 0}
     - target: {fileID: 6091518693444855417, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
       propertyPath: joystick
@@ -56402,12 +56410,12 @@ PrefabInstance:
     - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.86
+      value: -3.98
       objectReference: {fileID: 0}
     - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.22
+      value: -0.06
       objectReference: {fileID: 0}
     - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
@@ -56487,14 +56495,6 @@ PrefabInstance:
       propertyPath: bloodOnScreen
       value: 
       objectReference: {fileID: 128854685}
-    - target: {fileID: 1993397791, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: m_Layer
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 1993397791, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
-      propertyPath: m_Name
-      value: Attack1HitBox
-      objectReference: {fileID: 0}
     - target: {fileID: 1920639417, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
       propertyPath: m_Layer
       value: 12
@@ -56662,6 +56662,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -56716,11 +56721,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
