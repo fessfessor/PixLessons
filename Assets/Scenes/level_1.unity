@@ -822,7 +822,7 @@ PrefabInstance:
     - target: {fileID: 6211908140791974501, guid: 15326cb2baf0a7449982adfc15f9be11,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6211908140791974501, guid: 15326cb2baf0a7449982adfc15f9be11,
         type: 3}
@@ -2460,7 +2460,7 @@ PrefabInstance:
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2929252283123773938, guid: aaa2c939c0359ac4dbce3f49e8b90252,
         type: 3}
@@ -3336,11 +3336,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (14)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3395,6 +3390,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (14)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -3591,11 +3591,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 622868065}
     m_Modifications:
-    - target: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
-        type: 3}
-      propertyPath: m_Name
-      value: AidKit (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1346641178655288220, guid: b503e210987ba4f45995c923a0c1cab6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3650,6 +3645,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
+        type: 3}
+      propertyPath: m_Name
+      value: AidKit (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1346641178655288216, guid: b503e210987ba4f45995c923a0c1cab6,
         type: 3}
@@ -4586,11 +4586,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (10)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4645,6 +4640,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (10)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -6497,11 +6497,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (15)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6556,6 +6551,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (15)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -7174,6 +7174,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &601844219 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1993397791, guid: 2a5e9d80768d2404da804b437e297077,
+    type: 3}
+  m_PrefabInstance: {fileID: 6091518694079316367}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &604655450
 GameObject:
   m_ObjectHideFlags: 0
@@ -7262,11 +7268,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 622868065}
     m_Modifications:
-    - target: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
-        type: 3}
-      propertyPath: m_Name
-      value: AidKit
-      objectReference: {fileID: 0}
     - target: {fileID: 1346641178655288220, guid: b503e210987ba4f45995c923a0c1cab6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7321,6 +7322,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346641178655288223, guid: b503e210987ba4f45995c923a0c1cab6,
+        type: 3}
+      propertyPath: m_Name
+      value: AidKit
       objectReference: {fileID: 0}
     - target: {fileID: 1346641178655288216, guid: b503e210987ba4f45995c923a0c1cab6,
         type: 3}
@@ -7815,11 +7821,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7874,6 +7875,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (5)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -9115,11 +9121,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (9)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9174,6 +9175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (9)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -9665,11 +9671,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9724,6 +9725,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -10025,6 +10031,152 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &834195317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 834195318}
+  - component: {fileID: 834195322}
+  - component: {fileID: 834195321}
+  - component: {fileID: 834195320}
+  - component: {fileID: 834195319}
+  m_Layer: 5
+  m_Name: Roll
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &834195318
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834195317}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1809612010}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -549, y: 20}
+  m_SizeDelta: {x: 260, y: 260}
+  m_Pivot: {x: 1, y: 0}
+--- !u!114 &834195319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834195317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1113396698}
+          m_MethodName: Roll
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &834195320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834195317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 834195321}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &834195321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834195317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.7058824}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9a5f3daaae6bf7b4b830f93f27330c03, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &834195322
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834195317}
+  m_CullTransparentMesh: 0
 --- !u!1 &840331187
 GameObject:
   m_ObjectHideFlags: 0
@@ -10945,11 +11097,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11004,6 +11151,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -12436,11 +12588,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
-        type: 3}
-      propertyPath: m_Name
-      value: LampWithChain (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 5886832347021737547, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12495,6 +12642,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
+        type: 3}
+      propertyPath: m_Name
+      value: LampWithChain (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5886832345223353714, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
@@ -12631,11 +12783,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (13)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12690,6 +12837,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (13)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -12998,7 +13150,7 @@ RectTransform:
   - {fileID: 643761825}
   - {fileID: 645956276}
   m_Father: {fileID: 1809612010}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -15942,7 +16094,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1809612010}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -22169,11 +22321,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -22228,6 +22375,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (7)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -24049,11 +24201,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24109,6 +24256,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_SortingOrder
@@ -24134,11 +24286,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (6)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -24193,6 +24340,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (6)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -25219,7 +25371,7 @@ RectTransform:
   m_Children:
   - {fileID: 779649207}
   m_Father: {fileID: 1809612010}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -25816,11 +25968,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25875,6 +26022,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -26858,6 +27010,7 @@ RectTransform:
   - {fileID: 1748184843}
   - {fileID: 393819369}
   - {fileID: 694754581}
+  - {fileID: 834195318}
   - {fileID: 1296563017}
   - {fileID: 1325835900}
   - {fileID: 1020540085}
@@ -47165,11 +47318,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (8)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -47224,6 +47372,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (8)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -47746,11 +47899,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (11)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -47805,6 +47953,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (11)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -48198,11 +48351,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss (12)
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -48257,6 +48405,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss (12)
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
@@ -48368,11 +48521,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 934550771}
     m_Modifications:
-    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
-        type: 3}
-      propertyPath: m_Name
-      value: LampWithChain (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 5886832347021737547, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -48427,6 +48575,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
+        type: 3}
+      propertyPath: m_Name
+      value: LampWithChain (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5886832345223353714, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
@@ -54101,16 +54254,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3854131659587392882, guid: 2b75023c8c3db6c40b0bc8b42e6e5155,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 8343959927357817744, guid: 2b75023c8c3db6c40b0bc8b42e6e5155,
         type: 3}
       propertyPath: fallingDelay
       value: 1.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3854131659587392882, guid: 2b75023c8c3db6c40b0bc8b42e6e5155,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b75023c8c3db6c40b0bc8b42e6e5155, type: 3}
 --- !u!4 &2116661907 stripped
@@ -55682,7 +55835,7 @@ RectTransform:
   - {fileID: 865007997}
   - {fileID: 5275528353620267909}
   m_Father: {fileID: 1809612010}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -56033,11 +56186,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 934550771}
     m_Modifications:
-    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
-        type: 3}
-      propertyPath: m_Name
-      value: LampWithChain
-      objectReference: {fileID: 0}
     - target: {fileID: 5886832347021737547, guid: d0901fdb2adc6bf47ba3368dcbde482a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -56092,6 +56240,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886832347021737545, guid: d0901fdb2adc6bf47ba3368dcbde482a,
+        type: 3}
+      propertyPath: m_Name
+      value: LampWithChain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0901fdb2adc6bf47ba3368dcbde482a, type: 3}
@@ -56241,6 +56394,11 @@ PrefabInstance:
       propertyPath: swordAttackTime
       value: 0.733
       objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855417, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: SwordObject
+      value: 
+      objectReference: {fileID: 601844219}
     - target: {fileID: 6091518693444855418, guid: 2a5e9d80768d2404da804b437e297077,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -56333,9 +56491,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 1993397791, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_Name
+      value: Attack1HitBox
+      objectReference: {fileID: 0}
     - target: {fileID: 1920639417, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
       propertyPath: m_Layer
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920639417, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1113396693, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
       propertyPath: m_Offset.x
@@ -56388,6 +56554,30 @@ PrefabInstance:
     - target: {fileID: 1113396701, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
       propertyPath: duration
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1920639419, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993397793, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993397793, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.67280674
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993397793, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_Size.y
+      value: 1.7757397
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993397793, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.60417044
+      objectReference: {fileID: 0}
+    - target: {fileID: 1993397793, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
+      propertyPath: m_Size.x
+      value: 1.8980315
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
@@ -56472,11 +56662,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 490061323}
     m_Modifications:
-    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
-        type: 3}
-      propertyPath: m_Name
-      value: TrapMoss
-      objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275505, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -56531,6 +56716,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6828742094872275516, guid: 4b4e0202bae609343b76ddacab92adb2,
+        type: 3}
+      propertyPath: m_Name
+      value: TrapMoss
       objectReference: {fileID: 0}
     - target: {fileID: 6828742094872275504, guid: 4b4e0202bae609343b76ddacab92adb2,
         type: 3}

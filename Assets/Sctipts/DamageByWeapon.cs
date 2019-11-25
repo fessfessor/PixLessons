@@ -9,7 +9,7 @@ public class DamageByWeapon : MonoBehaviour
 
     [SerializeField] GameObject parent;
     [SerializeField] float splashDuration;
-    [SerializeField] Side side;
+    
 
     private ObjectPooler pooler;
     private Player playerScript;
@@ -66,7 +66,7 @@ public class DamageByWeapon : MonoBehaviour
         
         GameObject splash = pooler.SpawnFromPool("BloodSplash", position, Quaternion.identity);
         SpriteRenderer sr = splash.GetComponent<SpriteRenderer>();
-        if (side == Side.left)
+        if (!playerScript.isRightDirection)
             sr.flipX = true;
         yield return new WaitForSeconds(splashDuration);
         sr.flipX = false;
@@ -75,7 +75,7 @@ public class DamageByWeapon : MonoBehaviour
 
 
 
-    enum Side { left, right }
+    
         
        
             

@@ -25,8 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private CameraShake cameraShaker;
     [SerializeField] private MagicBall magicBall;
     [SerializeField] private Health health;
-    [SerializeField] private GameObject SwordRight;
-    [SerializeField] private GameObject SwordLeft;
+    [SerializeField] private GameObject SwordObject;   
     [SerializeField] private GameObject fireButton;
     [SerializeField] private GameObject dieMenu;
     [SerializeField] private Joystick joystick;
@@ -47,7 +46,7 @@ public class Player : MonoBehaviour
     
     
     
-    private  bool isRightDirection;
+    [HideInInspector]public bool isRightDirection;
     private Vector3 jumpDirection;
     private bool isJumping;
     private bool canMove;
@@ -56,14 +55,15 @@ public class Player : MonoBehaviour
     private Vector3 direction;
     private int currentHealth;
     private bool isAttacking;
+    private bool isRolling;
     private bool isDeath;
     private bool shootReady;
     private ObjectPooler pooler;
     private UIController controller;
     private AudioManager audioManager;
 
-    private Collider2D SwordRightCollider;
-    private Collider2D SwordLeftCollider;
+    private Collider2D SwordAttack1Collider;
+    
     
     private Image fireButtonImage;
     private float rechargeTimer;    
@@ -104,8 +104,8 @@ public class Player : MonoBehaviour
         currentHealth = Health.HealthCount;
         cameraShaker = transform.GetComponent<CameraShake>();
 
-        SwordRightCollider = SwordRight.GetComponent<Collider2D>();
-        SwordLeftCollider = SwordLeft.GetComponent<Collider2D>();
+        SwordAttack1Collider = SwordObject.GetComponent<Collider2D>();
+        
         fireButtonImage = fireButton.GetComponent<Image>();
 
         rechargeTimer = shootRecharge;
@@ -162,6 +162,9 @@ public class Player : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.Space))
                     Jump();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                    Roll();
             }
 #endif
         }
@@ -169,13 +172,18 @@ public class Player : MonoBehaviour
         if (transform.position.y < minHeight)
             resetHeroPoition();
 
+    
+
+
+        //Ориентация персонажа
         if (direction.x > 0) {
-            isRightDirection = true;
-            spriteR.flipX = false;           
+            isRightDirection = true;          
+            transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         if (direction.x < 0) {
             isRightDirection = false;
-            spriteR.flipX = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+
         }
 
  
@@ -304,35 +312,21 @@ public class Player : MonoBehaviour
         canAttack = true;
     }
 
-    //методы для ивента. Появление\исчезание коллайдера меча
+    //методы для ивента. Появление\исчезание коллайдера меча. Вызывается из анимации
     void SwordAttackColliderStart() {
         rb.WakeUp();
-        if (isRightDirection) {
-            SwordRightCollider.enabled = true;            
-            
-        }
-        else {
-            SwordLeftCollider.enabled = true;
-            //numberHits = SwordLeftCollider.Cast(Vector2.left, hits);
-            //Debug.Log("Left - " + numberHits + " " + hits[0].transform.name + " " + hits[1].transform.name);
-        }
-            
-        
+        SwordAttack1Collider.enabled = true;
     }
 
     void SwordAttackColliderDone() {
-        if (isRightDirection)
-            SwordRightCollider.enabled = false;
-        else
-            SwordLeftCollider.enabled = false;
-
+        SwordAttack1Collider.enabled = false;
     }
 
     // Вызывается из анимации 
     void CheckShoot() {
         GameObject spawnedObj = pooler.SpawnFromPool("MagicBall", transform.position, Quaternion.identity);
         MagicBall mb = spawnedObj.GetComponent<MagicBall>();
-        mb.SetImpulse(Vector2.right, spriteR.flipX ? -shootForce : shootForce, this);
+        mb.SetImpulse(Vector2.right, shootForce, this);
 
     }
 
@@ -343,10 +337,7 @@ public class Player : MonoBehaviour
 
     #region Move
     public void Jump() {
-        isMoving = false;
-        //if (Input.GetKeyDown(KeyCode.Space) &&  groundD.isGrounded) {
-
-
+        isMoving = false;       
         if ( groundD.isGrounded) {
             isJumping = true;
             rb.velocity = Vector3.zero;
@@ -423,6 +414,17 @@ public class Player : MonoBehaviour
 #endif
 
 
+    }
+
+    public void Roll() {
+        if (!isJumping && !isAttacking) {            
+            animator.SetTrigger("roll");
+            if (isRightDirection)
+                rb.AddForce(Vector2.right * 10000, ForceMode2D.Force);
+            else
+                rb.AddForce(Vector2.left * 1000);
+
+        }
     }
 
     void resetHeroPoition() {
