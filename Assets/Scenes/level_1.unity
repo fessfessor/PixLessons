@@ -55053,7 +55053,32 @@ PrefabInstance:
     - target: {fileID: 1344657104777902529, guid: 942e2cd9aab94ba4d871728e4d5564e3,
         type: 3}
       propertyPath: m_Mass
-      value: 100
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344657104777902529, guid: 942e2cd9aab94ba4d871728e4d5564e3,
+        type: 3}
+      propertyPath: m_BodyType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344657104777902529, guid: 942e2cd9aab94ba4d871728e4d5564e3,
+        type: 3}
+      propertyPath: m_SleepingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344657104777902529, guid: 942e2cd9aab94ba4d871728e4d5564e3,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344657104777902529, guid: 942e2cd9aab94ba4d871728e4d5564e3,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3603434038853835681, guid: 942e2cd9aab94ba4d871728e4d5564e3,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 942e2cd9aab94ba4d871728e4d5564e3, type: 3}
@@ -55608,26 +55633,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 881912941158177685, guid: 214df0e8b75169a42a42b938bc7db675,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.00078201294
-      objectReference: {fileID: 0}
-    - target: {fileID: 1501134013488522170, guid: 214df0e8b75169a42a42b938bc7db675,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.00078201294
-      objectReference: {fileID: 0}
-    - target: {fileID: 3075555616350599950, guid: 214df0e8b75169a42a42b938bc7db675,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.00078201294
-      objectReference: {fileID: 0}
-    - target: {fileID: 8081926512205776175, guid: 214df0e8b75169a42a42b938bc7db675,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: -0.00078201294
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 214df0e8b75169a42a42b938bc7db675, type: 3}
@@ -56578,6 +56583,11 @@ PrefabInstance:
     - target: {fileID: 1993397793, guid: 2a5e9d80768d2404da804b437e297077, type: 3}
       propertyPath: m_Size.x
       value: 1.8980315
+      objectReference: {fileID: 0}
+    - target: {fileID: 6091518693444855420, guid: 2a5e9d80768d2404da804b437e297077,
+        type: 3}
+      propertyPath: m_SleepingMode
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a5e9d80768d2404da804b437e297077, type: 3}

@@ -45,6 +45,7 @@ public class SimplePatrol : MonoBehaviour
 
     #region startUpdate
     private void Start() {
+
         enemyBase = GameManager.Instance.enemyBase;
 
         currentHealth = GetComponent<Health>().HealthCount;
@@ -54,20 +55,23 @@ public class SimplePatrol : MonoBehaviour
         EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, OnEvent);
         GameManager.Instance.enemyDangerContainer.Add(gameObject, dangerClass);
 
-                
 
+        rb = GetComponent<Rigidbody2D>();
         startPosition = transform.position;
         leftBorderPosition = leftBorder.transform.position;
         rightBorderPosition = rightBorder.transform.position;
         isDamaged = false;
         isRised = false;
+
+    
         
-        
+
 
     }
 
 
     private void Update() {
+        
         //Проверяем изменение здоровья
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
             isDamaged = true;
@@ -86,7 +90,7 @@ public class SimplePatrol : MonoBehaviour
         if (currentHealth <= 0 && !isDeath)
             Death();
 
-        if (isRised && animator.GetCurrentAnimatorStateInfo(0).IsName("Walk")) {
+        if (isRised && !animator.GetCurrentAnimatorStateInfo(0).IsName("Death")) {
             coll.enabled = true;
             rb.gravityScale = 1;
             Move();
@@ -190,7 +194,7 @@ public class SimplePatrol : MonoBehaviour
 
     public void Damage() {
         if (isAttacking && enemy!=null) {
-            //TODO дописать атаку скелету
+            
         }
     }
 

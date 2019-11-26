@@ -75,6 +75,8 @@ public class Player : MonoBehaviour
 
     private int comboCount = 0;
     private float comboTimer = 0;
+    private float slowSpeed;
+    private float normarSpeed;
 
     
 
@@ -122,8 +124,9 @@ public class Player : MonoBehaviour
         else {
             jumpButtonEnabled = false;
         }
-        
 
+        slowSpeed = speed / 2;
+        normarSpeed = speed;
        // InitUIController();
 
     }
@@ -134,6 +137,10 @@ public class Player : MonoBehaviour
         //Таймер для комбо
         if (comboCount > 0)
             comboTimer += Time.deltaTime;
+
+        if (comboCount > 3)
+            comboCount = 0;
+
         animator.SetInteger("comboCount", comboCount);
 
         //Анимации
@@ -149,7 +156,7 @@ public class Player : MonoBehaviour
 
         //Движение
         if (!isDeath) {
-            if (canMove) {
+            if (canMove && !isAttacking) {
                 Move();
             }
 
@@ -195,13 +202,36 @@ public class Player : MonoBehaviour
         }
 
 
-        //Debug.Log($"TIMER - " + comboTimer);
+        //Перекат
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Roll")) {
+            canMove = false;
+            isRolling = true;
+
+            if (isRightDirection) {
+                rb.velocity = Vector2.right * 8;
+                IgnoreEnemyAndTrap(true);
+            }
+            else {
+                rb.velocity = Vector2.left * 8;
+                IgnoreEnemyAndTrap(true);
+            } 
+                
+            
+        }else {
+            canMove = true;
+            isRolling = false;
+            IgnoreEnemyAndTrap(false);
+        }
 
  
     }
 
+    
+
 
     private void Update() {
+        CheckAttacking();
+
         //Таймер перезарядки выстрела
         if (rechargeTimer < shootRecharge) {
             rechargeTimer += Time.deltaTime;
@@ -217,12 +247,9 @@ public class Player : MonoBehaviour
             isDamaged = true; 
             currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
             if(currentHealth > 0 && !bloodLoss) {
-                StartCoroutine(invulnerability.GetInvulnerability());
+                StartCoroutine(invulnerability.GetInvulnerability(true));
                 AudioManager.Instance.Play("Pain");
                 animator.SetTrigger("hit");
-                if (groundD.isGrounded)                  
-                    rb.velocity = new Vector2(0,0); // TODO Непонятно почем у не работает
-
 
             }
                 
@@ -239,9 +266,13 @@ public class Player : MonoBehaviour
 
         //При уменьшении здоровья трясем камеру
         if (isDamaged && ShakeCameraOnDamage && !bloodLoss) {
-            ProCamera2DShake.Instance.ShakeUsingPreset("PlayerPain");
-            //cameraShaker.Shake();
+            ProCamera2DShake.Instance.ShakeUsingPreset("PlayerPain");          
         }
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("hit"))
+            speed = slowSpeed;
+        else
+            speed = normarSpeed;
             
         
         // Звуки шагов
@@ -277,20 +308,17 @@ public class Player : MonoBehaviour
 
     IEnumerator MagicAttack() {
         rechargeTimer = 0f;
-        animator.SetTrigger("isShooting");
-        isAttacking = true;
+        animator.SetTrigger("isShooting");       
         shootReady = false;
         canAttack = false;
-        canMove = false;
-        rb.velocity = Vector2.zero;
+        canMove = false;       
         AudioManager.Instance.Play("FireballCast");
         AudioManager.Instance.Play("BloodLoss");
         //За выстрел платим здоровьем
         //HealthChange(healthByShoot, true);
         
         // Время анимации
-        yield return new WaitForSeconds(1.25f);        
-        isAttacking = false;
+        yield return new WaitForSeconds(1.25f);              
         canMove = true;
         canAttack = true;
         // Время перезарядки
@@ -302,59 +330,35 @@ public class Player : MonoBehaviour
 
     public void Attack() {
         if (!isAttacking && !isJumping) {
-
+            
             canAttack = false;
             canMove = false;
             AudioManager.Instance.Play("SwordSwing");
-
-
-            switch (comboCount) {
-                case 0:
-                    animator.SetTrigger("isSwordAttack");
-                    break;
-                case 1:
-                    animator.SetTrigger("Attack2");
-                    break;
-                case 2:
-                    animator.SetTrigger("Attack3");
-                    break;
-                case 3:
-                    animator.SetTrigger("Attack4");
-                    break;
-                default:
-                    break;
-            }
-
+            animator.SetTrigger("isSwordAttack");
             StartCoroutine(SwordAttack());
+
+            
+            if (comboTimer < 1.5f) {
+                comboTimer = 0f;                
+                StopCoroutine("ComboDelay");
+                 StartCoroutine("ComboDelay");
+            }
 
         }
     }   
     IEnumerator SwordAttack() {
-      
-        isAttacking = true;
-        //Если на земле тормозимся
-        if (groundD.isGrounded)
-            rb.velocity = new Vector2(0, 0);
 
-
-        comboCount++;       
-        if (comboTimer < 3f) {           
-            comboTimer = 0f;
-            Debug.Log("HERE!");
-            StopCoroutine(ComboDelay());
-           // StartCoroutine(ComboDelay());
-        }
-        yield return new WaitForSeconds(swordAttackTime);      
-
+        yield return new WaitForSeconds(swordAttackTime);
+        comboCount++;
         BloodLoss(healthLossByHit);
-        isAttacking = false;
+        
         canMove = true;
         canAttack = true;
     }
 
    
     IEnumerator ComboDelay() {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
         comboCount = 0;
         comboTimer = 0f;
     }
@@ -463,16 +467,25 @@ public class Player : MonoBehaviour
 
     }
 
+    //Вызывается кнопкой
     public void Roll() {
         if (!isJumping && !isAttacking) {            
-            animator.SetTrigger("roll");
-           // if (isRightDirection)
-          //      rb.AddForce(Vector2.right * 10000, ForceMode2D.Force);
-          //  else
-           //     rb.AddForce(Vector2.left * 1000);
-
+            animator.SetTrigger("roll");            
         }
     }
+
+    public void Rolling(bool start) {
+        if (start)
+            isRolling = true;
+
+    }
+
+    private void IgnoreEnemyAndTrap(bool ignore) {
+        Physics2D.IgnoreLayerCollision(8, 9, ignore);
+        Physics2D.IgnoreLayerCollision(8, 11, ignore);
+    }
+
+
 
     void resetHeroPoition() {
         rb.velocity = new Vector2(0, 0);
@@ -489,6 +502,22 @@ public class Player : MonoBehaviour
     //controller.Fire.onClick.AddListener(Shoot);
     // 
 
+    void CheckAttacking() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hero-Attack")
+            ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2")
+            ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Attack3")
+            ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("Attack4")
+            ||
+            animator.GetCurrentAnimatorStateInfo(0).IsName("CastMagic")) {
+
+            isAttacking = true;
+            rb.velocity = Vector2.zero;
+        } else
+            isAttacking = false;
+    }
 
 
     #region bloodMechanics
