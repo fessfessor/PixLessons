@@ -294,7 +294,7 @@ public class Player : MonoBehaviour
         isDeath = true;
         AudioManager.Instance.Play("PlayerDie");
         animator.SetTrigger("death");
-        //Time.timeScale = 0.1f;
+       
 
     }
 
@@ -310,19 +310,17 @@ public class Player : MonoBehaviour
         rechargeTimer = 0f;
         animator.SetTrigger("isShooting");       
         shootReady = false;
-        canAttack = false;
-        canMove = false;       
+        canAttack = false;             
         AudioManager.Instance.Play("FireballCast");
         AudioManager.Instance.Play("BloodLoss");
-        //За выстрел платим здоровьем
-        //HealthChange(healthByShoot, true);
+
         
         // Время анимации
-        yield return new WaitForSeconds(1.25f);              
-        canMove = true;
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);              
+        
         canAttack = true;
         // Время перезарядки
-        yield return new WaitForSeconds(shootRecharge - 1.25f);
+        yield return new WaitForSeconds(shootRecharge - animator.GetCurrentAnimatorStateInfo(0).length);
         shootReady = true;      
     }
 
@@ -331,14 +329,12 @@ public class Player : MonoBehaviour
     public void Attack() {
         if (!isAttacking && !isJumping) {
             
-            canAttack = false;
-            canMove = false;
+            //canAttack = false;             
             AudioManager.Instance.Play("SwordSwing");
             animator.SetTrigger("isSwordAttack");
             StartCoroutine(SwordAttack());
-
-            
-            if (comboTimer < 1.5f) {
+ 
+            if (comboTimer < 2f) {
                 comboTimer = 0f;                
                 StopCoroutine("ComboDelay");
                  StartCoroutine("ComboDelay");
@@ -348,17 +344,19 @@ public class Player : MonoBehaviour
     }   
     IEnumerator SwordAttack() {
 
-        yield return new WaitForSeconds(swordAttackTime);
+        //canAttack = true;
+        isAttacking = true;
         comboCount++;
-        BloodLoss(healthLossByHit);
+        yield return new WaitForSeconds(1);
         
-        canMove = true;
-        canAttack = true;
+        isAttacking = false;
+        //BloodLoss(healthLossByHit);
+        //canAttack = true;
     }
 
    
     IEnumerator ComboDelay() {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
         comboCount = 0;
         comboTimer = 0f;
     }
