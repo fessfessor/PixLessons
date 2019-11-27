@@ -3458,7 +3458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossSpawnCount: 5
-  isTest: ground_2_empty
+  isTest: 
 --- !u!1001 &260508214
 PrefabInstance:
   m_ObjectHideFlags: 0

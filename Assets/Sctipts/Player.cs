@@ -51,6 +51,7 @@ public class Player : MonoBehaviour
     private bool isJumping;
     private bool canMove;
     private bool isMoving;
+    private bool isHited;
     private bool canAttack;
     private Vector3 direction;
     private int currentHealth;
@@ -134,12 +135,6 @@ public class Player : MonoBehaviour
 
     void FixedUpdate() {
 
-        //Таймер для комбо
-        if (comboCount > 0)
-            comboTimer += Time.deltaTime;
-
-        if (comboCount > 3)
-            comboCount = 0;
 
         animator.SetInteger("comboCount", comboCount);
 
@@ -187,12 +182,12 @@ public class Player : MonoBehaviour
         if (transform.position.y < minHeight)
             resetHeroPoition();
 
-    
+
 
 
         //Ориентация персонажа
         if (direction.x > 0) {
-            isRightDirection = true;          
+            isRightDirection = true;
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
         if (direction.x < 0) {
@@ -214,16 +209,25 @@ public class Player : MonoBehaviour
             else {
                 rb.velocity = Vector2.left * 8;
                 IgnoreEnemyAndTrap(true);
-            } 
-                
-            
-        }else {
+            }
+
+
+        } else {
             canMove = true;
             isRolling = false;
             IgnoreEnemyAndTrap(false);
         }
 
- 
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("getHit")) {
+            speed = 0;
+            isHited = true;
+        }
+        else {
+            speed = normarSpeed;
+            isHited = false;
+        }
+            
+
     }
 
     
@@ -249,7 +253,8 @@ public class Player : MonoBehaviour
             if(currentHealth > 0 && !bloodLoss) {
                 StartCoroutine(invulnerability.GetInvulnerability(true));
                 AudioManager.Instance.Play("Pain");
-                animator.SetTrigger("hit");
+                if(!isAttacking&& !isJumping)
+                    animator.SetTrigger("hit");
 
             }
                 
@@ -269,10 +274,7 @@ public class Player : MonoBehaviour
             ProCamera2DShake.Instance.ShakeUsingPreset("PlayerPain");          
         }
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("hit"))
-            speed = slowSpeed;
-        else
-            speed = normarSpeed;
+       
             
         
         // Звуки шагов
@@ -313,8 +315,7 @@ public class Player : MonoBehaviour
         canAttack = false;             
         AudioManager.Instance.Play("FireballCast");
         AudioManager.Instance.Play("BloodLoss");
-
-        
+       
         // Время анимации
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);              
         
@@ -327,39 +328,28 @@ public class Player : MonoBehaviour
     
 
     public void Attack() {
-        if (!isAttacking && !isJumping) {
+        
             
             //canAttack = false;             
             AudioManager.Instance.Play("SwordSwing");
             animator.SetTrigger("isSwordAttack");
             StartCoroutine(SwordAttack());
  
-            if (comboTimer < 2f) {
-                comboTimer = 0f;                
-                StopCoroutine("ComboDelay");
-                 StartCoroutine("ComboDelay");
-            }
-
-        }
+           
     }   
     IEnumerator SwordAttack() {
 
         //canAttack = true;
-        isAttacking = true;
-        comboCount++;
-        yield return new WaitForSeconds(1);
-        
+        isAttacking = true;    
+        yield return new WaitForSeconds(1);       
         isAttacking = false;
+        
         //BloodLoss(healthLossByHit);
         //canAttack = true;
     }
 
    
-    IEnumerator ComboDelay() {
-        yield return new WaitForSeconds(2f);
-        comboCount = 0;
-        comboTimer = 0f;
-    }
+    
 
     //методы для ивента. Появление\исчезание коллайдера меча. Вызывается из анимации
     void SwordAttackColliderStart() {
@@ -387,7 +377,11 @@ public class Player : MonoBehaviour
     #region Move
     public void Jump() {
         isMoving = false;       
-        if ( groundD.isGrounded) {
+        if ( groundD.isGrounded
+            && !animator.GetCurrentAnimatorStateInfo(0).IsName("Roll") 
+            && !isAttacking
+            && !isHited
+            ) {
             isJumping = true;
             rb.velocity = Vector3.zero;
             AudioManager.Instance.Play("Jump");
@@ -517,6 +511,13 @@ public class Player : MonoBehaviour
             isAttacking = false;
     }
 
+    public void ComboStart(int comboCount) {
+        this.comboCount = comboCount;       
+    }
+
+    public void ComboEnd() {
+        comboCount = 0;
+    }
 
     #region bloodMechanics
     // Механика "кровавых атак". 
