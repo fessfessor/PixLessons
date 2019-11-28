@@ -45,9 +45,9 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Start() {
-        //foreach (KeyValuePair<GameObject, IPooledObject> el in pooledObjectContainer) {
-       //     Debug.Log("Key = " + el.Key.transform.name);
-       // }
+        // Игнорирования врагами коллизий с врагами
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Traps"), LayerMask.NameToLayer("Trap"));
     }
 
     // Кнопка паузы

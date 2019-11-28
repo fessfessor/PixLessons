@@ -63,7 +63,8 @@ public class SimplePatrol : MonoBehaviour
         isDamaged = false;
         isRised = false;
 
-    
+        
+
         
 
 

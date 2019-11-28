@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
 
 
     void FixedUpdate() {
-
+        
 
         animator.SetInteger("comboCount", comboCount);
 
@@ -143,7 +143,7 @@ public class Player : MonoBehaviour
         if (!isJumping && !groundD.isGrounded)
             animator.SetTrigger("fallWithoutJump");
 
-        isJumping = !groundD.isGrounded;
+        isJumping = !groundD.isGrounded && (animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping") || animator.GetCurrentAnimatorStateInfo(0).IsName("JumpingLand"));
 
         animator.SetFloat("speed", Mathf.Abs(direction.x));
         animator.SetFloat("isFalling", rb.velocity.y);
@@ -381,6 +381,7 @@ public class Player : MonoBehaviour
             && !animator.GetCurrentAnimatorStateInfo(0).IsName("Roll") 
             && !isAttacking
             && !isHited
+            && !isJumping
             ) {
             isJumping = true;
             rb.velocity = Vector3.zero;
