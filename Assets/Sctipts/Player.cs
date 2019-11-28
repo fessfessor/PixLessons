@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     private int currentHealth;
     private bool isAttacking;
     private bool isRolling;
+    private bool isLanding;
     private bool isDeath;
     private bool shootReady;
     private ObjectPooler pooler;
@@ -143,7 +144,7 @@ public class Player : MonoBehaviour
         if (!isJumping && !groundD.isGrounded)
             animator.SetTrigger("fallWithoutJump");
 
-        isJumping = !groundD.isGrounded && (animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping") || animator.GetCurrentAnimatorStateInfo(0).IsName("JumpingLand"));
+        isJumping = !groundD.isGrounded;
 
         animator.SetFloat("speed", Mathf.Abs(direction.x));
         animator.SetFloat("isFalling", rb.velocity.y);
@@ -151,7 +152,7 @@ public class Player : MonoBehaviour
 
         //Движение
         if (!isDeath) {
-            if (canMove && !isAttacking) {
+            if (canMove && !isAttacking ) {
                 Move();
             }
 
@@ -236,6 +237,7 @@ public class Player : MonoBehaviour
     private void Update() {
         CheckAttacking();
 
+       
         //Таймер перезарядки выстрела
         if (rechargeTimer < shootRecharge) {
             rechargeTimer += Time.deltaTime;
@@ -377,11 +379,12 @@ public class Player : MonoBehaviour
     #region Move
     public void Jump() {
         isMoving = false;       
-        if ( groundD.isGrounded
-            && !animator.GetCurrentAnimatorStateInfo(0).IsName("Roll") 
+        if ( groundD.isGrounded         
             && !isAttacking
-            && !isHited
-            && !isJumping
+            && !isHited         
+            && !isLanding
+            && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")
+
             ) {
             isJumping = true;
             rb.velocity = Vector3.zero;
@@ -518,6 +521,14 @@ public class Player : MonoBehaviour
 
     public void ComboEnd() {
         comboCount = 0;
+    }
+
+    public void HeroLandStart() {
+        isLanding = true;
+    }
+
+    public void HeroLandEnd() {
+        isLanding = false;
     }
 
     #region bloodMechanics
