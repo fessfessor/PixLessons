@@ -9,8 +9,6 @@ public class Health : MonoBehaviour {
 
     private int maxHealth;
 
-    private Vector3 startPosition;
-
     private bool isPooledObj;
 
 
@@ -24,10 +22,7 @@ public class Health : MonoBehaviour {
         isPooledObj = GetComponent<IPooledObject>() != null;
     }
 
-    private void OnEnable() {
-        startPosition = transform.position;
-    }
-
+   
     public int HealthCount { get => healthCount; set => healthCount = (value < maxHealth) ? value : maxHealth; }
 
 
@@ -35,11 +30,11 @@ public class Health : MonoBehaviour {
         HealthCount -= damage;
         if (HealthCount <= 0 && gameObject != GameManager.Instance.player) {
             if (isPooledObj) {// Если это объект из пула ,возвращаем его туда
-                
-                ObjectPooler.Instance.ReturnToPool(transform.name, gameObject,0.5f);
+                //TODO Что-нибудь сделать с анимациями смерти, чтобы не хардкодить задержку отправки в пулер
+                ObjectPooler.Instance.ReturnToPool(transform.name, gameObject,3f);
             }
             else {
-                Destroy(gameObject, 0.5f);
+                Destroy(gameObject, 1f);
             }
             
         }

@@ -147,8 +147,8 @@ public class SpawnManager : MonoBehaviour
             // Сообщаем что заспавнили блок земли
             Notification(block);
         }
-        Debug.Log($"Спавним - {spawnedGroundLog.Last().ToString()}");
-        Debug.Log($"Блоков до босса - {blockCount}");
+        //Debug.Log($"Спавним - {spawnedGroundLog.Last().ToString()}");
+        //Debug.Log($"Блоков до босса - {blockCount}");
     }
 
 

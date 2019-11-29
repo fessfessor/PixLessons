@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         // Игнорирования врагами коллизий с врагами
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"));
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Traps"), LayerMask.NameToLayer("Trap"));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Traps"), LayerMask.NameToLayer("Traps"));
     }
 
     // Кнопка паузы

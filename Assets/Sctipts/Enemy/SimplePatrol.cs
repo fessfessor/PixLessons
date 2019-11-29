@@ -8,12 +8,10 @@ public class SimplePatrol : MonoBehaviour
     #region variables
     [SerializeField] private GameObject leftBorder;
     [SerializeField] private GameObject rightBorder;
-    [SerializeField] private Rigidbody2D rb;
-    
-    [SerializeField] private Collider2D coll;
-    [SerializeField] private Animator animator;
-    [SerializeField] private SpriteRenderer sr;
+ 
     [SerializeField] private ENEMY_DANGER dangerClass;
+    [SerializeField] public int damage;
+
 
    
 
@@ -22,9 +20,9 @@ public class SimplePatrol : MonoBehaviour
 
 
     private int currentHealth;
-    private bool isRised;
+    [SerializeField]private bool isRised;    
     private bool isDamaged;
-    private bool isDeath = false;
+    [HideInInspector] public bool isDeath = false;
     private Vector3 startPosition;
     private Vector3 leftBorderPosition;
     private Vector3 rightBorderPosition;
@@ -33,8 +31,13 @@ public class SimplePatrol : MonoBehaviour
     private AttackArea attackArea;
     private GameObject enemy;
 
-    
-    
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Collider2D coll;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public SpriteRenderer sr;
+
+
+
 
 
 
@@ -45,6 +48,10 @@ public class SimplePatrol : MonoBehaviour
 
     #region startUpdate
     private void Start() {
+        coll = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
 
         enemyBase = GameManager.Instance.enemyBase;
 
@@ -56,14 +63,12 @@ public class SimplePatrol : MonoBehaviour
         GameManager.Instance.enemyDangerContainer.Add(gameObject, dangerClass);
 
 
-        rb = GetComponent<Rigidbody2D>();
+        
         startPosition = transform.position;
         leftBorderPosition = leftBorder.transform.position;
         rightBorderPosition = rightBorder.transform.position;
         isDamaged = false;
-        isRised = false;
-
-        
+        //isRised = false;
 
         
 
@@ -78,8 +83,7 @@ public class SimplePatrol : MonoBehaviour
             isDamaged = true;
             //Уведомляем слушателей, что у скелета изменилось здоровье
             EventManager.Instance.PostNotification(EVENT_TYPE.HEALTH_CHANGE, this, GameManager.Instance.healthContainer[gameObject]);
-        }
-        else 
+        }else 
             isDamaged = false;
             
         
@@ -104,7 +108,7 @@ public class SimplePatrol : MonoBehaviour
     #endregion
 
 
-    public void Rise() {
+    public virtual void Rise() {
         if (!isRised) {
             animator.SetTrigger("Rise");
             AudioManager.Instance.Play("Zomby");
@@ -115,12 +119,12 @@ public class SimplePatrol : MonoBehaviour
     }
 
 
-    void Death() {
+    public virtual void Death() {
         isDeath = true;
         AudioManager.Instance.Play("ZombyDie");
         AudioManager.Instance.Stop("Zomby");
         
-        animator.SetTrigger("isDeath");      
+        animator.SetTrigger("Death");      
         NonCollision();
     }
 
@@ -195,10 +199,10 @@ public class SimplePatrol : MonoBehaviour
 
     public void Damage() {
         if (isAttacking && enemy!=null) {
-            
+            GameManager.Instance.healthContainer[enemy].takeHit(damage);
         }
     }
 
-    
-    
+
+
 }

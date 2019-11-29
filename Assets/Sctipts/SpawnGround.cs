@@ -6,13 +6,18 @@ using UnityEditor;
 public class SpawnGround : MonoBehaviour, IPooledObject
 {
     private WaitForSeconds timer;
-    ObjectPooler pooler;
-    private Collider2D collider2d;   
+    private ObjectPooler pooler;
+    private Collider2D collider2d;
+
+    // Зависимость шанса спавна блока от пройденной дистанции. Возможно когда нибудь будет использоваться
+    public AnimationCurve chanceFromDistance;
+
 
     private void Start() {
         timer = new WaitForSeconds(0.5f);
         pooler = ObjectPooler.Instance;
         collider2d = GetComponent<Collider2D>();
+      
     }
 
     public void OnReturnToPool() {
