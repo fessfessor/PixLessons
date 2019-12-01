@@ -1,5 +1,6 @@
 ﻿
 using System.Collections;
+using Sctipts;
 using UnityEngine;
 using UnityEngine.UI;
 

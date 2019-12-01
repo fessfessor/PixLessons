@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Sctipts;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour {
     public EnemyBase enemyBase;
     [HideInInspector]public PlayerInventory inventory;
     [HideInInspector]public GameObject player;
+    [HideInInspector]public GameObject playerTrigger; // Эта штука нужна чтобы при перекатах срабатывали методы типа OnTriggerExit и т.п.
     [HideInInspector]public GameObject darkWall;
 
     private void Awake() {
@@ -37,7 +39,8 @@ public class GameManager : MonoBehaviour {
         enemyDangerContainer = new Dictionary<GameObject, ENEMY_DANGER>();
         player = FindObjectOfType<Player>().gameObject;
         darkWall = FindObjectOfType<DarkWall>().gameObject;
-        
+        playerTrigger = player.GetComponentInChildren<PlayerTrigger>().gameObject;
+
 
 
 

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SimplePatrol : MonoBehaviour
+public class SimplePatrol : MonoBehaviour, IEnemy
 {
     #region variables
     [SerializeField] private GameObject leftBorder;
@@ -61,6 +61,7 @@ public class SimplePatrol : MonoBehaviour
 
         EventManager.Instance.AddListener(EVENT_TYPE.HEALTH_CHANGE, OnEvent);
         GameManager.Instance.enemyDangerContainer.Add(gameObject, dangerClass);
+        
 
 
         
@@ -81,8 +82,6 @@ public class SimplePatrol : MonoBehaviour
         //Проверяем изменение здоровья
         if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
             isDamaged = true;
-            //Уведомляем слушателей, что у скелета изменилось здоровье
-            EventManager.Instance.PostNotification(EVENT_TYPE.HEALTH_CHANGE, this, GameManager.Instance.healthContainer[gameObject]);
         }else 
             isDamaged = false;
             
@@ -137,7 +136,7 @@ public class SimplePatrol : MonoBehaviour
 
 
     //Простое движение
-    void Move() {
+    public void Move() {
         if (!isAttacking) {
             if (isRightDirection && currentHealth > 0) {
                 //sr.flipX = true;
@@ -183,6 +182,8 @@ public class SimplePatrol : MonoBehaviour
         //Debug.Log($"Изменилось здоровье у {sender.name}. Стало {health.HealthCount}");       
     }
 
+
+    
 
     //Вызывается из дочернего объекта "Attack Area"
     public void Attack(bool isAttacking, GameObject enemy) {

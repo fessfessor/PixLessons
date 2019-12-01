@@ -4,33 +4,33 @@ using UnityEngine;
 
 public class AttackArea : MonoBehaviour
 {
-    private SimplePatrol simplePatrol;
-   
+    private IEnemy parentComponent;
+    private Collider2D col;
     
     
 
     private void Start() {
-        simplePatrol = transform.parent.GetComponent<SimplePatrol>();
-       
-       
+        parentComponent = transform.parent.GetComponent<IEnemy>();
+        col = GetComponent<Collider2D>();
+
     }
 
 
     private void OnTriggerEnter2D(Collider2D col) {
-        bool isPlayer = col.gameObject == GameManager.Instance.player;
+        var isPlayer = col.gameObject == GameManager.Instance.player;
         if (isPlayer) {
-            simplePatrol.Attack(true, col.gameObject);
+            parentComponent.Attack(true, col.gameObject);
+            
         }
     }
 
     private void OnTriggerExit2D(Collider2D col) {
-        bool isPlayer = col.gameObject == GameManager.Instance.player;
+        var o = col.gameObject;
+        var isPlayer = o == GameManager.Instance.player || o == GameManager.Instance.playerTrigger;
         if (isPlayer) {
-            simplePatrol.Attack(false, null);
+            parentComponent.Attack(false, null);
         }
     }
-
-   
 
    
 
