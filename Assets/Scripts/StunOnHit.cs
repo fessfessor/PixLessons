@@ -7,7 +7,6 @@ public class StunOnHit : MonoBehaviour
     private Health health;
     private int currentHealth;
     private bool isDamaged;
-    [SerializeField] float animationDelay;
     [SerializeField] float stunDuration;
     private Rigidbody2D rb;
     ObjectPooler pooler;

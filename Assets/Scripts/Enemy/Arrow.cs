@@ -10,11 +10,13 @@ public class Arrow : MonoBehaviour, IPooledObject
     private Vector3 direction;
     private bool hit;
     private Transform tempParent;
+    private Collider2D colComponent;
     
     
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        colComponent = GetComponent<Collider2D>();
         tempParent = transform.parent;
 
 
@@ -45,13 +47,23 @@ public class Arrow : MonoBehaviour, IPooledObject
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        
         rb.velocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;
         hit = true;
         transform.parent = col.transform;
 
         Destroy(gameObject, 1f);
+
+        if (GameManager.Instance.healthContainer.ContainsKey(col.gameObject))
+        {
+            GameManager.Instance.healthContainer[col.gameObject].takeHit(GameSettings.Instance.ArrowDamage);
+        }
+        else
+        {
+            colComponent.enabled = false;
+        }
+
+        
         //ObjectPooler.Instance.ReturnToPool("Arrow", gameObject, 1f );
 
     }

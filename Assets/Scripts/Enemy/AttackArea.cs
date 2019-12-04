@@ -19,7 +19,7 @@ public class AttackArea : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col) {
         var isPlayer = col.gameObject == GameManager.Instance.player;
         if (isPlayer) {
-            parentComponent.Attack(true, col.gameObject);
+            parentComponent.Attack(true, col.gameObject, gameObject);
             
         }
     }
@@ -28,7 +28,7 @@ public class AttackArea : MonoBehaviour
         var o = col.gameObject;
         var isPlayer = o == GameManager.Instance.player || o == GameManager.Instance.playerTrigger;
         if (isPlayer) {
-            parentComponent.Attack(false, null);
+            parentComponent.Attack(false, null, gameObject);
         }
     }
 

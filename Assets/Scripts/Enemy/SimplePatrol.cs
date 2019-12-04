@@ -186,7 +186,7 @@ public class SimplePatrol : MonoBehaviour, IEnemy
     
 
     //Вызывается из дочернего объекта "Attack Area"
-    public void Attack(bool isAttacking, GameObject enemy) {
+    public void Attack(bool isAttacking, GameObject enemy, GameObject sender) {
         this.isAttacking = isAttacking;
         this.enemy = enemy;
 
