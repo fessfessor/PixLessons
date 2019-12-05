@@ -74,9 +74,8 @@ public class SkeletonArcher : MonoBehaviour, IEnemy
             {
                 {typeof(PatrolState), new PatrolState(this) },
                 {typeof(ShootingState), new ShootingState(this) },
-                {typeof(HittingState), new HittingState(this) },
+                {typeof(HittingState), new HittingState(this) }
                 
-
             };
         }
 

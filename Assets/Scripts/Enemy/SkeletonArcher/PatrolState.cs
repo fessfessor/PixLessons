@@ -19,9 +19,16 @@ public class PatrolState : BaseState
         Moving();
 
         if (_archer.inShootArea)
+        {
+            _archer.anim.SetBool("isPatroling", false);
             return typeof(ShootingState);
-        else if(_archer.inAttackArea)
+        }
+        else if (_archer.inAttackArea)
+        {
+            _archer.anim.SetBool("isPatroling", false);
             return typeof(HittingState);
+        }
+            
 
         return null;
 
@@ -29,13 +36,14 @@ public class PatrolState : BaseState
 
     private void Moving()
     {
-        
+        _archer.anim.SetBool("isPatroling", true);
 
         if (_archer.isRightDirection && !_archer.isDeath) {
             rb.velocity = Vector2.right * _archer.speed;
             if (transform.position.x > _archer.rightBorderPosition.x) {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
                 _archer.isRightDirection = false;
+                Debug.Log("Revert SKELETON!");
             }
         }
         else if (!_archer.isRightDirection && !_archer.isDeath) {

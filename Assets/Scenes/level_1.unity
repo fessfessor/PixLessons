@@ -2661,7 +2661,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592784453}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.53, y: -1.39, z: 0}
+  m_LocalPosition: {x: -5.59, y: -1.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1374666324}
@@ -2984,7 +2984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 638593902}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.84, y: -1.32, z: 0}
+  m_LocalPosition: {x: 5.98, y: -1.32, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1374666324}
@@ -7193,9 +7193,9 @@ MonoBehaviour:
   ShootFreq: 3
   ShootPower: 20
   attackDamage: 30
-  attackFreq: 1
+  attackFreq: 2
   speed: 3
-  type: 2
+  type: 1
   arrowPrefab: {fileID: 4204378309084214682, guid: 5bb97e2f51148c24b869c30caa05e1d9,
     type: 3}
   leftBorderObject: {fileID: 592784453}
@@ -13502,8 +13502,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.120000005, y: -0.95736766}
-  m_Size: {x: 0.78, y: 1.8547354}
+  m_Offset: {x: -0.120000005, y: -1.4658487}
+  m_Size: {x: 0.78, y: 0.8377733}
   m_Direction: 0
 --- !u!1 &1739190588
 GameObject:
@@ -38462,7 +38462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!70 &2066063820
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
