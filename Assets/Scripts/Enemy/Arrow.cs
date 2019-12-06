@@ -28,7 +28,6 @@ public class Arrow : MonoBehaviour, IPooledObject
             // Направляем стрелу туда,куда направлен вектор скорости
             transform.right = Vector2.Lerp(transform.right, rb.velocity, Time.deltaTime);
         
-        
 
     }
 
@@ -57,6 +56,7 @@ public class Arrow : MonoBehaviour, IPooledObject
         if (GameManager.Instance.healthContainer.ContainsKey(col.gameObject))
         {
             GameManager.Instance.healthContainer[col.gameObject].takeHit(GameSettings.Instance.ArrowDamage);
+            colComponent.enabled = false;
         }
         else
         {

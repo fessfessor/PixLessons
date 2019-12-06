@@ -49,7 +49,7 @@ public class StateMachine : MonoBehaviour
         GUIStyle style = new GUIStyle();
         style.fontSize = 20;
         style.normal.textColor = Color.red;
-        Handles.Label(transform.position + Vector3.up * 3, CurrentState?.GetType().FullName , style);
+        Handles.Label(transform.position + Vector3.up * 3, CurrentState?.GetType().Name , style);
 
     }
 }

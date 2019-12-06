@@ -33,7 +33,8 @@ public class Health : MonoBehaviour {
                 //TODO Что-нибудь сделать с анимациями смерти, чтобы не хардкодить задержку отправки в пулер
                 ObjectPooler.Instance.ReturnToPool(transform.name, gameObject,3f);
             }
-            else {
+            else 
+            {
                 Destroy(gameObject, 1f);
             }
             

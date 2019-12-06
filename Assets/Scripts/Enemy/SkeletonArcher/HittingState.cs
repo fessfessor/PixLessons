@@ -1,55 +1,56 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HittingState : BaseState {
-    private SkeletonArcher _archer;
-    private float timer;
-    private bool firstEnterInState;
+namespace Assets.Scripts.Enemy.SkeletonArcher
+{
+    public class HittingState : BaseState {
+        private SkeletonArcher _archer;
+        private float timer;
+        private bool firstEnterInState;
 
-    public HittingState(SkeletonArcher _archer) : base(_archer.gameObject)
-    {
-        this._archer = _archer;
-        timer = _archer.attackFreq;
-    }
-
-    public override Type Tick()
-    {
-
-        CheckTransitionState();
-
-        if (timer > _archer.attackFreq)
+        public HittingState(SkeletonArcher _archer) : base(_archer.gameObject)
         {
-            Hitting();
-            timer = 0;
+            this._archer = _archer;
+            timer = _archer.attackFreq;
         }
 
-        if (!_archer.inAttackArea)
+        public override Type Tick()
         {
-            if (_archer.type == SkeletonArcher.ArcherType.PATROL)
-                return typeof(PatrolState);
 
-            return typeof(WatchingState);
-        }
+            CheckTransitionState();
 
-        firstEnterInState = true;
-        return null;
+            if (timer > _archer.attackFreq)
+            {
+                Hitting();
+                timer = 0;
+            }
 
-    }
+            if (!_archer.inAttackArea)
+            {
+                if (_archer.type == SkeletonArcher.ArcherType.PATROL)
+                    return typeof(PatrolState);
 
-    private void Hitting()
-    {
-        _archer.rb.velocity = Vector2.zero;
-        _archer.anim.SetTrigger("Hit");
-    }
-    private void CheckTransitionState() {
-        if (!firstEnterInState) {
+                return typeof(WatchingState);
+            }
+
             firstEnterInState = true;
-            timer += Time.deltaTime;
+            return null;
+
         }
-        else {
-            timer = _archer.ShootFreq;
+
+        private void Hitting()
+        {
+            _archer.rb.velocity = Vector2.zero;
+            _archer.anim.SetTrigger("Hit");
+        }
+        private void CheckTransitionState() {
+            if (!firstEnterInState) {
+                firstEnterInState = true;
+                timer += Time.deltaTime;
+            }
+            else {
+                timer = _archer.ShootFreq;
+            }
         }
     }
 }

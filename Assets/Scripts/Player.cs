@@ -476,8 +476,8 @@ namespace Sctipts
         }
 
         private void IgnoreEnemyAndTrap(bool ignore) {
-            Physics2D.IgnoreLayerCollision(8, 9, ignore);
-            Physics2D.IgnoreLayerCollision(8, 11, ignore);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), ignore);
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Traps"), ignore);
         }
 
 
