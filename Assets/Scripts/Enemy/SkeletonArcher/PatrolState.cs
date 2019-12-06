@@ -12,6 +12,7 @@ public class PatrolState : BaseState
     {
         this._archer = _archer;
         rb = transform.GetComponent<Rigidbody2D>();
+        
     }
 
     public override Type Tick()
@@ -23,11 +24,12 @@ public class PatrolState : BaseState
             _archer.anim.SetBool("isPatroling", false);
             return typeof(ShootingState);
         }
-        else if (_archer.inAttackArea)
+        if (_archer.inAttackArea)
         {
             _archer.anim.SetBool("isPatroling", false);
             return typeof(HittingState);
         }
+
             
 
         return null;
@@ -43,7 +45,6 @@ public class PatrolState : BaseState
             if (transform.position.x > _archer.rightBorderPosition.x) {
                 transform.rotation = Quaternion.Euler(0, 180, 0);
                 _archer.isRightDirection = false;
-                Debug.Log("Revert SKELETON!");
             }
         }
         else if (!_archer.isRightDirection && !_archer.isDeath) {

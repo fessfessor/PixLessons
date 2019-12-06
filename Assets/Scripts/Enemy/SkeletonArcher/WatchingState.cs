@@ -24,7 +24,7 @@ public class WatchingState : BaseState
 
         if (timer > _archer.TurnFreq)
         {
-            SwitchVision();
+            _archer.SwitchVision();
             timer = 0;
         }
             
@@ -43,10 +43,5 @@ public class WatchingState : BaseState
 
     }
 
-    private void SwitchVision()
-    {
-        transform.rotation = Quaternion.Euler(0, transform.rotation == Quaternion.Euler(0, 0, 0) ? 180 : 0, 0);
-        _archer.isRightDirection = _archer.transform.rotation.y <= 0;
-
-    }
+    
 }

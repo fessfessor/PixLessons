@@ -6,6 +6,7 @@ using UnityEngine;
 public class HittingState : BaseState {
     private SkeletonArcher _archer;
     private float timer;
+    private bool firstEnterInState;
 
     public HittingState(SkeletonArcher _archer) : base(_archer.gameObject)
     {
@@ -15,7 +16,8 @@ public class HittingState : BaseState {
 
     public override Type Tick()
     {
-        timer += Time.deltaTime;
+
+        CheckTransitionState();
 
         if (timer > _archer.attackFreq)
         {
@@ -24,14 +26,30 @@ public class HittingState : BaseState {
         }
 
         if (!_archer.inAttackArea)
-            return typeof(WatchingState);
+        {
+            if (_archer.type == SkeletonArcher.ArcherType.PATROL)
+                return typeof(PatrolState);
 
+            return typeof(WatchingState);
+        }
+
+        firstEnterInState = true;
         return null;
 
     }
 
     private void Hitting()
     {
+        _archer.rb.velocity = Vector2.zero;
         _archer.anim.SetTrigger("Hit");
+    }
+    private void CheckTransitionState() {
+        if (!firstEnterInState) {
+            firstEnterInState = true;
+            timer += Time.deltaTime;
+        }
+        else {
+            timer = _archer.ShootFreq;
+        }
     }
 }

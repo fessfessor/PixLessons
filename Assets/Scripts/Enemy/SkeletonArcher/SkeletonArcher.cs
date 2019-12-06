@@ -30,6 +30,7 @@ public class SkeletonArcher : MonoBehaviour, IEnemy
     [HideInInspector]public bool inShootArea;
     [HideInInspector]public bool inAttackArea;
     [HideInInspector]public Animator anim;
+    [HideInInspector]public Rigidbody2D rb;
     [HideInInspector]public bool isRightDirection = true;
     [HideInInspector] public bool isDeath;
 
@@ -90,6 +91,7 @@ public class SkeletonArcher : MonoBehaviour, IEnemy
         
         //pooler = ObjectPooler.Instance;
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         enemy = GameManager.Instance.player;
         leftBorderPosition = leftBorderObject.transform.position;
         rightBorderPosition = rightBorderObject.transform.position;
@@ -106,10 +108,14 @@ public class SkeletonArcher : MonoBehaviour, IEnemy
 
     }
 
-    
+    public void SwitchVision() {
+        transform.rotation = Quaternion.Euler(0, transform.rotation == Quaternion.Euler(0, 0, 0) ? 180 : 0, 0);
+        isRightDirection = transform.rotation.y <= 0;
 
-    
-//Информация из дочернего объекта(область стрельбы, атаки) с коллайдером
+    }
+
+
+    //Информация из дочернего объекта(область стрельбы, атаки) с коллайдером
     public void Attack(bool isAttacking, GameObject enemy, GameObject sender)
     {
         if (sender.transform.name == "ShootArea")
