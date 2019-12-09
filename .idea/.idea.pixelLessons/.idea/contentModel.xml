@@ -158,7 +158,7 @@
             <e p="README.txt" t="Include" />
           </e>
         </e>
-        <e p="Sctipts" t="Include">
+        <e p="Scripts" t="Include">
           <e p="AidKit.cs" t="Include" />
           <e p="Audio" t="Include">
             <e p="AudioManager.cs" t="Include" />
@@ -218,6 +218,7 @@
           <e p="Enemy" t="Include">
             <e p="Arrow.cs" t="Include" />
             <e p="AttackArea.cs" t="Include" />
+            <e p="BaseState.cs" t="Include" />
             <e p="Bug.cs" t="Include" />
             <e p="EnemyMagicBall.cs" t="Include" />
             <e p="EnemyPatrol.cs" t="Include" />
@@ -229,9 +230,24 @@
             <e p="RangeEnemy.cs" t="Include" />
             <e p="SimplePatrol.cs" t="Include" />
             <e p="Skeleton.cs" t="Include" />
-            <e p="SkeletonArcher.cs" t="Include" />
+            <e p="SkeletonArcher" t="Include">
+              <e p="HittingState.cs" t="Include" />
+              <e p="PatrolState.cs" t="Include" />
+              <e p="ShootingState.cs" t="Include" />
+              <e p="SkeletonArcher.cs" t="Include" />
+              <e p="WatchingState.cs" t="Include" />
+            </e>
+            <e p="SkeletonFootman" t="Include">
+              <e p="AttackingState.cs" t="Include" />
+              <e p="BangingShieldState.cs" t="Include" />
+              <e p="BlockingState.cs" t="Include" />
+              <e p="ChasingState.cs" t="Include" />
+              <e p="SkeletonFootman.cs" t="Include" />
+              <e p="WatchingState.cs" t="Include" />
+            </e>
             <e p="SkeletonRiseArea.cs" t="Include" />
             <e p="Spikes.cs" t="Include" />
+            <e p="StateMachine.cs" t="Include" />
             <e p="TriggerDamage.cs" t="Include" />
           </e>
           <e p="EnemyBase.cs" t="Include" />
@@ -241,6 +257,7 @@
           </e>
           <e p="FlameCoin.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
+          <e p="GameSettings.cs" t="Include" />
           <e p="GroundDetection.cs" t="Include" />
           <e p="Health.cs" t="Include" />
           <e p="HealthBar.cs" t="Include" />
