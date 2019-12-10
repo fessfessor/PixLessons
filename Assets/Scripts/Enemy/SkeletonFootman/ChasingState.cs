@@ -7,6 +7,7 @@ namespace Assets.Scripts.Enemy.SkeletonFootman
     {
         private SkeletonFootman _footman;
         
+        
         public ChasingState(SkeletonFootman _footman) : base(_footman.gameObject)
         {
             this._footman = _footman;
@@ -15,48 +16,92 @@ namespace Assets.Scripts.Enemy.SkeletonFootman
         public override Type Tick()
         {
             
-            
-            if (_footman.inAttackArea)
-                return typeof(AttackingState);
 
-            return Moving(); 
+            if (_footman.inAttackArea)
+            {
+                _footman.anim.SetBool("isRunning", false);
+                return typeof(AttackingState);
+            }
+
+
+            if (!_footman.inAgrArea)
+            {
+                _footman.anim.SetBool("isRunning", false);
+                
+                return typeof(WatchingState);
+            }
+
+            
+           
+            Moving();
+
+            return null; 
             
         }
         
-        private Type Moving()
+        private void Moving()
         {
-            _footman.anim.SetBool("Run", true);
+            if (_footman.isDeath)
+                _footman.rb.velocity = Vector3.zero;
+
+            CheckDirection();
+            
+            _footman.anim.SetBool("isRunning", true);
+            
 
             if (_footman.isRightDirection && !_footman.isDeath) {
                 
                 if (transform.position.x > _footman.rightBorderPosition.x)
                 {
-                    return typeof(BangingShieldState);
+                    BangingShield(); 
                 }
                 else
                 {
-                    _footman.rb.velocity = Time.deltaTime * _footman.runSpeed * Vector2.right;
-                    return null;
+                    _footman.rb.velocity = _footman.runSpeed * Vector2.right;
                 }
             }
-            else if (!_footman.isRightDirection && !_footman.isDeath) {
+            else if (!_footman.isRightDirection && !_footman.isDeath) 
+            {
                 
 
-                if (transform.position.x < _footman.leftBorderPosition.x) {
-                    return typeof(BangingShieldState);
+                if (transform.position.x < _footman.leftBorderPosition.x) 
+                {
+                    BangingShield();
                 }
                 else
                 {
-                    _footman.rb.velocity = Time.deltaTime * _footman.runSpeed * Vector2.left;
-                    return null;
+                    _footman.rb.velocity =_footman.runSpeed * Vector2.left;
                 }
             }
-            else if (_footman.isDeath)
-                _footman.rb.velocity = Vector3.zero;
+            
 
-            return null;
+            
         }
 
-       
+        private void BangingShield() {
+            _footman.rb.velocity = Vector2.zero;
+
+            if(!_footman.anim.GetCurrentAnimatorStateInfo(0).IsName("Banging_shield"))
+                _footman.anim.SetTrigger("BangingShield");
+            
+        }
+
+        private void CheckDirection()
+        {
+            //Если враг слева, а смотрим вправо - разворачиваемся и наоборот
+            if (transform.position.x > _footman.enemy.transform.position.x
+                && _footman.isRightDirection)
+            {
+                _footman.SwitchVision();
+            }
+
+            if (transform.position.x < _footman.enemy.transform.position.x
+                && !_footman.isRightDirection) {
+                _footman.SwitchVision();
+            }
+        }
+
+        
+
     }
 }

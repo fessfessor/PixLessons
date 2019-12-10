@@ -13,7 +13,14 @@ namespace Assets.Scripts.Enemy.SkeletonFootman
 
         public override Type Tick()
         {
-            throw new NotImplementedException();
+            
+
+            return null;
+        }
+
+        private void Attack()
+        {
+
         }
     }
 }

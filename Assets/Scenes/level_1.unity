@@ -12526,7 +12526,7 @@ MonoBehaviour:
   attackDamage: 30
   attackFreq: 3
   speed: 3
-  runSpeed: 4
+  runSpeed: 7
   leftBorderObject: {fileID: 1212364014}
   rightBorderObject: {fileID: 948254423}
   type: 0

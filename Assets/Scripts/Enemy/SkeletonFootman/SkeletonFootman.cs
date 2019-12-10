@@ -93,7 +93,7 @@ namespace Assets.Scripts.Enemy.SkeletonFootman
             if (GameManager.Instance.healthContainer[gameObject].HealthCount <= 0 && !isDeath)
                 Death();
 
-
+            anim.SetBool("inAgrArea", inAgrArea);
         }
 
         
@@ -111,6 +111,12 @@ namespace Assets.Scripts.Enemy.SkeletonFootman
                 inAttackArea = isAttacking;
                 //this.enemy = enemy;
             }
+        }
+
+        public void SwitchVision() {
+            transform.rotation = Quaternion.Euler(0, transform.rotation == Quaternion.Euler(0, 0, 0) ? 180 : 0, 0);
+            isRightDirection = transform.rotation.y <= 0;
+
         }
 
         public void Death()
