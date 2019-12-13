@@ -33,7 +33,7 @@ namespace Assets.Scripts.Enemy.SkeletonArcher
                 return typeof(WatchingState);
             }
 
-            firstEnterInState = true;
+            firstEnterInState = false;
             return null;
 
         }

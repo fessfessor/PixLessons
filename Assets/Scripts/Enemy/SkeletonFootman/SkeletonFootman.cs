@@ -132,7 +132,18 @@ namespace Assets.Scripts.Enemy.SkeletonFootman
 
         public void Damage()
         {
-            
+            if (inAttackArea && enemy != null) {
+                GameManager.Instance.healthContainer[enemy].takeHit(attackDamage);
+            }
+        }
+
+        //Animation event
+        public void AttackImpulse()
+        {
+            if(isRightDirection)
+                rb.AddForce(Vector2.right * 35, ForceMode2D.Impulse);
+            else
+                rb.AddForce(Vector2.left * 35, ForceMode2D.Impulse);
         }
     
         public enum FootmanType
