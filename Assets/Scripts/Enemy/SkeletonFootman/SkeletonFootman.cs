@@ -34,8 +34,8 @@ namespace Assets.Scripts.Enemy.SkeletonFootman
         [HideInInspector]public Animator anim;
         [HideInInspector]public Rigidbody2D rb;
         [HideInInspector]public bool isRightDirection = true;
-        [HideInInspector] public bool isDeath;
-        [HideInInspector] public bool endLooking;
+        [HideInInspector]public bool isDeath;
+        [HideInInspector]public bool endLooking;
     
         private void Awake()
         {
