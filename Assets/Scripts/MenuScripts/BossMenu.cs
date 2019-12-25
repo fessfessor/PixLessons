@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Sctipts;
+using Assets.Scripts.PlayerLogic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

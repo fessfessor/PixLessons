@@ -1,5 +1,5 @@
 ﻿
-using Sctipts;
+using Assets.Scripts.PlayerLogic;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Sctipts;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Assets.Scripts.PlayerLogic;
 
 public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
@@ -120,12 +120,6 @@ public class GameManager : MonoBehaviour {
     }
 
    
-
-   
-
-
-
-
 
 
 }

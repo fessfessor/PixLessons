@@ -39,16 +39,39 @@ public class FirefliesController : MonoBehaviour
         if (playerIsRight)
         {
             
-            systems[0].transform.position *= Vector2.right * particleSystemRadius * 6;
-            
+            systems[0].transform.position += Vector3.right*6; 
+            ArrayScrollRight();
 
         }
 
         if (playerIsLeft)
         {
-            systems[2].transform.position *= Vector2.left * particleSystemRadius * 6;
+            systems[2].transform.position += Vector3.left*6;
+            ArrayScrollLeft();
         }
 
+    }
+
+    private void ArrayScrollRight()
+    {
+        GameObject temp0 = systems[0];
+        GameObject temp1 = systems[1];
+        GameObject temp2 = systems[2];
+
+        systems[0] = temp2;
+        systems[1] = temp0;
+        systems[2] = temp1;
+    }
+
+    private void ArrayScrollLeft()
+    {
+        GameObject temp0 = systems[0];
+        GameObject temp1 = systems[1];
+        GameObject temp2 = systems[2];
+
+        systems[0] = temp1;
+        systems[1] = temp2;
+        systems[2] = temp0;
     }
 
     

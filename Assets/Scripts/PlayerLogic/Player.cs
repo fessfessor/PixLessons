@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Com.LuisPedroFonseca.ProCamera2D;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Sctipts
+namespace Assets.Scripts.PlayerLogic
 {
     public class Player : MonoBehaviour
     {
@@ -88,10 +90,37 @@ namespace Sctipts
 
         #endregion
 
-        // Start is called before the first frame update
-        void Start()
+
+
+        private void Awake() {
+            InitStateMachine();
+        }
+
+       
+        private void InitStateMachine() {
+            Dictionary<Type, BaseState> states = new Dictionary<Type, BaseState>();           
+            states = new Dictionary<Type, BaseState>()
+            {
+                
+                {typeof(IdleState), new IdleState(this) },
+                {typeof(AttackState), new AttackState(this) },
+                {typeof(JumpState), new JumpState(this) },
+                {typeof(RollState), new RollState(this) },
+                {typeof(MagicAttackState), new MagicAttackState(this) },
+                {typeof(PainState), new PainState(this) },
+                {typeof(DeathState), new DeathState(this) }
+                
+            };
+
+            GetComponent<StateMachine>().SetStates(states);
+        }
+
+
+            // Start is called before the first frame update
+            void Start()
         {
-            //Debug.Log($"Speed : {speed} Forse : {force} ShootRechardge: {shootRecharge}");
+            
+
 
             //Подписываемся на события "кровавой механики"
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_HIT, OnEvent);
