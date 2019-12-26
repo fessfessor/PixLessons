@@ -13,20 +13,20 @@ namespace Assets.Scripts.PlayerLogic
         [Header("Физические параметры")]
         [SerializeField] private float speed = 1.0f;
         [SerializeField] private float force = 1.0f;
-        [SerializeField] private float shootRecharge = 3.0f;   
+        [SerializeField] private float shootRecharge = 3.0f;
         [SerializeField] private float minHeight = -50.0f;
         [SerializeField] private float swordAttackTime;
         [SerializeField] private float shootForce;
 
         [Header("Компоненты")]
         [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private GroundDetection groundD;   
-        [SerializeField] private SpriteRenderer spriteR;   
+        [SerializeField] private GroundDetection groundD;
+        [SerializeField] private SpriteRenderer spriteR;
         [SerializeField] private Animator animator;
         [SerializeField] private CameraShake cameraShaker;
         [SerializeField] private MagicBall magicBall;
         [SerializeField] private Health health;
-        [SerializeField] private GameObject SwordObject;   
+        [SerializeField] private GameObject SwordObject;
         [SerializeField] private GameObject fireButton;
         [SerializeField] private GameObject dieMenu;
         [SerializeField] private Joystick joystick;
@@ -40,14 +40,14 @@ namespace Assets.Scripts.PlayerLogic
         [SerializeField] bool useComputerMode;
 
         [Header("Механика кровавого меча")]
-        [SerializeField] private int healthLossByHit; 
+        [SerializeField] private int healthLossByHit;
         [SerializeField] private int healthLossByShoot;
-        [SerializeField] private int healthReturnByHit; 
-        [SerializeField] private int healthReturnByShoot; 
-    
-    
-    
-        [HideInInspector]public bool isRightDirection;
+        [SerializeField] private int healthReturnByHit;
+        [SerializeField] private int healthReturnByShoot;
+
+
+
+        [HideInInspector] public bool isRightDirection;
         private Vector3 jumpDirection;
         private bool isJumping;
         private bool canMove;
@@ -66,10 +66,10 @@ namespace Assets.Scripts.PlayerLogic
         private AudioManager audioManager;
 
         private Collider2D SwordAttack1Collider;
-    
-    
+
+
         private Image fireButtonImage;
-        private float rechargeTimer;    
+        private float rechargeTimer;
         private Invulnerability invulnerability;
         private bool jumpButtonEnabled;
 
@@ -81,7 +81,7 @@ namespace Assets.Scripts.PlayerLogic
         private float slowSpeed;
         private float normarSpeed;
 
-    
+
 
 
 
@@ -92,16 +92,18 @@ namespace Assets.Scripts.PlayerLogic
 
 
 
-        private void Awake() {
+        private void Awake()
+        {
             InitStateMachine();
         }
 
-       
-        private void InitStateMachine() {
-            Dictionary<Type, BaseState> states = new Dictionary<Type, BaseState>();           
+
+        private void InitStateMachine()
+        {
+            Dictionary<Type, BaseState> states = new Dictionary<Type, BaseState>();
             states = new Dictionary<Type, BaseState>()
             {
-                
+
                 {typeof(IdleState), new IdleState(this) },
                 {typeof(AttackState), new AttackState(this) },
                 {typeof(JumpState), new JumpState(this) },
@@ -109,17 +111,17 @@ namespace Assets.Scripts.PlayerLogic
                 {typeof(MagicAttackState), new MagicAttackState(this) },
                 {typeof(PainState), new PainState(this) },
                 {typeof(DeathState), new DeathState(this) }
-                
+
             };
 
             GetComponent<StateMachine>().SetStates(states);
         }
 
 
-            // Start is called before the first frame update
-            void Start()
+        // Start is called before the first frame update
+        void Start()
         {
-            
+
 
 
             //Подписываемся на события "кровавой механики"
@@ -127,7 +129,7 @@ namespace Assets.Scripts.PlayerLogic
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_MISS, OnEvent);
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_MELEE_HIT, OnEvent);
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_MELEE_MISS, OnEvent);
-        
+
 
             pooler = ObjectPooler.Instance;
             audioManager = AudioManager.Instance;
@@ -141,17 +143,19 @@ namespace Assets.Scripts.PlayerLogic
             cameraShaker = transform.GetComponent<CameraShake>();
 
             SwordAttack1Collider = SwordObject.GetComponent<Collider2D>();
-        
+
             fireButtonImage = fireButton.GetComponent<Image>();
 
             rechargeTimer = shootRecharge;
 
             invulnerability = GetComponent<Invulnerability>();
 
-            if (PlayerPrefs.HasKey("jumpButton")) {
+            if (PlayerPrefs.HasKey("jumpButton"))
+            {
                 jumpButtonEnabled = PlayerPrefs.GetInt("jumpButton") != 0;
             }
-            else {
+            else
+            {
                 jumpButtonEnabled = false;
             }
 
@@ -162,8 +166,9 @@ namespace Assets.Scripts.PlayerLogic
         }
 
 
-        void FixedUpdate() {
-        
+        void FixedUpdate()
+        {
+
 
             animator.SetInteger("comboCount", comboCount);
 
@@ -179,18 +184,22 @@ namespace Assets.Scripts.PlayerLogic
 
 
             //Движение
-            if (!isDeath) {
-                if (canMove && !isAttacking ) {
+            if (!isDeath)
+            {
+                if (canMove && !isAttacking)
+                {
                     Move();
                 }
 
                 float vetricalMove = joystick.Vertical;
-                if (vetricalMove >= .5f && !jumpButtonEnabled) {
+                if (vetricalMove >= .5f && !jumpButtonEnabled)
+                {
                     Jump();
                 }
 
 #if UNITY_EDITOR
-                if (useComputerMode) {
+                if (useComputerMode)
+                {
                     if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack)
                         Attack();
 
@@ -215,11 +224,13 @@ namespace Assets.Scripts.PlayerLogic
 
 
             //Ориентация персонажа
-            if (direction.x > 0) {
+            if (direction.x > 0)
+            {
                 isRightDirection = true;
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-            if (direction.x < 0) {
+            if (direction.x < 0)
+            {
                 isRightDirection = false;
                 transform.rotation = Quaternion.Euler(0, 180, 0);
 
@@ -227,47 +238,56 @@ namespace Assets.Scripts.PlayerLogic
 
 
             //Перекат
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Roll")) {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Roll"))
+            {
                 canMove = false;
                 isRolling = true;
 
-                if (isRightDirection) {
+                if (isRightDirection)
+                {
                     rb.velocity = Vector2.right * 8;
                     IgnoreEnemyAndTrap(true);
                 }
-                else {
+                else
+                {
                     rb.velocity = Vector2.left * 8;
                     IgnoreEnemyAndTrap(true);
                 }
 
 
-            } else {
+            }
+            else
+            {
                 canMove = true;
                 isRolling = false;
                 IgnoreEnemyAndTrap(false);
             }
 
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("getHit")) {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("getHit"))
+            {
                 speed = 0;
                 isHited = true;
             }
-            else {
+            else
+            {
                 speed = normarSpeed;
                 isHited = false;
             }
-            
+
 
         }
 
-    
 
 
-        private void Update() {
+
+        private void Update()
+        {
             CheckAttacking();
 
-       
+
             //Таймер перезарядки выстрела
-            if (rechargeTimer < shootRecharge) {
+            if (rechargeTimer < shootRecharge)
+            {
                 rechargeTimer += Time.deltaTime;
                 fireButtonImage.fillAmount = rechargeTimer / shootRecharge;
             }
@@ -277,122 +297,128 @@ namespace Assets.Scripts.PlayerLogic
 
 
             // Проверка на дамаг
-            if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
-                isDamaged = true; 
+            if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount)
+            {
+                isDamaged = true;
                 currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-                if(currentHealth > 0 && !bloodLoss) {
+                if (currentHealth > 0 && !bloodLoss)
+                {
                     StartCoroutine(invulnerability.GetInvulnerability(true));
                     AudioManager.Instance.Play("Pain");
-                    if(!isAttacking&& !isJumping)
+                    if (!isAttacking && !isJumping)
                         animator.SetTrigger("hit");
 
                 }
-                
+
             }
-            else {
+            else
+            {
                 isDamaged = false;
                 currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
             }
 
             // Гибель
-            if(currentHealth <= 0 && !isDeath) {
+            if (currentHealth <= 0 && !isDeath)
+            {
                 Death();
             }
 
             //При уменьшении здоровья трясем камеру
-            if (isDamaged && ShakeCameraOnDamage && !bloodLoss) {
-                ProCamera2DShake.Instance.ShakeUsingPreset("PlayerPain");          
+            if (isDamaged && ShakeCameraOnDamage && !bloodLoss)
+            {
+                ProCamera2DShake.Instance.ShakeUsingPreset("PlayerPain");
             }
 
-       
-            
-        
+
+
+
             // Звуки шагов
-            if (isMoving && !AudioManager.Instance.isPlaying("PlayerFootsteps") && groundD.isGrounded) {
+            if (isMoving && !AudioManager.Instance.isPlaying("PlayerFootsteps") && groundD.isGrounded)
+            {
                 AudioManager.Instance.Play("PlayerFootsteps");
             }
-            else if((!isMoving || !groundD.isGrounded) && AudioManager.Instance.isPlaying("PlayerFootsteps")) {
+            else if ((!isMoving || !groundD.isGrounded) && AudioManager.Instance.isPlaying("PlayerFootsteps"))
+            {
                 AudioManager.Instance.Stop("PlayerFootsteps");
             }
 
-            
+
         }
 
-    
-        void Death() {
+
+        void Death()
+        {
             health.HealthCount = 0;
             dieMenu.SetActive(true);
             isMoving = false;
             isDeath = true;
             AudioManager.Instance.Play("PlayerDie");
             animator.SetTrigger("death");
-       
+
 
         }
 
 
         #region Attack
 
-        public void Shoot() {
-            if (shootReady && groundD.isGrounded && !isAttacking) 
-                StartCoroutine(MagicAttack());          
+        public void Shoot()
+        {
+            if (shootReady && groundD.isGrounded && !isAttacking)
+                StartCoroutine(MagicAttack());
         }
 
-        IEnumerator MagicAttack() {
+        IEnumerator MagicAttack()
+        {
             rechargeTimer = 0f;
-            animator.SetTrigger("isShooting");       
+            animator.SetTrigger("isShooting");
             shootReady = false;
-            canAttack = false;             
+            canAttack = false;
             AudioManager.Instance.Play("FireballCast");
             AudioManager.Instance.Play("BloodLoss");
-       
+
             // Время анимации
-            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);              
-        
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+
             canAttack = true;
             // Время перезарядки
             yield return new WaitForSeconds(shootRecharge - animator.GetCurrentAnimatorStateInfo(0).length);
-            shootReady = true;      
+            shootReady = true;
         }
 
-    
 
-        public void Attack() {
-        
-            
-            //canAttack = false;             
-            AudioManager.Instance.Play("SwordSwing");
+
+        public void Attack()
+        {
+            //AudioManager.Instance.Play("SwordSwing");
             animator.SetTrigger("isSwordAttack");
             StartCoroutine(SwordAttack());
- 
-           
-        }   
-        IEnumerator SwordAttack() {
 
-            //canAttack = true;
-            isAttacking = true;    
-            yield return new WaitForSeconds(1);       
+        }
+        IEnumerator SwordAttack()
+        {
+            isAttacking = true;
+            yield return new WaitForSeconds(1);
             isAttacking = false;
-        
-            //BloodLoss(healthLossByHit);
-            //canAttack = true;
         }
 
-   
-    
+
+
 
         //методы для ивента. Появление\исчезание коллайдера меча. Вызывается из анимации
-        void SwordAttackColliderStart() {
+        void SwordAttackColliderStart()
+        {
             rb.WakeUp();
             SwordAttack1Collider.enabled = true;
         }
 
-        void SwordAttackColliderDone() {
+        void SwordAttackColliderDone()
+        {
             SwordAttack1Collider.enabled = false;
         }
 
         // Вызывается из анимации 
-        void CheckShoot() {
+        void CheckShoot()
+        {
             GameObject spawnedObj = pooler.SpawnFromPool("MagicBall", transform.position, Quaternion.identity);
             MagicBall mb = spawnedObj.GetComponent<MagicBall>();
             mb.SetImpulse(Vector2.right, shootForce, this);
@@ -405,29 +431,33 @@ namespace Assets.Scripts.PlayerLogic
 
 
         #region Move
-        public void Jump() {
-            isMoving = false;       
-            if ( groundD.isGrounded         
+        public void Jump()
+        {
+            isMoving = false;
+            if (groundD.isGrounded
                  && !isAttacking
-                 && !isHited         
+                 && !isHited
                  && !isLanding
                  && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")
 
-            ) {
+            )
+            {
                 isJumping = true;
                 rb.velocity = Vector3.zero;
                 AudioManager.Instance.Play("Jump");
                 rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
                 animator.SetTrigger("startJump");
-            } 
+            }
         }
 
         // Звук приземления , вызывается из анимации
-        void JumpLanding() {
+        void JumpLanding()
+        {
             AudioManager.Instance.Play("JumpLanding");
         }
 
-        void Move() {
+        void Move()
+        {
             direction = Vector3.zero;
 
             /*
@@ -443,42 +473,49 @@ namespace Assets.Scripts.PlayerLogic
         */
 
             //Управление джойстиком
-            if (joystick.Horizontal >= .2f) {
+            if (joystick.Horizontal >= .2f)
+            {
                 direction = Vector3.right * speed;
                 direction.y = rb.velocity.y;
                 rb.velocity = direction;
-                if(!isJumping)
+                if (!isJumping)
                     isMoving = true;
             }
-            else if (joystick.Horizontal <= -.2f) {
+            else if (joystick.Horizontal <= -.2f)
+            {
                 direction = Vector3.left * speed;
                 direction.y = rb.velocity.y;
                 rb.velocity = direction;
                 if (!isJumping)
                     isMoving = true;
             }
-            else {
+            else
+            {
                 direction = Vector3.zero;
                 direction.y = rb.velocity.y;
                 rb.velocity = direction;
                 isMoving = false;
-            
+
             }
 
 #if UNITY_EDITOR
-            if (useComputerMode) {
+            if (useComputerMode)
+            {
                 //Debug.Log("useComputerMode");
-                if (Input.GetKey(KeyCode.A)) {
+                if (Input.GetKey(KeyCode.A))
+                {
                     direction = Vector3.left;
                     if (!isJumping)
                         isMoving = true;
                 }
-                else if (Input.GetKey(KeyCode.D)) {
+                else if (Input.GetKey(KeyCode.D))
+                {
                     direction = Vector3.right;
                     if (!isJumping)
                         isMoving = true;
                 }
-                else {
+                else
+                {
                     isMoving = false;
                 }
                 direction *= speed;
@@ -492,26 +529,31 @@ namespace Assets.Scripts.PlayerLogic
         }
 
         //Вызывается кнопкой
-        public void Roll() {
-            if (!isJumping && !isAttacking) {            
-                animator.SetTrigger("roll");            
+        public void Roll()
+        {
+            if (!isJumping && !isAttacking)
+            {
+                animator.SetTrigger("roll");
             }
         }
 
-        public void Rolling(bool start) {
+        public void Rolling(bool start)
+        {
             if (start)
                 isRolling = true;
 
         }
 
-        private void IgnoreEnemyAndTrap(bool ignore) {
+        private void IgnoreEnemyAndTrap(bool ignore)
+        {
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), ignore);
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Traps"), ignore);
         }
 
 
 
-        void resetHeroPoition() {
+        void resetHeroPoition()
+        {
             rb.velocity = new Vector2(0, 0);
             transform.position = new Vector2(0, 0);
         }
@@ -526,7 +568,8 @@ namespace Assets.Scripts.PlayerLogic
         //controller.Fire.onClick.AddListener(Shoot);
         // 
 
-        void CheckAttacking() {
+        void CheckAttacking()
+        {
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hero-Attack")
                 ||
                 animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2")
@@ -535,47 +578,57 @@ namespace Assets.Scripts.PlayerLogic
                 ||
                 animator.GetCurrentAnimatorStateInfo(0).IsName("Attack4")
                 ||
-                animator.GetCurrentAnimatorStateInfo(0).IsName("CastMagic")) {
+                animator.GetCurrentAnimatorStateInfo(0).IsName("CastMagic"))
+            {
 
                 isAttacking = true;
                 rb.velocity = Vector2.zero;
-            } else
+            }
+            else
                 isAttacking = false;
         }
 
-        public void ComboStart(int comboCount) {
-            this.comboCount = comboCount;       
+        public void ComboStart(int comboCount)
+        {
+            this.comboCount = comboCount;
         }
 
-        public void ComboEnd() {
+        public void ComboEnd()
+        {
             comboCount = 0;
         }
 
-        public void HeroLandStart() {
+        public void HeroLandStart()
+        {
             isLanding = true;
         }
 
-        public void HeroLandEnd() {
+        public void HeroLandEnd()
+        {
             isLanding = false;
         }
 
         #region bloodMechanics
         // Механика "кровавых атак". 
-    
 
-        private void BloodLoss(int healthCount) {
+
+        private void BloodLoss(int healthCount)
+        {
             health.HealthCount -= healthCount;
             StartCoroutine(bloodDelay());
-        
+
         }
 
-        private void BloodVampire(int healthCount) {
+        private void BloodVampire(int healthCount)
+        {
             health.HealthCount += healthCount;
         }
-   
-        IEnumerator bloodDelay() {
+
+        IEnumerator bloodDelay()
+        {
             bloodLoss = true;
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < 2; i++)
+            {
                 yield return null;
             }
             bloodLoss = false;
@@ -584,22 +637,24 @@ namespace Assets.Scripts.PlayerLogic
         #endregion
 
         #region events
-        void OnEvent(EVENT_TYPE eventType, Component sender, object param = null) {
-            switch (eventType) {            
+        void OnEvent(EVENT_TYPE eventType, Component sender, object param = null)
+        {
+            switch (eventType)
+            {
                 case EVENT_TYPE.BLD_BALL_HIT:
-                    BloodVampire(healthReturnByShoot);
-                    break;
+                BloodVampire(healthReturnByShoot);
+                break;
                 case EVENT_TYPE.BLD_BALL_MISS:
-                    BloodLoss(healthLossByShoot);
-                    break;
+                BloodLoss(healthLossByShoot);
+                break;
                 case EVENT_TYPE.BLD_MELEE_HIT:
-                    BloodVampire(healthReturnByHit);
-                    break;
+                BloodVampire(healthReturnByHit);
+                break;
                 case EVENT_TYPE.BLD_MELEE_MISS:
-                    BloodLoss(healthLossByHit);
-                    break;          
+                BloodLoss(healthLossByHit);
+                break;
                 default:
-                    break;
+                break;
             }
         }
 

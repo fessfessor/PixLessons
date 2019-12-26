@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class FirefliesController : MonoBehaviour
 {
-    
+
     public GameObject System01;
     public GameObject System02;
     public GameObject System03;
 
     private ParticleSystem particleSystem;
     private float radius;
-    
+
     private GameObject[] systems;
     private GameObject player;
     private float particleSystemRadius = 10f;
-     
+
 
 
     void Start()
     {
         particleSystem = GetComponent<ParticleSystem>();
         radius = particleSystem.shape.radius;
-        systems = new[] {System01, System02, System03};
+        systems = new[] { System01, System02, System03 };
         player = GameManager.Instance.player;
     }
 
-    
+
     void Update()
     {
         CheckParticleSystems();
@@ -38,15 +38,15 @@ public class FirefliesController : MonoBehaviour
         bool playerIsLeft = player.transform.position.x < systems[0].transform.position.x;
         if (playerIsRight)
         {
-            
-            systems[0].transform.position += Vector3.right*6; 
+
+            systems[0].transform.position += Vector3.right * 6;
             ArrayScrollRight();
 
         }
 
         if (playerIsLeft)
         {
-            systems[2].transform.position += Vector3.left*6;
+            systems[2].transform.position += Vector3.left * 6;
             ArrayScrollLeft();
         }
 
@@ -74,6 +74,6 @@ public class FirefliesController : MonoBehaviour
         systems[2] = temp0;
     }
 
-    
-   
+
+
 }
