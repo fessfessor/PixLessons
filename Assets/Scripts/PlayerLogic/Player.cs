@@ -12,24 +12,30 @@ namespace Assets.Scripts.PlayerLogic
         #region variables
         [Header("Физические параметры")]
         [SerializeField] private float speed = 1.0f;
+        public float Speed { get { return speed; } set { speed = value; } }
         [SerializeField] private float force = 1.0f;
+        public float Force { get => force; set => force = value; }
         [SerializeField] private float shootRecharge = 3.0f;
         [SerializeField] private float minHeight = -50.0f;
         [SerializeField] private float swordAttackTime;
         [SerializeField] private float shootForce;
 
         [Header("Компоненты")]
-        [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private GroundDetection groundD;
+
         [SerializeField] private SpriteRenderer spriteR;
-        [SerializeField] private Animator animator;
+
+
         [SerializeField] private CameraShake cameraShaker;
         [SerializeField] private MagicBall magicBall;
         [SerializeField] private Health health;
         [SerializeField] private GameObject SwordObject;
         [SerializeField] private GameObject fireButton;
-        [SerializeField] private GameObject dieMenu;
+
         [SerializeField] private Joystick joystick;
+        public Joystick Joystick
+        {
+            get { return joystick; }
+        }
 
         [Header("События при дамаге")]
         [SerializeField] private bool ShakeCameraOnDamage;
@@ -38,6 +44,11 @@ namespace Assets.Scripts.PlayerLogic
 
         [Header("Компьютерный мод")]
         [SerializeField] bool useComputerMode;
+        public bool UseComputerMode
+        {
+            get { return useComputerMode; }
+            set { useComputerMode = value; }
+        }
 
         [Header("Механика кровавого меча")]
         [SerializeField] private int healthLossByHit;
@@ -47,9 +58,12 @@ namespace Assets.Scripts.PlayerLogic
 
 
 
-        [HideInInspector] public bool isRightDirection;
+
+
+
+
         private Vector3 jumpDirection;
-        private bool isJumping;
+        //private bool isJumping;
         private bool canMove;
         private bool isMoving;
         private bool isHited;
@@ -58,7 +72,7 @@ namespace Assets.Scripts.PlayerLogic
         private int currentHealth;
         private bool isAttacking;
         private bool isRolling;
-        private bool isLanding;
+
         private bool isDeath;
         private bool shootReady;
         private ObjectPooler pooler;
@@ -71,7 +85,7 @@ namespace Assets.Scripts.PlayerLogic
         private Image fireButtonImage;
         private float rechargeTimer;
         private Invulnerability invulnerability;
-        private bool jumpButtonEnabled;
+
 
         private bool bloodLoss = false;
 
@@ -87,6 +101,27 @@ namespace Assets.Scripts.PlayerLogic
 
 
         public Health Health { get { return health; } }
+
+        private Animator animator;
+        public Animator Animator { get => animator; set => animator = value; }
+
+        private bool isRightDirection;
+        public bool IsRightDirection { get => isRightDirection; set => isRightDirection = value; }
+
+        private bool jumpButtonEnabled;
+        public bool JumpButtonEnabled { get => jumpButtonEnabled; set => jumpButtonEnabled = value; }
+
+        private Rigidbody2D rb;
+        public Rigidbody2D Rb { get => rb; set => rb = value; }
+
+        private GroundDetection groundD;
+        public GroundDetection GroundD { get => groundD; set => groundD = value; }
+
+        private bool isJumping;
+        public bool IsJumping { get => isJumping; set => isJumping = value; }
+
+
+
 
         #endregion
 
@@ -105,6 +140,7 @@ namespace Assets.Scripts.PlayerLogic
             {
 
                 {typeof(IdleState), new IdleState(this) },
+                {typeof(RunState), new RunState(this) },
                 {typeof(AttackState), new AttackState(this) },
                 {typeof(JumpState), new JumpState(this) },
                 {typeof(RollState), new RollState(this) },
@@ -118,11 +154,9 @@ namespace Assets.Scripts.PlayerLogic
         }
 
 
-        // Start is called before the first frame update
+
         void Start()
         {
-
-
 
             //Подписываемся на события "кровавой механики"
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_HIT, OnEvent);
@@ -133,6 +167,9 @@ namespace Assets.Scripts.PlayerLogic
 
             pooler = ObjectPooler.Instance;
             audioManager = AudioManager.Instance;
+            animator = GetComponent<Animator>();
+            groundD = GetComponent<GroundDetection>();
+            rb = GetComponent<Rigidbody2D>();
 
             isAttacking = false;
             canAttack = true;
@@ -161,7 +198,6 @@ namespace Assets.Scripts.PlayerLogic
 
             slowSpeed = speed / 2;
             normarSpeed = speed;
-            // InitUIController();
 
         }
 
@@ -171,31 +207,16 @@ namespace Assets.Scripts.PlayerLogic
 
 
             animator.SetInteger("comboCount", comboCount);
-
-            //Анимации
             animator.SetBool("isGrounded", groundD.isGrounded);
-            if (!isJumping && !groundD.isGrounded)
-                animator.SetTrigger("fallWithoutJump");
 
-            isJumping = !groundD.isGrounded;
+            CheckFallingAndSetTrigger();
 
-            animator.SetFloat("speed", Mathf.Abs(direction.x));
-            animator.SetFloat("isFalling", rb.velocity.y);
 
 
             //Движение
             if (!isDeath)
             {
-                if (canMove && !isAttacking)
-                {
-                    Move();
-                }
 
-                float vetricalMove = joystick.Vertical;
-                if (vetricalMove >= .5f && !jumpButtonEnabled)
-                {
-                    Jump();
-                }
 
 #if UNITY_EDITOR
                 if (useComputerMode)
@@ -208,33 +229,12 @@ namespace Assets.Scripts.PlayerLogic
                         Shoot();
 
 
-                    if (Input.GetKeyDown(KeyCode.Space))
-                        Jump();
-
                     if (Input.GetKeyDown(KeyCode.F))
                         Roll();
                 }
 #endif
             }
-            // телепортация обратно на платформу
-            if (transform.position.y < minHeight)
-                resetHeroPoition();
 
-
-
-
-            //Ориентация персонажа
-            if (direction.x > 0)
-            {
-                isRightDirection = true;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            if (direction.x < 0)
-            {
-                isRightDirection = false;
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-
-            }
 
 
             //Перекат
@@ -317,11 +317,6 @@ namespace Assets.Scripts.PlayerLogic
                 currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
             }
 
-            // Гибель
-            if (currentHealth <= 0 && !isDeath)
-            {
-                Death();
-            }
 
             //При уменьшении здоровья трясем камеру
             if (isDamaged && ShakeCameraOnDamage && !bloodLoss)
@@ -345,18 +340,6 @@ namespace Assets.Scripts.PlayerLogic
 
         }
 
-
-        void Death()
-        {
-            health.HealthCount = 0;
-            dieMenu.SetActive(true);
-            isMoving = false;
-            isDeath = true;
-            AudioManager.Instance.Play("PlayerDie");
-            animator.SetTrigger("death");
-
-
-        }
 
 
         #region Attack
@@ -431,24 +414,7 @@ namespace Assets.Scripts.PlayerLogic
 
 
         #region Move
-        public void Jump()
-        {
-            isMoving = false;
-            if (groundD.isGrounded
-                 && !isAttacking
-                 && !isHited
-                 && !isLanding
-                 && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")
 
-            )
-            {
-                isJumping = true;
-                rb.velocity = Vector3.zero;
-                AudioManager.Instance.Play("Jump");
-                rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
-                animator.SetTrigger("startJump");
-            }
-        }
 
         // Звук приземления , вызывается из анимации
         void JumpLanding()
@@ -456,77 +422,7 @@ namespace Assets.Scripts.PlayerLogic
             AudioManager.Instance.Play("JumpLanding");
         }
 
-        void Move()
-        {
-            direction = Vector3.zero;
 
-            /*
-        if (controller.Left.IsPressed) {
-            direction = Vector3.left;
-        }
-        else if (controller.Right.IsPressed) {
-            direction = Vector3.right;
-        }
-         direction *= speed;
-        direction.y = rb.velocity.y;
-        rb.velocity = direction;
-        */
-
-            //Управление джойстиком
-            if (joystick.Horizontal >= .2f)
-            {
-                direction = Vector3.right * speed;
-                direction.y = rb.velocity.y;
-                rb.velocity = direction;
-                if (!isJumping)
-                    isMoving = true;
-            }
-            else if (joystick.Horizontal <= -.2f)
-            {
-                direction = Vector3.left * speed;
-                direction.y = rb.velocity.y;
-                rb.velocity = direction;
-                if (!isJumping)
-                    isMoving = true;
-            }
-            else
-            {
-                direction = Vector3.zero;
-                direction.y = rb.velocity.y;
-                rb.velocity = direction;
-                isMoving = false;
-
-            }
-
-#if UNITY_EDITOR
-            if (useComputerMode)
-            {
-                //Debug.Log("useComputerMode");
-                if (Input.GetKey(KeyCode.A))
-                {
-                    direction = Vector3.left;
-                    if (!isJumping)
-                        isMoving = true;
-                }
-                else if (Input.GetKey(KeyCode.D))
-                {
-                    direction = Vector3.right;
-                    if (!isJumping)
-                        isMoving = true;
-                }
-                else
-                {
-                    isMoving = false;
-                }
-                direction *= speed;
-                direction.y = rb.velocity.y;
-                rb.velocity = direction;
-            }
-
-#endif
-
-
-        }
 
         //Вызывается кнопкой
         public void Roll()
@@ -549,24 +445,11 @@ namespace Assets.Scripts.PlayerLogic
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), ignore);
             Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Traps"), ignore);
         }
-
-
-
-        void resetHeroPoition()
-        {
-            rb.velocity = new Vector2(0, 0);
-            transform.position = new Vector2(0, 0);
-        }
+ 
 
         #endregion
 
 
-        // public void InitUIController() {
-        //     controller = GameManager.Instance.uiConroller;
-        //controller.Jump.onClick.AddListener(Jump);
-        //controller.Attack.onClick.AddListener(Attack);
-        //controller.Fire.onClick.AddListener(Shoot);
-        // 
 
         void CheckAttacking()
         {
@@ -598,14 +481,17 @@ namespace Assets.Scripts.PlayerLogic
             comboCount = 0;
         }
 
-        public void HeroLandStart()
+
+        public void CharacterStartJump()
         {
-            isLanding = true;
+            isJumping = true;            
+            //EventManager.Instance.PostNotification(EVENT_TYPE.PLAYER_START_JUMP, this);
         }
 
-        public void HeroLandEnd()
+        public void CharacterEndJump()
         {
-            isLanding = false;
+            isJumping = false;            
+            //EventManager.Instance.PostNotification(EVENT_TYPE.PLAYER_END_JUMP, this);
         }
 
         #region bloodMechanics
@@ -662,9 +548,76 @@ namespace Assets.Scripts.PlayerLogic
 
 
 
+        private void CheckFallingAndSetTrigger()
+        {
+            if (!groundD.isGrounded)
+                animator.SetTrigger("fallWithoutJump");
+        }
 
 
 
+        public bool CharacterPressRunning()
+        {
+#if UNITY_EDITOR
+            if (useComputerMode)
+            {
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                {
+                    return true;
+                }
+
+            }
+#endif
+            if (joystick.Horizontal >= .2f || joystick.Horizontal <= -.2f)
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+        public bool CharacterPressJumping()
+        {
+
+            float vetricalMove = joystick.Vertical;
+            if (vetricalMove >= .5f && !jumpButtonEnabled)
+            {
+                return true;
+            }
+
+#if UNITY_EDITOR
+            if (useComputerMode)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    return true;
+                }
+
+            }
+#endif
+
+            return false;
+        }
+
+        public bool CharacterPressRolling()
+        {
+
+
+#if UNITY_EDITOR
+            if (useComputerMode)
+            {
+                if (Input.GetKeyDown(KeyCode.F))
+                {
+                    return true;
+                }
+
+            }
+#endif
+            return false;
+
+        }
 
     }
+
 }

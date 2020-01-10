@@ -2,7 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 namespace Assets.Scripts.PlayerLogic
 {
@@ -10,41 +10,38 @@ namespace Assets.Scripts.PlayerLogic
     public class IdleState : BaseState
     {
         private Player _player;
+        private bool useComputerMode;
+        private Joystick joystick;
 
 
         public IdleState(Player _player) : base(_player.gameObject)
         {
             this._player = _player;
+            useComputerMode = _player.UseComputerMode;
+            joystick = _player.Joystick;
         }
 
         public override Type Tick()
         {
-            throw new NotImplementedException();
+            if (_player.GroundD.isGrounded)
+            {
+
+                if (_player.CharacterPressJumping())
+                    return typeof(JumpState);
+            }
+
+            if (_player.CharacterPressRunning())
+                return typeof(RunState);
+
+            if (_player.Health.HealthCount <= 0)
+                return typeof(DeathState);
+
+            return null;
         }
 
-        private void CheckAndAttack()
-        {
+        
 
-        }
 
-        private void CheckAndJump()
-        {
-
-        }
-
-        private void CheckAndRoll()
-        {
-
-        }
-
-        private void CheckAndMagicAttack()
-        {
-
-        }
-
-        private void CheckAndRun()
-        {
-
-        }
+        
     }
 }

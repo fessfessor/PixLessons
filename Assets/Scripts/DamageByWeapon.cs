@@ -67,7 +67,7 @@ public class DamageByWeapon : MonoBehaviour
         
         GameObject splash = pooler.SpawnFromPool("BloodSplash", position, Quaternion.identity);
         SpriteRenderer sr = splash.GetComponent<SpriteRenderer>();
-        if (!playerScript.isRightDirection)
+        if (!playerScript.IsRightDirection)
             sr.flipX = true;
         yield return new WaitForSeconds(splashDuration);
         sr.flipX = false;
