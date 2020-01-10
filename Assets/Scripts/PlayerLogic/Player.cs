@@ -52,7 +52,7 @@ namespace Assets.Scripts.PlayerLogic
         private bool isJumping;
         private bool canMove;
         private bool isMoving;
-        private bool isHited;
+        private bool isHitted;
         private bool canAttack;
         private Vector3 direction;
         private int currentHealth;
@@ -91,12 +91,13 @@ namespace Assets.Scripts.PlayerLogic
         #endregion
 
 
-
+        #region AWAKE_AND_INIT_STATE_MACHINE
         private void Awake() {
-            InitStateMachine();
+            //InitStateMachine();
         }
+        
 
-       
+
         private void InitStateMachine() {
             Dictionary<Type, BaseState> states = new Dictionary<Type, BaseState>();           
             states = new Dictionary<Type, BaseState>()
@@ -114,14 +115,12 @@ namespace Assets.Scripts.PlayerLogic
 
             GetComponent<StateMachine>().SetStates(states);
         }
+        #endregion
 
 
-            // Start is called before the first frame update
-            void Start()
+        void Start()
         {
             
-
-
             //Подписываемся на события "кровавой механики"
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_HIT, OnEvent);
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_MISS, OnEvent);
@@ -163,19 +162,15 @@ namespace Assets.Scripts.PlayerLogic
 
 
         void FixedUpdate() {
-        
 
-            animator.SetInteger("comboCount", comboCount);
 
-            //Анимации
-            animator.SetBool("isGrounded", groundD.isGrounded);
-            if (!isJumping && !groundD.isGrounded)
-                animator.SetTrigger("fallWithoutJump");
+            SetAnimatorValues();
+            CheckFallWithoutJump();
+            CheckCharOrientationAndRotate();
+            CheckCharacterDeath();
+            CheckCharacterPainAndShakeCamera();
 
             isJumping = !groundD.isGrounded;
-
-            animator.SetFloat("speed", Mathf.Abs(direction.x));
-            animator.SetFloat("isFalling", rb.velocity.y);
 
 
             //Движение
@@ -207,127 +202,111 @@ namespace Assets.Scripts.PlayerLogic
                 }
 #endif
             }
-            // телепортация обратно на платформу
-            if (transform.position.y < minHeight)
-                resetHeroPoition();
 
-
-
-
-            //Ориентация персонажа
-            if (direction.x > 0) {
-                isRightDirection = true;
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            if (direction.x < 0) {
-                isRightDirection = false;
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-
-            }
-
-
-            //Перекат
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Roll")) {
-                canMove = false;
-                isRolling = true;
-
-                if (isRightDirection) {
-                    rb.velocity = Vector2.right * 8;
-                    IgnoreEnemyAndTrap(true);
-                }
-                else {
-                    rb.velocity = Vector2.left * 8;
-                    IgnoreEnemyAndTrap(true);
-                }
-
-
-            } else {
-                canMove = true;
-                isRolling = false;
-                IgnoreEnemyAndTrap(false);
-            }
 
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("getHit")) {
                 speed = 0;
-                isHited = true;
+                isHitted = true;
             }
             else {
                 speed = normarSpeed;
-                isHited = false;
+                isHitted = false;
             }
             
 
         }
 
-    
+
+        private void CheckCharOrientationAndRotate()
+        {
+            if (direction.x > 0)
+            {
+                isRightDirection = true;
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            if (direction.x < 0)
+            {
+                isRightDirection = false;
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+
+            }
+        }
+        private void SetAnimatorValues()
+        {
+            animator.SetInteger("comboCount", comboCount);        
+            animator.SetBool("isGrounded", groundD.isGrounded);
+            animator.SetFloat("speed", Mathf.Abs(direction.x));
+            animator.SetFloat("isFalling", rb.velocity.y);
+        }
+        private void CheckFallWithoutJump()
+        {
+            if (!isJumping && !groundD.isGrounded)
+                animator.SetTrigger("fallWithoutJump");
+        }
+        private void CheckCharacterDeath()
+        {
+            if (currentHealth <= 0 && !isDeath)
+            {
+                health.HealthCount = 0;
+                dieMenu.SetActive(true);
+                isMoving = false;
+                isDeath = true;
+                AudioManager.Instance.Play("PlayerDie");
+                animator.SetTrigger("death");
+
+            }
+        }
+        private void CheckCharacterPainAndShakeCamera()
+        {
+            if (isDamaged && ShakeCameraOnDamage && !bloodLoss)
+            {
+                ProCamera2DShake.Instance.ShakeUsingPreset("PlayerPain");
+            }
+        }
 
 
         private void Update() {
             CheckAttacking();
+            CheckShootCooldownAndFillFireButton();
+            CheckCharacterIsHittedAndDebuf();
 
-       
-            //Таймер перезарядки выстрела
-            if (rechargeTimer < shootRecharge) {
+            CheckCharacterGetDamage();
+
+        }
+
+        private void CheckShootCooldownAndFillFireButton()
+        {            
+            if (rechargeTimer < shootRecharge)
+            {
                 rechargeTimer += Time.deltaTime;
                 fireButtonImage.fillAmount = rechargeTimer / shootRecharge;
             }
             else
                 rechargeTimer = shootRecharge;
-
-
-
-            // Проверка на дамаг
-            if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount) {
-                isDamaged = true; 
+        }
+        private void CheckCharacterGetDamage()
+        {
+            if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount)
+            {
+                isDamaged = true;
                 currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-                if(currentHealth > 0 && !bloodLoss) {
-                    StartCoroutine(invulnerability.GetInvulnerability(true));
-                    AudioManager.Instance.Play("Pain");
-                    if(!isAttacking&& !isJumping)
-                        animator.SetTrigger("hit");
 
-                }
-                
+                CheckAndTriggerInvulnerability();
             }
-            else {
+            else
+            {
                 isDamaged = false;
                 currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
             }
-
-            // Гибель
-            if(currentHealth <= 0 && !isDeath) {
-                Death();
-            }
-
-            //При уменьшении здоровья трясем камеру
-            if (isDamaged && ShakeCameraOnDamage && !bloodLoss) {
-                ProCamera2DShake.Instance.ShakeUsingPreset("PlayerPain");          
-            }
-
-       
-            
-        
-            // Звуки шагов
-            if (isMoving && !AudioManager.Instance.isPlaying("PlayerFootsteps") && groundD.isGrounded) {
-                AudioManager.Instance.Play("PlayerFootsteps");
-            }
-            else if((!isMoving || !groundD.isGrounded) && AudioManager.Instance.isPlaying("PlayerFootsteps")) {
-                AudioManager.Instance.Stop("PlayerFootsteps");
-            }
-
-            
         }
-
-    
-        void Death() {
-            health.HealthCount = 0;
-            dieMenu.SetActive(true);
-            isMoving = false;
-            isDeath = true;
-            AudioManager.Instance.Play("PlayerDie");
-            animator.SetTrigger("death");
-       
-
+        private void CheckAndTriggerInvulnerability()
+        {
+            if (currentHealth > 0 && !bloodLoss)
+            {
+                StartCoroutine(invulnerability.GetInvulnerability(true));
+                if (!isAttacking && !isJumping)
+                    animator.SetTrigger("hit");
+            }
         }
 
 
@@ -342,8 +321,7 @@ namespace Assets.Scripts.PlayerLogic
             rechargeTimer = 0f;
             animator.SetTrigger("isShooting");       
             shootReady = false;
-            canAttack = false;             
-            AudioManager.Instance.Play("FireballCast");
+            canAttack = false;                        
             AudioManager.Instance.Play("BloodLoss");
        
             // Время анимации
@@ -360,8 +338,7 @@ namespace Assets.Scripts.PlayerLogic
         public void Attack() {
         
             
-            //canAttack = false;             
-            AudioManager.Instance.Play("SwordSwing");
+            //canAttack = false;                         
             animator.SetTrigger("isSwordAttack");
             StartCoroutine(SwordAttack());
  
@@ -405,42 +382,54 @@ namespace Assets.Scripts.PlayerLogic
 
 
         #region Move
+        private void CharacterStopRolling()
+        {
+            canMove = true;
+            isRolling = false;
+            IgnoreEnemyAndTrap(false);
+        }
+
+        private void CharacterGetHitDebufStart()
+        {                   
+         isHitted = true;
+        }
+
+        private void CharacterGetHitDebufEnd()
+        {
+         isHitted = false;
+        }
+
+        private void CheckCharacterIsHittedAndDebuf()
+        {
+            if (isHitted)
+            {
+                speed = 0;
+            }
+        }
+
+
+
+
         public void Jump() {
             isMoving = false;       
             if ( groundD.isGrounded         
                  && !isAttacking
-                 && !isHited         
+                 && !isHitted         
                  && !isLanding
                  && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling")
 
             ) {
                 isJumping = true;
-                rb.velocity = Vector3.zero;
-                AudioManager.Instance.Play("Jump");
+                rb.velocity = Vector3.zero;               
                 rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
                 animator.SetTrigger("startJump");
             } 
         }
 
-        // Звук приземления , вызывается из анимации
-        void JumpLanding() {
-            AudioManager.Instance.Play("JumpLanding");
-        }
 
         void Move() {
             direction = Vector3.zero;
 
-            /*
-        if (controller.Left.IsPressed) {
-            direction = Vector3.left;
-        }
-        else if (controller.Right.IsPressed) {
-            direction = Vector3.right;
-        }
-         direction *= speed;
-        direction.y = rb.velocity.y;
-        rb.velocity = direction;
-        */
 
             //Управление джойстиком
             if (joystick.Horizontal >= .2f) {
@@ -494,7 +483,20 @@ namespace Assets.Scripts.PlayerLogic
         //Вызывается кнопкой
         public void Roll() {
             if (!isJumping && !isAttacking) {            
-                animator.SetTrigger("roll");            
+                animator.SetTrigger("roll");
+                canMove = false;
+                isRolling = true;
+
+                if (isRightDirection)
+                {
+                    rb.velocity = Vector2.right * 8;
+                    IgnoreEnemyAndTrap(true);
+                }
+                else
+                {
+                    rb.velocity = Vector2.left * 8;
+                    IgnoreEnemyAndTrap(true);
+                }
             }
         }
 
@@ -519,13 +521,7 @@ namespace Assets.Scripts.PlayerLogic
         #endregion
 
 
-        // public void InitUIController() {
-        //     controller = GameManager.Instance.uiConroller;
-        //controller.Jump.onClick.AddListener(Jump);
-        //controller.Attack.onClick.AddListener(Attack);
-        //controller.Fire.onClick.AddListener(Shoot);
-        // 
-
+       
         void CheckAttacking() {
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hero-Attack")
                 ||
@@ -606,10 +602,33 @@ namespace Assets.Scripts.PlayerLogic
         #endregion
 
 
+        #region SOUND_FROM_ANIMATION
+        private void CharacterFootstepsSound()
+        {
+            AudioManager.Instance.Play("PlayerFootsteps");
+        }
 
+        private void CharacterMagicSound()
+        {
+            AudioManager.Instance.Play("FireballCast");
+        }
 
+        private void CharacterSwordAttackSound()
+        {
+            AudioManager.Instance.Play("SwordSwing");
+        }
 
+        private void CharacterJumpingSound()
+        {
+            AudioManager.Instance.Play("Jump");
+        }
 
+        private void CharacterJumpLandingSound()
+        {
+            AudioManager.Instance.Play("JumpLanding");
+        }
+
+        #endregion
 
     }
 }
