@@ -592,6 +592,7 @@ namespace Assets.Scripts.PlayerLogic
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
                     return true;
+
                 }
 
             }
