@@ -33,6 +33,8 @@ namespace Assets.Scripts.PlayerLogic
             if (_player.CharacterPressRunning())
                 return typeof(RunState);
 
+            if (_player.Health.HealthCount <= 0)
+                return typeof(DeathState);
 
             return null;
         }

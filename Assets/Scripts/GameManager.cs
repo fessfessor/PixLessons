@@ -9,8 +9,9 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance { get; private set; }
 
     public static bool isPaused = false;
-    [SerializeField] GameObject pauseMenuUI;
-    [SerializeField] GameObject inventoryMenuUI;
+    [SerializeField] public GameObject pauseMenuUI;
+    [SerializeField] public GameObject inventoryMenuUI;
+    [SerializeField] public GameObject deathMenuUI;
     
 
     public Dictionary<GameObject, Health> healthContainer;

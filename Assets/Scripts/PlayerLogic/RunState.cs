@@ -35,6 +35,8 @@ namespace Assets.Scripts.PlayerLogic
             if(_player.CharacterPressJumping())
                 return typeof(JumpState);
 
+            if(_player.Health.HealthCount <=0)
+                return typeof(DeathState);
 
             return null;
            
