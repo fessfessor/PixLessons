@@ -80,9 +80,7 @@ namespace Assets.Scripts.PlayerLogic
         private float comboTimer = 0;
         private float slowSpeed;
         private float normarSpeed;
-
-    
-
+        private float joystickVetricalMove;
 
 
 
@@ -175,15 +173,8 @@ namespace Assets.Scripts.PlayerLogic
 
             //Движение
             if (!isDeath) {
-                if (canMove && !isAttacking ) {
-                    Move();
-                }
-
-                float vetricalMove = joystick.Vertical;
-                if (vetricalMove >= .5f && !jumpButtonEnabled) {
-                    Jump();
-                }
-
+                CheckMoving();
+                CheckJumping();
 #if UNITY_EDITOR
                 if (useComputerMode) {
                     if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack)
@@ -204,18 +195,7 @@ namespace Assets.Scripts.PlayerLogic
             }
 
 
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("getHit")) {
-                speed = 0;
-                isHitted = true;
-            }
-            else {
-                speed = normarSpeed;
-                isHitted = false;
-            }
-            
-
         }
-
 
         private void CheckCharOrientationAndRotate()
         {
@@ -263,13 +243,26 @@ namespace Assets.Scripts.PlayerLogic
                 ProCamera2DShake.Instance.ShakeUsingPreset("PlayerPain");
             }
         }
-
+        private void CheckMoving()
+        {
+            if (canMove && !isAttacking)
+            {
+                Move();
+            }
+        }
+        private void CheckJumping()
+        {           
+            if (joystick.Vertical >= .5f && !jumpButtonEnabled)
+            {
+                Jump();
+            }
+        }
+    
 
         private void Update() {
             CheckAttacking();
             CheckShootCooldownAndFillFireButton();
             CheckCharacterIsHittedAndDebuf();
-
             CheckCharacterGetDamage();
 
         }
