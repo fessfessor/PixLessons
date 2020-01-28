@@ -18,11 +18,7 @@ namespace Assets.Scripts.PlayerLogic
         [SerializeField] private float swordAttackTime;
         [SerializeField] private float shootForce;
 
-        [Header("Компоненты")]
-        [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private GroundDetection groundD;   
-        [SerializeField] private SpriteRenderer spriteR;   
-        [SerializeField] private Animator animator;
+        [Header("Компоненты")]      
         [SerializeField] private CameraShake cameraShaker;
         [SerializeField] private MagicBall magicBall;
         [SerializeField] private Health health;
@@ -48,6 +44,10 @@ namespace Assets.Scripts.PlayerLogic
     
     
         [HideInInspector]public bool isRightDirection;
+        private Rigidbody2D rb;
+        private GroundDetection groundD;
+        private SpriteRenderer spriteR;
+        private Animator animator;
         private Vector3 jumpDirection;
         private bool isJumping;
         private bool canMove;
@@ -128,8 +128,12 @@ namespace Assets.Scripts.PlayerLogic
 
             pooler = ObjectPooler.Instance;
             audioManager = AudioManager.Instance;
+            rb = GetComponent<Rigidbody2D>();
+            groundD = GetComponent<GroundDetection>();
+            spriteR = GetComponent<SpriteRenderer>();
+            animator = GetComponent<Animator>();
 
-            isAttacking = false;
+        isAttacking = false;
             canAttack = true;
             canMove = true;
             shootReady = true;
@@ -245,8 +249,10 @@ namespace Assets.Scripts.PlayerLogic
         }
         private void CheckMoving()
         {
+            
             if (canMove && !isAttacking)
             {
+                Debug.Log($"Can move - {canMove} isAttacking {isAttacking}");
                 Move();
             }
         }
@@ -377,6 +383,7 @@ namespace Assets.Scripts.PlayerLogic
         #region Move
         private void CharacterStopRolling()
         {
+            
             canMove = true;
             isRolling = false;
             IgnoreEnemyAndTrap(false);
@@ -451,11 +458,13 @@ namespace Assets.Scripts.PlayerLogic
             if (useComputerMode) {
                 //Debug.Log("useComputerMode");
                 if (Input.GetKey(KeyCode.A)) {
+                    Debug.Log("A");
                     direction = Vector3.left;
                     if (!isJumping)
                         isMoving = true;
                 }
                 else if (Input.GetKey(KeyCode.D)) {
+                    Debug.Log("D");
                     direction = Vector3.right;
                     if (!isJumping)
                         isMoving = true;
