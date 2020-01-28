@@ -12,8 +12,15 @@ namespace Assets.Scripts.PlayerLogic
         private Joystick joystick;
         private Vector3 direction;
         private Rigidbody2D rb;
-        
+        public RunState(Player _player) : base(_player.gameObject)
+        {
+        }
+        public override Type Tick()
+        { return null; }
 
+
+
+        /*
         public RunState(Player _player) : base(_player.gameObject)
         {
             this._player = _player;
@@ -26,6 +33,7 @@ namespace Assets.Scripts.PlayerLogic
 
         public override Type Tick()
         {
+
             CharacterRun();
             SetSpeedInAnimator();
             SwitchCharacterDirection();
@@ -39,7 +47,7 @@ namespace Assets.Scripts.PlayerLogic
                 return typeof(DeathState);
 
             return null;
-           
+
         }
 
 
@@ -73,14 +81,14 @@ namespace Assets.Scripts.PlayerLogic
                 if (Input.GetKey(KeyCode.A))
                 {
                     direction = Vector3.left;
-                    
+
                 }
                 else if (Input.GetKey(KeyCode.D))
                 {
                     direction = Vector3.right;
-                    
+
                 }
-               
+
                 direction *= _player.Speed;
                 direction.y = rb.velocity.y;
                 rb.velocity = direction;
@@ -88,7 +96,7 @@ namespace Assets.Scripts.PlayerLogic
 
 
 #endif
-            
+
 
         }
 
@@ -111,7 +119,8 @@ namespace Assets.Scripts.PlayerLogic
 
             }
         }
+        */
     }
 
-   
+
 }

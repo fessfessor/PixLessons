@@ -16,32 +16,40 @@ namespace Assets.Scripts.PlayerLogic
 
         public IdleState(Player _player) : base(_player.gameObject)
         {
-            this._player = _player;
-            useComputerMode = _player.UseComputerMode;
-            joystick = _player.Joystick;
+           
         }
 
         public override Type Tick()
-        {
-            if (_player.GroundD.isGrounded)
+        { return null; }
+            /*
+            public IdleState(Player _player) : base(_player.gameObject)
             {
-
-                if (_player.CharacterPressJumping())
-                    return typeof(JumpState);
+                this._player = _player;
+                useComputerMode = _player.UseComputerMode;
+                joystick = _player.Joystick;
             }
 
-            if (_player.CharacterPressRunning())
-                return typeof(RunState);
+            public override Type Tick()
+            {
+                if (_player.GroundD.isGrounded)
+                {
 
-            if (_player.Health.HealthCount <= 0)
-                return typeof(DeathState);
+                    if (_player.CharacterPressJumping())
+                        return typeof(JumpState);
+                }
 
-            return null;
+                if (_player.CharacterPressRunning())
+                    return typeof(RunState);
+
+                if (_player.Health.HealthCount <= 0)
+                    return typeof(DeathState);
+
+                return null;
+            }
+
+
+
+
+    */
         }
-
-        
-
-
-        
-    }
 }
