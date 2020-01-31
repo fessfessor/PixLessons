@@ -18,6 +18,8 @@ public class BloodSplash : MonoBehaviour, IPooledObject
     {
         //GameManager.Instance.pooledObjectContainer.Add(gameObject, this);
         animator = GetComponent<Animator>();
+		
+		
     }
 
     
