@@ -16,6 +16,8 @@ TagManager:
   - NonShootable
   - Potion
   - Fireball
+  - ShootArea
+  - AttackArea
   layers:
   - Default
   - TransparentFX

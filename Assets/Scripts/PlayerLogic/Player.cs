@@ -18,11 +18,7 @@ namespace Assets.Scripts.PlayerLogic
         [SerializeField] private float swordAttackTime;
         [SerializeField] private float shootForce;
 
-        [Header("Компоненты")]
-        [SerializeField] private Rigidbody2D rb;
-        [SerializeField] private GroundDetection groundD;   
-        [SerializeField] private SpriteRenderer spriteR;   
-        [SerializeField] private Animator animator;
+        [Header("Компоненты")]        
         [SerializeField] private CameraShake cameraShaker;
         [SerializeField] private MagicBall magicBall;
         [SerializeField] private Health health;
@@ -33,7 +29,7 @@ namespace Assets.Scripts.PlayerLogic
 
         [Header("События при дамаге")]
         [SerializeField] private bool ShakeCameraOnDamage;
-        [SerializeField] private bool isDamaged;
+        [SerializeField] private bool isDamaged = false;
         public bool IsDamaged { get => isDamaged; }
 
         [Header("Компьютерный мод")]
@@ -48,19 +44,23 @@ namespace Assets.Scripts.PlayerLogic
     
     
         [HideInInspector]public bool isRightDirection;
+         private Rigidbody2D rb;
+         private GroundDetection groundD;
+         private SpriteRenderer spriteR;
+         private Animator animator;
         private Vector3 jumpDirection;
         private bool isJumping;
-        private bool canMove;
+        private bool canMove = true;
         private bool isMoving;
         private bool isHitted;
-        private bool canAttack;
+        private bool canAttack = true;
         private Vector3 direction;
         private int currentHealth;
-        private bool isAttacking;
+        private bool isAttacking = false;
         private bool isRolling;
         private bool isLanding;
         private bool isDeath;
-        private bool shootReady;
+        private bool shootReady = true;
         private ObjectPooler pooler;
         private UIController controller;
         private AudioManager audioManager;
@@ -89,7 +89,7 @@ namespace Assets.Scripts.PlayerLogic
         #endregion
 
 
-        #region AWAKE_AND_INIT_STATE_MACHINE
+        #region awake_and_init_state_machine
         private void Awake() {
             //InitStateMachine();
         }
@@ -118,7 +118,9 @@ namespace Assets.Scripts.PlayerLogic
 
         void Start()
         {
-            
+            InitComponents();
+            SetPrefsSettings();
+
             //Подписываемся на события "кровавой механики"
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_HIT, OnEvent);
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_MISS, OnEvent);
@@ -129,33 +131,41 @@ namespace Assets.Scripts.PlayerLogic
             pooler = ObjectPooler.Instance;
             audioManager = AudioManager.Instance;
 
-            isAttacking = false;
-            canAttack = true;
-            canMove = true;
-            shootReady = true;
-            isDamaged = false;
             currentHealth = Health.HealthCount;
-            cameraShaker = transform.GetComponent<CameraShake>();
-
-            SwordAttack1Collider = SwordObject.GetComponent<Collider2D>();
-        
-            fireButtonImage = fireButton.GetComponent<Image>();
-
+           
             rechargeTimer = shootRecharge;
-
-            invulnerability = GetComponent<Invulnerability>();
-
-            if (PlayerPrefs.HasKey("jumpButton")) {
-                jumpButtonEnabled = PlayerPrefs.GetInt("jumpButton") != 0;
-            }
-            else {
-                jumpButtonEnabled = false;
-            }
+            
 
             slowSpeed = speed / 2;
             normarSpeed = speed;
-            // InitUIController();
+            
 
+        }
+      
+
+        private void InitComponents()
+        {
+            rb = GetComponent<Rigidbody2D>();
+            groundD = GetComponent<GroundDetection>();
+            spriteR = GetComponent<SpriteRenderer>();
+            animator = GetComponent<Animator>();
+            cameraShaker = GetComponent<CameraShake>();
+            invulnerability = GetComponent<Invulnerability>();
+
+            SwordAttack1Collider = SwordObject.GetComponent<Collider2D>();
+            fireButtonImage = fireButton.GetComponent<Image>();
+            
+        }
+        private void SetPrefsSettings()
+        {
+            if (PlayerPrefs.HasKey("jumpButton"))
+            {
+                jumpButtonEnabled = PlayerPrefs.GetInt("jumpButton") != 0;
+            }
+            else
+            {
+                jumpButtonEnabled = false;
+            }
         }
 
 
@@ -279,26 +289,30 @@ namespace Assets.Scripts.PlayerLogic
         }
         private void CheckCharacterGetDamage()
         {
-            if (currentHealth > GameManager.Instance.healthContainer[gameObject].HealthCount)
+            int actualHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+            if (currentHealth > actualHealth)
             {
                 isDamaged = true;
-                currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
-
+                currentHealth = actualHealth;
                 CheckAndTriggerInvulnerability();
             }
             else
             {
                 isDamaged = false;
-                currentHealth = GameManager.Instance.healthContainer[gameObject].HealthCount;
+                currentHealth = actualHealth;
             }
         }
         private void CheckAndTriggerInvulnerability()
         {
             if (currentHealth > 0 && !bloodLoss)
             {
-                StartCoroutine(invulnerability.GetInvulnerability(true));
-                if (!isAttacking && !isJumping)
-                    animator.SetTrigger("hit");
+                //if (groundD.isGrounded && !invulnerability.IsImmune)
+                  //  animator.SetTrigger("hit");
+                  //FIXME Какая то проблема с анимацией боли, после нее перс не двигается, скорее всего из-за того что триггер срабатывает
+                  // много раз. но непонятно почему.
+
+                invulnerability.GetInvulnerability();
+                
             }
         }
 
