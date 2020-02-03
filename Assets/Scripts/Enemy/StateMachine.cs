@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class StateMachine : MonoBehaviour
 {
-
+    private Type nextState;
     private Dictionary<Type, BaseState> _availableStates;
 
     public BaseState CurrentState { get; private set;}
@@ -16,6 +16,7 @@ public class StateMachine : MonoBehaviour
     public void SetStates(Dictionary<Type, BaseState> states)
     {
         _availableStates = states;
+        
     }
 
     
@@ -27,8 +28,14 @@ public class StateMachine : MonoBehaviour
             CurrentState = _availableStates.Values.First();
         }
 
-        //Переменная в которую мы возвращаем какой нибудь тип состояния. Или тот который и был или же какой то новый, в который перешли
-        var nextState = CurrentState?.Tick();
+        InitPreviousState();
+
+
+        //Переменная в которую мы возвращаем какой нибудь тип состояния. 
+        //Или тот который и был или же какой-то новый, в который перешли
+        //Заодно вызывая один кадр для апдейта       
+        nextState = CurrentState?.Tick();
+        SetPreviousState();
 
         if (nextState != null &&
             nextState != CurrentState?.GetType() &&
@@ -41,10 +48,27 @@ public class StateMachine : MonoBehaviour
     private void SwitchToNewState(Type nextState)
     {
         CurrentState = _availableStates[nextState];
-
+        
         OnStateChanged?.Invoke(CurrentState);
+        
     }
 
+    private void SetPreviousState()
+    {
+        CurrentState.PreviousState = CurrentState.GetType();
+    }
+
+    private void InitPreviousState()
+    {
+        if (CurrentState.PreviousState == null)
+        {
+            CurrentState.PreviousState = CurrentState.GetType();
+        }
+    }
+
+
+
+#if UNITY_EDITOR
     void OnDrawGizmos() {
         GUIStyle style = new GUIStyle();
         style.fontSize = 20;
@@ -52,4 +76,5 @@ public class StateMachine : MonoBehaviour
         Handles.Label(transform.position + Vector3.up * 3, CurrentState?.GetType().Name , style);
 
     }
+#endif
 }

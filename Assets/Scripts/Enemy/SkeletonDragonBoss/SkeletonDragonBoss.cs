@@ -21,7 +21,20 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
 
         [Header("Ресурсы")]
         public GameObject fireBallPrefab;
+
+
+        private bool playerInLongArea = false;
+        public bool PlayerInLongArea { get => playerInLongArea; set => playerInLongArea = value; }
+
+        private bool playerInShortArea = false;
+        public bool PlayerInShortArea { get => playerInShortArea; set => playerInShortArea = value; }
+
+        private bool playerInBackArea = false;
+        public bool PlayerInBackArea { get => playerInBackArea; set => playerInBackArea = value; }
         
+
+        private Animator dragonAnimator;
+        public Animator DragonAnimator { get => dragonAnimator; set => dragonAnimator = value; }
 
 
         private void Awake()
@@ -39,7 +52,8 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
                 {typeof(MeleeAttackState), new MeleeAttackState(this) },
                 {typeof(FlyState), new FlyState(this) },
                 {typeof(DeathState), new DeathState(this) },
-                {typeof(FireAttackState), new FireAttackState(this) }
+                {typeof(FireAttackState), new FireAttackState(this) },
+                {typeof(WalkState), new WalkState(this) }
 
             };
 
@@ -50,7 +64,7 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
        
         void Start()
         {
-
+            dragonAnimator = GetComponent<Animator>();
         }
 
 
@@ -58,6 +72,8 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
         {
 
         }
+
+
 
         
     }
