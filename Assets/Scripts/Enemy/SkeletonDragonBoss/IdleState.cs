@@ -13,7 +13,7 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
 
         public override Type Tick()
         {
-            /*
+            
             if (_dragon.PlayerInShortArea)
                 return typeof(MeleeAttackState);
 
@@ -22,12 +22,12 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
                 return typeof(FireAttackState);
 
 
-            if (_dragon.PlayerInBackArea)
+            if (_dragon.PlayerInWalkArea)
                 return typeof(WalkState);
-                */
+                
 
-            if (_dragon.PlayerInBackArea || _dragon.PlayerInLongArea || _dragon.PlayerInShortArea)
-                return typeof(MeleeAttackState);
+           // if (_dragon.PlayerInBackArea || _dragon.PlayerInLongArea || _dragon.PlayerInShortArea)
+             //   return typeof(MeleeAttackState);
 
 
 

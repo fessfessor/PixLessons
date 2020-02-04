@@ -8,9 +8,15 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     private Type nextState;
+
+    private Type previousState;
+    public Type PreviousState { get => previousState; set => previousState = value; }
+
     private Dictionary<Type, BaseState> _availableStates;
 
     public BaseState CurrentState { get; private set;}
+    
+
     public event Action<BaseState> OnStateChanged;
 
     public void SetStates(Dictionary<Type, BaseState> states)
@@ -54,15 +60,15 @@ public class StateMachine : MonoBehaviour
     }
 
     private void SetPreviousState()
-    {
-        CurrentState.PreviousState = CurrentState.GetType();
+    {       
+        PreviousState = CurrentState.GetType();
     }
 
     private void InitPreviousState()
     {
-        if (CurrentState.PreviousState == null)
+        if (PreviousState == null)
         {
-            CurrentState.PreviousState = CurrentState.GetType();
+            PreviousState = CurrentState.GetType();
         }
     }
 
@@ -73,7 +79,7 @@ public class StateMachine : MonoBehaviour
         GUIStyle style = new GUIStyle();
         style.fontSize = 20;
         style.normal.textColor = Color.red;
-        Handles.Label(transform.position + Vector3.up * 3, CurrentState?.GetType().Name , style);
+        Handles.Label(transform.position + Vector3.up * 3, CurrentState?.GetType().Name + " " + PreviousState?.Name, style);
 
     }
 #endif

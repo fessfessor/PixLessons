@@ -41,20 +41,22 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
         {
             switch (areaType)
             {
-                case ATTACK_AREA_TYPE.Short:                   
-                    parentScript.PlayerInShortArea = playerInArea;
-                    break;                                  
+                case ATTACK_AREA_TYPE.Short:
+                parentScript.PlayerInShortArea = playerInArea;
+                break;
                 case ATTACK_AREA_TYPE.Medium:
                 break;
                 case ATTACK_AREA_TYPE.Long:
-                    parentScript.PlayerInLongArea = playerInArea;
-                    break;
+                parentScript.PlayerInLongArea = playerInArea;
+                break;
                 case ATTACK_AREA_TYPE.Back:
-                    parentScript.PlayerInBackArea = playerInArea;
-                    break;
-                
+                parentScript.PlayerInBackArea = playerInArea;
+                break;
+                case ATTACK_AREA_TYPE.Walk:
+                parentScript.PlayerInWalkArea = playerInArea;
+                break;
             }
         }
-        enum ATTACK_AREA_TYPE{Short, Medium ,Long, Back}
+        enum ATTACK_AREA_TYPE{Short, Medium ,Long, Back, Walk}
     }
 }
