@@ -127,6 +127,12 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
         }
 
 
+        private void ShootFireball()
+        {
+
+        }
+
+
         
 
 

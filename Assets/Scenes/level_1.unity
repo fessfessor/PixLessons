@@ -57028,7 +57028,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066063819}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 17, y: -26.8, z: 0}
+  m_LocalPosition: {x: 17, y: -27.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 595266484}
@@ -57051,13 +57051,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TurnDelay: 2
-  ShootFreq: 3
+  ShootFreq: 5
   ShootPower: 10
   attackDamage: 30
-  attackFreq: 5
+  attackFreq: 10
   fireAttackFreq: 3
   speed: 3
-  fireBallPrefab: {fileID: 0}
+  fireBallPrefab: {fileID: 6888292196518972721, guid: 28d1981ebddeef7418d0b0d06b338d36,
+    type: 3}
 --- !u!114 &2066063826
 MonoBehaviour:
   m_ObjectHideFlags: 0
