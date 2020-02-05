@@ -17,11 +17,14 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
         public int attackDamage = 30;
         public float attackFreq = 3f;
         public float fireAttackFreq = 3f;
+        public float fireAttackForce = 3f;
+        public float fireAttackDamage = 3f;
         public float speed = 3f;
 
 
         [Header("Ресурсы")]
         public GameObject fireBallPrefab;
+        public GameObject fireballSpawnPoint;
 
         private bool isRightDirection = false;
         public bool IsRightDirection { get => isRightDirection; set => isRightDirection = value; }
@@ -47,7 +50,13 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
         private Rigidbody2D rb;
         public Rigidbody2D Rb { get => rb; set => rb = value; }
 
+        private float flyTimer = 0f;
+        public float FlyTimer { get => flyTimer; set => flyTimer = value; }
+
         private GameObject player;
+        private ObjectPooler pooler;
+        
+        
        
 
         private void Awake()
@@ -81,6 +90,8 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
             stateMachine = GetComponent<StateMachine>();
             rb = GetComponent<Rigidbody2D>();
             player = GameManager.Instance.player;
+            pooler = ObjectPooler.Instance;
+            
 
             StartCoroutine(CheckAndSwitchVision());
         }
@@ -88,7 +99,7 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
 
         void Update()
         {
-
+            flyTimer += Time.deltaTime;
         }
 
 
@@ -99,7 +110,7 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
             while (true)
             {
                 
-                if (transform.position.x < player.transform.position.x
+                if (player.transform.position.x > transform.position.x
                     && !IsRightDirection)
                 {
                     
@@ -109,7 +120,7 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
                     yield return null;
                 }
 
-                if (transform.position.x > player.transform.position.x
+                if (player.transform.position.x < transform.position.x
                     && IsRightDirection)
                 {
                     
@@ -126,11 +137,21 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
 
         }
 
+        //Animation event
+        private void FireAttack()
+        {
+            var fireball = pooler.SpawnFromPool("DragonFireball", fireballSpawnPoint.transform.position, Quaternion.identity);
+            var direction = isRightDirection ? Vector2.right : Vector2.left;
+            fireball.GetComponent<Rigidbody2D>().AddForce(direction * fireAttackForce, ForceMode2D.Impulse);
+        }
 
-        private void ShootFireball()
+        //Animation event
+        private void MeleeAttack()
         {
 
         }
+
+
 
 
         

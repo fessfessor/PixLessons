@@ -125,16 +125,14 @@ namespace Assets.Scripts.PlayerLogic
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_HIT, OnEvent);
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_BALL_MISS, OnEvent);
             EventManager.Instance.AddListener(EVENT_TYPE.BLD_MELEE_HIT, OnEvent);
-            EventManager.Instance.AddListener(EVENT_TYPE.BLD_MELEE_MISS, OnEvent);
-        
+            EventManager.Instance.AddListener(EVENT_TYPE.BLD_MELEE_MISS, OnEvent);        
 
             pooler = ObjectPooler.Instance;
             audioManager = AudioManager.Instance;
 
             currentHealth = Health.HealthCount;
            
-            rechargeTimer = shootRecharge;
-            
+            rechargeTimer = shootRecharge;            
 
             slowSpeed = speed / 2;
             normarSpeed = speed;

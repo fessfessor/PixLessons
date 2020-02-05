@@ -53,7 +53,7 @@ public class MagicBall : MonoBehaviour , IPooledObject
             pooler.ReturnToPool("MagicBall", gameObject, 0.4f);
 
             //"Кровавая механика", размещаем информацию о событии попадания или промаха
-            if (col.gameObject.tag == "Enemy")
+            if (col.gameObject.CompareTag("Enemy"))
                 EventManager.Instance.PostNotification(EVENT_TYPE.BLD_BALL_HIT, this);
             else
                 EventManager.Instance.PostNotification(EVENT_TYPE.BLD_BALL_MISS, this);

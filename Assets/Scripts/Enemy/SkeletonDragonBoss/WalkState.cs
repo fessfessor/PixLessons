@@ -15,7 +15,8 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
 
         public override Type Tick()
         {
-
+            
+            
             if (_dragon.PlayerInWalkArea)
             {
                 Walk();
@@ -26,7 +27,7 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
                 _dragon.DragonAnimator.SetBool("WalkingBool", false);
                 return typeof(FireAttackState);
             }
-                
+             
 
             if (_dragon.PlayerInShortArea)
             {

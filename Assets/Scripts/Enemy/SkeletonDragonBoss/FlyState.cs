@@ -14,7 +14,20 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
 
         public override Type Tick()
         {
-            throw new NotImplementedException();
+            Fly();
+
+            if (!_dragon.DragonAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fly"))
+            {
+                return typeof(WalkState);
+            }
+
+            return null;
+        }
+
+
+        private void Fly()
+        {
+            _dragon.DragonAnimator.SetBool("FlyBool", true);
         }
 
 

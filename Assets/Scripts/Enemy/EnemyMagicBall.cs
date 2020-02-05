@@ -8,6 +8,7 @@ public class EnemyMagicBall : MonoBehaviour, IPooledObject
     [SerializeField] private Collider2D ballCollider;
     [SerializeField] private int damage;
     [SerializeField] private bool CanReflectBySword;    
+    [SerializeField] private string poolName;    
     ObjectPooler pooler;
 
     private void Start() {
@@ -37,7 +38,7 @@ public class EnemyMagicBall : MonoBehaviour, IPooledObject
     void ExplodeBall() {
         animator.SetTrigger("isExplosion");
         ballCollider.enabled = false;
-        pooler.ReturnToPool("EnemyMagicBall", gameObject, 0.5f);
+        pooler.ReturnToPool(poolName, gameObject, 0.5f);
     }
 
     public void OnSpawnFromPool() {

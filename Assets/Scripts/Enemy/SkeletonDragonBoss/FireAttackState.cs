@@ -15,6 +15,12 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
 
         public override Type Tick()
         {
+            if(_dragon.FlyTimer > 10)
+            {
+                _dragon.DragonAnimator.SetBool("FireAttackBool", false);
+                return typeof(FlyState);
+            }
+
             FireAttack();
 
             if (_dragon.PlayerInWalkArea)
