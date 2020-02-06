@@ -19,20 +19,28 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
 
         public override Type Tick()
         {
+            MeleeAttack();
 
-             if (_dragon.PlayerInLongArea && !_dragon.PlayerInShortArea)
+
+            if (_dragon.PlayerInLongArea)
             {
                 _dragon.DragonAnimator.SetBool("MeleeAttackBool", false);
                 return typeof(FireAttackState);
             }
-                
 
-            // if (_dragon.PlayerInBackArea)
-            //     return typeof(FlyState);
-            MeleeAttack();
 
-            if (!_dragon.PlayerInBackArea && !_dragon.PlayerInLongArea && !_dragon.PlayerInShortArea)
+            if (_dragon.PlayerInBackArea)
+            {
+                _dragon.DragonAnimator.SetBool("MeleeAttackBool", false);
+                return typeof(FlyState);
+            }
+            
+
+            if (!_dragon.PlayerInAreas())
+            {
+                _dragon.DragonAnimator.SetBool("MeleeAttackBool", false);
                 return typeof(IdleState);
+            }
 
             return null;
         }

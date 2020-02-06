@@ -152,6 +152,12 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
         }
 
 
+        public bool PlayerInAreas()
+        {
+            return PlayerInBackArea || PlayerInLongArea || PlayerInShortArea || PlayerInWalkArea;
+        }
+
+
 
 
         

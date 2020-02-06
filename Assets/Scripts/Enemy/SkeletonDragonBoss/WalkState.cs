@@ -22,18 +22,25 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
                 Walk();
             }
 
-            if (_dragon.PlayerInLongArea && !_dragon.PlayerInWalkArea)
+            if (_dragon.PlayerInLongArea)
             {
                 _dragon.DragonAnimator.SetBool("WalkingBool", false);
                 return typeof(FireAttackState);
             }
-             
 
             if (_dragon.PlayerInShortArea)
             {
                 _dragon.DragonAnimator.SetBool("WalkingBool", false);
                 return typeof(MeleeAttackState);
             }
+                
+
+            if (!_dragon.PlayerInAreas())
+            {
+                _dragon.DragonAnimator.SetBool("WalkingBool", false);
+                return typeof(IdleState);
+            }
+             
 
 
 

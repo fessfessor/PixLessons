@@ -15,11 +15,11 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
 
         public override Type Tick()
         {
-            if(_dragon.FlyTimer > 10)
-            {
-                _dragon.DragonAnimator.SetBool("FireAttackBool", false);
-                return typeof(FlyState);
-            }
+            //if(_dragon.FlyTimer > 10)
+           // {
+           //     _dragon.DragonAnimator.SetBool("FireAttackBool", false);
+           //     return typeof(FlyState);
+           // }
 
             FireAttack();
 
@@ -34,7 +34,13 @@ namespace Assets.Scripts.Enemy.SkeletonDragonBoss
                 _dragon.DragonAnimator.SetBool("FireAttackBool", false);
                 return typeof(MeleeAttackState);
             }
-            
+
+            if (_dragon.PlayerInBackArea)
+            {
+                _dragon.DragonAnimator.SetBool("FireAttackBool", false);
+                return typeof(FlyState);
+            }
+
 
 
 
