@@ -5,13 +5,13 @@ using UnityEngine;
 public class FirefliesGismo : MonoBehaviour
 {
     public int count = 0;
-    private ParticleSystem particleSystem;
+    private ParticleSystem particleSys;
     private float radius;
 
     private void Start()
     {
-        particleSystem = GetComponent<ParticleSystem>();
-        radius = particleSystem.shape.radius;
+        particleSys = GetComponent<ParticleSystem>();
+        radius = particleSys.shape.radius;
     }
 
 

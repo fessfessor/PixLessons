@@ -8,7 +8,7 @@ public class EnemyPatrol : MonoBehaviour
     [SerializeField] private GameObject rigthBorder;
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Health healthComponent;
-    [SerializeField] private  Collider2D collider;
+    [SerializeField] private  Collider2D coll;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer sr;
 
@@ -54,7 +54,7 @@ public class EnemyPatrol : MonoBehaviour
         if (currentHealth < 0) {
             rb.velocity = Vector2.zero;
             rb.gravityScale = 0;
-            collider.enabled = false;
+            coll.enabled = false;
             
         }
             

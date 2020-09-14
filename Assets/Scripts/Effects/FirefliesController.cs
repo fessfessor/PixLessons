@@ -9,7 +9,7 @@ public class FirefliesController : MonoBehaviour
     public GameObject System02;
     public GameObject System03;
 
-    private ParticleSystem particleSystem;
+    private ParticleSystem particleSys;
     private float radius;
 
     private GameObject[] systems;
@@ -20,8 +20,8 @@ public class FirefliesController : MonoBehaviour
 
     void Start()
     {
-        particleSystem = GetComponent<ParticleSystem>();
-        radius = particleSystem.shape.radius;
+        particleSys = GetComponent<ParticleSystem>();
+        radius = particleSys.shape.radius;
         systems = new[] { System01, System02, System03 };
         player = GameManager.Instance.player;
     }

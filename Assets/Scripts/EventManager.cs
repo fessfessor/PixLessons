@@ -93,9 +93,10 @@ public class EventManager : MonoBehaviour
     }
 
     //Очистка словаря при смене сцены
-    private void OnLevelWasLoaded() {
-        RemoveRedundancies();
-    }
+    //private void OnLevelWasLoaded() {
+    //    RemoveRedundancies();
+    //}
+
 
 
 }

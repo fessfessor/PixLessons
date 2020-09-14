@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerTrigger : MonoBehaviour
 {
     // Start is called before the first frame update

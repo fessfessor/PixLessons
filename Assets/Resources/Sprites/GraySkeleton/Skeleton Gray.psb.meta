@@ -61,6 +61,7 @@ ScriptedImporter:
     maxTextureSizeSet: 0
     compressionQualitySet: 0
     textureFormatSet: 0
+    applyGammaDecoding: 0
   spriteImportData:
   - name: 
     originalName: 
@@ -3129,34 +3130,8 @@ ScriptedImporter:
       order: 0
     dimension: {x: 0, y: 0}
     characterGroups: []
-  boneGOs:
-  - go: {fileID: 7682748749441471965, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 0
-  - go: {fileID: 6617182959558174962, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 1
-  - go: {fileID: -8722027918808408162, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 2
-  - go: {fileID: -6926191648486840615, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 3
-  - go: {fileID: 6173919769428346809, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 4
-  - go: {fileID: 2699290951829055132, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 5
-  - go: {fileID: -121396693956003082, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 6
-  - go: {fileID: -8038109442913890637, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 7
-  - go: {fileID: 49254044685441428, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 8
-  - go: {fileID: 3304872498036265077, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 9
-  - go: {fileID: -338612959703637829, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 10
-  - go: {fileID: 8392614435941784910, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 11
-  - go: {fileID: 6053618224979002641, guid: c2bb23eaf3c7ea04288903bd05d891c2, type: 3}
-    index: 12
   generateGOHierarchy: 0
   textureAssetName: Skeleton Gray Texture
   prefabAssetName: Skeleton Gray Prefab
   spriteLibAssetName: Skeleton Gray Sprite Lib
+  secondarySpriteTextures: []

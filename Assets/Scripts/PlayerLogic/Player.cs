@@ -5,6 +5,7 @@ using Com.LuisPedroFonseca.ProCamera2D;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 namespace Assets.Scripts.PlayerLogic
 {
     public class Player : MonoBehaviour
@@ -17,6 +18,7 @@ namespace Assets.Scripts.PlayerLogic
         [SerializeField] private float minHeight = -50.0f;
         [SerializeField] private float swordAttackTime;
         [SerializeField] private float shootForce;
+        [SerializeField] private float wallCheckDistance = 0.6f;
 
         [Header("Компоненты")]        
         [SerializeField] private CameraShake cameraShaker;
@@ -26,6 +28,10 @@ namespace Assets.Scripts.PlayerLogic
         [SerializeField] private GameObject fireButton;
         [SerializeField] private GameObject dieMenu;
         [SerializeField] private Joystick joystick;
+        [SerializeField] private ParticleSystem jumpDust;
+        [SerializeField] private Transform wallCheck;
+        [SerializeField] private Transform ledgeCheck;
+        [SerializeField] private LayerMask groundLayer;
 
         [Header("События при дамаге")]
         [SerializeField] private bool ShakeCameraOnDamage;
@@ -39,10 +45,12 @@ namespace Assets.Scripts.PlayerLogic
         [SerializeField] private int healthLossByHit; 
         [SerializeField] private int healthLossByShoot;
         [SerializeField] private int healthReturnByHit; 
-        [SerializeField] private int healthReturnByShoot; 
-    
-    
-    
+        [SerializeField] private int healthReturnByShoot;
+
+        
+
+
+
         [HideInInspector]public bool isRightDirection;
          private Rigidbody2D rb;
          private GroundDetection groundD;
@@ -66,8 +74,18 @@ namespace Assets.Scripts.PlayerLogic
         private AudioManager audioManager;
 
         private Collider2D SwordAttack1Collider;
-    
-    
+
+
+        private bool isTouchingLedge;
+        private bool isTouchingWall;
+        private bool canClimbLedge = false;
+        private bool ledgeDetected;
+        private Vector2 ledgePositionBot;
+        private Vector2 ledgePosition1;
+        private Vector2 ledgePosition2;
+
+
+
         private Image fireButtonImage;
         private float rechargeTimer;    
         private Invulnerability invulnerability;
@@ -77,11 +95,8 @@ namespace Assets.Scripts.PlayerLogic
 
 
         private int comboCount = 0;
-        private float comboTimer = 0;
-        private float slowSpeed;
-        private float normarSpeed;
-        private float joystickVetricalMove;
-
+        
+        
 
 
         public Health Health { get { return health; } }
@@ -134,10 +149,6 @@ namespace Assets.Scripts.PlayerLogic
            
             rechargeTimer = shootRecharge;            
 
-            slowSpeed = speed / 2;
-            normarSpeed = speed;
-            
-
         }
       
 
@@ -175,6 +186,7 @@ namespace Assets.Scripts.PlayerLogic
             CheckCharOrientationAndRotate();
             CheckCharacterDeath();
             CheckCharacterPainAndShakeCamera();
+            CheckLedgeClimb();
 
             isJumping = !groundD.isGrounded;
 
@@ -224,7 +236,7 @@ namespace Assets.Scripts.PlayerLogic
             animator.SetInteger("comboCount", comboCount);        
             animator.SetBool("isGrounded", groundD.isGrounded);
             animator.SetFloat("speed", Mathf.Abs(direction.x));
-            animator.SetFloat("isFalling", rb.velocity.y);
+            //animator.SetFloat("isFalling", rb.velocity.y);
         }
         private void CheckFallWithoutJump()
         {
@@ -327,7 +339,7 @@ namespace Assets.Scripts.PlayerLogic
             animator.SetTrigger("isShooting");       
             shootReady = false;
             canAttack = false;                        
-            AudioManager.Instance.Play("BloodLoss");
+            //AudioManager.Instance.Play("BloodLoss");
        
             // Время анимации
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);              
@@ -373,6 +385,7 @@ namespace Assets.Scripts.PlayerLogic
             SwordAttack1Collider.enabled = false;
         }
 
+        /*
         // Вызывается из анимации 
         void CheckShoot() {
             GameObject spawnedObj = pooler.SpawnFromPool("MagicBall", transform.position, Quaternion.identity);
@@ -380,6 +393,7 @@ namespace Assets.Scripts.PlayerLogic
             mb.SetImpulse(Vector2.right, shootForce, this);
 
         }
+        */
 
 
 
@@ -412,6 +426,18 @@ namespace Assets.Scripts.PlayerLogic
             }
         }
 
+        private void CheckLedgeClimb()
+        {
+            isTouchingWall = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckDistance, groundLayer);
+            isTouchingLedge = Physics2D.Raycast(ledgeCheck.position, transform.right, wallCheckDistance, groundLayer);
+
+            if(isTouchingWall && !isTouchingLedge && !ledgeDetected)
+            {
+                ledgeDetected = true;
+                ledgePositionBot = wallCheck.position;
+            }
+        }
+
 
 
 
@@ -429,6 +455,11 @@ namespace Assets.Scripts.PlayerLogic
                 rb.AddForce(Vector2.up * force, ForceMode2D.Impulse);
                 animator.SetTrigger("startJump");
             } 
+        }
+
+        public void JumpDust()
+        {
+            jumpDust.Play();
         }
 
 
@@ -505,6 +536,7 @@ namespace Assets.Scripts.PlayerLogic
             }
         }
 
+        //Вызывается из анимации
         public void Rolling(bool start) {
             if (start)
                 isRolling = true;
@@ -528,7 +560,7 @@ namespace Assets.Scripts.PlayerLogic
 
        
         void CheckAttacking() {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Hero-Attack")
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1")
                 ||
                 animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2")
                 ||
@@ -536,7 +568,7 @@ namespace Assets.Scripts.PlayerLogic
                 ||
                 animator.GetCurrentAnimatorStateInfo(0).IsName("Attack4")
                 ||
-                animator.GetCurrentAnimatorStateInfo(0).IsName("CastMagic")) {
+                animator.GetCurrentAnimatorStateInfo(0).IsName("Block")) {
 
                 isAttacking = true;
                 rb.velocity = Vector2.zero;
@@ -607,6 +639,9 @@ namespace Assets.Scripts.PlayerLogic
         #endregion
 
 
+
+
+
         #region SOUND_FROM_ANIMATION
         private void CharacterFootstepsSound()
         {
@@ -635,5 +670,11 @@ namespace Assets.Scripts.PlayerLogic
 
         #endregion
 
+
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y, wallCheck.position.z));
+        }
     }
 }
